@@ -5,6 +5,7 @@
   ],
   "next_required_evidence": [
     "run_tmuf_calibration_smoke_test",
+    "record_tmuf_smoke_evidence",
     "fill_out/proof/calibration_tmuf_smoke.json",
     "evaluate_then_apply_tmuf_smoke_gate"
   ],

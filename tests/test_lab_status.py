@@ -19,6 +19,7 @@ class LabStatusTests(unittest.TestCase):
         self.assertEqual(status["smoke_kit"]["status"], "not_run")
         self.assertTrue(status["smoke_kit"]["exists"])
         self.assertIn("run_tmuf_calibration_smoke_test", status["next_required_evidence"])
+        self.assertIn("record_tmuf_smoke_evidence", status["next_required_evidence"])
 
     def test_cli_can_emit_and_write_status_json(self):
         from recipes.lab_status import main

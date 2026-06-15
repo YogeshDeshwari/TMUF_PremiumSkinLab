@@ -45,8 +45,10 @@ Use this before calling any skin complete.
 - [ ] Put zip into the StadiumCar skin folder.
 - [ ] Load the skin in TMUF.
 - [ ] Capture at least front, side, rear, and top-ish views.
-- [ ] Update the report JSON from `tmuf_smoke_test: not_run` to the actual result.
-- [ ] Promote or keep evidence status based on the result.
+- [ ] Record evidence with `python3 recipes/record_tmuf_smoke.py ...`.
+- [ ] Evaluate with `python3 recipes/tmuf_smoke_gate.py --evaluate out/proof/calibration_tmuf_smoke.json`.
+- [ ] Promote with `python3 recipes/tmuf_smoke_gate.py --apply out/proof/calibration_tmuf_smoke.json`
+      only if the evaluation passes.
 
 ## Custom Profile Gates
 

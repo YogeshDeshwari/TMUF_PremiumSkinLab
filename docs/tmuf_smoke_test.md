@@ -53,7 +53,7 @@ out/proof/tmuf_calibration_smoke_kit.zip
 
 The kit is only a handoff bundle. It does not prove TMUF smoke status.
 
-Create the template:
+Create the template if you want a manual form:
 
 ```bash
 python3 recipes/tmuf_smoke_gate.py --write-template
@@ -70,6 +70,34 @@ Save the filled copy as:
 ```text
 out/proof/calibration_tmuf_smoke.json
 ```
+
+Preferred path: record the real smoke evidence with the helper after the skin
+has been loaded in TMUF/TMNF and the required observations have been checked:
+
+```bash
+python3 recipes/record_tmuf_smoke.py \
+  --tester "manual tester" \
+  --tmuf-build "TMUF local install" \
+  --test-date-local 2026-06-15 \
+  --screenshot /path/to/tmuf_calibration_front.png \
+  --screenshot /path/to/tmuf_calibration_side.png \
+  --all-required-observations-passed
+```
+
+The helper copies screenshots into:
+
+```text
+out/proof/tmuf_smoke_screenshots/
+```
+
+and writes:
+
+```text
+out/proof/calibration_tmuf_smoke.json
+```
+
+It does not promote generated reports. It only records a filled evidence file
+that the smoke gate can evaluate.
 
 Evaluate it without changing generated reports:
 

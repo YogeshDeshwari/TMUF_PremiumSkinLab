@@ -44,6 +44,7 @@ def build_lab_status(root: Path = ROOT) -> dict[str, Any]:
     if stock["tmuf_smoke_status"] != "passed":
         blockers.append("stock_calibration_tmuf_smoke_pending")
         next_required.append("run_tmuf_calibration_smoke_test")
+        next_required.append("record_tmuf_smoke_evidence")
         next_required.append("fill_out/proof/calibration_tmuf_smoke.json")
         next_required.append("evaluate_then_apply_tmuf_smoke_gate")
     if profiles["overall_status"] == "custom_profiles_locked":

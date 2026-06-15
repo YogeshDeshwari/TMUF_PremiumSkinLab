@@ -77,3 +77,11 @@ python3 -m unittest discover -s tests
 
 See `docs/tmuf_smoke_test.md` before promoting any report from
 `experimental_until_tmuf_smoke` to `proven_by_tmuf_smoke`.
+
+After the calibration skin is loaded in TMUF/TMNF, record the real screenshots
+and explicit observation confirmation with:
+
+```bash
+python3 recipes/record_tmuf_smoke.py --tester "manual tester" --tmuf-build "TMUF local install" --test-date-local 2026-06-15 --screenshot /path/to/tmuf_calibration.png --all-required-observations-passed
+python3 recipes/tmuf_smoke_gate.py --evaluate out/proof/calibration_tmuf_smoke.json
+```
