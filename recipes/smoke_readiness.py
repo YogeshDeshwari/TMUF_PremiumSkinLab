@@ -21,6 +21,7 @@ from src.evidence.smoke_readiness import (  # noqa: E402
 def main(argv: list[str] | None = None) -> str:
     parser = argparse.ArgumentParser(description="Summarize readiness for manual TMUF calibration smoke testing.")
     parser.add_argument("--root", type=Path, default=ROOT, help="lab root to inspect")
+    parser.add_argument("--install-target", type=Path, help="optional explicit StadiumCar folder to preflight without copying files")
     parser.add_argument("--write", type=Path, nargs="?", const=DEFAULT_READINESS_PATH, help="write readiness JSON")
     parser.add_argument(
         "--write-command-packet",
@@ -32,12 +33,16 @@ def main(argv: list[str] | None = None) -> str:
     parser.add_argument("--json", action="store_true", help="emit machine-readable JSON")
     args = parser.parse_args(argv)
 
-    readiness = build_smoke_readiness(args.root)
+    readiness = build_smoke_readiness(args.root, install_target=args.install_target)
     if args.write is not None:
-        write_smoke_readiness(args.write, args.root)
+        write_smoke_readiness(args.write, args.root, install_target=args.install_target)
     command_packet = None
     if args.write_command_packet is not None:
-        command_packet = write_smoke_command_packet(args.write_command_packet, args.root)
+        command_packet = write_smoke_command_packet(
+            args.write_command_packet,
+            args.root,
+            install_target=args.install_target,
+        )
 
     if args.json:
         json_data = dict(readiness)

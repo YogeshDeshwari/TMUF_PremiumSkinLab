@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+import shlex
 import tempfile
 import unittest
 
@@ -67,6 +68,47 @@ class SmokeReadinessTests(unittest.TestCase):
             self.assertIn("run_tmuf_calibration_smoke_test", readiness["next_actions"])
             self.assertIn("record_tmuf_smoke_evidence", readiness["next_actions"])
 
+    def test_explicit_install_target_preflight_recommends_exact_install_command(self):
+        from src.evidence.skin_dirs import write_skin_dir_report
+        from src.evidence.smoke_kit import build_smoke_kit
+        from src.evidence.smoke_readiness import build_smoke_readiness
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            install_dir = root / "Manual Prefix" / "Skins" / "Vehicles" / "StadiumCar"
+            install_dir.mkdir(parents=True)
+            build_smoke_kit(root / "out" / "proof" / "tmuf_calibration_smoke_kit")
+            write_skin_dir_report(root / "out" / "proof" / "tmuf_skin_dirs.json", roots=[root / "missing"])
+
+            readiness = build_smoke_readiness(root, install_target=install_dir)
+
+            self.assertEqual(readiness["status"], "ready_for_explicit_install")
+            self.assertTrue(readiness["install_target_preflight"]["valid"])
+            self.assertEqual(readiness["install_target_preflight"]["path"], str(install_dir))
+            self.assertEqual(readiness["install_target_preflight"]["route"], "skins_vehicles_stadiumcar")
+            self.assertIn(shlex.quote(str(install_dir)), readiness["commands"]["install_explicit"])
+            self.assertIn("install_with_explicit_target", readiness["next_actions"])
+            self.assertFalse((install_dir / "calibration_stock_diffuse.zip").exists())
+
+    def test_explicit_install_target_preflight_rejects_unrecognized_route(self):
+        from src.evidence.skin_dirs import write_skin_dir_report
+        from src.evidence.smoke_kit import build_smoke_kit
+        from src.evidence.smoke_readiness import build_smoke_readiness
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            wrong_dir = root / "StadiumCar"
+            wrong_dir.mkdir()
+            build_smoke_kit(root / "out" / "proof" / "tmuf_calibration_smoke_kit")
+            write_skin_dir_report(root / "out" / "proof" / "tmuf_skin_dirs.json", roots=[root / "missing"])
+
+            readiness = build_smoke_readiness(root, install_target=wrong_dir)
+
+            self.assertEqual(readiness["status"], "explicit_install_target_invalid")
+            self.assertFalse(readiness["install_target_preflight"]["valid"])
+            self.assertIn("unrecognized_stadiumcar_route", readiness["install_target_preflight"]["errors"])
+            self.assertNotIn("run_tmuf_calibration_smoke_test", readiness["next_actions"])
+
     def test_cli_can_write_readiness_json(self):
         from recipes.smoke_readiness import main
         from src.evidence.skin_dirs import write_skin_dir_report
@@ -84,6 +126,25 @@ class SmokeReadinessTests(unittest.TestCase):
             self.assertEqual(data["status"], "needs_explicit_stadiumcar_dir")
             self.assertTrue(out_path.exists())
             self.assertEqual(json.loads(out_path.read_text())["status"], data["status"])
+
+    def test_cli_accepts_install_target_for_preflight(self):
+        from recipes.smoke_readiness import main
+        from src.evidence.skin_dirs import write_skin_dir_report
+        from src.evidence.smoke_kit import build_smoke_kit
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            install_dir = root / "Skins" / "Vehicles" / "StadiumCar"
+            install_dir.mkdir(parents=True)
+            build_smoke_kit(root / "out" / "proof" / "tmuf_calibration_smoke_kit")
+            write_skin_dir_report(root / "out" / "proof" / "tmuf_skin_dirs.json", roots=[root / "missing"])
+
+            output = main(["--root", str(root), "--install-target", str(install_dir), "--json"])
+            data = json.loads(output)
+
+            self.assertEqual(data["status"], "ready_for_explicit_install")
+            self.assertEqual(data["install_target_preflight"]["path"], str(install_dir))
+            self.assertIn(shlex.quote(str(install_dir)), data["commands"]["install_explicit"])
 
     def test_command_packet_is_human_readable_and_keeps_proof_boundary(self):
         from src.evidence.skin_dirs import write_skin_dir_report
@@ -106,6 +167,28 @@ class SmokeReadinessTests(unittest.TestCase):
             self.assertIn("python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir", text)
             self.assertIn("python3 recipes/record_tmuf_smoke.py", text)
             self.assertIn("Do not run apply until evaluate passes", text)
+
+    def test_command_packet_includes_explicit_install_target_preflight(self):
+        from src.evidence.skin_dirs import write_skin_dir_report
+        from src.evidence.smoke_kit import build_smoke_kit
+        from src.evidence.smoke_readiness import write_smoke_command_packet
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            install_dir = root / "Skins" / "Vehicles" / "StadiumCar"
+            packet_path = root / "commands.txt"
+            install_dir.mkdir(parents=True)
+            build_smoke_kit(root / "out" / "proof" / "tmuf_calibration_smoke_kit")
+            write_skin_dir_report(root / "out" / "proof" / "tmuf_skin_dirs.json", roots=[root / "missing"])
+
+            write_smoke_command_packet(packet_path, root, install_target=install_dir)
+
+            text = packet_path.read_text()
+            self.assertIn("Install target preflight:", text)
+            self.assertIn(f"path={install_dir}", text)
+            self.assertIn("route=skins_vehicles_stadiumcar", text)
+            self.assertIn("valid=true", text)
+            self.assertIn("does_not_prove_tmuf_smoke=true", text)
 
     def test_cli_can_write_command_packet(self):
         from recipes.smoke_readiness import main

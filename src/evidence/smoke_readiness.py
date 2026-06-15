@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import json
+import os
+import shlex
 from pathlib import Path
 from typing import Any
 
-from src.evidence.skin_dirs import DEFAULT_REPORT as DEFAULT_SKIN_DIR_REPORT
+from src.evidence.skin_dirs import DEFAULT_REPORT as DEFAULT_SKIN_DIR_REPORT, route_for_stadiumcar_skin_dir
 from src.evidence.smoke_gate import validate_install_receipt_file
-from src.evidence.smoke_kit import DEFAULT_KIT_DIR, validate_smoke_kit
+from src.evidence.smoke_kit import CALIBRATION_SKIN, DEFAULT_KIT_DIR, validate_smoke_kit
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -88,6 +90,51 @@ def _base_commands(root: Path) -> dict[str, str]:
     }
 
 
+def _preflight_install_target(path: Path | None) -> dict[str, Any] | None:
+    if path is None:
+        return None
+    target = Path(path)
+    errors: list[str] = []
+    if not target.exists():
+        errors.append("target_missing")
+    if target.exists() and not target.is_dir():
+        errors.append("target_not_directory")
+    route = route_for_stadiumcar_skin_dir(target)
+    if route is None:
+        errors.append("unrecognized_stadiumcar_route")
+
+    existing_zip_count = 0
+    calibration_present = False
+    calibration_matches_source = False
+    writable = False
+    if target.is_dir():
+        existing_zip_count = len([child for child in target.iterdir() if child.is_file() and child.suffix.lower() == ".zip"])
+        calibration_path = target / "calibration_stock_diffuse.zip"
+        calibration_present = calibration_path.exists()
+        calibration_matches_source = (
+            calibration_path.is_file()
+            and CALIBRATION_SKIN.exists()
+            and calibration_path.read_bytes() == CALIBRATION_SKIN.read_bytes()
+        )
+        writable = os.access(target, os.W_OK)
+        if not writable:
+            errors.append("target_not_writable")
+
+    return {
+        "path": str(target),
+        "exists": target.exists(),
+        "is_dir": target.is_dir(),
+        "route": route,
+        "writable": writable,
+        "existing_zip_count": existing_zip_count,
+        "calibration_present": calibration_present,
+        "calibration_matches_source": calibration_matches_source,
+        "valid": not errors,
+        "errors": errors,
+        "does_not_prove_tmuf_smoke": True,
+    }
+
+
 def _install_discovered_command(candidate: dict[str, Any] | None) -> str:
     command = "python3 recipes/prepare_tmuf_smoke_kit.py --install-discovered"
     if candidate:
@@ -97,16 +144,22 @@ def _install_discovered_command(candidate: dict[str, Any] | None) -> str:
     return command
 
 
-def build_smoke_readiness(root: Path = ROOT) -> dict[str, Any]:
+def build_smoke_readiness(root: Path = ROOT, *, install_target: Path | None = None) -> dict[str, Any]:
     root = Path(root)
     kit_dir = _relative_root_path(root, DEFAULT_KIT_DIR)
     kit = validate_smoke_kit(kit_dir)
     skin_dirs = _load_skin_dirs(root)
     receipt = _install_receipt_status(root)
+    target_preflight = _preflight_install_target(install_target)
     candidates = skin_dirs["candidates"]
     selected_candidate = candidates[0] if len(candidates) == 1 else None
 
     commands = _base_commands(root)
+    if target_preflight is not None:
+        commands["install_explicit"] = (
+            "python3 recipes/prepare_tmuf_smoke_kit.py "
+            f"--install-skins-dir {shlex.quote(target_preflight['path'])}"
+        )
     commands["install_discovered"] = _install_discovered_command(selected_candidate)
 
     if not kit["fresh"]:
@@ -119,6 +172,12 @@ def build_smoke_readiness(root: Path = ROOT) -> dict[str, Any]:
             "record_tmuf_smoke_evidence",
             "evaluate_then_apply_tmuf_smoke_gate",
         ]
+    elif target_preflight is not None and not target_preflight["valid"]:
+        status = "explicit_install_target_invalid"
+        next_actions = ["fix_explicit_install_target", "rerun_smoke_readiness"]
+    elif target_preflight is not None:
+        status = "ready_for_explicit_install"
+        next_actions = ["install_with_explicit_target", "run_tmuf_calibration_smoke_test"]
     elif skin_dirs["candidate_count"] == 0:
         status = "needs_explicit_stadiumcar_dir"
         next_actions = ["choose_or_create_tmuf_stadiumcar_skin_dir", "install_with_explicit_target"]
@@ -145,6 +204,7 @@ def build_smoke_readiness(root: Path = ROOT) -> dict[str, Any]:
         },
         "skin_dirs": skin_dirs,
         "selected_candidate": selected_candidate,
+        "install_target_preflight": target_preflight,
         "install_receipt": receipt,
         "next_actions": next_actions,
         "commands": commands,
@@ -152,10 +212,17 @@ def build_smoke_readiness(root: Path = ROOT) -> dict[str, Any]:
     }
 
 
-def write_smoke_readiness(path: Path = DEFAULT_READINESS_PATH, root: Path = ROOT) -> Path:
+def write_smoke_readiness(
+    path: Path = DEFAULT_READINESS_PATH,
+    root: Path = ROOT,
+    *,
+    install_target: Path | None = None,
+) -> Path:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(build_smoke_readiness(root), indent=2, sort_keys=True) + "\n")
+    path.write_text(
+        json.dumps(build_smoke_readiness(root, install_target=install_target), indent=2, sort_keys=True) + "\n"
+    )
     return path
 
 
@@ -169,6 +236,19 @@ def format_smoke_command_packet(readiness: dict[str, Any]) -> str:
         "Next actions:",
     ]
     lines.extend(f"- {action}" for action in readiness["next_actions"])
+    target_preflight = readiness.get("install_target_preflight")
+    if target_preflight is not None:
+        lines.extend(
+            [
+                "",
+                "Install target preflight:",
+                f"path={target_preflight['path']}",
+                f"route={target_preflight['route']}",
+                f"valid={str(target_preflight['valid']).lower()}",
+                f"errors={','.join(target_preflight['errors']) if target_preflight['errors'] else 'none'}",
+                "does_not_prove_tmuf_smoke=true",
+            ]
+        )
     lines.extend(["", "Commands:"])
     for name in [
         "build_smoke_kit",
@@ -194,8 +274,13 @@ def format_smoke_command_packet(readiness: dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def write_smoke_command_packet(path: Path = DEFAULT_COMMAND_PACKET, root: Path = ROOT) -> Path:
+def write_smoke_command_packet(
+    path: Path = DEFAULT_COMMAND_PACKET,
+    root: Path = ROOT,
+    *,
+    install_target: Path | None = None,
+) -> Path:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(format_smoke_command_packet(build_smoke_readiness(root)))
+    path.write_text(format_smoke_command_packet(build_smoke_readiness(root, install_target=install_target)))
     return path

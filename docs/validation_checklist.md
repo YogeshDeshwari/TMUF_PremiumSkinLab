@@ -65,7 +65,10 @@ Use this before calling any skin complete.
       TMUF evidence exists.
 - [ ] Run `python3 recipes/smoke_readiness.py --write --write-command-packet`
       and follow the reported install/setup status.
-- [ ] Put zip into the StadiumCar skin folder using either an explicit
+- [ ] When an exact StadiumCar folder is known, rerun
+      `python3 recipes/smoke_readiness.py --install-target /path/to/StadiumCar --write --write-command-packet`
+      and confirm the preflight is valid before copying.
+- [ ] Put zip into the StadiumCar skin folder using either the preflighted
       `--install-skins-dir` target or guarded `--install-discovered` with one
       candidate.
 - [ ] Load the skin in TMUF.

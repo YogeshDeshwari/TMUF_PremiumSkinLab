@@ -18,6 +18,7 @@
     "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit/proof/calibration_install_receipt.json",
     "valid": false
   },
+  "install_target_preflight": null,
   "next_actions": [
     "choose_or_create_tmuf_stadiumcar_skin_dir",
     "install_with_explicit_target"

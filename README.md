@@ -127,16 +127,20 @@ visual review aid. Neither file is smoke evidence.
 
 `python3 recipes/smoke_readiness.py --write --write-command-packet` summarizes
 the current manual smoke-test setup state and writes a human-readable command
-packet at `out/proof/tmuf_manual_smoke_commands.txt`. These are setup aids only;
-they do not prove TMUF smoke status.
+packet at `out/proof/tmuf_manual_smoke_commands.txt`. Add
+`--install-target /path/to/StadiumCar` after you know the exact target folder to
+preflight that path and write the exact install command without copying files.
+These are setup aids only; they do not prove TMUF smoke status.
 
 See `docs/tmuf_smoke_test.md` before promoting any report from
 `experimental_until_tmuf_smoke` to `proven_by_tmuf_smoke`.
 
 To install the calibration skin for manual smoke testing, use an explicit
-StadiumCar folder or the guarded single-candidate discovery path:
+StadiumCar folder or the guarded single-candidate discovery path. Prefer the
+readiness preflight before copying:
 
 ```bash
+python3 recipes/smoke_readiness.py --install-target /path/to/StadiumCar --write --write-command-packet
 python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /path/to/StadiumCar
 python3 recipes/prepare_tmuf_smoke_kit.py --install-discovered --search-root /path/to/TrackMania-or-Wine-prefix
 ```

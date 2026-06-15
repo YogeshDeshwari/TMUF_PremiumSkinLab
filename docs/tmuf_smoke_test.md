@@ -98,6 +98,13 @@ readiness report:
 python3 recipes/smoke_readiness.py --write --write-command-packet
 ```
 
+When you know the intended `StadiumCar` install folder, preflight it without
+copying files:
+
+```bash
+python3 recipes/smoke_readiness.py --install-target /path/to/StadiumCar --write --write-command-packet
+```
+
 This writes:
 
 ```text
@@ -107,8 +114,9 @@ out/proof/tmuf_manual_smoke_commands.txt
 
 The readiness report does not prove TMUF smoke status. It only reports whether
 the local kit is fresh, how many StadiumCar folders were found, whether an
-install receipt exists, and which command should be run next. The command
-packet is the same setup guidance in copy-friendly text form.
+explicit install target is recognized and writable, whether an install receipt
+exists, and which command should be run next. The command packet is the same
+setup guidance in copy-friendly text form.
 
 Create the template if you want a manual form:
 
@@ -252,13 +260,14 @@ Do not apply this gate from projected previews alone.
 To copy the calibration skin into an explicit StadiumCar skin folder:
 
 ```bash
+python3 recipes/smoke_readiness.py --install-target /path/to/StadiumCar --write --write-command-packet
 python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /path/to/StadiumCar
 ```
 
 The install target must already exist and match a recognized StadiumCar skin
-route such as `Skins/Vehicles/StadiumCar`. The install helper only copies
-`calibration_stock_diffuse.zip`; it does not promote reports or mark the smoke
-gate as passed.
+route such as `Skins/Vehicles/StadiumCar`. The readiness preflight does not
+copy files. The install helper only copies `calibration_stock_diffuse.zip`; it
+does not promote reports or mark the smoke gate as passed.
 
 If discovery finds exactly one recognized StadiumCar skin folder, the helper can
 install there without copying the path manually:
