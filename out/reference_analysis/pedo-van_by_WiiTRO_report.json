@@ -180,5 +180,168 @@
   "size_bytes": 4851744,
   "skin_json": {},
   "source_path": "resources/reference_only/downloads/pedo-van_by_WiiTRO.zip",
-  "stock_lane_status": "not_stock_diffuse_only"
+  "stock_lane_status": "not_stock_diffuse_only",
+  "style_metrics": {
+    "does_not_prove_stock_diffuse_mapping": true,
+    "does_not_prove_tmuf_smoke": true,
+    "dominant_palette_tags": [
+      "black",
+      "white",
+      "gray"
+    ],
+    "primary_livery_slot": "details.dds",
+    "schema": "tmuf_premium_skin_lab.reference_style_metrics.v1",
+    "slots": {
+      "Icon.dds": {
+        "alpha_visible_ratio": 0.546753,
+        "black_ratio": 0.527161,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.217834,
+        "height": 128,
+        "magenta_ratio": 6.1e-05,
+        "mean_contrast": 105.206167,
+        "mean_luminance": 86.944092,
+        "palette_tags": [
+          "black",
+          "gray",
+          "white"
+        ],
+        "red_ratio": 0.001465,
+        "slot_role": "icon",
+        "valid": true,
+        "visual_score": 145.448712,
+        "white_ratio": 0.240356,
+        "width": 128,
+        "yellow_gold_ratio": 0.0
+      },
+      "ProjShad.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.239288,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.177414,
+        "height": 512,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 98.115035,
+        "mean_luminance": 166.381063,
+        "palette_tags": [
+          "black",
+          "white"
+        ],
+        "red_ratio": 0.0,
+        "slot_role": "projected_shadow_or_underglow",
+        "valid": true,
+        "visual_score": 94.875457,
+        "white_ratio": 0.570724,
+        "width": 512,
+        "yellow_gold_ratio": 0.0
+      },
+      "details.dds": {
+        "alpha_visible_ratio": 0.0,
+        "black_ratio": 0.744843,
+        "blue_ratio": 0.000122,
+        "cyan_ratio": 9.2e-05,
+        "gray_ratio": 0.174744,
+        "height": 2048,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 45.300839,
+        "mean_luminance": 31.142629,
+        "palette_tags": [
+          "black"
+        ],
+        "red_ratio": 0.010559,
+        "slot_role": "details",
+        "valid": true,
+        "visual_score": 271.025015,
+        "white_ratio": 0.005951,
+        "width": 4096,
+        "yellow_gold_ratio": 0.006042
+      },
+      "detailsdirty.dds": {
+        "alpha_visible_ratio": 0.181488,
+        "black_ratio": 0.863739,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.084656,
+        "height": 1024,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 22.708357,
+        "mean_luminance": 9.367055,
+        "palette_tags": [
+          "black"
+        ],
+        "red_ratio": 0.0,
+        "slot_role": "dirty_map",
+        "valid": true,
+        "visual_score": -25.008462,
+        "white_ratio": 0.000183,
+        "width": 2048,
+        "yellow_gold_ratio": 3.1e-05
+      },
+      "diffuse.dds": {
+        "alpha_visible_ratio": 0.993973,
+        "black_ratio": 0.006409,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.002213,
+        "height": 1024,
+        "magenta_ratio": 1.5e-05,
+        "mean_contrast": 34.289638,
+        "mean_luminance": 248.946477,
+        "palette_tags": [
+          "white"
+        ],
+        "red_ratio": 0.021286,
+        "slot_role": "diffuse",
+        "valid": true,
+        "visual_score": 248.710003,
+        "white_ratio": 0.961517,
+        "width": 1024,
+        "yellow_gold_ratio": 0.0
+      },
+      "diffusedirty.dds": {
+        "alpha_visible_ratio": 0.26236,
+        "black_ratio": 0.9133,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.048752,
+        "height": 1024,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 15.636609,
+        "mean_luminance": 7.163915,
+        "palette_tags": [
+          "black"
+        ],
+        "red_ratio": 0.0,
+        "slot_role": "dirty_map",
+        "valid": true,
+        "visual_score": -46.203615,
+        "white_ratio": 0.0,
+        "width": 1024,
+        "yellow_gold_ratio": 0.0
+      },
+      "illum.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.967834,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.003693,
+        "height": 2048,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 23.73254,
+        "mean_luminance": 3.372365,
+        "palette_tags": [
+          "black"
+        ],
+        "red_ratio": 0.008148,
+        "slot_role": "illumination",
+        "valid": true,
+        "visual_score": 50.465056,
+        "white_ratio": 0.003387,
+        "width": 4096,
+        "yellow_gold_ratio": 0.000153
+      }
+    }
+  }
 }

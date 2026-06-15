@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import struct
+from collections import Counter
 from io import BytesIO
 from pathlib import Path
 from typing import Any
@@ -52,6 +53,7 @@ def analyze_reference_package(
         names = zf.namelist()
         entries = {name: _entry_info(zf, name) for name in names}
         dds = {name: _dds_info(zf.read(name)) for name in names if name.lower().endswith(".dds")}
+        style_metrics = _style_metrics(zf, names)
         skin_json = _skin_json(zf)
         donor_mesh_match = _donor_mesh_match(zf, donor_zip)
         contact_sheet = _write_contact_sheet(zf, names, output_dir / f"{package_zip.stem}_contact_sheet.png")
@@ -70,6 +72,7 @@ def analyze_reference_package(
         "does_not_prove_stock_diffuse_mapping": True,
         "entries": entries,
         "dds": dds,
+        "style_metrics": style_metrics,
         "skin_json": skin_json,
         "filename_case_notes": _filename_case_notes(names),
         "donor_mesh_match": donor_mesh_match,
@@ -93,6 +96,10 @@ def write_reference_package_index(
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     path = output_dir / "reference_package_index.json"
+    route_counts = Counter(report["package_route"] for report in reports)
+    palette_tag_counts: Counter[str] = Counter()
+    for report in reports:
+        palette_tag_counts.update(report.get("style_metrics", {}).get("dominant_palette_tags", []))
     path.write_text(
         json.dumps(
             {
@@ -100,6 +107,8 @@ def write_reference_package_index(
                 "does_not_prove_tmuf_smoke": True,
                 "gallery": str(gallery) if gallery is not None else None,
                 "livery_atlas_gallery": str(livery_gallery) if livery_gallery is not None else None,
+                "route_counts": dict(sorted(route_counts.items())),
+                "palette_tag_counts": dict(sorted(palette_tag_counts.items())),
                 "reports": [
                     {
                         "package_name": report["package_name"],
@@ -108,6 +117,8 @@ def write_reference_package_index(
                         "archive_sha256": report["archive_sha256"],
                         "report": report["output_artifacts"]["report"],
                         "contact_sheet": report["output_artifacts"]["contact_sheet"],
+                        "primary_livery_slot": report.get("style_metrics", {}).get("primary_livery_slot"),
+                        "dominant_palette_tags": report.get("style_metrics", {}).get("dominant_palette_tags", []),
                     }
                     for report in reports
                 ],
@@ -257,6 +268,145 @@ def _dds_info(data: bytes) -> dict[str, Any]:
         "mip_count": struct.unpack("<I", data[28:32])[0],
         "fourcc": fourcc or "RGBA8",
     }
+
+
+def _style_metrics(zf: ZipFile, names: list[str]) -> dict[str, Any]:
+    dds_names = [name for name in names if name.lower().endswith(".dds")]
+    slots: dict[str, dict[str, Any]] = {}
+    for name in dds_names:
+        try:
+            image = Image.open(BytesIO(zf.read(name))).convert("RGBA")
+        except Exception:
+            slots[name] = {"valid": False}
+            continue
+        slots[name] = _image_style_metrics(image, name)
+
+    primary = _primary_livery_slot(slots)
+    palette_counter: Counter[str] = Counter()
+    for metrics in slots.values():
+        if not metrics.get("valid"):
+            continue
+        for tag in metrics["palette_tags"]:
+            palette_counter[tag] += 1
+    return {
+        "schema": "tmuf_premium_skin_lab.reference_style_metrics.v1",
+        "does_not_prove_tmuf_smoke": True,
+        "does_not_prove_stock_diffuse_mapping": True,
+        "primary_livery_slot": primary,
+        "dominant_palette_tags": sorted(palette_counter, key=lambda tag: (-palette_counter[tag], tag)),
+        "slots": slots,
+    }
+
+
+def _image_style_metrics(image: Image.Image, slot_name: str) -> dict[str, Any]:
+    rgba = image.convert("RGBA")
+    rgb_sample = rgba.convert("RGB")
+    alpha_sample = rgba.getchannel("A")
+    rgb_sample.thumbnail((256, 256), Image.Resampling.LANCZOS)
+    alpha_sample.thumbnail((256, 256), Image.Resampling.LANCZOS)
+    rgb_raw = rgb_sample.tobytes()
+    alpha_raw = alpha_sample.tobytes()
+    pixels = [
+        (
+            rgb_raw[index],
+            rgb_raw[index + 1],
+            rgb_raw[index + 2],
+            alpha_raw[index // 3],
+        )
+        for index in range(0, len(rgb_raw), 3)
+    ]
+    total = max(len(pixels), 1)
+    visible = [px for px in pixels if px[3] > 8]
+    rgb_pixels = pixels if visible else [(r, g, b, 255) for r, g, b, _a in pixels]
+    rgb_image = Image.new("RGB", rgb_sample.size)
+    rgb_image.putdata([(r, g, b) for r, g, b, _a in pixels])
+    stat = ImageStat.Stat(rgb_image)
+
+    cyan_count = sum(1 for r, g, b, _a in rgb_pixels if b > 130 and g > 100 and r < 90)
+    magenta_count = sum(1 for r, g, b, _a in rgb_pixels if r > 130 and b > 100 and g < 100)
+    red_count = sum(1 for r, g, b, _a in rgb_pixels if r > 140 and g < 110 and b < 110)
+    blue_count = sum(1 for r, g, b, _a in rgb_pixels if b > 140 and r < 100 and g < 150)
+    yellow_or_gold_count = sum(1 for r, g, b, _a in rgb_pixels if r > 150 and g > 110 and b < 100)
+    white_count = sum(1 for r, g, b, _a in rgb_pixels if r > 190 and g > 190 and b > 190)
+    black_count = sum(1 for r, g, b, _a in rgb_pixels if r < 45 and g < 45 and b < 45)
+    gray_count = sum(1 for r, g, b, _a in rgb_pixels if max(r, g, b) - min(r, g, b) < 24 and 45 <= ((r + g + b) / 3) <= 190)
+    alpha_visible_ratio = len(visible) / total
+    palette_ratios = {
+        "black_ratio": round(black_count / total, 6),
+        "blue_ratio": round(blue_count / total, 6),
+        "cyan_ratio": round(cyan_count / total, 6),
+        "gray_ratio": round(gray_count / total, 6),
+        "magenta_ratio": round(magenta_count / total, 6),
+        "red_ratio": round(red_count / total, 6),
+        "white_ratio": round(white_count / total, 6),
+        "yellow_gold_ratio": round(yellow_or_gold_count / total, 6),
+    }
+    return {
+        "valid": True,
+        "slot_role": _slot_role(slot_name),
+        "width": image.width,
+        "height": image.height,
+        "alpha_visible_ratio": round(alpha_visible_ratio, 6),
+        "mean_luminance": round(sum(stat.mean) / 3.0, 6),
+        "mean_contrast": round(sum(stat.stddev) / 3.0, 6),
+        "visual_score": round(_livery_visual_score(slot_name, _image_to_png_bytes(image)), 6),
+        "palette_tags": _palette_tags(palette_ratios),
+        **palette_ratios,
+    }
+
+
+def _image_to_png_bytes(image: Image.Image) -> bytes:
+    buf = BytesIO()
+    image.save(buf, format="PNG")
+    return buf.getvalue()
+
+
+def _palette_tags(ratios: dict[str, float]) -> list[str]:
+    tags = []
+    thresholds = {
+        "black": 0.18,
+        "blue": 0.08,
+        "cyan": 0.08,
+        "gray": 0.18,
+        "magenta": 0.08,
+        "red": 0.08,
+        "white": 0.12,
+        "yellow_gold": 0.08,
+    }
+    for key, threshold in thresholds.items():
+        if ratios[f"{key}_ratio"] >= threshold:
+            tags.append(key)
+    return tags
+
+
+def _primary_livery_slot(slots: dict[str, dict[str, Any]]) -> str | None:
+    valid = [(name, metrics) for name, metrics in slots.items() if metrics.get("valid")]
+    if not valid:
+        return None
+    candidates = [
+        (name, metrics)
+        for name, metrics in valid
+        if Path(name).name.lower() in {"diffuse.dds", "details.dds", "diffusedirty.dds", "detailsdirty.dds"}
+    ]
+    candidates = candidates or valid
+    return max(candidates, key=lambda item: item[1].get("visual_score", 0.0))[0]
+
+
+def _slot_role(slot_name: str) -> str:
+    lower = Path(slot_name).name.lower()
+    if lower == "diffuse.dds":
+        return "diffuse"
+    if lower == "details.dds":
+        return "details"
+    if lower in {"diffusedirty.dds", "detailsdirty.dds"}:
+        return "dirty_map"
+    if lower == "projshad.dds":
+        return "projected_shadow_or_underglow"
+    if lower == "illum.dds":
+        return "illumination"
+    if lower == "icon.dds":
+        return "icon"
+    return "unknown_dds"
 
 
 def _skin_json(zf: ZipFile) -> dict[str, Any]:

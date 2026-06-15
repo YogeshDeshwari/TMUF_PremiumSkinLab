@@ -111,5 +111,148 @@
   "size_bytes": 9723670,
   "skin_json": {},
   "source_path": "resources/reference_only/downloads/Winter-SKIN_by_MINA_TM.zip",
-  "stock_lane_status": "not_stock_diffuse_only"
+  "stock_lane_status": "not_stock_diffuse_only",
+  "style_metrics": {
+    "does_not_prove_stock_diffuse_mapping": true,
+    "does_not_prove_tmuf_smoke": true,
+    "dominant_palette_tags": [
+      "black",
+      "blue",
+      "cyan",
+      "white",
+      "gray"
+    ],
+    "primary_livery_slot": "Diffuse.dds",
+    "schema": "tmuf_premium_skin_lab.reference_style_metrics.v1",
+    "slots": {
+      "Details.dds": {
+        "alpha_visible_ratio": 0.6689,
+        "black_ratio": 0.905548,
+        "blue_ratio": 0.011749,
+        "cyan_ratio": 0.010788,
+        "gray_ratio": 0.047455,
+        "height": 4096,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 33.989501,
+        "mean_luminance": 25.179067,
+        "palette_tags": [
+          "black"
+        ],
+        "red_ratio": 0.000168,
+        "slot_role": "details",
+        "valid": true,
+        "visual_score": 236.316493,
+        "white_ratio": 0.007736,
+        "width": 4096,
+        "yellow_gold_ratio": 0.0
+      },
+      "DetailsDirty.dds": {
+        "alpha_visible_ratio": 0.393143,
+        "black_ratio": 0.0,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.0,
+        "height": 1024,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 2.377903,
+        "mean_luminance": 91.392771,
+        "palette_tags": [],
+        "red_ratio": 0.0,
+        "slot_role": "dirty_map",
+        "valid": true,
+        "visual_score": -28.834315,
+        "white_ratio": 0.0,
+        "width": 1024,
+        "yellow_gold_ratio": 0.0
+      },
+      "Diffuse.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.328735,
+        "blue_ratio": 0.135178,
+        "cyan_ratio": 0.121017,
+        "gray_ratio": 0.352005,
+        "height": 2048,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 63.893832,
+        "mean_luminance": 71.472839,
+        "palette_tags": [
+          "black",
+          "blue",
+          "cyan",
+          "gray"
+        ],
+        "red_ratio": 0.0,
+        "slot_role": "diffuse",
+        "valid": true,
+        "visual_score": 352.654549,
+        "white_ratio": 0.024551,
+        "width": 2048,
+        "yellow_gold_ratio": 0.0
+      },
+      "DiffuseDirty.dds": {
+        "alpha_visible_ratio": 0.670746,
+        "black_ratio": 0.0,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.0,
+        "height": 1024,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 3.049092,
+        "mean_luminance": 90.538172,
+        "palette_tags": [],
+        "red_ratio": 0.0,
+        "slot_role": "dirty_map",
+        "valid": true,
+        "visual_score": -27.445153,
+        "white_ratio": 0.0,
+        "width": 1024,
+        "yellow_gold_ratio": 0.0
+      },
+      "Icon.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.218994,
+        "blue_ratio": 0.165283,
+        "cyan_ratio": 0.34967,
+        "gray_ratio": 0.01239,
+        "height": 128,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 93.40227,
+        "mean_luminance": 139.633545,
+        "palette_tags": [
+          "black",
+          "blue",
+          "cyan",
+          "white"
+        ],
+        "red_ratio": 0.0,
+        "slot_role": "icon",
+        "valid": true,
+        "visual_score": 213.930724,
+        "white_ratio": 0.178772,
+        "width": 128,
+        "yellow_gold_ratio": 0.0
+      },
+      "ProjShad.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.105469,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.177765,
+        "height": 512,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 78.807939,
+        "mean_luminance": 194.070328,
+        "palette_tags": [
+          "white"
+        ],
+        "red_ratio": 0.0,
+        "slot_role": "projected_shadow_or_underglow",
+        "valid": true,
+        "visual_score": 39.363862,
+        "white_ratio": 0.706406,
+        "width": 512,
+        "yellow_gold_ratio": 0.0
+      }
+    }
+  }
 }

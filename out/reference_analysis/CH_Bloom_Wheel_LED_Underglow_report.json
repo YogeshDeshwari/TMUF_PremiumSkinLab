@@ -135,5 +135,143 @@
     "theme": "CH_Cyber_SynthwaveGrid_WheelFix_LED_Underglow"
   },
   "source_path": "resources/reference_only/downloads/CH_Bloom_Wheel_LED_Underglow.zip",
-  "stock_lane_status": "not_stock_diffuse_only"
+  "stock_lane_status": "not_stock_diffuse_only",
+  "style_metrics": {
+    "does_not_prove_stock_diffuse_mapping": true,
+    "does_not_prove_tmuf_smoke": true,
+    "dominant_palette_tags": [
+      "magenta",
+      "black",
+      "blue",
+      "white"
+    ],
+    "primary_livery_slot": "Diffuse.dds",
+    "schema": "tmuf_premium_skin_lab.reference_style_metrics.v1",
+    "slots": {
+      "Details.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.551544,
+        "blue_ratio": 0.006897,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.000153,
+        "height": 4096,
+        "magenta_ratio": 0.025803,
+        "mean_contrast": 37.760092,
+        "mean_luminance": 36.162257,
+        "palette_tags": [
+          "black"
+        ],
+        "red_ratio": 0.0,
+        "slot_role": "details",
+        "valid": true,
+        "visual_score": 278.25456,
+        "white_ratio": 0.0,
+        "width": 4096,
+        "yellow_gold_ratio": 0.0
+      },
+      "DetailsDirty.dds": {
+        "alpha_visible_ratio": 0.393997,
+        "black_ratio": 0.0,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 1.5e-05,
+        "gray_ratio": 0.039154,
+        "height": 1024,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 25.475993,
+        "mean_luminance": 83.780212,
+        "palette_tags": [],
+        "red_ratio": 0.0,
+        "slot_role": "dirty_map",
+        "valid": true,
+        "visual_score": 6.063643,
+        "white_ratio": 0.0,
+        "width": 1024,
+        "yellow_gold_ratio": 0.0
+      },
+      "Diffuse.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.128235,
+        "blue_ratio": 0.175323,
+        "cyan_ratio": 0.042679,
+        "gray_ratio": 0.000824,
+        "height": 2048,
+        "magenta_ratio": 0.357056,
+        "mean_contrast": 58.298757,
+        "mean_luminance": 94.382472,
+        "palette_tags": [
+          "blue",
+          "magenta"
+        ],
+        "red_ratio": 0.0,
+        "slot_role": "diffuse",
+        "valid": true,
+        "visual_score": 380.640277,
+        "white_ratio": 0.0,
+        "width": 2048,
+        "yellow_gold_ratio": 0.0
+      },
+      "DiffuseDirty.dds": {
+        "alpha_visible_ratio": 0.670746,
+        "black_ratio": 0.0,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 1.5e-05,
+        "gray_ratio": 0.02948,
+        "height": 1024,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 25.445585,
+        "mean_luminance": 78.881922,
+        "palette_tags": [],
+        "red_ratio": 0.0,
+        "slot_role": "dirty_map",
+        "valid": true,
+        "visual_score": 35.227172,
+        "white_ratio": 0.0,
+        "width": 1024,
+        "yellow_gold_ratio": 0.0
+      },
+      "Icon.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.128479,
+        "blue_ratio": 0.070618,
+        "cyan_ratio": 0.012268,
+        "gray_ratio": 0.0,
+        "height": 128,
+        "magenta_ratio": 0.40625,
+        "mean_contrast": 54.312143,
+        "mean_luminance": 92.18453,
+        "palette_tags": [
+          "magenta"
+        ],
+        "red_ratio": 0.0,
+        "slot_role": "icon",
+        "valid": true,
+        "visual_score": 74.648045,
+        "white_ratio": 0.0,
+        "width": 128,
+        "yellow_gold_ratio": 0.0
+      },
+      "ProjShad.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.0,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.0,
+        "height": 512,
+        "magenta_ratio": 0.221619,
+        "mean_contrast": 31.150094,
+        "mean_luminance": 228.274841,
+        "palette_tags": [
+          "magenta",
+          "white"
+        ],
+        "red_ratio": 0.0,
+        "slot_role": "projected_shadow_or_underglow",
+        "valid": true,
+        "visual_score": -31.657727,
+        "white_ratio": 0.658463,
+        "width": 512,
+        "yellow_gold_ratio": 0.0
+      }
+    }
+  }
 }

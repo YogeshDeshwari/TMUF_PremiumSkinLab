@@ -148,5 +148,171 @@
   "size_bytes": 4126248,
   "skin_json": {},
   "source_path": "resources/reference_only/downloads/flintstone_by_WiiTRO.zip",
-  "stock_lane_status": "not_stock_diffuse_only"
+  "stock_lane_status": "not_stock_diffuse_only",
+  "style_metrics": {
+    "does_not_prove_stock_diffuse_mapping": true,
+    "does_not_prove_tmuf_smoke": true,
+    "dominant_palette_tags": [
+      "black",
+      "yellow_gold",
+      "gray",
+      "red",
+      "white"
+    ],
+    "primary_livery_slot": "details.dds",
+    "schema": "tmuf_premium_skin_lab.reference_style_metrics.v1",
+    "slots": {
+      "DetailsDirty.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.000946,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.0,
+        "height": 1024,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 66.987495,
+        "mean_luminance": 96.40066,
+        "palette_tags": [
+          "red"
+        ],
+        "red_ratio": 0.143692,
+        "slot_role": "dirty_map",
+        "valid": true,
+        "visual_score": 231.061577,
+        "white_ratio": 0.000443,
+        "width": 1024,
+        "yellow_gold_ratio": 0.078781
+      },
+      "DiffuseDirty.dds": {
+        "alpha_visible_ratio": 0.998611,
+        "black_ratio": 0.023911,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.0,
+        "height": 1024,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 36.21883,
+        "mean_luminance": 55.500666,
+        "palette_tags": [
+          "red",
+          "yellow_gold"
+        ],
+        "red_ratio": 0.095078,
+        "slot_role": "dirty_map",
+        "valid": true,
+        "visual_score": 106.520055,
+        "white_ratio": 0.0,
+        "width": 1024,
+        "yellow_gold_ratio": 0.149292
+      },
+      "Icon.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.055725,
+        "blue_ratio": 0.001465,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.579407,
+        "height": 128,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 48.928608,
+        "mean_luminance": 107.52891,
+        "palette_tags": [
+          "gray",
+          "yellow_gold"
+        ],
+        "red_ratio": 0.000427,
+        "slot_role": "icon",
+        "valid": true,
+        "visual_score": 2.903094,
+        "white_ratio": 0.0,
+        "width": 128,
+        "yellow_gold_ratio": 0.080566
+      },
+      "Illum.dds": {
+        "alpha_visible_ratio": 0.012695,
+        "black_ratio": 0.988602,
+        "blue_ratio": 4.6e-05,
+        "cyan_ratio": 3.1e-05,
+        "gray_ratio": 0.000778,
+        "height": 1024,
+        "magenta_ratio": 1.5e-05,
+        "mean_contrast": 18.094381,
+        "mean_luminance": 1.798182,
+        "palette_tags": [
+          "black"
+        ],
+        "red_ratio": 0.001648,
+        "slot_role": "illumination",
+        "valid": true,
+        "visual_score": 34.390499,
+        "white_ratio": 0.002167,
+        "width": 1024,
+        "yellow_gold_ratio": 0.000443
+      },
+      "ProjShad.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.077499,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.191849,
+        "height": 512,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 84.263883,
+        "mean_luminance": 199.91541,
+        "palette_tags": [
+          "gray",
+          "white"
+        ],
+        "red_ratio": 0.0,
+        "slot_role": "projected_shadow_or_underglow",
+        "valid": true,
+        "visual_score": 55.601768,
+        "white_ratio": 0.715942,
+        "width": 512,
+        "yellow_gold_ratio": 0.0
+      },
+      "details.dds": {
+        "alpha_visible_ratio": 0.666779,
+        "black_ratio": 0.63295,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.033737,
+        "height": 1024,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 79.666218,
+        "mean_luminance": 58.716146,
+        "palette_tags": [
+          "black"
+        ],
+        "red_ratio": 0.000229,
+        "slot_role": "details",
+        "valid": true,
+        "visual_score": 410.718009,
+        "white_ratio": 0.0,
+        "width": 1024,
+        "yellow_gold_ratio": 0.027542
+      },
+      "diffuse.dds": {
+        "alpha_visible_ratio": 0.221848,
+        "black_ratio": 0.557831,
+        "blue_ratio": 0.018555,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.10199,
+        "height": 1024,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 74.61497,
+        "mean_luminance": 60.730179,
+        "palette_tags": [
+          "black",
+          "yellow_gold"
+        ],
+        "red_ratio": 0.014587,
+        "slot_role": "diffuse",
+        "valid": true,
+        "visual_score": 373.97743,
+        "white_ratio": 0.000931,
+        "width": 1024,
+        "yellow_gold_ratio": 0.10144
+      }
+    }
+  }
 }

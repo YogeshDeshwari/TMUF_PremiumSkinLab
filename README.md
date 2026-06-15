@@ -126,12 +126,14 @@ is local preview evidence only and still does not prove TMUF runtime visibility.
 External skin references can be analyzed with
 `recipes/analyze_reference_packages.py`. The current batch reports live under
 `out/reference_analysis/`; see `docs/reference_skin_batch_analysis.md` for the
-evidence split. The gallery at
+evidence split, route counts, and style metrics. The gallery at
 `out/reference_analysis/reference_package_gallery.png` is a package-identity
 scan aid and may choose `Icon.dds`. Use
 `out/reference_analysis/reference_livery_atlas_gallery.png` when comparing
 paint texture slots. Per-package contact sheets remain the safest review
-artifacts because they show every detected DDS slot.
+artifacts because they show every detected DDS slot. `style_metrics` in each
+report are local RGB/alpha image metrics only; they do not prove TMUF runtime
+appearance or stock UV mapping.
 
 The generated batch summary lives at `out/reports/premium_batch_index.json`.
 It indexes all premium candidates, lanes, artifacts, style metrics, and pending

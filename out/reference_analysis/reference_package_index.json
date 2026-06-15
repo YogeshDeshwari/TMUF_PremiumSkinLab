@@ -2,231 +2,436 @@
   "does_not_prove_tmuf_smoke": true,
   "gallery": "out/reference_analysis/reference_package_gallery.png",
   "livery_atlas_gallery": "out/reference_analysis/reference_livery_atlas_gallery.png",
+  "palette_tag_counts": {
+    "black": 28,
+    "blue": 6,
+    "cyan": 6,
+    "gray": 24,
+    "magenta": 2,
+    "red": 10,
+    "white": 25,
+    "yellow_gold": 4
+  },
   "reports": [
     {
       "archive_sha256": "e849f0dc6469828c1d72db2a1dfc05f265976e4e71026d58118d9124ec909441",
       "contact_sheet": "out/reference_analysis/minecart_by_WiiTRO_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "gray"
+      ],
       "package_name": "minecart_by_WiiTRO.zip",
       "package_route": "custom_fullcar_other_mesh_reference",
+      "primary_livery_slot": "Details.dds",
       "report": "out/reference_analysis/minecart_by_WiiTRO_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "d905faf9b200f686462859275128a46a138124fcf4323da02241c9aa17d20835",
       "contact_sheet": "out/reference_analysis/hunter_by_WiiTRO_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "red",
+        "white"
+      ],
       "package_name": "hunter_by_WiiTRO.zip",
       "package_route": "custom_fullcar_partial_ch2026_mesh_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/hunter_by_WiiTRO_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "efff90fe65b098e6b5c82a0c6323e537ed8a2941ec278a17d0679e76b5406512",
       "contact_sheet": "out/reference_analysis/Aqua-Public-SKIN_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "cyan",
+        "gray",
+        "white"
+      ],
       "package_name": "Aqua-Public-SKIN_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/Aqua-Public-SKIN_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "0d5371afc83dc044778ee9feaf501ba3084eea68d511b5b6aa7106be98d506ce",
       "contact_sheet": "out/reference_analysis/Fall-Public-SKIN-_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "red",
+        "gray",
+        "white",
+        "yellow_gold"
+      ],
       "package_name": "Fall-Public-SKIN-_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/Fall-Public-SKIN-_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "62984146b3addb3175d66c13cf9b57540c6c40c6fc733514495ba19c99ff97ca",
       "contact_sheet": "out/reference_analysis/Azerbaijan_by_kekfeg_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "cyan",
+        "red"
+      ],
       "package_name": "Azerbaijan_by_kekfeg.zip",
       "package_route": "stock_diffuse_only_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/Azerbaijan_by_kekfeg_report.json",
       "stock_lane_status": "reference_only_not_generated_by_lab"
     },
     {
       "archive_sha256": "5774ecedd6a4b0a6c5da22c5f5ee5c85e06d2542ed221aed92666deddfaa0bd4",
       "contact_sheet": "out/reference_analysis/flintstone_by_WiiTRO_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "yellow_gold",
+        "gray",
+        "red",
+        "white"
+      ],
       "package_name": "flintstone_by_WiiTRO.zip",
       "package_route": "custom_fullcar_other_mesh_reference",
+      "primary_livery_slot": "details.dds",
       "report": "out/reference_analysis/flintstone_by_WiiTRO_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "a25d3abcbf9d887a548cca32c781bad6f584de873dd245ecbc815bdd0418641a",
       "contact_sheet": "out/reference_analysis/steve-in-a-cart_by_WiiTRO_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "gray",
+        "white"
+      ],
       "package_name": "steve-in-a-cart_by_WiiTRO.zip",
       "package_route": "custom_fullcar_other_mesh_reference",
+      "primary_livery_slot": "Details.dds",
       "report": "out/reference_analysis/steve-in-a-cart_by_WiiTRO_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "6db6d8b9b604ac3925edf26a47648d96f2a8d6ea991f59d2446eb4ebc4389b73",
       "contact_sheet": "out/reference_analysis/pedo-van_by_WiiTRO_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "white",
+        "gray"
+      ],
       "package_name": "pedo-van_by_WiiTRO.zip",
       "package_route": "custom_fullcar_other_mesh_reference",
+      "primary_livery_slot": "details.dds",
       "report": "out/reference_analysis/pedo-van_by_WiiTRO_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "6feef5825981f79a53742a74b8e8598cdf97977a6d821b89b56ad86639ef0ec9",
       "contact_sheet": "out/reference_analysis/Christmas-2023-SKIN_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "red",
+        "white",
+        "gray"
+      ],
       "package_name": "Christmas-2023-SKIN_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/Christmas-2023-SKIN_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "fdd8380ca74d46d5fbe788e55b73e05c90a14777153c85241a99bf16a753d586",
       "contact_sheet": "out/reference_analysis/Incoming-Winter-Public-SKIN_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "white",
+        "cyan",
+        "gray"
+      ],
       "package_name": "Incoming-Winter-Public-SKIN_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/Incoming-Winter-Public-SKIN_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "cc90a291216f1e1d6f48e43eec17868422a3c1ea7bde5d1f88ecf71f1cfd4b71",
       "contact_sheet": "out/reference_analysis/Red-Public-SKIN_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "red",
+        "gray",
+        "white"
+      ],
       "package_name": "Red-Public-SKIN_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/Red-Public-SKIN_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "9eebcab5898a93f8cb4fbc139c8fcc3e3dfba2859a0b370dd99c5fdf23c6b995",
       "contact_sheet": "out/reference_analysis/KEKW-Public-SKIN_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "red",
+        "gray"
+      ],
       "package_name": "KEKW-Public-SKIN_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/KEKW-Public-SKIN_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "5f9cf0548adf468d3755c9b925224213f475361cd6f5cc4426aa7148084b3173",
       "contact_sheet": "out/reference_analysis/KILL-la-KILL-Public-SKIN_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "white",
+        "gray",
+        "red"
+      ],
       "package_name": "KILL-la-KILL-Public-SKIN_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/KILL-la-KILL-Public-SKIN_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "1753fee46ecd805bf9e2c6003d093c318563aa5982114250f4defd7f53c16dfe",
       "contact_sheet": "out/reference_analysis/Fallen-leaves-SKIN_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "yellow_gold",
+        "gray",
+        "red",
+        "white"
+      ],
       "package_name": "Fallen-leaves-SKIN_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/Fallen-leaves-SKIN_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "a0ddbb8baf5496f151543f105321d1c61a21cac990e802400fd7ab290e43479b",
       "contact_sheet": "out/reference_analysis/Deep-Galaxy-SKIN_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "blue",
+        "gray",
+        "magenta",
+        "white"
+      ],
       "package_name": "Deep-Galaxy-SKIN_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/Deep-Galaxy-SKIN_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "f9f58e075670127daa2b2349058133158f3179a876a8b2005b343427522db922",
       "contact_sheet": "out/reference_analysis/(TMN_UF)_by_SparkyTM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "red",
+        "white",
+        "gray"
+      ],
       "package_name": "(TMN_UF)_by_SparkyTM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/(TMN_UF)_by_SparkyTM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "6d8440523031944f73d6f64d4af17a087843f144fe1d91c5a00516f831ffc36f",
       "contact_sheet": "out/reference_analysis/Summer-2024-SKIN_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "blue",
+        "cyan",
+        "gray",
+        "white",
+        "yellow_gold"
+      ],
       "package_name": "Summer-2024-SKIN_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/Summer-2024-SKIN_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "3e4b9953a5455af805f6c66668e733dffcb8290e045867e3d61573a6dfced149",
       "contact_sheet": "out/reference_analysis/Rameses-b-SKIN_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "white",
+        "gray"
+      ],
       "package_name": "Rameses-b-SKIN_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/Rameses-b-SKIN_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "beec138fe55c77a47b0b887c07016f8de911fd4113de1645877d08630568592e",
       "contact_sheet": "out/reference_analysis/Spring-2024-SKIN_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "white",
+        "gray"
+      ],
       "package_name": "Spring-2024-SKIN_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/Spring-2024-SKIN_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "ea1bfd48fcf14a7c52bba9f6c6f230a0943c9162674c46baa6ba0a4bf4a1dd14",
       "contact_sheet": "out/reference_analysis/Pink-Skin-(TMNF_UF)_by_SparkyTM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "gray",
+        "white"
+      ],
       "package_name": "Pink-Skin-(TMNF_UF)_by_SparkyTM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/Pink-Skin-(TMNF_UF)_by_SparkyTM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "184ea0de746548e866e3bb5b60198ad9d3bcadd716fd858ac79d0f2bd74ecf74",
       "contact_sheet": "out/reference_analysis/MINA-2023-SKIN_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "white",
+        "blue",
+        "gray"
+      ],
       "package_name": "MINA-2023-SKIN_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/MINA-2023-SKIN_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "ab077ad49e2b1dced079fcf76a4e2fdd4e654d979d436f2179b37716353d9236",
       "contact_sheet": "out/reference_analysis/Winter-SKIN_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "blue",
+        "cyan",
+        "white",
+        "gray"
+      ],
       "package_name": "Winter-SKIN_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/Winter-SKIN_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "0b133f26fece629c6a8c919b22521ee6b4167e0dd76662acbeee5914cd84437c",
       "contact_sheet": "out/reference_analysis/KACKIEST-KACKY-9-SKIN-(white)_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "white",
+        "gray"
+      ],
       "package_name": "KACKIEST-KACKY-9-SKIN-(white)_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/KACKIEST-KACKY-9-SKIN-(white)_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "31d938aa798d07a874b7247c8c4ce6dce9045681ab9fb33380a3d59e705eaf74",
       "contact_sheet": "out/reference_analysis/KACKIEST-KACKY-9-(black)_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "white",
+        "gray"
+      ],
       "package_name": "KACKIEST-KACKY-9-(black)_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/KACKIEST-KACKY-9-(black)_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "b406423820d93e7578a44d35b6cc559105fb1dfdfa51a785dfa62ee6fedd0fba",
       "contact_sheet": "out/reference_analysis/KACKIEST-KACKY-10-SKIN-(light-gray)_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "white",
+        "gray"
+      ],
       "package_name": "KACKIEST-KACKY-10-SKIN-(light-gray)_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/KACKIEST-KACKY-10-SKIN-(light-gray)_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "292dc3bdadfb5d8231e153e82b924f9c664464ff5b055c43939f9bf4c2252af8",
       "contact_sheet": "out/reference_analysis/KACKIEST-KACKY-10-SKIN-(dark-gray)_by_MINA_TM_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "white",
+        "gray"
+      ],
       "package_name": "KACKIEST-KACKY-10-SKIN-(dark-gray)_by_MINA_TM.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/KACKIEST-KACKY-10-SKIN-(dark-gray)_by_MINA_TM_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "94a336d1babf89e1c837f31cfa8dc66e5275c816d99c21d52892a8ed1c238666",
       "contact_sheet": "out/reference_analysis/CH_Blu_contact_sheet.png",
+      "dominant_palette_tags": [
+        "black",
+        "blue",
+        "cyan",
+        "white"
+      ],
       "package_name": "CH_Blu.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Details.dds",
       "report": "out/reference_analysis/CH_Blu_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     },
     {
       "archive_sha256": "73a41369c8e093828915aadee5a9490503d06b7f83c96038e625204eddf86d80",
       "contact_sheet": "out/reference_analysis/CH_Bloom_Wheel_LED_Underglow_contact_sheet.png",
+      "dominant_palette_tags": [
+        "magenta",
+        "black",
+        "blue",
+        "white"
+      ],
       "package_name": "CH_Bloom_Wheel_LED_Underglow.zip",
       "package_route": "custom_fullcar_ch2026_reference",
+      "primary_livery_slot": "Diffuse.dds",
       "report": "out/reference_analysis/CH_Bloom_Wheel_LED_Underglow_report.json",
       "stock_lane_status": "not_stock_diffuse_only"
     }
   ],
+  "route_counts": {
+    "custom_fullcar_ch2026_reference": 22,
+    "custom_fullcar_other_mesh_reference": 4,
+    "custom_fullcar_partial_ch2026_mesh_reference": 1,
+    "stock_diffuse_only_reference": 1
+  },
   "schema": "tmuf_premium_skin_lab.reference_package_index.v1"
 }

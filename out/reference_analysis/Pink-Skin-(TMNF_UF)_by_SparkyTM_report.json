@@ -116,5 +116,141 @@
   "size_bytes": 10251155,
   "skin_json": {},
   "source_path": "resources/reference_only/downloads/Pink-Skin-(TMNF_UF)_by_SparkyTM.zip",
-  "stock_lane_status": "not_stock_diffuse_only"
+  "stock_lane_status": "not_stock_diffuse_only",
+  "style_metrics": {
+    "does_not_prove_stock_diffuse_mapping": true,
+    "does_not_prove_tmuf_smoke": true,
+    "dominant_palette_tags": [
+      "black",
+      "gray",
+      "white"
+    ],
+    "primary_livery_slot": "Diffuse.dds",
+    "schema": "tmuf_premium_skin_lab.reference_style_metrics.v1",
+    "slots": {
+      "Details.dds": {
+        "alpha_visible_ratio": 0.6689,
+        "black_ratio": 0.889359,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.039001,
+        "height": 4096,
+        "magenta_ratio": 0.003265,
+        "mean_contrast": 26.29857,
+        "mean_luminance": 24.939061,
+        "palette_tags": [
+          "black"
+        ],
+        "red_ratio": 0.005432,
+        "slot_role": "details",
+        "valid": true,
+        "visual_score": 216.923152,
+        "white_ratio": 0.003906,
+        "width": 4096,
+        "yellow_gold_ratio": 0.0
+      },
+      "DetailsDirty.dds": {
+        "alpha_visible_ratio": 0.393143,
+        "black_ratio": 0.0,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.0,
+        "height": 1024,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 2.377903,
+        "mean_luminance": 91.392771,
+        "palette_tags": [],
+        "red_ratio": 0.0,
+        "slot_role": "dirty_map",
+        "valid": true,
+        "visual_score": -28.834315,
+        "white_ratio": 0.0,
+        "width": 1024,
+        "yellow_gold_ratio": 0.0
+      },
+      "Diffuse.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.434235,
+        "blue_ratio": 3.1e-05,
+        "cyan_ratio": 1.5e-05,
+        "gray_ratio": 0.385193,
+        "height": 2048,
+        "magenta_ratio": 0.060547,
+        "mean_contrast": 47.768875,
+        "mean_luminance": 48.81017,
+        "palette_tags": [
+          "black",
+          "gray"
+        ],
+        "red_ratio": 0.027206,
+        "slot_role": "diffuse",
+        "valid": true,
+        "visual_score": 282.379379,
+        "white_ratio": 0.000504,
+        "width": 2048,
+        "yellow_gold_ratio": 0.0
+      },
+      "DiffuseDirty.dds": {
+        "alpha_visible_ratio": 0.670746,
+        "black_ratio": 0.0,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.0,
+        "height": 1024,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 3.049092,
+        "mean_luminance": 90.538172,
+        "palette_tags": [],
+        "red_ratio": 0.0,
+        "slot_role": "dirty_map",
+        "valid": true,
+        "visual_score": -27.445153,
+        "white_ratio": 0.0,
+        "width": 1024,
+        "yellow_gold_ratio": 0.0
+      },
+      "Icon.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.939941,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.0,
+        "height": 128,
+        "magenta_ratio": 0.042969,
+        "mean_contrast": 26.386694,
+        "mean_luminance": 6.470133,
+        "palette_tags": [
+          "black"
+        ],
+        "red_ratio": 0.011597,
+        "slot_role": "icon",
+        "valid": true,
+        "visual_score": -87.933809,
+        "white_ratio": 0.0,
+        "width": 128,
+        "yellow_gold_ratio": 0.0
+      },
+      "ProjShad.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.105469,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.177765,
+        "height": 512,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 78.807939,
+        "mean_luminance": 194.070328,
+        "palette_tags": [
+          "white"
+        ],
+        "red_ratio": 0.0,
+        "slot_role": "projected_shadow_or_underglow",
+        "valid": true,
+        "visual_score": 39.363862,
+        "white_ratio": 0.706406,
+        "width": 512,
+        "yellow_gold_ratio": 0.0
+      }
+    }
+  }
 }

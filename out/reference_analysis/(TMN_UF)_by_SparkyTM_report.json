@@ -85,5 +85,107 @@
   "size_bytes": 9192015,
   "skin_json": {},
   "source_path": "resources/reference_only/downloads/(TMN_UF)_by_SparkyTM.zip",
-  "stock_lane_status": "not_stock_diffuse_only"
+  "stock_lane_status": "not_stock_diffuse_only",
+  "style_metrics": {
+    "does_not_prove_stock_diffuse_mapping": true,
+    "does_not_prove_tmuf_smoke": true,
+    "dominant_palette_tags": [
+      "black",
+      "red",
+      "white",
+      "gray"
+    ],
+    "primary_livery_slot": "Diffuse.dds",
+    "schema": "tmuf_premium_skin_lab.reference_style_metrics.v1",
+    "slots": {
+      "Details.dds": {
+        "alpha_visible_ratio": 0.6689,
+        "black_ratio": 0.857224,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.03421,
+        "height": 4096,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 28.655137,
+        "mean_luminance": 25.290324,
+        "palette_tags": [
+          "black"
+        ],
+        "red_ratio": 0.027771,
+        "slot_role": "details",
+        "valid": true,
+        "visual_score": 230.411646,
+        "white_ratio": 0.003723,
+        "width": 4096,
+        "yellow_gold_ratio": 0.0
+      },
+      "Diffuse.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.440338,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.3564,
+        "height": 2048,
+        "magenta_ratio": 0.000137,
+        "mean_contrast": 61.674921,
+        "mean_luminance": 51.953791,
+        "palette_tags": [
+          "black",
+          "gray",
+          "red"
+        ],
+        "red_ratio": 0.088699,
+        "slot_role": "diffuse",
+        "valid": true,
+        "visual_score": 324.172452,
+        "white_ratio": 0.039337,
+        "width": 2048,
+        "yellow_gold_ratio": 0.0
+      },
+      "Icon.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.376526,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.045471,
+        "height": 128,
+        "magenta_ratio": 0.000183,
+        "mean_contrast": 100.851379,
+        "mean_luminance": 86.236633,
+        "palette_tags": [
+          "black",
+          "red",
+          "white"
+        ],
+        "red_ratio": 0.345459,
+        "slot_role": "icon",
+        "valid": true,
+        "visual_score": 216.341008,
+        "white_ratio": 0.169922,
+        "width": 128,
+        "yellow_gold_ratio": 0.0
+      },
+      "ProjShad.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.105469,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.177765,
+        "height": 512,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 78.807939,
+        "mean_luminance": 194.070328,
+        "palette_tags": [
+          "white"
+        ],
+        "red_ratio": 0.0,
+        "slot_role": "projected_shadow_or_underglow",
+        "valid": true,
+        "visual_score": 39.363862,
+        "white_ratio": 0.706406,
+        "width": 512,
+        "yellow_gold_ratio": 0.0
+      }
+    }
+  }
 }

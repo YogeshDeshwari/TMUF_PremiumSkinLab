@@ -53,6 +53,54 @@ class ReferencePackageAnalysisTests(unittest.TestCase):
             self.assertTrue((output_dir / "CH_Test_report.json").exists())
             self.assertTrue((output_dir / "CH_Test_contact_sheet.png").exists())
 
+    def test_reference_report_records_texture_style_metrics(self):
+        from src.dds.tmnf_dds import build_dds_dxt5_bytes
+        from src.evidence.reference_package_analysis import analyze_reference_package
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            package_zip = root / "style_metrics.zip"
+            with zipfile.ZipFile(package_zip, "w", zipfile.ZIP_DEFLATED) as zf:
+                zf.writestr("Diffuse.dds", build_dds_dxt5_bytes(Image.new("RGBA", (8, 8), (0, 220, 255, 255))))
+                zf.writestr("Details.dds", build_dds_dxt5_bytes(Image.new("RGBA", (8, 8), (255, 0, 180, 255))))
+                zf.writestr("Icon.dds", build_dds_dxt5_bytes(Image.new("RGBA", (8, 8), (20, 20, 20, 255))))
+                zf.writestr("MainBody.Solid.Gbx", b"custom-main")
+                zf.writestr("MainBodyHigh.Solid.Gbx", b"custom-high")
+
+            report = analyze_reference_package(package_zip, output_dir=root / "out")
+
+            self.assertEqual(
+                report["style_metrics"]["schema"],
+                "tmuf_premium_skin_lab.reference_style_metrics.v1",
+            )
+            self.assertEqual(report["style_metrics"]["primary_livery_slot"], "Details.dds")
+            self.assertGreater(report["style_metrics"]["slots"]["Diffuse.dds"]["cyan_ratio"], 0.8)
+            self.assertGreater(report["style_metrics"]["slots"]["Details.dds"]["magenta_ratio"], 0.8)
+            self.assertIn("cyan", report["style_metrics"]["dominant_palette_tags"])
+            self.assertIn("magenta", report["style_metrics"]["dominant_palette_tags"])
+            self.assertTrue(report["style_metrics"]["does_not_prove_tmuf_smoke"])
+
+    def test_style_metrics_preserve_rgb_when_alpha_is_transparent(self):
+        from src.dds.tmnf_dds import build_dds_dxt5_bytes
+        from src.evidence.reference_package_analysis import analyze_reference_package
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            package_zip = root / "transparent_rgb.zip"
+            with zipfile.ZipFile(package_zip, "w", zipfile.ZIP_DEFLATED) as zf:
+                zf.writestr(
+                    "Diffuse.dds",
+                    build_dds_dxt5_bytes(Image.new("RGBA", (512, 512), (255, 0, 180, 0))),
+                )
+                zf.writestr("Icon.dds", build_dds_dxt5_bytes(Image.new("RGBA", (8, 8), (20, 20, 20, 255))))
+
+            report = analyze_reference_package(package_zip, output_dir=root / "out")
+            diffuse = report["style_metrics"]["slots"]["Diffuse.dds"]
+
+            self.assertEqual(diffuse["alpha_visible_ratio"], 0.0)
+            self.assertGreater(diffuse["magenta_ratio"], 0.8)
+            self.assertLess(diffuse["black_ratio"], 0.1)
+
     def test_stock_diffuse_only_reference_package_stays_separate(self):
         from src.dds.tmnf_dds import build_dds_dxt5_bytes
         from src.evidence.reference_package_analysis import analyze_reference_package
@@ -126,6 +174,9 @@ class ReferencePackageAnalysisTests(unittest.TestCase):
             index = json.loads((output_dir / "reference_package_index.json").read_text())
             self.assertEqual(index["schema"], "tmuf_premium_skin_lab.reference_package_index.v1")
             self.assertEqual(index["reports"][0]["package_route"], "stock_diffuse_only_reference")
+            self.assertEqual(index["route_counts"], {"stock_diffuse_only_reference": 1})
+            self.assertIn("cyan", index["palette_tag_counts"])
+            self.assertEqual(index["reports"][0]["primary_livery_slot"], "Diffuse.dds")
             self.assertEqual(index["gallery"], str(output_dir / "reference_package_gallery.png"))
             self.assertEqual(index["livery_atlas_gallery"], str(output_dir / "reference_livery_atlas_gallery.png"))
             self.assertTrue((output_dir / "reference_package_gallery.png").exists())

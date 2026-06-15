@@ -72,5 +72,83 @@
   "size_bytes": 8892064,
   "skin_json": {},
   "source_path": "resources/reference_only/downloads/KEKW-Public-SKIN_by_MINA_TM.zip",
-  "stock_lane_status": "not_stock_diffuse_only"
+  "stock_lane_status": "not_stock_diffuse_only",
+  "style_metrics": {
+    "does_not_prove_stock_diffuse_mapping": true,
+    "does_not_prove_tmuf_smoke": true,
+    "dominant_palette_tags": [
+      "black",
+      "red",
+      "gray"
+    ],
+    "primary_livery_slot": "Diffuse.dds",
+    "schema": "tmuf_premium_skin_lab.reference_style_metrics.v1",
+    "slots": {
+      "Details.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.457108,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.007965,
+        "height": 4096,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 25.636068,
+        "mean_luminance": 43.619085,
+        "palette_tags": [
+          "black"
+        ],
+        "red_ratio": 0.052246,
+        "slot_role": "details",
+        "valid": true,
+        "visual_score": 239.743907,
+        "white_ratio": 0.0,
+        "width": 4096,
+        "yellow_gold_ratio": 0.005203
+      },
+      "Diffuse.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.197388,
+        "blue_ratio": 0.000702,
+        "cyan_ratio": 0.000198,
+        "gray_ratio": 0.413498,
+        "height": 4096,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 46.314862,
+        "mean_luminance": 79.4048,
+        "palette_tags": [
+          "black",
+          "gray",
+          "red"
+        ],
+        "red_ratio": 0.10675,
+        "slot_role": "diffuse",
+        "valid": true,
+        "visual_score": 286.85958,
+        "white_ratio": 0.0,
+        "width": 4096,
+        "yellow_gold_ratio": 0.005615
+      },
+      "Icon.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.022705,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.0,
+        "height": 128,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 38.88014,
+        "mean_luminance": 100.358439,
+        "palette_tags": [
+          "red"
+        ],
+        "red_ratio": 0.487244,
+        "slot_role": "icon",
+        "valid": true,
+        "visual_score": 36.238826,
+        "white_ratio": 0.0,
+        "width": 128,
+        "yellow_gold_ratio": 0.070679
+      }
+    }
+  }
 }

@@ -28,6 +28,66 @@ because they show all detected DDS slots.
 | `custom_fullcar_partial_ch2026_mesh_reference` | 1 | Contains full-car custom package files and one GBX mesh matches the CH_2026 donor comparison. |
 | `custom_fullcar_other_mesh_reference` | 4 | Contains full-car custom package files, but the GBX meshes do not match the CH_2026 donor comparison. |
 
+## Style Metrics
+
+Each report now includes `style_metrics`:
+
+- `primary_livery_slot`: the livery texture slot with the strongest paint-surface signal.
+- `slots`: per-DDS metrics for alpha visibility, contrast, luminance, and palette ratios.
+- `dominant_palette_tags`: color-family tags derived from sampled RGB data.
+- `does_not_prove_tmuf_smoke=true`: these are local image metrics only.
+
+The metric sampler preserves RGB separately from alpha. This matters because
+several reference packages have visible RGB data in a texture whose alpha is
+fully transparent. Alpha is recorded, but RGB is still counted as visual design
+evidence for analysis.
+
+Current aggregate evidence from `reference_package_index.json`:
+
+| Metric | Value |
+| --- | --- |
+| Primary livery slot `Diffuse.dds` | 23 packages |
+| Primary livery slot `Details.dds` | 3 packages |
+| Primary livery slot `details.dds` | 2 packages |
+| `black` palette tag | 28 packages |
+| `white` palette tag | 25 packages |
+| `gray` palette tag | 24 packages |
+| `red` palette tag | 10 packages |
+| `cyan` palette tag | 6 packages |
+| `blue` palette tag | 6 packages |
+| `yellow_gold` palette tag | 4 packages |
+| `magenta` palette tag | 2 packages |
+
+Reference-only packages with notable color evidence:
+
+- Magenta: `Deep-Galaxy-SKIN_by_MINA_TM.zip`,
+  `CH_Bloom_Wheel_LED_Underglow.zip`.
+- Cyan: `Aqua-Public-SKIN_by_MINA_TM.zip`, `Azerbaijan_by_kekfeg.zip`,
+  `Incoming-Winter-Public-SKIN_by_MINA_TM.zip`,
+  `Summer-2024-SKIN_by_MINA_TM.zip`, `Winter-SKIN_by_MINA_TM.zip`,
+  `CH_Blu.zip`.
+- Red: `hunter_by_WiiTRO.zip`, `Fall-Public-SKIN-_by_MINA_TM.zip`,
+  `Azerbaijan_by_kekfeg.zip`, `flintstone_by_WiiTRO.zip`,
+  `Christmas-2023-SKIN_by_MINA_TM.zip`, `Red-Public-SKIN_by_MINA_TM.zip`,
+  `KEKW-Public-SKIN_by_MINA_TM.zip`,
+  `KILL-la-KILL-Public-SKIN_by_MINA_TM.zip`,
+  `Fallen-leaves-SKIN_by_MINA_TM.zip`, `(TMN_UF)_by_SparkyTM.zip`.
+
+Evidence-backed generator guidance:
+
+- Black/gray/white should remain the structural base family because it appears
+  across nearly every strong reference.
+- Magenta is rare in this batch, so black/magenta/cyan skins should keep magenta
+  as a deliberate high-value accent instead of flooding every panel.
+- Cyan appears more often than magenta and works well as a secondary blade,
+  spine, or cold-light contrast color.
+- Red is common and can support separate minimal black/red recipe lanes, but it
+  should not be mixed into the first black/magenta/cyan proof family unless a
+  recipe explicitly targets a red lane.
+- `CH_Bloom_Wheel_LED_Underglow.zip` is the closest batch reference to the
+  black/magenta/cyan direction, but it is CH_2026 full-car reference-only and
+  must not be treated as stock mapping truth.
+
 ## Package Classification
 
 | Package | Route | DDS | GBX | Donor Mesh Evidence | Notes |

@@ -55,6 +55,11 @@ comparison because it prefers `Diffuse.dds`, `Details.dds`, and dirty-map
 variants. Per-package contact sheets are the safest review surface because they
 show all detected DDS slots.
 
+Each generated report also includes `style_metrics`. These metrics preserve RGB
+separately from alpha, so transparent-alpha livery textures still contribute
+color evidence while alpha visibility remains recorded. Use those metrics for
+reference-only palette guidance; do not treat them as TMUF runtime proof.
+
 ## Experimental
 
 These are copied into `resources/experimental/`.

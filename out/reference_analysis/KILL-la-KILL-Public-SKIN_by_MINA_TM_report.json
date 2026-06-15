@@ -85,5 +85,106 @@
   "size_bytes": 5196995,
   "skin_json": {},
   "source_path": "resources/reference_only/downloads/KILL-la-KILL-Public-SKIN_by_MINA_TM.zip",
-  "stock_lane_status": "not_stock_diffuse_only"
+  "stock_lane_status": "not_stock_diffuse_only",
+  "style_metrics": {
+    "does_not_prove_stock_diffuse_mapping": true,
+    "does_not_prove_tmuf_smoke": true,
+    "dominant_palette_tags": [
+      "black",
+      "white",
+      "gray",
+      "red"
+    ],
+    "primary_livery_slot": "Diffuse.dds",
+    "schema": "tmuf_premium_skin_lab.reference_style_metrics.v1",
+    "slots": {
+      "Details.dds": {
+        "alpha_visible_ratio": 0.0,
+        "black_ratio": 0.838242,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.052704,
+        "height": 4096,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 33.145592,
+        "mean_luminance": 27.483388,
+        "palette_tags": [
+          "black"
+        ],
+        "red_ratio": 0.016342,
+        "slot_role": "details",
+        "valid": true,
+        "visual_score": 242.610882,
+        "white_ratio": 0.009476,
+        "width": 4096,
+        "yellow_gold_ratio": 0.000122
+      },
+      "Diffuse.dds": {
+        "alpha_visible_ratio": 0.0,
+        "black_ratio": 0.34523,
+        "blue_ratio": 3.1e-05,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.458939,
+        "height": 2048,
+        "magenta_ratio": 4.6e-05,
+        "mean_contrast": 71.110062,
+        "mean_luminance": 73.767604,
+        "palette_tags": [
+          "black",
+          "gray"
+        ],
+        "red_ratio": 0.0504,
+        "slot_role": "diffuse",
+        "valid": true,
+        "visual_score": 339.557179,
+        "white_ratio": 0.092255,
+        "width": 2048,
+        "yellow_gold_ratio": 7.6e-05
+      },
+      "Icon.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.35968,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.059448,
+        "height": 128,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 103.658648,
+        "mean_luminance": 104.772176,
+        "palette_tags": [
+          "black",
+          "red",
+          "white"
+        ],
+        "red_ratio": 0.145325,
+        "slot_role": "icon",
+        "valid": true,
+        "visual_score": 176.656347,
+        "white_ratio": 0.280334,
+        "width": 128,
+        "yellow_gold_ratio": 0.005737
+      },
+      "ProjShad.dds": {
+        "alpha_visible_ratio": 1.0,
+        "black_ratio": 0.105469,
+        "blue_ratio": 0.0,
+        "cyan_ratio": 0.0,
+        "gray_ratio": 0.177765,
+        "height": 512,
+        "magenta_ratio": 0.0,
+        "mean_contrast": 78.807939,
+        "mean_luminance": 194.070328,
+        "palette_tags": [
+          "white"
+        ],
+        "red_ratio": 0.0,
+        "slot_role": "projected_shadow_or_underglow",
+        "valid": true,
+        "visual_score": 39.363862,
+        "white_ratio": 0.706406,
+        "width": 512,
+        "yellow_gold_ratio": 0.0
+      }
+    }
+  }
 }
