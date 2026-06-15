@@ -45,6 +45,27 @@ class PanelMaskTests(unittest.TestCase):
                 self.assertGreater(panel.pixel_count, 0)
                 self.assertFalse((panel.mask & ~coverage).any())
 
+    def test_generated_panel_family_masks_match_catalog_areas(self):
+        from src.stock_diffuse.calibration import load_fields
+        from src.stock_diffuse.panel_masks import build_stock_panel_masks
+
+        masks = build_stock_panel_masks(load_fields())
+
+        expected_areas = {
+            "mid_deck_generated_panels": 723_443,
+            "mid_side_generated_panel": 623_575,
+            "nose_floor_generated_panels": 788_929,
+            "rear_floor_generated_panels": 256_274,
+            "rear_deck_fine_louver_rows": 272_437,
+        }
+        for name, expected_area in expected_areas.items():
+            with self.subTest(name=name):
+                panel = masks[name]
+                self.assertEqual(panel.pixel_count, expected_area)
+                self.assertEqual(panel.evidence_status, "mixed_generated_labels_and_experimental_gbuffer")
+                self.assertTrue(any("panels_" in source for source in panel.source_files))
+                self.assertIn("resources/authoritative/gbuffer/position_2048.npy", panel.source_files)
+
     def test_mask_report_entries_strip_arrays_but_keep_evidence(self):
         from src.stock_diffuse.calibration import load_fields
         from src.stock_diffuse.panel_masks import build_stock_panel_masks, mask_report_entries

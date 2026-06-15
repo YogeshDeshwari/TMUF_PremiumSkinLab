@@ -2,11 +2,12 @@
   "alpha_metrics": {
     "high_alpha_pixel_ratio": 0.40197,
     "max_alpha": 148,
-    "mean_alpha": 127.056246,
+    "mean_alpha": 129.602099,
     "min_alpha": 112,
     "unique_alpha_values": [
       112,
       118,
+      124,
       136,
       148
     ]
@@ -21,7 +22,7 @@
     "underbody_alpha": 118
   },
   "design_lane": {
-    "catalog_target_count": 9,
+    "catalog_target_count": 11,
     "composition_focus": "balanced race prototype layout using nose, spine, side blades, and local aero accents",
     "distinctive_masks": [
       "nose_spear",
@@ -42,6 +43,8 @@
       "center_spine",
       "nose_identity_panel",
       "nose_deck_generated_panels",
+      "mid_deck_generated_panels",
+      "mid_side_generated_panel",
       "sidepod_blades",
       "side_wings",
       "mirrors_and_holders",
@@ -85,6 +88,26 @@
       "evidence_label": "experimental",
       "sha256": "5aa1f34419b4de82d8475046b6154754f0a6c92afd97f44f18ab5068b25228eb",
       "size_bytes": 50331776
+    },
+    "authoritative/parts/panels_fine.json": {
+      "evidence_label": "proven",
+      "sha256": "3d8c46a54416d1dd05b9beec127d350c119707053247c092589ffc7d73a33598",
+      "size_bytes": 25866
+    },
+    "authoritative/parts/panels_fine_labels.npy": {
+      "evidence_label": "proven",
+      "sha256": "0050febba84ef8257bdbafa38468c06d03920f7621d96c6e4fcdea81847bc51f",
+      "size_bytes": 16777344
+    },
+    "authoritative/parts/panels_high.json": {
+      "evidence_label": "proven",
+      "sha256": "74f1ed937863751afa6863d6188ba26fc3c526377bb729a61b9051dc6cba458e",
+      "size_bytes": 14455
+    },
+    "authoritative/parts/panels_high_labels.npy": {
+      "evidence_label": "proven",
+      "sha256": "21397a36f33279115b7b0ab52bec0b69f98be78019ef146e115ee0852ef30bb5",
+      "size_bytes": 16777344
     },
     "authoritative/parts/psd_parts.json": {
       "evidence_label": "proven",
@@ -136,6 +159,59 @@
         "MainBodyUNDER_TR",
         "MainBodyUNDER_BL",
         "MainBodyUNDER_BR"
+      ]
+    },
+    "mid_deck_generated_panels": {
+      "design_use": "Cockpit-adjacent deck and roof-flow panels from generated local labels.",
+      "evidence_status": "mixed_generated_labels_and_experimental_gbuffer",
+      "pixel_count": 723443,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/panels_high.json",
+        "resources/authoritative/parts/panels_high_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": [
+        "mid_deck_C_79",
+        "mid_deck_C_48",
+        "mid_deck_C_82",
+        "mid_deck_C_78"
+      ]
+    },
+    "mid_floor_generated_panels": {
+      "design_use": "Mid-floor support blocks and lower shadow fields from generated local labels.",
+      "evidence_status": "mixed_generated_labels_and_experimental_gbuffer",
+      "pixel_count": 196123,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/panels_fine.json",
+        "resources/authoritative/parts/panels_fine_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": [
+        "mid_floor_C_35",
+        "mid_floor_C_38",
+        "mid_floor_C_36"
+      ]
+    },
+    "mid_side_generated_panel": {
+      "design_use": "Large mid-side flank field from generated local labels.",
+      "evidence_status": "mixed_generated_labels_and_experimental_gbuffer",
+      "pixel_count": 623575,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/panels_high.json",
+        "resources/authoritative/parts/panels_high_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": [
+        "mid_side_C_02"
       ]
     },
     "mirrors": {
@@ -197,6 +273,61 @@
         "RearMudguardsedgeColor"
       ]
     },
+    "nose_deck_generated_panels": {
+      "design_use": "Front deck blocks and nose-adjacent color surfaces from generated local labels.",
+      "evidence_status": "mixed_generated_labels_and_experimental_gbuffer",
+      "pixel_count": 220398,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/panels_high.json",
+        "resources/authoritative/parts/panels_high_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": [
+        "nose_deck_C_84",
+        "nose_deck_C_85",
+        "nose_deck_C_09",
+        "nose_deck_C_92"
+      ]
+    },
+    "nose_floor_generated_panels": {
+      "design_use": "Front floor returns and lower wedge continuation probes from generated local labels.",
+      "evidence_status": "mixed_generated_labels_and_experimental_gbuffer",
+      "pixel_count": 788929,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/panels_fine.json",
+        "resources/authoritative/parts/panels_fine_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": [
+        "nose_floor_C_09",
+        "nose_floor_C_33",
+        "nose_floor_C_34",
+        "nose_floor_C_149"
+      ]
+    },
+    "nose_side_generated_panels": {
+      "design_use": "Large front-side sweeps from generated local labels.",
+      "evidence_status": "mixed_generated_labels_and_experimental_gbuffer",
+      "pixel_count": 1078213,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/panels_high.json",
+        "resources/authoritative/parts/panels_high_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": [
+        "nose_side_C_04",
+        "nose_side_C_83"
+      ]
+    },
     "nose_spear": {
       "design_use": "Front spear selected by positive LEN and center symmetry.",
       "evidence_status": "experimental_until_tmuf_smoke",
@@ -225,6 +356,44 @@
       ],
       "source_zones": []
     },
+    "rear_deck_fine_louver_rows": {
+      "design_use": "Fine rear deck louver row probes from generated local labels.",
+      "evidence_status": "mixed_generated_labels_and_experimental_gbuffer",
+      "pixel_count": 272437,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/panels_fine.json",
+        "resources/authoritative/parts/panels_fine_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": [
+        "rear_deck_C_140",
+        "rear_deck_C_118",
+        "rear_deck_C_122",
+        "rear_deck_C_146",
+        "rear_deck_C_133"
+      ]
+    },
+    "rear_floor_generated_panels": {
+      "design_use": "Rear floor support panels and low rear accent returns from generated local labels.",
+      "evidence_status": "mixed_generated_labels_and_experimental_gbuffer",
+      "pixel_count": 256274,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/panels_high.json",
+        "resources/authoritative/parts/panels_high_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": [
+        "rear_floor_C_15",
+        "rear_floor_C_17",
+        "rear_floor_C_36"
+      ]
+    },
     "rear_louvers": {
       "design_use": "Rear deck louver rhythm selected by LEN/HGT/symmetry.",
       "evidence_status": "experimental_until_tmuf_smoke",
@@ -238,6 +407,25 @@
         "resources/authoritative/gbuffer/extents_2048.json"
       ],
       "source_zones": []
+    },
+    "rear_side_generated_panels": {
+      "design_use": "Rear side sweeps and side-to-tail transition panels from generated local labels.",
+      "evidence_status": "mixed_generated_labels_and_experimental_gbuffer",
+      "pixel_count": 383268,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/panels_fine.json",
+        "resources/authoritative/parts/panels_fine_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": [
+        "rear_side_C_30",
+        "rear_side_C_152",
+        "rear_side_C_154",
+        "rear_side_C_153"
+      ]
     },
     "secondary_blade": {
       "design_use": "Secondary lower side blade offset from the primary blade.",
@@ -344,16 +532,37 @@
     "center_spine": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 148.0,
-      "mean_chroma": 218.988464,
-      "mean_luminance": 64.974251,
+      "mean_chroma": 219.224777,
+      "mean_luminance": 64.959488,
       "pixel_count": 616837
     },
     "main_body_under": {
       "high_alpha_pixel_ratio": 0.0,
       "mean_alpha": 118.000008,
-      "mean_chroma": 22.102676,
-      "mean_luminance": 12.632838,
+      "mean_chroma": 22.134533,
+      "mean_luminance": 12.639991,
       "pixel_count": 353313
+    },
+    "mid_deck_generated_panels": {
+      "high_alpha_pixel_ratio": 0.565217,
+      "mean_alpha": 137.565186,
+      "mean_chroma": 148.083237,
+      "mean_luminance": 43.192337,
+      "pixel_count": 723443
+    },
+    "mid_floor_generated_panels": {
+      "high_alpha_pixel_ratio": 0.006562,
+      "mean_alpha": 112.236237,
+      "mean_chroma": 6.032301,
+      "mean_luminance": 14.56849,
+      "pixel_count": 196123
+    },
+    "mid_side_generated_panel": {
+      "high_alpha_pixel_ratio": 0.159772,
+      "mean_alpha": 127.761414,
+      "mean_chroma": 63.999622,
+      "mean_luminance": 57.353783,
+      "pixel_count": 623575
     },
     "mirrors": {
       "high_alpha_pixel_ratio": 1.0,
@@ -365,85 +574,127 @@
     "mudguard_edge": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 148.0,
-      "mean_chroma": 193.979111,
-      "mean_luminance": 110.127769,
+      "mean_chroma": 195.589081,
+      "mean_luminance": 110.482506,
       "pixel_count": 414363
     },
     "mudguards": {
       "high_alpha_pixel_ratio": 0.974192,
-      "mean_alpha": 147.070923,
-      "mean_chroma": 190.981705,
-      "mean_luminance": 108.992188,
+      "mean_alpha": 147.114578,
+      "mean_chroma": 192.612289,
+      "mean_luminance": 109.384354,
       "pixel_count": 425340
+    },
+    "nose_deck_generated_panels": {
+      "high_alpha_pixel_ratio": 0.812866,
+      "mean_alpha": 143.499313,
+      "mean_chroma": 168.036087,
+      "mean_luminance": 55.27499,
+      "pixel_count": 220398
+    },
+    "nose_floor_generated_panels": {
+      "high_alpha_pixel_ratio": 0.055852,
+      "mean_alpha": 119.387733,
+      "mean_chroma": 30.163332,
+      "mean_luminance": 25.209028,
+      "pixel_count": 788929
+    },
+    "nose_side_generated_panels": {
+      "high_alpha_pixel_ratio": 0.284134,
+      "mean_alpha": 124.070114,
+      "mean_chroma": 57.973476,
+      "mean_luminance": 37.812447,
+      "pixel_count": 1078213
     },
     "nose_spear": {
       "high_alpha_pixel_ratio": 0.659312,
       "mean_alpha": 137.779343,
-      "mean_chroma": 170.707397,
-      "mean_luminance": 57.519321,
+      "mean_chroma": 170.232529,
+      "mean_luminance": 57.645508,
       "pixel_count": 226603
     },
     "rear_center_glow": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 148.0,
-      "mean_chroma": 204.047272,
-      "mean_luminance": 72.804085,
+      "mean_chroma": 204.053894,
+      "mean_luminance": 72.80275,
       "pixel_count": 196214
+    },
+    "rear_deck_fine_louver_rows": {
+      "high_alpha_pixel_ratio": 0.75191,
+      "mean_alpha": 139.019852,
+      "mean_chroma": 74.849052,
+      "mean_luminance": 74.421539,
+      "pixel_count": 272437
+    },
+    "rear_floor_generated_panels": {
+      "high_alpha_pixel_ratio": 0.110007,
+      "mean_alpha": 115.953377,
+      "mean_chroma": 11.216207,
+      "mean_luminance": 29.003477,
+      "pixel_count": 256274
     },
     "rear_louvers": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 147.726089,
-      "mean_chroma": 129.854813,
-      "mean_luminance": 118.052322,
+      "mean_chroma": 129.836655,
+      "mean_luminance": 118.051765,
       "pixel_count": 114388
+    },
+    "rear_side_generated_panels": {
+      "high_alpha_pixel_ratio": 0.468252,
+      "mean_alpha": 134.883118,
+      "mean_chroma": 114.039795,
+      "mean_luminance": 91.996658,
+      "pixel_count": 383268
     },
     "secondary_blade": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 148.0,
-      "mean_chroma": 124.778763,
-      "mean_luminance": 91.845062,
+      "mean_chroma": 84.684975,
+      "mean_luminance": 105.346512,
       "pixel_count": 41698
     },
     "shoulder_line": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 136.0,
-      "mean_chroma": 21.919487,
-      "mean_luminance": 161.764786,
+      "mean_chroma": 21.940086,
+      "mean_luminance": 161.785782,
       "pixel_count": 44664
     },
     "side_blade": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 148.0,
-      "mean_chroma": 210.191254,
-      "mean_luminance": 158.033279,
+      "mean_chroma": 213.699753,
+      "mean_luminance": 160.64061,
       "pixel_count": 31550
     },
     "side_wings": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 148.0,
-      "mean_chroma": 114.289017,
-      "mean_luminance": 103.940575,
+      "mean_chroma": 114.643669,
+      "mean_luminance": 104.201447,
       "pixel_count": 125401
     },
     "tail_bar": {
       "high_alpha_pixel_ratio": 0.999979,
       "mean_alpha": 147.833206,
-      "mean_chroma": 203.846497,
-      "mean_luminance": 158.595291,
+      "mean_chroma": 203.260635,
+      "mean_luminance": 158.488525,
       "pixel_count": 194475
     },
     "tailwing": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 147.999664,
-      "mean_chroma": 70.22245,
-      "mean_luminance": 86.159431,
+      "mean_chroma": 70.719131,
+      "mean_luminance": 86.044075,
       "pixel_count": 177929
     },
     "underplate": {
       "high_alpha_pixel_ratio": 0.0,
       "mean_alpha": 118.0,
-      "mean_chroma": 24.203798,
-      "mean_luminance": 12.754785,
+      "mean_chroma": 26.117598,
+      "mean_luminance": 14.198688,
       "pixel_count": 136321
     }
   },
@@ -462,23 +713,32 @@
     "side_wings",
     "mirrors",
     "underplate",
-    "main_body_under"
+    "main_body_under",
+    "nose_deck_generated_panels",
+    "nose_floor_generated_panels",
+    "nose_side_generated_panels",
+    "mid_deck_generated_panels",
+    "mid_side_generated_panel",
+    "mid_floor_generated_panels",
+    "rear_side_generated_panels",
+    "rear_floor_generated_panels",
+    "rear_deck_fine_louver_rows"
   ],
   "output_artifacts": {
     "atlas_preview": {
       "path": "out/previews/magenta_cyan_race_proto_atlas.png",
-      "sha256": "4ecc02f933f94802676ff8fa7edf388eee5a3e6723f00750580d9faca066eb85",
-      "size_bytes": 879583
+      "sha256": "eb181d7adb1fb13b9ffbb107b55d19643a8b88d0a5fe1d80838df612272c611b",
+      "size_bytes": 978961
     },
     "projected_preview": {
       "path": "out/previews/magenta_cyan_race_proto_projected_side_top_rear.png",
-      "sha256": "504963aad4e0dbac3818f63ed87dd84fb570df5a755d70853a2e4d46ecdc03eb",
-      "size_bytes": 281620
+      "sha256": "6d7df8607acc5bd680533b27dca58abab090a91c601859a53bbabcc6f460ef24",
+      "size_bytes": 298447
     },
     "skin_zip": {
       "path": "out/skins/magenta_cyan_race_proto.zip",
-      "sha256": "242a18a540f810d28be9161ebd6740f0b433dd899ed9966c2a683c11e6eade0a",
-      "size_bytes": 515283
+      "sha256": "01ae0a789532be417bc06cf9f8b20f554e9616d00943b83710c86be89ed63337",
+      "size_bytes": 586846
     }
   },
   "package_files": [
@@ -489,6 +749,8 @@
     "center_spine",
     "nose_identity_panel",
     "nose_deck_generated_panels",
+    "mid_deck_generated_panels",
+    "mid_side_generated_panel",
     "sidepod_blades",
     "side_wings",
     "mirrors_and_holders",
@@ -516,12 +778,21 @@
     "mask_strengths": {
       "center_spine": 1.16,
       "main_body_under": 1.0,
+      "mid_deck_generated_panels": 1.0,
+      "mid_floor_generated_panels": 1.0,
+      "mid_side_generated_panel": 1.0,
       "mirrors": 1.28,
       "mudguard_edge": 1.0,
       "mudguards": 1.0,
+      "nose_deck_generated_panels": 1.0,
+      "nose_floor_generated_panels": 1.0,
+      "nose_side_generated_panels": 1.0,
       "nose_spear": 1.22,
       "rear_center_glow": 0.82,
+      "rear_deck_fine_louver_rows": 1.0,
+      "rear_floor_generated_panels": 1.0,
       "rear_louvers": 0.72,
+      "rear_side_generated_panels": 1.0,
       "secondary_blade": 1.0,
       "shoulder_line": 1.0,
       "side_blade": 1.0,
@@ -529,14 +800,19 @@
       "tail_bar": 1.0,
       "tailwing": 1.0,
       "underplate": 1.0
+    },
+    "panel_family_strengths": {
+      "mid_deck_generated_panels": 1.0,
+      "mid_side_generated_panel": 1.0,
+      "nose_deck_generated_panels": 1.0
     }
   },
   "route": "stock_diffuse_only",
   "skin_name": "magenta_cyan_race_proto",
   "style_metrics": {
-    "cyan_accent_ratio": 0.136732,
-    "dark_pixel_ratio": 0.822058,
-    "magenta_accent_ratio": 0.193394
+    "cyan_accent_ratio": 0.137531,
+    "dark_pixel_ratio": 0.822335,
+    "magenta_accent_ratio": 0.194132
   },
   "tmuf_smoke_test": "not_run"
 }

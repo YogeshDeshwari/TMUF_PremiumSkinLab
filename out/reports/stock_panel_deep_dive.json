@@ -19,6 +19,14 @@
     "licence_plate_blocks": [
       "magenta_cyan_race_proto"
     ],
+    "mid_deck_generated_panels": [
+      "black_cyan_spine",
+      "magenta_cyan_race_proto"
+    ],
+    "mid_side_generated_panel": [
+      "magenta_cyan_race_proto",
+      "violet_cyber_flow"
+    ],
     "mirrors_and_holders": [
       "black_cyan_spine",
       "black_magenta_cyan_blade",
@@ -29,6 +37,9 @@
     "nose_deck_generated_panels": [
       "black_magenta_cyan_blade",
       "magenta_cyan_race_proto"
+    ],
+    "nose_floor_generated_panels": [
+      "black_magenta_cyan_blade"
     ],
     "nose_identity_panel": [
       "black_cyan_spine",
@@ -164,7 +175,10 @@
   ],
   "more_panel_opportunities": [
     {
-      "candidate_usage": [],
+      "candidate_usage": [
+        "black_cyan_spine",
+        "magenta_cyan_race_proto"
+      ],
       "proof_gates": [
         "run TMUF smoke calibration before treating GBuffer/generated placement as runtime truth",
         "capture front/side/rear/top screenshots before promoting visual claims"
@@ -182,7 +196,10 @@
       "why_it_matters": "large cockpit and roof-flow deck fields for symmetric extra panels near the engine cover."
     },
     {
-      "candidate_usage": [],
+      "candidate_usage": [
+        "magenta_cyan_race_proto",
+        "violet_cyber_flow"
+      ],
       "proof_gates": [
         "run TMUF smoke calibration before treating GBuffer/generated placement as runtime truth",
         "capture front/side/rear/top screenshots before promoting visual claims"
@@ -218,7 +235,9 @@
       "why_it_matters": "fine rear deck rows for technical louver rhythm and paired glow accents."
     },
     {
-      "candidate_usage": [],
+      "candidate_usage": [
+        "black_magenta_cyan_blade"
+      ],
       "proof_gates": [
         "run TMUF smoke calibration before treating GBuffer/generated placement as runtime truth",
         "capture front/side/rear/top screenshots before promoting visual claims"
@@ -304,7 +323,10 @@
           "total_label_area": 1622702
         },
         {
-          "candidate_usage": [],
+          "candidate_usage": [
+            "black_cyan_spine",
+            "magenta_cyan_race_proto"
+          ],
           "design_role": "cockpit-adjacent deck panels, roof flow breaks, and mid-body geometric blocks",
           "geometry_constraints": [
             "generated mid/deck tokens",
@@ -334,7 +356,10 @@
           "total_label_area": 723443
         },
         {
-          "candidate_usage": [],
+          "candidate_usage": [
+            "magenta_cyan_race_proto",
+            "violet_cyber_flow"
+          ],
           "design_role": "large mid-side field for readable speed blades and blank sponsor-like geometry without text",
           "geometry_constraints": [
             "generated mid/side token",
@@ -561,7 +586,9 @@
           "total_label_area": 220398
         },
         {
-          "candidate_usage": [],
+          "candidate_usage": [
+            "black_magenta_cyan_blade"
+          ],
           "design_role": "front floor returns, lower wedge continuation, and dark/bright underside split probes",
           "geometry_constraints": [
             "generated nose/floor tokens",
@@ -1029,7 +1056,10 @@
           "total_label_area": 263234
         },
         {
-          "candidate_usage": [],
+          "candidate_usage": [
+            "magenta_cyan_race_proto",
+            "violet_cyber_flow"
+          ],
           "design_role": "large mid-side field for readable speed blades and blank sponsor-like geometry without text",
           "geometry_constraints": [
             "generated mid/side token",

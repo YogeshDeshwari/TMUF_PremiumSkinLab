@@ -12,7 +12,7 @@ from scipy.ndimage import binary_dilation, gaussian_filter
 
 from src.dds.tmnf_dds import build_dds_dxt5_bytes
 from src.evidence.artifact_trace import stock_output_artifacts
-from src.evidence.input_trace import input_evidence
+from src.evidence.input_trace import PREMIUM_DIFFUSE_INPUTS, input_evidence
 from src.stock_diffuse.calibration import SIZE, hx, load_fields, project_view
 from src.stock_diffuse.package import write_stable_zip_entry
 from src.stock_diffuse.panel_masks import PremiumMaskParams, build_stock_panel_masks, mask_report_entries
@@ -45,6 +45,18 @@ PREMIUM_MASK_NAMES = [
     "underplate",
     "main_body_under",
 ]
+PANEL_FAMILY_MASK_NAMES = [
+    "nose_deck_generated_panels",
+    "nose_floor_generated_panels",
+    "nose_side_generated_panels",
+    "mid_deck_generated_panels",
+    "mid_side_generated_panel",
+    "mid_floor_generated_panels",
+    "rear_side_generated_panels",
+    "rear_floor_generated_panels",
+    "rear_deck_fine_louver_rows",
+]
+PREMIUM_MASK_NAMES = [*PREMIUM_MASK_NAMES, *PANEL_FAMILY_MASK_NAMES]
 PANEL_CATALOG_TARGETS = [
     "tailwing_bands",
     "side_wings",
@@ -95,6 +107,7 @@ CANDIDATES = [
             "nose_identity_panel",
             "nose_side_generated_panels",
             "nose_deck_generated_panels",
+            "nose_floor_generated_panels",
             "front_mudguard_caps",
             "front_mudguard_edge_details",
             *DEFAULT_PANEL_CATALOG_TARGETS,
@@ -126,6 +139,7 @@ CANDIDATES = [
         (
             "center_spine",
             "nose_identity_panel",
+            "mid_deck_generated_panels",
             "tailwing_bands",
             "front_mudguard_caps",
             "rear_mudguard_caps",
@@ -162,6 +176,7 @@ CANDIDATES = [
             "rear_mudguard_caps",
             "front_mudguard_edge_details",
             "rear_mudguard_edge_details",
+            "mid_side_generated_panel",
             "rear_side_generated_panels",
             *DEFAULT_PANEL_CATALOG_TARGETS,
         ),
@@ -227,6 +242,8 @@ CANDIDATES = [
             "center_spine",
             "nose_identity_panel",
             "nose_deck_generated_panels",
+            "mid_deck_generated_panels",
+            "mid_side_generated_panel",
             "sidepod_blades",
             "side_wings",
             "mirrors_and_holders",
@@ -256,8 +273,25 @@ def _candidate_mask_strengths(candidate: Candidate) -> dict[str, float]:
     return strengths
 
 
+def _candidate_panel_family_strengths(candidate: Candidate) -> dict[str, float]:
+    targets = set(_candidate_catalog_targets(candidate))
+    strengths: dict[str, float] = {}
+    for name in PANEL_FAMILY_MASK_NAMES:
+        if name in targets:
+            strengths[name] = 1.0
+    return strengths
+
+
 def _blend_strength(strengths: dict[str, float], name: str, base: float) -> float:
     return base * strengths.get(name, 1.0)
+
+
+def _panel_family_color(candidate: Candidate, name: str) -> str:
+    if "floor" in name:
+        return candidate.base2
+    if "side" in name or "louver" in name:
+        return candidate.secondary
+    return candidate.primary
 
 
 def _axis_fields(fields: dict[str, Any]) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
@@ -302,6 +336,7 @@ def build_premium_rgba(candidate: Candidate) -> tuple[Image.Image, dict[str, flo
     length, _lateral, height, symmetry = _axis_fields(fields)
     masks = _build_masks(fields, candidate)
     strengths = _candidate_mask_strengths(candidate)
+    panel_family_strengths = _candidate_panel_family_strengths(candidate)
 
     rgb = np.zeros((SIZE, SIZE, 3), dtype=np.float32)
     alpha = np.full((SIZE, SIZE), 112, dtype=np.float32)
@@ -326,6 +361,11 @@ def build_premium_rgba(candidate: Candidate) -> tuple[Image.Image, dict[str, flo
     _blend(rgb, masks["tailwing"] & (height > 0.52), candidate.secondary, _blend_strength(strengths, "tailwing", 0.28))
     _blend(rgb, masks["side_wings"], candidate.secondary, _blend_strength(strengths, "side_wings", 0.46))
     _blend(rgb, masks["mirrors"], candidate.highlight, _blend_strength(strengths, "mirrors", 0.54))
+
+    panel_family_accent = np.zeros_like(coverage, dtype=bool)
+    for mask_name, strength in panel_family_strengths.items():
+        panel_family_accent |= masks[mask_name]
+        _blend(rgb, masks[mask_name], _panel_family_color(candidate, mask_name), 0.18 * strength)
 
     if candidate.mudguard_mode == "split":
         _blend(rgb, masks["mudguards"] & (length > 0.5), candidate.primary, _blend_strength(strengths, "mudguards", 0.72))
@@ -364,6 +404,7 @@ def build_premium_rgba(candidate: Candidate) -> tuple[Image.Image, dict[str, flo
         | masks["mirrors"]
     )
     alpha[accent] = 148
+    alpha[panel_family_accent & ~accent] = np.maximum(alpha[panel_family_accent & ~accent], 124)
     alpha[masks["shoulder_line"]] = 136
     alpha[underbody] = 118
     for mask_name in candidate.distinctive_masks:
@@ -477,6 +518,7 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
     draw.text((pad * 2 + side.width, 2), "rear", fill=(230, 230, 240))
     canvas.save(out_preview)
     mask_strengths = _candidate_mask_strengths(candidate)
+    panel_family_strengths = _candidate_panel_family_strengths(candidate)
 
     report = {
         "skin_name": candidate.name,
@@ -496,7 +538,7 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
             "details_dds": "not_used",
             "projshad_dds": "not_used",
         },
-        "input_evidence": input_evidence(),
+        "input_evidence": input_evidence(PREMIUM_DIFFUSE_INPUTS),
         "output_artifacts": stock_output_artifacts(out_skin, out_atlas, out_preview),
         "design_lane": {
             "lane_id": candidate.lane_id,
@@ -517,6 +559,7 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
             "lane_specific_strengths": True,
             "evidence_status": "recipe_metadata_not_tmuf_proof",
             "mask_strengths": mask_strengths,
+            "panel_family_strengths": panel_family_strengths,
             "distinctive_mask_strengths": {
                 name: mask_strengths[name] for name in candidate.distinctive_masks
             },

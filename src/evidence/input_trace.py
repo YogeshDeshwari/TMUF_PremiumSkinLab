@@ -15,6 +15,13 @@ STOCK_DIFFUSE_INPUTS = [
     "authoritative/parts/psd_parts.json",
     "authoritative/reference/official_prelight_AO.png",
 ]
+PREMIUM_DIFFUSE_INPUTS = [
+    *STOCK_DIFFUSE_INPUTS,
+    "authoritative/parts/panels_high_labels.npy",
+    "authoritative/parts/panels_high.json",
+    "authoritative/parts/panels_fine_labels.npy",
+    "authoritative/parts/panels_fine.json",
+]
 
 
 def load_manifest_entries() -> dict[str, dict[str, Any]]:

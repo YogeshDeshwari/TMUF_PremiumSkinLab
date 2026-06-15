@@ -42,11 +42,12 @@ class StockPanelDeepDiveTests(unittest.TestCase):
         opportunities = {entry["target"]: entry for entry in report["more_panel_opportunities"]}
 
         self.assertIn("mid_deck_generated_panels", opportunities)
-        self.assertEqual(opportunities["mid_deck_generated_panels"]["candidate_usage"], [])
+        self.assertIn("black_cyan_spine", opportunities["mid_deck_generated_panels"]["candidate_usage"])
+        self.assertIn("magenta_cyan_race_proto", opportunities["mid_deck_generated_panels"]["candidate_usage"])
         self.assertIn("cockpit", opportunities["mid_deck_generated_panels"]["why_it_matters"])
 
         self.assertIn("mid_side_generated_panel", opportunities)
-        self.assertEqual(opportunities["mid_side_generated_panel"]["candidate_usage"], [])
+        self.assertIn("violet_cyber_flow", opportunities["mid_side_generated_panel"]["candidate_usage"])
         self.assertIn("mid_side_C_02", opportunities["mid_side_generated_panel"]["source_zones"])
 
         for entry in opportunities.values():

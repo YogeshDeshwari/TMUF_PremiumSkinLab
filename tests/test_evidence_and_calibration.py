@@ -18,6 +18,13 @@ EXPECTED_STOCK_INPUTS = {
     "authoritative/parts/psd_parts.json": "proven",
     "authoritative/reference/official_prelight_AO.png": "proven",
 }
+EXPECTED_PREMIUM_STOCK_INPUTS = {
+    **EXPECTED_STOCK_INPUTS,
+    "authoritative/parts/panels_high_labels.npy": "proven",
+    "authoritative/parts/panels_high.json": "proven",
+    "authoritative/parts/panels_fine_labels.npy": "proven",
+    "authoritative/parts/panels_fine.json": "proven",
+}
 EXPECTED_OUTPUT_ARTIFACTS = {
     "skin_zip": "out/skins/{name}.zip",
     "atlas_preview": "out/previews/{name}_atlas.png",
@@ -115,8 +122,13 @@ class CalibrationArtifactTests(unittest.TestCase):
         manifest_by_path = {entry["path"]: entry for entry in manifest["resources"]}
 
         input_evidence = report["input_evidence"]
-        self.assertEqual(set(input_evidence), set(EXPECTED_STOCK_INPUTS))
-        for path, expected_label in EXPECTED_STOCK_INPUTS.items():
+        expected_inputs = (
+            EXPECTED_STOCK_INPUTS
+            if report["skin_name"] == "calibration_stock_diffuse"
+            else EXPECTED_PREMIUM_STOCK_INPUTS
+        )
+        self.assertEqual(set(input_evidence), set(expected_inputs))
+        for path, expected_label in expected_inputs.items():
             self.assertEqual(input_evidence[path]["evidence_label"], expected_label)
             self.assertEqual(input_evidence[path]["sha256"], manifest_by_path[path]["sha256"])
             self.assertEqual(input_evidence[path]["size_bytes"], manifest_by_path[path]["size_bytes"])
@@ -138,6 +150,13 @@ class PremiumStockBatchTests(unittest.TestCase):
         outputs = save_batch()
         self.assertEqual([item["name"] for item in outputs], CANDIDATE_NAMES)
         lane_ids = set()
+        deeper_panel_masks = {
+            "mid_deck_generated_panels",
+            "mid_side_generated_panel",
+            "nose_floor_generated_panels",
+            "rear_floor_generated_panels",
+            "rear_deck_fine_louver_rows",
+        }
 
         for item in outputs:
             zip_path = Path(item["zip"])
@@ -180,11 +199,23 @@ class PremiumStockBatchTests(unittest.TestCase):
             self.assertLessEqual(set(report["design_lane"]["distinctive_masks"]), set(report["masks_used"]))
             self.assertTrue(report["render_profile"]["lane_specific_strengths"])
             self.assertEqual(report["render_profile"]["evidence_status"], "recipe_metadata_not_tmuf_proof")
+            self.assertIn("panel_family_strengths", report["render_profile"])
+            self.assertGreaterEqual(
+                len(deeper_panel_masks & set(report["render_profile"]["panel_family_strengths"])),
+                1,
+            )
             self.assertEqual(
                 set(report["render_profile"]["distinctive_mask_strengths"]),
                 set(report["design_lane"]["distinctive_masks"]),
             )
             self.assertEqual(set(report["mask_style_metrics"]), set(report["masks_used"]))
+            self.assertGreaterEqual(len(deeper_panel_masks & set(report["masks_used"])), 1)
+            accented_deeper_masks = [
+                name
+                for name in deeper_panel_masks & set(report["masks_used"])
+                if report["mask_style_metrics"][name]["mean_alpha"] > 112
+            ]
+            self.assertGreaterEqual(len(accented_deeper_masks), 1)
             for mask_name in report["design_lane"]["distinctive_masks"]:
                 self.assertGreaterEqual(
                     report["render_profile"]["distinctive_mask_strengths"][mask_name],

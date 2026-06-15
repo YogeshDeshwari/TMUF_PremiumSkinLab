@@ -158,6 +158,23 @@ class StockValidatorTests(unittest.TestCase):
             validate_mask_evidence(bad_local_source_report, premium=True),
         )
 
+        mixed_generated_report = {
+            **valid_report,
+            "masks_used": ["mudguards", "mid_deck_generated_panels"],
+            "mask_evidence": {
+                "mudguards": valid_report["mask_evidence"]["mudguards"],
+                "mid_deck_generated_panels": {
+                    "evidence_status": "mixed_generated_labels_and_experimental_gbuffer",
+                    "pixel_count": 723443,
+                    "source_files": [
+                        "resources/authoritative/parts/panels_high_labels.npy",
+                        "resources/authoritative/gbuffer/position_2048.npy",
+                    ],
+                },
+            },
+        }
+        self.assertEqual(validate_mask_evidence(mixed_generated_report, premium=True), [])
+
         broken_report = {
             "skin_name": "broken",
             "masks_used": ["mudguards", "center_spine"],
@@ -326,7 +343,7 @@ class StockValidatorTests(unittest.TestCase):
 
         valid_report = {
             "skin_name": "example",
-            "masks_used": ["center_spine", "side_blade", "tailwing"],
+            "masks_used": ["center_spine", "side_blade", "tailwing", "mid_deck_generated_panels"],
             "design_lane": {
                 "distinctive_masks": ["center_spine", "tailwing"],
             },
@@ -337,6 +354,10 @@ class StockValidatorTests(unittest.TestCase):
                     "center_spine": 1.2,
                     "side_blade": 0.7,
                     "tailwing": 1.1,
+                    "mid_deck_generated_panels": 1.0,
+                },
+                "panel_family_strengths": {
+                    "mid_deck_generated_panels": 1.0,
                 },
                 "distinctive_mask_strengths": {
                     "center_spine": 1.2,
@@ -348,6 +369,7 @@ class StockValidatorTests(unittest.TestCase):
                 "center_spine": {"pixel_count": 100, "mean_alpha": 148.0},
                 "side_blade": {"pixel_count": 100, "mean_alpha": 112.0},
                 "tailwing": {"pixel_count": 100, "mean_alpha": 136.0},
+                "mid_deck_generated_panels": {"pixel_count": 100, "mean_alpha": 124.0},
             },
         }
         self.assertEqual(validate_render_profile(valid_report, premium=True), [])
@@ -369,6 +391,19 @@ class StockValidatorTests(unittest.TestCase):
         self.assertIn(
             "render profile metadata must not claim TMUF proof",
             validate_render_profile(bad_status, premium=True),
+        )
+
+        missing_panel_family_strengths = {
+            **valid_report,
+            "render_profile": {
+                key: value
+                for key, value in valid_report["render_profile"].items()
+                if key != "panel_family_strengths"
+            },
+        }
+        self.assertIn(
+            "render profile has no panel_family_strengths object",
+            validate_render_profile(missing_panel_family_strengths, premium=True),
         )
 
         missing_metric = {

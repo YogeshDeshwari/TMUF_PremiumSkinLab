@@ -20,6 +20,11 @@ FORBIDDEN_STOCK_FILES = {"Details.dds", "ProjShad.dds"}
 LOCAL_PSD_MASK_STATUS = "proven_local_psd_parts_label_map"
 GBUFFER_PENDING_STATUS = "experimental_until_tmuf_smoke"
 GBUFFER_PROVEN_STATUS = "proven_by_tmuf_smoke"
+PENDING_EXPERIMENTAL_MASK_STATUSES = {
+    GBUFFER_PENDING_STATUS,
+    "mixed_generated_labels_and_experimental_gbuffer",
+    "mixed_local_label_and_experimental_gbuffer",
+}
 ALPHA_MIN_CONSERVATIVE = 100
 ALPHA_MAX_CONSERVATIVE = 155
 
@@ -140,11 +145,11 @@ def validate_mask_evidence(report: dict[str, Any], premium: bool) -> list[str]:
             if "resources/authoritative/parts/psd_parts_labels.npy" not in entry.get("source_files", []):
                 errors.append(f"{name} local PSD mask must cite psd_parts_labels.npy")
             continue
-        if entry.get("evidence_status") != expected_gbuffer_status:
-            if gbuffer_proven:
-                errors.append(f"{name} must be proven by TMUF smoke after promotion")
-            else:
-                errors.append(f"{name} must stay experimental until TMUF smoke")
+        status = entry.get("evidence_status")
+        if gbuffer_proven and status != expected_gbuffer_status:
+            errors.append(f"{name} must be proven by TMUF smoke after promotion")
+        elif not gbuffer_proven and status not in PENDING_EXPERIMENTAL_MASK_STATUSES:
+            errors.append(f"{name} must stay experimental until TMUF smoke")
 
     return errors
 
@@ -287,6 +292,17 @@ def validate_render_profile(report: dict[str, Any], premium: bool) -> list[str]:
         for mask_name in masks_used:
             if mask_name not in mask_strengths:
                 errors.append(f"missing render strength: {mask_name}")
+
+    panel_family_strengths = profile.get("panel_family_strengths")
+    if not isinstance(panel_family_strengths, dict) or not panel_family_strengths:
+        errors.append("render profile has no panel_family_strengths object")
+    else:
+        masks_used_set = set(masks_used)
+        for mask_name, strength in panel_family_strengths.items():
+            if mask_name not in masks_used_set:
+                errors.append(f"panel family render strength references unused mask: {mask_name}")
+            if not isinstance(strength, (int, float)) or strength <= 0:
+                errors.append(f"panel family render strength must be positive: {mask_name}")
 
     distinctive_masks = report.get("design_lane", {}).get("distinctive_masks", [])
     distinctive_strengths = profile.get("distinctive_mask_strengths")

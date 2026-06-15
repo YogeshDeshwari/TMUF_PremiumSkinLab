@@ -1,16 +1,71 @@
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Callable
 
 import numpy as np
 
 
+ROOT = Path(__file__).resolve().parents[2]
 PSD_PARTS_JSON = "resources/authoritative/parts/psd_parts.json"
 PSD_PARTS_LABELS = "resources/authoritative/parts/psd_parts_labels.npy"
+PANELS_HIGH_JSON = "resources/authoritative/parts/panels_high.json"
+PANELS_HIGH_LABELS = "resources/authoritative/parts/panels_high_labels.npy"
+PANELS_FINE_JSON = "resources/authoritative/parts/panels_fine.json"
+PANELS_FINE_LABELS = "resources/authoritative/parts/panels_fine_labels.npy"
 GBUFFER_POSITION = "resources/authoritative/gbuffer/position_2048.npy"
 GBUFFER_COVERAGE = "resources/authoritative/gbuffer/coverage_2048.npy"
 GBUFFER_EXTENTS = "resources/authoritative/gbuffer/extents_2048.json"
+
+GENERATED_PANEL_SPECS = {
+    "nose_deck_generated_panels": (
+        "panels_high",
+        ("nose_deck_C_84", "nose_deck_C_85", "nose_deck_C_09", "nose_deck_C_92"),
+        "Front deck blocks and nose-adjacent color surfaces from generated local labels.",
+    ),
+    "nose_floor_generated_panels": (
+        "panels_fine",
+        ("nose_floor_C_09", "nose_floor_C_33", "nose_floor_C_34", "nose_floor_C_149"),
+        "Front floor returns and lower wedge continuation probes from generated local labels.",
+    ),
+    "nose_side_generated_panels": (
+        "panels_high",
+        ("nose_side_C_04", "nose_side_C_83"),
+        "Large front-side sweeps from generated local labels.",
+    ),
+    "mid_deck_generated_panels": (
+        "panels_high",
+        ("mid_deck_C_79", "mid_deck_C_48", "mid_deck_C_82", "mid_deck_C_78"),
+        "Cockpit-adjacent deck and roof-flow panels from generated local labels.",
+    ),
+    "mid_side_generated_panel": (
+        "panels_high",
+        ("mid_side_C_02",),
+        "Large mid-side flank field from generated local labels.",
+    ),
+    "mid_floor_generated_panels": (
+        "panels_fine",
+        ("mid_floor_C_35", "mid_floor_C_38", "mid_floor_C_36"),
+        "Mid-floor support blocks and lower shadow fields from generated local labels.",
+    ),
+    "rear_side_generated_panels": (
+        "panels_fine",
+        ("rear_side_C_30", "rear_side_C_152", "rear_side_C_154", "rear_side_C_153"),
+        "Rear side sweeps and side-to-tail transition panels from generated local labels.",
+    ),
+    "rear_floor_generated_panels": (
+        "panels_high",
+        ("rear_floor_C_15", "rear_floor_C_17", "rear_floor_C_36"),
+        "Rear floor support panels and low rear accent returns from generated local labels.",
+    ),
+    "rear_deck_fine_louver_rows": (
+        "panels_fine",
+        ("rear_deck_C_140", "rear_deck_C_118", "rear_deck_C_122", "rear_deck_C_146", "rear_deck_C_133"),
+        "Fine rear deck louver row probes from generated local labels.",
+    ),
+}
 
 
 @dataclass(frozen=True)
@@ -84,6 +139,7 @@ def build_stock_panel_masks(
         name: _local_panel_mask(name, mask, source_zones, design_use)
         for name, (mask, source_zones, design_use) in named_masks.items()
     }
+    masks.update(_generated_panel_masks())
 
     spine_width = params.spine_width + 0.018 * np.clip(length - 0.68, 0, 1)
     center_spine = upper & _thin_line(symmetry, 0.0, spine_width)
@@ -207,6 +263,45 @@ def _local_panel_mask(
         risk_class=_risk_class(int(mask.sum())),
         design_use=design_use,
     )
+
+
+def _generated_panel_masks() -> dict[str, StockPanelMask]:
+    labels_by_map = {
+        "panels_high": np.load(ROOT / PANELS_HIGH_LABELS),
+        "panels_fine": np.load(ROOT / PANELS_FINE_LABELS),
+    }
+    zones_by_map = {
+        "panels_high": json.loads((ROOT / PANELS_HIGH_JSON).read_text())["zones"],
+        "panels_fine": json.loads((ROOT / PANELS_FINE_JSON).read_text())["zones"],
+    }
+    source_files_by_map = {
+        "panels_high": (PANELS_HIGH_JSON, PANELS_HIGH_LABELS),
+        "panels_fine": (PANELS_FINE_JSON, PANELS_FINE_LABELS),
+    }
+
+    masks: dict[str, StockPanelMask] = {}
+    for name, (source_map, source_zones, design_use) in GENERATED_PANEL_SPECS.items():
+        zone_index = {zone["name"]: int(zone["id"]) for zone in zones_by_map[source_map]}
+        missing = [zone_name for zone_name in source_zones if zone_name not in zone_index]
+        if missing:
+            raise KeyError(f"{name} references missing generated panel zones: {', '.join(missing)}")
+        ids = [zone_index[zone_name] for zone_name in source_zones]
+        mask = np.isin(labels_by_map[source_map], ids)
+        masks[name] = StockPanelMask(
+            name=name,
+            mask=mask,
+            evidence_status="mixed_generated_labels_and_experimental_gbuffer",
+            source_files=(
+                *source_files_by_map[source_map],
+                GBUFFER_POSITION,
+                GBUFFER_COVERAGE,
+                GBUFFER_EXTENTS,
+            ),
+            source_zones=source_zones,
+            risk_class=_risk_class(int(mask.sum())),
+            design_use=design_use,
+        )
+    return masks
 
 
 def _gbuffer_panel_mask(

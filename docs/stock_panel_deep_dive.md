@@ -90,10 +90,10 @@ Non-hero support surfaces that can polish a skin without proving custom material
 
 | Target | Current candidates | Why it matters |
 | --- | --- | --- |
-| `mid_deck_generated_panels` | none yet | large cockpit and roof-flow deck fields for symmetric extra panels near the engine cover. |
-| `mid_side_generated_panel` | none yet | very large flank field for broad side blades and blank sponsor-like geometry without text. |
+| `mid_deck_generated_panels` | black_cyan_spine, magenta_cyan_race_proto | large cockpit and roof-flow deck fields for symmetric extra panels near the engine cover. |
+| `mid_side_generated_panel` | magenta_cyan_race_proto, violet_cyber_flow | very large flank field for broad side blades and blank sponsor-like geometry without text. |
 | `rear_deck_fine_louver_rows` | dark_neon_louver | fine rear deck rows for technical louver rhythm and paired glow accents. |
-| `nose_floor_generated_panels` | none yet | front floor returns for splitter-like lower wedge continuation probes. |
+| `nose_floor_generated_panels` | black_magenta_cyan_blade | front floor returns for splitter-like lower wedge continuation probes. |
 | `rear_floor_generated_panels` | dark_neon_louver | low rear support blocks for shadow fields and tail color echoes. |
 
 ## Aliases
