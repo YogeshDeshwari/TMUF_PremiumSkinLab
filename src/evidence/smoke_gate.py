@@ -25,6 +25,11 @@ REQUIRED_OBSERVATIONS = [
 ]
 REQUIRED_METADATA = ["tester", "tmuf_build", "test_date_local"]
 REQUIRED_SCREENSHOT_ROLES = ["front", "side", "rear", "top"]
+PROMOTABLE_GBUFFER_MASK_STATUSES = {
+    "experimental_until_tmuf_smoke",
+    "mixed_generated_labels_and_experimental_gbuffer",
+    "mixed_local_label_and_experimental_gbuffer",
+}
 
 
 def validate_screenshot_file(path: Path) -> dict[str, Any]:
@@ -242,6 +247,6 @@ def _promote_gbuffer_mask_evidence(data: dict[str, Any], gbuffer_mapping_status:
     for entry in mask_evidence.values():
         if (
             isinstance(entry, dict)
-            and entry.get("evidence_status") == "experimental_until_tmuf_smoke"
+            and entry.get("evidence_status") in PROMOTABLE_GBUFFER_MASK_STATUSES
         ):
             entry["evidence_status"] = "proven_by_tmuf_smoke"

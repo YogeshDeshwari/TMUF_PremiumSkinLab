@@ -101,6 +101,14 @@ class TmufSmokeGateTests(unittest.TestCase):
                                 "evidence_status": "experimental_until_tmuf_smoke",
                                 "pixel_count": 531368,
                             },
+                            "mid_deck_generated_panels": {
+                                "evidence_status": "mixed_generated_labels_and_experimental_gbuffer",
+                                "pixel_count": 723443,
+                            },
+                            "front_mudguard_caps": {
+                                "evidence_status": "mixed_local_label_and_experimental_gbuffer",
+                                "pixel_count": 192838,
+                            },
                         },
                     }
                 )
@@ -122,6 +130,14 @@ class TmufSmokeGateTests(unittest.TestCase):
             )
             self.assertEqual(
                 promoted["mask_evidence"]["center_spine"]["evidence_status"],
+                "proven_by_tmuf_smoke",
+            )
+            self.assertEqual(
+                promoted["mask_evidence"]["mid_deck_generated_panels"]["evidence_status"],
+                "proven_by_tmuf_smoke",
+            )
+            self.assertEqual(
+                promoted["mask_evidence"]["front_mudguard_caps"]["evidence_status"],
                 "proven_by_tmuf_smoke",
             )
             self.assertEqual(promoted["tmuf_smoke_evidence"]["screenshots"], screenshots)
