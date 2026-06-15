@@ -1,0 +1,89 @@
+{
+  "archive_sha256": "fdd8380ca74d46d5fbe788e55b73e05c90a14777153c85241a99bf16a753d586",
+  "dds": {
+    "Details.dds": {
+      "fourcc": "DXT5",
+      "height": 4096,
+      "linear_size": 16777216,
+      "mip_count": 13,
+      "valid": true,
+      "width": 4096
+    },
+    "Diffuse.dds": {
+      "fourcc": "DXT5",
+      "height": 2048,
+      "linear_size": 4194304,
+      "mip_count": 12,
+      "valid": true,
+      "width": 2048
+    },
+    "Icon.dds": {
+      "fourcc": "DXT1",
+      "height": 128,
+      "linear_size": 0,
+      "mip_count": 7,
+      "valid": true,
+      "width": 128
+    },
+    "ProjShad.dds": {
+      "fourcc": "DXT1",
+      "height": 512,
+      "linear_size": 131072,
+      "mip_count": 10,
+      "valid": true,
+      "width": 512
+    }
+  },
+  "does_not_prove_stock_diffuse_mapping": true,
+  "does_not_prove_tmuf_smoke": true,
+  "donor_mesh_match": {
+    "MainBody.Solid.Gbx": true,
+    "MainBodyHigh.Solid.Gbx": true
+  },
+  "entries": {
+    "Details.dds": {
+      "compress_size": 7218584,
+      "file_size": 22369776,
+      "sha256": "9496620425907299bfbd80208a3c6bff71b512c611c35cf587631a0582a62d17"
+    },
+    "Diffuse.dds": {
+      "compress_size": 1350911,
+      "file_size": 5592560,
+      "sha256": "ebafe400790e341db0d134e7a1795f37a9f75ade430f9e9071c17a42c778e712"
+    },
+    "Icon.dds": {
+      "compress_size": 7959,
+      "file_size": 11064,
+      "sha256": "7685d4c10ac2766a8e4d114835fc5ac9fddd9649a2894da4c54286d08c7c853b"
+    },
+    "MainBody.Solid.Gbx": {
+      "compress_size": 68263,
+      "file_size": 79812,
+      "sha256": "c273680b4b4cfb07d942ec63d56f24a6d12778b6b3fd7b1a7bde133dcc04136c"
+    },
+    "MainBodyHigh.Solid.Gbx": {
+      "compress_size": 971002,
+      "file_size": 1126504,
+      "sha256": "4c29742a3940085a0d54af465c08e6e044ad8b3b25b883eadfc583103d5b1831"
+    },
+    "ProjShad.dds": {
+      "compress_size": 66310,
+      "file_size": 174904,
+      "sha256": "b3564ba75d7746b14f479ac48db9aada64d7547438989e96af43561c70d5e0d4"
+    }
+  },
+  "evidence_label": "reference_only",
+  "filename_case_notes": [],
+  "output_artifacts": {
+    "contact_sheet": "out/reference_analysis/Incoming-Winter-Public-SKIN_by_MINA_TM_contact_sheet.png",
+    "report": "out/reference_analysis/Incoming-Winter-Public-SKIN_by_MINA_TM_report.json"
+  },
+  "package_name": "Incoming-Winter-Public-SKIN_by_MINA_TM.zip",
+  "package_route": "custom_fullcar_ch2026_reference",
+  "safe_use": "Use only as CH_2026 custom full-car reference for Details/ProjShad/GBX lane analysis; never as stock StadiumCar truth.",
+  "schema": "tmuf_premium_skin_lab.reference_package_analysis.v1",
+  "size_bytes": 9683887,
+  "skin_json": {},
+  "source_path": "resources/reference_only/downloads/Incoming-Winter-Public-SKIN_by_MINA_TM.zip",
+  "stock_lane_status": "not_stock_diffuse_only"
+}

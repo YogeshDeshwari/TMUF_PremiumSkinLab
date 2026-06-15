@@ -79,10 +79,20 @@ def usage_text(rel: Path, label: str) -> tuple[str, str]:
             "Use only as modern Trackmania media reference.",
             "Rejected as TMUF/TMNF classic material-route authority.",
         )
+    if name in {"CH_Blu.zip", "CH_Bloom_Wheel_LED_Underglow.zip"}:
+        return (
+            "Use as CH_2026 custom full-car reference for visual comparison of Diffuse, Details, ProjShad, dirty maps, and GBX packaging.",
+            "Reference-only and not stock Diffuse-only truth; these packages stay outside the first stock calibration lane.",
+        )
     if name.startswith("ugghost"):
         return (
             "Use as TMU/TMUF technical routing and custom-model workflow reference.",
             "Old guide; not proof that any generated package is TMUF-smoke-tested.",
+        )
+    if rel.parts[:2] == ("reference_only", "downloads") and name.endswith(".zip"):
+        return (
+            "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+            "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
         )
     if name.endswith(".zip") and "CH_2026" in name:
         return (

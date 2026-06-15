@@ -1,0 +1,120 @@
+{
+  "archive_sha256": "ea1bfd48fcf14a7c52bba9f6c6f230a0943c9162674c46baa6ba0a4bf4a1dd14",
+  "dds": {
+    "Details.dds": {
+      "fourcc": "DXT5",
+      "height": 4096,
+      "linear_size": 16777216,
+      "mip_count": 13,
+      "valid": true,
+      "width": 4096
+    },
+    "DetailsDirty.dds": {
+      "fourcc": "DXT3",
+      "height": 1024,
+      "linear_size": 1048576,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    },
+    "Diffuse.dds": {
+      "fourcc": "DXT5",
+      "height": 2048,
+      "linear_size": 4194304,
+      "mip_count": 12,
+      "valid": true,
+      "width": 2048
+    },
+    "DiffuseDirty.dds": {
+      "fourcc": "DXT3",
+      "height": 1024,
+      "linear_size": 1048576,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    },
+    "Icon.dds": {
+      "fourcc": "DXT5",
+      "height": 128,
+      "linear_size": 16384,
+      "mip_count": 8,
+      "valid": true,
+      "width": 128
+    },
+    "ProjShad.dds": {
+      "fourcc": "DXT1",
+      "height": 512,
+      "linear_size": 131072,
+      "mip_count": 10,
+      "valid": true,
+      "width": 512
+    }
+  },
+  "does_not_prove_stock_diffuse_mapping": true,
+  "does_not_prove_tmuf_smoke": true,
+  "donor_mesh_match": {
+    "MainBody.Solid.Gbx": true,
+    "MainBodyHigh.Solid.Gbx": true
+  },
+  "entries": {
+    "Details.dds": {
+      "compress_size": 7135247,
+      "file_size": 22369776,
+      "sha256": "d4da8cce121e31b80fb177923713b9bab77b4e3db0b9d329c49f4812e6bb2be5"
+    },
+    "DetailsDirty.dds": {
+      "compress_size": 384277,
+      "file_size": 1398256,
+      "sha256": "832a742eda750d05ef76989476324ce071b859f70a292fef1d1d5c79d31a9223"
+    },
+    "Diffuse.dds": {
+      "compress_size": 1036959,
+      "file_size": 5592560,
+      "sha256": "9b5062836c7a7e01365c1eb8afabccba6be3ce9416fa57c3fce5d340301a9b9b"
+    },
+    "DiffuseDirty.dds": {
+      "compress_size": 586718,
+      "file_size": 1398256,
+      "sha256": "d721c57de6e5ad34e08bbf01e30aa52311b336ef161204f6d373af242ede003b"
+    },
+    "Icon.dds": {
+      "compress_size": 905,
+      "file_size": 22000,
+      "sha256": "4eb8020d808ed501e3d5afac3c27a15f7bc54fbdba0fa66679514c643dc43c72"
+    },
+    "MainBody.Solid.Gbx": {
+      "compress_size": 68265,
+      "file_size": 79812,
+      "sha256": "c273680b4b4cfb07d942ec63d56f24a6d12778b6b3fd7b1a7bde133dcc04136c"
+    },
+    "MainBodyHigh.Solid.Gbx": {
+      "compress_size": 970998,
+      "file_size": 1126504,
+      "sha256": "4c29742a3940085a0d54af465c08e6e044ad8b3b25b883eadfc583103d5b1831"
+    },
+    "ProjShad.dds": {
+      "compress_size": 66586,
+      "file_size": 174904,
+      "sha256": "b3564ba75d7746b14f479ac48db9aada64d7547438989e96af43561c70d5e0d4"
+    },
+    "readme.txt": {
+      "compress_size": 66,
+      "file_size": 132,
+      "sha256": "670ca468ac68429619042aeaf6056a62d4d6d871c18ca488c9d7fb212d6dbf90"
+    }
+  },
+  "evidence_label": "reference_only",
+  "filename_case_notes": [],
+  "output_artifacts": {
+    "contact_sheet": "out/reference_analysis/Pink-Skin-(TMNF_UF)_by_SparkyTM_contact_sheet.png",
+    "report": "out/reference_analysis/Pink-Skin-(TMNF_UF)_by_SparkyTM_report.json"
+  },
+  "package_name": "Pink-Skin-(TMNF_UF)_by_SparkyTM.zip",
+  "package_route": "custom_fullcar_ch2026_reference",
+  "safe_use": "Use only as CH_2026 custom full-car reference for Details/ProjShad/GBX lane analysis; never as stock StadiumCar truth.",
+  "schema": "tmuf_premium_skin_lab.reference_package_analysis.v1",
+  "size_bytes": 10251155,
+  "skin_json": {},
+  "source_path": "resources/reference_only/downloads/Pink-Skin-(TMNF_UF)_by_SparkyTM.zip",
+  "stock_lane_status": "not_stock_diffuse_only"
+}

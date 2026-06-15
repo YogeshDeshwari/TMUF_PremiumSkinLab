@@ -67,6 +67,14 @@ class EvidenceManifestTests(unittest.TestCase):
             by_name["CH_2026_NOT_STOCK_STADIUM_DETAILS_CUSTOM_MESH.zip"]["evidence_label"],
             "experimental",
         )
+        self.assertEqual(by_name["CH_Blu.zip"]["evidence_label"], "reference_only")
+        self.assertIn("CH_2026 custom full-car reference", by_name["CH_Blu.zip"]["safe_use"])
+        self.assertIn("not stock Diffuse-only truth", by_name["CH_Blu.zip"]["limits"])
+        self.assertEqual(by_name["CH_Bloom_Wheel_LED_Underglow.zip"]["evidence_label"], "reference_only")
+        self.assertIn(
+            "CH_2026 custom full-car reference",
+            by_name["CH_Bloom_Wheel_LED_Underglow.zip"]["safe_use"],
+        )
 
         for entry in data["resources"]:
             self.assertRegex(entry["sha256"], r"^[0-9a-f]{64}$")

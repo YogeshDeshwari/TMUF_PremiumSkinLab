@@ -1,0 +1,152 @@
+{
+  "archive_sha256": "5774ecedd6a4b0a6c5da22c5f5ee5c85e06d2542ed221aed92666deddfaa0bd4",
+  "dds": {
+    "DetailsDirty.dds": {
+      "fourcc": "DXT5",
+      "height": 1024,
+      "linear_size": 0,
+      "mip_count": 9,
+      "valid": true,
+      "width": 1024
+    },
+    "DiffuseDirty.dds": {
+      "fourcc": "DXT5",
+      "height": 1024,
+      "linear_size": 0,
+      "mip_count": 9,
+      "valid": true,
+      "width": 1024
+    },
+    "Icon.dds": {
+      "fourcc": "DXT5",
+      "height": 128,
+      "linear_size": 0,
+      "mip_count": 0,
+      "valid": true,
+      "width": 128
+    },
+    "Illum.dds": {
+      "fourcc": "DXT3",
+      "height": 1024,
+      "linear_size": 0,
+      "mip_count": 9,
+      "valid": true,
+      "width": 1024
+    },
+    "ProjShad.dds": {
+      "fourcc": "DXT3",
+      "height": 512,
+      "linear_size": 262144,
+      "mip_count": 10,
+      "valid": true,
+      "width": 512
+    },
+    "details.dds": {
+      "fourcc": "DXT3",
+      "height": 1024,
+      "linear_size": 0,
+      "mip_count": 9,
+      "valid": true,
+      "width": 1024
+    },
+    "diffuse.dds": {
+      "fourcc": "DXT3",
+      "height": 1024,
+      "linear_size": 0,
+      "mip_count": 9,
+      "valid": true,
+      "width": 1024
+    }
+  },
+  "does_not_prove_stock_diffuse_mapping": true,
+  "does_not_prove_tmuf_smoke": true,
+  "donor_mesh_match": {
+    "MainBody.Solid.Gbx": false,
+    "MainBodyHigh.Solid.Gbx": false
+  },
+  "entries": {
+    "DetailsDirty.dds": {
+      "compress_size": 1192839,
+      "file_size": 1398256,
+      "sha256": "693ae323873acb390994407234afa128efbccd1b9d338a63b4060853a76ef2db"
+    },
+    "DiffuseDirty.dds": {
+      "compress_size": 1317573,
+      "file_size": 1398256,
+      "sha256": "1ffa9d4ba4f4eaaee6fff69a66f70380f13d8fd11b5b292cf867998607a59453"
+    },
+    "Icon.dds": {
+      "compress_size": 7459,
+      "file_size": 16512,
+      "sha256": "77c4b4f9f23826ea90a0277c80873aee6ce30145626f5b603fd0973d3d8d602f"
+    },
+    "Illum.dds": {
+      "compress_size": 14763,
+      "file_size": 1398256,
+      "sha256": "24a531a1d1fa8e714a6106ddc4c62a87a80a1f8450ccb98b5e5dceee782a3a26"
+    },
+    "MainBody.Solid.Gbx": {
+      "compress_size": 85894,
+      "file_size": 96029,
+      "sha256": "20b555db2d287cc7f1ed464b36e69da3a461930a67ea14db044167a98f7bd203"
+    },
+    "MainBodyHigh.Solid.Gbx": {
+      "compress_size": 571796,
+      "file_size": 671109,
+      "sha256": "a802faca3a5c580ff3f12c62fb9944f9088f2205934089007ed58fa2720d35e8"
+    },
+    "ProjShad.dds": {
+      "compress_size": 60748,
+      "file_size": 349680,
+      "sha256": "9a95888c976e3e42f890814eed1462c2fe4d8c5d203ba75197f4a7f95ed303ad"
+    },
+    "details.dds": {
+      "compress_size": 402443,
+      "file_size": 1398256,
+      "sha256": "6444dd572b1de6389ff0018598c73b39749e8ce9699d71c0fda37b26d66a1797"
+    },
+    "diffuse.dds": {
+      "compress_size": 424188,
+      "file_size": 1398256,
+      "sha256": "e6465f01f2aed40fc1f1d458ec9221881c73080b09504b1ce386c6c0f1b0a96f"
+    },
+    "horn.wav": {
+      "compress_size": 46848,
+      "file_size": 68748,
+      "sha256": "a7c08a9ee38e3331cd952cb923278cc94dc927c7766b735f9f47e7c9f1e89772"
+    },
+    "readme.txt": {
+      "compress_size": 250,
+      "file_size": 633,
+      "sha256": "57b7d5608db4be0439675567b01eb2b3ceb29af3afe884d670161c501266f2a2"
+    },
+    "readme_carpark.txt": {
+      "compress_size": 195,
+      "file_size": 294,
+      "sha256": "180c33718e50470dcd458a5d4c3b10662b808a6d6c75daed5b6fee2483129902"
+    }
+  },
+  "evidence_label": "reference_only",
+  "filename_case_notes": [
+    {
+      "entry": "details.dds",
+      "expected_canonical_case": "Details.dds"
+    },
+    {
+      "entry": "diffuse.dds",
+      "expected_canonical_case": "Diffuse.dds"
+    }
+  ],
+  "output_artifacts": {
+    "contact_sheet": "out/reference_analysis/flintstone_by_WiiTRO_contact_sheet.png",
+    "report": "out/reference_analysis/flintstone_by_WiiTRO_report.json"
+  },
+  "package_name": "flintstone_by_WiiTRO.zip",
+  "package_route": "custom_fullcar_other_mesh_reference",
+  "safe_use": "Use only as custom full-car visual and packaging reference; mesh differs from the CH_2026 donor comparison.",
+  "schema": "tmuf_premium_skin_lab.reference_package_analysis.v1",
+  "size_bytes": 4126248,
+  "skin_json": {},
+  "source_path": "resources/reference_only/downloads/flintstone_by_WiiTRO.zip",
+  "stock_lane_status": "not_stock_diffuse_only"
+}

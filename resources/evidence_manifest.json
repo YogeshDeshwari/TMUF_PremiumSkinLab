@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T00:14:56.047221+00:00",
+  "generated_at": "2026-06-15T06:26:09.036929+00:00",
   "resources": [
     {
       "evidence_label": "experimental",
@@ -609,6 +609,450 @@
     },
     {
       "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "Details.dds",
+            "Diffuse.dds",
+            "Icon.dds",
+            "ProjShad.dds",
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/(TMN_UF)_by_SparkyTM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "f9f58e075670127daa2b2349058133158f3179a876a8b2005b343427522db922",
+      "size_bytes": 9192015
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBodyHigh.Solid.Gbx",
+            "MainBody.Solid.Gbx",
+            "ProjShad.dds",
+            "Diffuse.dds",
+            "Icon.dds",
+            "Details.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Aqua-Public-SKIN_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "efff90fe65b098e6b5c82a0c6323e537ed8a2941ec278a17d0679e76b5406512",
+      "size_bytes": 9256608
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "Icon.dds",
+            "Diffuse.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Azerbaijan_by_kekfeg.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "62984146b3addb3175d66c13cf9b57540c6c40c6fc733514495ba19c99ff97ca",
+      "size_bytes": 153062
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only and not stock Diffuse-only truth; these packages stay outside the first stock calibration lane.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "Diffuse.dds",
+            "Details.dds",
+            "Icon.dds",
+            "ProjShad.dds",
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "skin.json"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/CH_Bloom_Wheel_LED_Underglow.zip",
+      "safe_use": "Use as CH_2026 custom full-car reference for visual comparison of Diffuse, Details, ProjShad, dirty maps, and GBX packaging.",
+      "sha256": "73a41369c8e093828915aadee5a9490503d06b7f83c96038e625204eddf86d80",
+      "size_bytes": 6360781
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only and not stock Diffuse-only truth; these packages stay outside the first stock calibration lane.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "Diffuse.dds",
+            "Details.dds",
+            "Icon.dds",
+            "ProjShad.dds",
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "skin.json"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/CH_Blu.zip",
+      "safe_use": "Use as CH_2026 custom full-car reference for visual comparison of Diffuse, Details, ProjShad, dirty maps, and GBX packaging.",
+      "sha256": "94a336d1babf89e1c837f31cfa8dc66e5275c816d99c21d52892a8ed1c238666",
+      "size_bytes": 5537903
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "ProjShad.dds",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "Icon.dds",
+            "Diffuse.dds",
+            "Details.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Christmas-2023-SKIN_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "6feef5825981f79a53742a74b8e8598cdf97977a6d821b89b56ad86639ef0ec9",
+      "size_bytes": 10292314
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "ProjShad.dds",
+            "Icon.dds",
+            "Details.dds",
+            "Diffuse.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Deep-Galaxy-SKIN_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "a0ddbb8baf5496f151543f105321d1c61a21cac990e802400fd7ab290e43479b",
+      "size_bytes": 9434366
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBodyHigh.Solid.Gbx",
+            "MainBody.Solid.Gbx",
+            "ProjShad.dds",
+            "Icon.dds",
+            "Details.dds",
+            "Diffuse.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Fall-Public-SKIN-_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "0d5371afc83dc044778ee9feaf501ba3084eea68d511b5b6aa7106be98d506ce",
+      "size_bytes": 9020409
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "ProjShad.dds",
+            "Details.dds",
+            "Icon.dds",
+            "Diffuse.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Fallen-leaves-SKIN_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "1753fee46ecd805bf9e2c6003d093c318563aa5982114250f4defd7f53c16dfe",
+      "size_bytes": 9408555
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "ProjShad.dds",
+            "Diffuse.dds",
+            "Icon.dds",
+            "Details.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Incoming-Winter-Public-SKIN_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "fdd8380ca74d46d5fbe788e55b73e05c90a14777153c85241a99bf16a753d586",
+      "size_bytes": 9683887
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "ProjShad.dds",
+            "Icon.dds",
+            "Details.dds",
+            "Diffuse.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/KACKIEST-KACKY-10-SKIN-(dark-gray)_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "292dc3bdadfb5d8231e153e82b924f9c664464ff5b055c43939f9bf4c2252af8",
+      "size_bytes": 4942940
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "ProjShad.dds",
+            "Diffuse.dds",
+            "Icon.dds",
+            "Details.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/KACKIEST-KACKY-10-SKIN-(light-gray)_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "b406423820d93e7578a44d35b6cc559105fb1dfdfa51a785dfa62ee6fedd0fba",
+      "size_bytes": 5095175
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "ProjShad.dds",
+            "Icon.dds",
+            "Details.dds",
+            "Diffuse.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/KACKIEST-KACKY-9-(black)_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "31d938aa798d07a874b7247c8c4ce6dce9045681ab9fb33380a3d59e705eaf74",
+      "size_bytes": 4837052
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "ProjShad.dds",
+            "Icon.dds",
+            "Details.dds",
+            "Diffuse.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/KACKIEST-KACKY-9-SKIN-(white)_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "0b133f26fece629c6a8c919b22521ee6b4167e0dd76662acbeee5914cd84437c",
+      "size_bytes": 4974507
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "Diffuse.dds",
+            "Details.dds",
+            "Icon.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/KEKW-Public-SKIN_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "9eebcab5898a93f8cb4fbc139c8fcc3e3dfba2859a0b370dd99c5fdf23c6b995",
+      "size_bytes": 8892064
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "ProjShad.dds",
+            "MainBodyHigh.Solid.Gbx",
+            "MainBody.Solid.Gbx",
+            "Icon.dds",
+            "Details.dds",
+            "Diffuse.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/KILL-la-KILL-Public-SKIN_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "5f9cf0548adf468d3755c9b925224213f475361cd6f5cc4426aa7148084b3173",
+      "size_bytes": 5196995
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "ProjShad.dds",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "Icon.dds",
+            "Details.dds",
+            "Diffuse.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/MINA-2023-SKIN_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "184ea0de746548e866e3bb5b60198ad9d3bcadd716fd858ac79d0f2bd74ecf74",
+      "size_bytes": 10730066
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "DetailsDirty.dds",
+            "DiffuseDirty.dds",
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "ProjShad.dds",
+            "readme.txt",
+            "Diffuse.dds",
+            "Icon.dds",
+            "Details.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Pink-Skin-(TMNF_UF)_by_SparkyTM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "ea1bfd48fcf14a7c52bba9f6c6f230a0943c9162674c46baa6ba0a4bf4a1dd14",
+      "size_bytes": 10251155
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "ProjShad.dds",
+            "Diffuse.dds",
+            "Icon.dds",
+            "Details.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Rameses-b-SKIN_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "3e4b9953a5455af805f6c66668e733dffcb8290e045867e3d61573a6dfced149",
+      "size_bytes": 9087923
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "Details.dds",
+            "Diffuse.dds",
+            "Icon.dds",
+            "MainBodyHigh.Solid.Gbx",
+            "MainBody.Solid.Gbx",
+            "ProjShad.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Red-Public-SKIN_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "cc90a291216f1e1d6f48e43eec17868422a3c1ea7bde5d1f88ecf71f1cfd4b71",
+      "size_bytes": 9469474
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "ProjShad.dds",
+            "Icon.dds",
+            "Details.dds",
+            "Diffuse.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Spring-2024-SKIN_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "beec138fe55c77a47b0b887c07016f8de911fd4113de1645877d08630568592e",
+      "size_bytes": 9946043
+    },
+    {
+      "evidence_label": "reference_only",
       "limits": "Reference-only because StadiumCar V2 uses new mapping and is not stock UV truth.",
       "metadata": {
         "zip": {
@@ -668,6 +1112,28 @@
     },
     {
       "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "ProjShad.dds",
+            "Diffuse.dds",
+            "Icon.dds",
+            "Details.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Summer-2024-SKIN_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "6d8440523031944f73d6f64d4af17a087843f144fe1d91c5a00516f831ffc36f",
+      "size_bytes": 9470029
+    },
+    {
+      "evidence_label": "reference_only",
       "limits": "Reference-only because hash differs from the local CarPark PSD and provenance is community-uploaded.",
       "metadata": {
         "zip": {
@@ -699,6 +1165,165 @@
       "safe_use": "Use only as modern Trackmania media reference.",
       "sha256": "d2ade95ad06f104cbe588126f27ef2ef6fd6f4aaf31620cd579c3b2a95a25a14",
       "size_bytes": 5049224
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "ProjShad.dds",
+            "Icon.dds",
+            "Details.dds",
+            "Diffuse.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Winter-SKIN_by_MINA_TM.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "ab077ad49e2b1dced079fcf76a4e2fdd4e654d979d436f2179b37716353d9236",
+      "size_bytes": 9723670
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBodyHigh.Solid.Gbx",
+            "details.dds",
+            "DetailsDirty.dds",
+            "diffuse.dds",
+            "DiffuseDirty.dds",
+            "horn.wav",
+            "Icon.dds",
+            "Illum.dds",
+            "MainBody.Solid.Gbx",
+            "ProjShad.dds",
+            "readme.txt",
+            "readme_carpark.txt"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/flintstone_by_WiiTRO.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "5774ecedd6a4b0a6c5da22c5f5ee5c85e06d2542ed221aed92666deddfaa0bd4",
+      "size_bytes": 4126248
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "Details.dds",
+            "MainBodyHigh.Solid.Gbx",
+            "readme.txt",
+            "ProjShad.dds",
+            "DetailsDirty.dds",
+            "DiffuseDirty.dds",
+            "MainBody.Solid.Gbx",
+            "Illum.dds",
+            "Icon.dds",
+            "Diffuse.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/hunter_by_WiiTRO.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "d905faf9b200f686462859275128a46a138124fcf4323da02241c9aa17d20835",
+      "size_bytes": 8421851
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "Details.dds",
+            "Diffuse.dds",
+            "Icon.dds",
+            "Illum.dds",
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "EngineFast.ogg",
+            "EngineIdle.wav",
+            "EngineLow.ogg",
+            "EngineMid.ogg",
+            "EngineRev.ogg",
+            "EngineRev2.ogg",
+            "readme_carpark.txt"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/minecart_by_WiiTRO.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "e849f0dc6469828c1d72db2a1dfc05f265976e4e71026d58118d9124ec909441",
+      "size_bytes": 186048
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "details.dds",
+            "detailsdirty.dds",
+            "diffusedirty.dds",
+            "EngineFast.ogg",
+            "EngineLow.ogg",
+            "EngineMid.ogg",
+            "EngineRev.ogg",
+            "EngineRev2.ogg",
+            "illum.dds",
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "ProjShad.dds",
+            "readme_transit_ssv.txt",
+            "readme_carpark.txt",
+            "Icon.dds",
+            "diffuse.dds"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/pedo-van_by_WiiTRO.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "6db6d8b9b604ac3925edf26a47648d96f2a8d6ea991f59d2446eb4ebc4389b73",
+      "size_bytes": 4851744
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only; package contents must be analyzed before borrowing any idea, and it is not stock mapping or TMUF smoke evidence.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "Details.dds",
+            "DetailsDirty.dds",
+            "Diffuse.dds",
+            "DiffuseDirty.dds",
+            "Illum.dds",
+            "MainBody.Solid.Gbx",
+            "Projshad.dds",
+            "MainBodyHigh.Solid.Gbx",
+            "Icon.dds",
+            "EngineFast.ogg",
+            "EngineIdle.wav",
+            "EngineLow.ogg",
+            "EngineMid.ogg",
+            "EngineRev.ogg",
+            "EngineRev2.ogg",
+            "readme_carpark.txt"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/steve-in-a-cart_by_WiiTRO.zip",
+      "safe_use": "Use as an external skin reference package for visual composition, texture-slot, and packaging analysis.",
+      "sha256": "a25d3abcbf9d887a548cca32c781bad6f584de873dd245ecbc815bdd0418641a",
+      "size_bytes": 2756021
     },
     {
       "evidence_label": "reference_only",

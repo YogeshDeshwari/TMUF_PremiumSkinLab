@@ -1,0 +1,184 @@
+{
+  "archive_sha256": "6db6d8b9b604ac3925edf26a47648d96f2a8d6ea991f59d2446eb4ebc4389b73",
+  "dds": {
+    "Icon.dds": {
+      "fourcc": "DXT1",
+      "height": 128,
+      "linear_size": 10936,
+      "mip_count": 8,
+      "valid": true,
+      "width": 128
+    },
+    "ProjShad.dds": {
+      "fourcc": "DXT1",
+      "height": 512,
+      "linear_size": 131072,
+      "mip_count": 10,
+      "valid": true,
+      "width": 512
+    },
+    "details.dds": {
+      "fourcc": "DXT5",
+      "height": 2048,
+      "linear_size": 8388608,
+      "mip_count": 13,
+      "valid": true,
+      "width": 4096
+    },
+    "detailsdirty.dds": {
+      "fourcc": "DXT5",
+      "height": 1024,
+      "linear_size": 2097152,
+      "mip_count": 12,
+      "valid": true,
+      "width": 2048
+    },
+    "diffuse.dds": {
+      "fourcc": "DXT5",
+      "height": 1024,
+      "linear_size": 1398128,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    },
+    "diffusedirty.dds": {
+      "fourcc": "DXT5",
+      "height": 1024,
+      "linear_size": 1048576,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    },
+    "illum.dds": {
+      "fourcc": "DXT5",
+      "height": 2048,
+      "linear_size": 8388608,
+      "mip_count": 13,
+      "valid": true,
+      "width": 4096
+    }
+  },
+  "does_not_prove_stock_diffuse_mapping": true,
+  "does_not_prove_tmuf_smoke": true,
+  "donor_mesh_match": {
+    "MainBody.Solid.Gbx": false,
+    "MainBodyHigh.Solid.Gbx": false
+  },
+  "entries": {
+    "EngineFast.ogg": {
+      "compress_size": 27474,
+      "file_size": 29943,
+      "sha256": "27a91074ca12f7e5ec80a0bf91e532704155d4e91d111802620b83ca9f005fdd"
+    },
+    "EngineLow.ogg": {
+      "compress_size": 25571,
+      "file_size": 28098,
+      "sha256": "e7a4d63c062430643cb062297bb4fada58bd85db514c43389752ce6335f96498"
+    },
+    "EngineMid.ogg": {
+      "compress_size": 24237,
+      "file_size": 26777,
+      "sha256": "2a23f0b99456e9f6ee4f81e7c411e77fa611376204f0336fa0292b85fa2e0ae9"
+    },
+    "EngineRev.ogg": {
+      "compress_size": 30243,
+      "file_size": 32433,
+      "sha256": "1890606103cb8ed99982ecbaeec62923af56870bcf6ab0162ee9d5ed584ed8c3"
+    },
+    "EngineRev2.ogg": {
+      "compress_size": 27709,
+      "file_size": 29904,
+      "sha256": "92f525d8879e7adac1286009842828c5d4e22e701f3830da7ab1f237056fb786"
+    },
+    "Icon.dds": {
+      "compress_size": 4179,
+      "file_size": 11064,
+      "sha256": "bc1937404cd195c41728478d8f2e0ccc9468ff367769425a1cc68f719501d01b"
+    },
+    "MainBody.Solid.Gbx": {
+      "compress_size": 50580,
+      "file_size": 58205,
+      "sha256": "ee393570de841b3ec88bcab3545eae67bd0e3a2364ad85cdc5d97ead4e55ec38"
+    },
+    "MainBodyHigh.Solid.Gbx": {
+      "compress_size": 2228113,
+      "file_size": 2585205,
+      "sha256": "664da799a0587e411037e23aa394d08853e371c379fe136008a4c29b42905dea"
+    },
+    "ProjShad.dds": {
+      "compress_size": 82474,
+      "file_size": 174904,
+      "sha256": "6eefa82dea39bee82d10f61452b2ca101442ee0bb58f195378fc14f4149605e7"
+    },
+    "details.dds": {
+      "compress_size": 1388442,
+      "file_size": 11184976,
+      "sha256": "6bfa56459c011bdb7c35a108f4f87644c22842384f86dac5bdef812953314616"
+    },
+    "detailsdirty.dds": {
+      "compress_size": 438780,
+      "file_size": 2796368,
+      "sha256": "99aeed0bfee22b17f0593bc7fda957b885664bc4115fc75befd6f55c675e92b9"
+    },
+    "diffuse.dds": {
+      "compress_size": 31237,
+      "file_size": 1398256,
+      "sha256": "d7e47ec50f25926c1162ffaa2c72af02f5c62a0548ce3e5af50816a9a50d9c6c"
+    },
+    "diffusedirty.dds": {
+      "compress_size": 342382,
+      "file_size": 1398256,
+      "sha256": "dde06e29a671e331d972352bd6fe8507842639fee7ceeecae85ac984a58410cd"
+    },
+    "illum.dds": {
+      "compress_size": 148222,
+      "file_size": 11184976,
+      "sha256": "72756ef02683f67ec5b9586296e64bd12b0cc9d1ebab127622fc7a06492c71ff"
+    },
+    "readme_carpark.txt": {
+      "compress_size": 215,
+      "file_size": 304,
+      "sha256": "90c74e094746f82aeffc967e5f49425dbd51304ba0a50fc86c348eac3296377b"
+    },
+    "readme_transit_ssv.txt": {
+      "compress_size": 188,
+      "file_size": 379,
+      "sha256": "5381f602bd7738b152c49dbec0945aa10fb5c84eb9fadc7a40a1bee7709a8537"
+    }
+  },
+  "evidence_label": "reference_only",
+  "filename_case_notes": [
+    {
+      "entry": "details.dds",
+      "expected_canonical_case": "Details.dds"
+    },
+    {
+      "entry": "detailsdirty.dds",
+      "expected_canonical_case": "DetailsDirty.dds"
+    },
+    {
+      "entry": "diffusedirty.dds",
+      "expected_canonical_case": "DiffuseDirty.dds"
+    },
+    {
+      "entry": "illum.dds",
+      "expected_canonical_case": "Illum.dds"
+    },
+    {
+      "entry": "diffuse.dds",
+      "expected_canonical_case": "Diffuse.dds"
+    }
+  ],
+  "output_artifacts": {
+    "contact_sheet": "out/reference_analysis/pedo-van_by_WiiTRO_contact_sheet.png",
+    "report": "out/reference_analysis/pedo-van_by_WiiTRO_report.json"
+  },
+  "package_name": "pedo-van_by_WiiTRO.zip",
+  "package_route": "custom_fullcar_other_mesh_reference",
+  "safe_use": "Use only as custom full-car visual and packaging reference; mesh differs from the CH_2026 donor comparison.",
+  "schema": "tmuf_premium_skin_lab.reference_package_analysis.v1",
+  "size_bytes": 4851744,
+  "skin_json": {},
+  "source_path": "resources/reference_only/downloads/pedo-van_by_WiiTRO.zip",
+  "stock_lane_status": "not_stock_diffuse_only"
+}

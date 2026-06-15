@@ -1,0 +1,76 @@
+{
+  "archive_sha256": "9eebcab5898a93f8cb4fbc139c8fcc3e3dfba2859a0b370dd99c5fdf23c6b995",
+  "dds": {
+    "Details.dds": {
+      "fourcc": "DXT1",
+      "height": 4096,
+      "linear_size": 0,
+      "mip_count": 12,
+      "valid": true,
+      "width": 4096
+    },
+    "Diffuse.dds": {
+      "fourcc": "DXT1",
+      "height": 4096,
+      "linear_size": 0,
+      "mip_count": 12,
+      "valid": true,
+      "width": 4096
+    },
+    "Icon.dds": {
+      "fourcc": "DXT1",
+      "height": 128,
+      "linear_size": 0,
+      "mip_count": 7,
+      "valid": true,
+      "width": 128
+    }
+  },
+  "does_not_prove_stock_diffuse_mapping": true,
+  "does_not_prove_tmuf_smoke": true,
+  "donor_mesh_match": {
+    "MainBody.Solid.Gbx": true,
+    "MainBodyHigh.Solid.Gbx": true
+  },
+  "entries": {
+    "Details.dds": {
+      "compress_size": 3949233,
+      "file_size": 11184952,
+      "sha256": "1c133ff6aac90015f938b02ff708b5db54530fa04a6a2882e8cfdbb45a998d50"
+    },
+    "Diffuse.dds": {
+      "compress_size": 3894462,
+      "file_size": 11184952,
+      "sha256": "92d34c9c8ac39c24ce6446c40a0a189f7801ac965add25ce3575e817f8e9d90b"
+    },
+    "Icon.dds": {
+      "compress_size": 8384,
+      "file_size": 11064,
+      "sha256": "d63241f5d6ac9a122cbe82154f97c45f14e7d1597de05841ad5c5429e2003c97"
+    },
+    "MainBody.Solid.Gbx": {
+      "compress_size": 68265,
+      "file_size": 79812,
+      "sha256": "c273680b4b4cfb07d942ec63d56f24a6d12778b6b3fd7b1a7bde133dcc04136c"
+    },
+    "MainBodyHigh.Solid.Gbx": {
+      "compress_size": 970998,
+      "file_size": 1126504,
+      "sha256": "4c29742a3940085a0d54af465c08e6e044ad8b3b25b883eadfc583103d5b1831"
+    }
+  },
+  "evidence_label": "reference_only",
+  "filename_case_notes": [],
+  "output_artifacts": {
+    "contact_sheet": "out/reference_analysis/KEKW-Public-SKIN_by_MINA_TM_contact_sheet.png",
+    "report": "out/reference_analysis/KEKW-Public-SKIN_by_MINA_TM_report.json"
+  },
+  "package_name": "KEKW-Public-SKIN_by_MINA_TM.zip",
+  "package_route": "custom_fullcar_ch2026_reference",
+  "safe_use": "Use only as CH_2026 custom full-car reference for Details/ProjShad/GBX lane analysis; never as stock StadiumCar truth.",
+  "schema": "tmuf_premium_skin_lab.reference_package_analysis.v1",
+  "size_bytes": 8892064,
+  "skin_json": {},
+  "source_path": "resources/reference_only/downloads/KEKW-Public-SKIN_by_MINA_TM.zip",
+  "stock_lane_status": "not_stock_diffuse_only"
+}

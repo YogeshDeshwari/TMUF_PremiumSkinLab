@@ -1,0 +1,168 @@
+{
+  "archive_sha256": "a25d3abcbf9d887a548cca32c781bad6f584de873dd245ecbc815bdd0418641a",
+  "dds": {
+    "Details.dds": {
+      "fourcc": "DXT5",
+      "height": 1024,
+      "linear_size": 1048576,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    },
+    "DetailsDirty.dds": {
+      "fourcc": "DXT5",
+      "height": 1024,
+      "linear_size": 1048576,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    },
+    "Diffuse.dds": {
+      "fourcc": "DXT5",
+      "height": 1024,
+      "linear_size": 1048576,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    },
+    "DiffuseDirty.dds": {
+      "fourcc": "DXT5",
+      "height": 1024,
+      "linear_size": 1048576,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    },
+    "Icon.dds": {
+      "fourcc": "DXT5",
+      "height": 128,
+      "linear_size": 16384,
+      "mip_count": 8,
+      "valid": true,
+      "width": 128
+    },
+    "Illum.dds": {
+      "fourcc": "DXT1",
+      "height": 1024,
+      "linear_size": 524288,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    },
+    "Projshad.dds": {
+      "fourcc": "DXT1",
+      "height": 256,
+      "linear_size": 32768,
+      "mip_count": 9,
+      "valid": true,
+      "width": 256
+    }
+  },
+  "does_not_prove_stock_diffuse_mapping": true,
+  "does_not_prove_tmuf_smoke": true,
+  "donor_mesh_match": {
+    "MainBody.Solid.Gbx": false,
+    "MainBodyHigh.Solid.Gbx": false
+  },
+  "entries": {
+    "Details.dds": {
+      "compress_size": 95274,
+      "file_size": 1398256,
+      "sha256": "1167c78d32fe080bebce083dbbafc667b6ccb10d77042b98502e94eed441eb7f"
+    },
+    "DetailsDirty.dds": {
+      "compress_size": 1142602,
+      "file_size": 1398256,
+      "sha256": "6e161b39be7f251b3101b37d51747d52cb32f7276dc645ead4bf3c35e0960ea9"
+    },
+    "Diffuse.dds": {
+      "compress_size": 78572,
+      "file_size": 1398256,
+      "sha256": "443b76faf7bad6d6e43d9781c539e223f03dbb445b58076129779ab605e04c86"
+    },
+    "DiffuseDirty.dds": {
+      "compress_size": 1287630,
+      "file_size": 1398256,
+      "sha256": "b4e08afdd1a85ff50d72eba33a39f3b0a789e2c1b5e5c657d40a00d3889743a7"
+    },
+    "EngineFast.ogg": {
+      "compress_size": 18812,
+      "file_size": 19584,
+      "sha256": "df2303c080c2a408958e001ea8cd594d42c8e1bc6c70fa7e5e90abd6117e401c"
+    },
+    "EngineIdle.wav": {
+      "compress_size": 257,
+      "file_size": 106274,
+      "sha256": "a631a45db67909131131ee054a053663115f80efe04c16667859649cc582494c"
+    },
+    "EngineLow.ogg": {
+      "compress_size": 14596,
+      "file_size": 15354,
+      "sha256": "eb1eab87b5ec779f976bc91b35665997870936ffcf111f3fc9a187b380bd5197"
+    },
+    "EngineMid.ogg": {
+      "compress_size": 14596,
+      "file_size": 15354,
+      "sha256": "eb1eab87b5ec779f976bc91b35665997870936ffcf111f3fc9a187b380bd5197"
+    },
+    "EngineRev.ogg": {
+      "compress_size": 14596,
+      "file_size": 15354,
+      "sha256": "eb1eab87b5ec779f976bc91b35665997870936ffcf111f3fc9a187b380bd5197"
+    },
+    "EngineRev2.ogg": {
+      "compress_size": 18812,
+      "file_size": 19584,
+      "sha256": "df2303c080c2a408958e001ea8cd594d42c8e1bc6c70fa7e5e90abd6117e401c"
+    },
+    "Icon.dds": {
+      "compress_size": 8583,
+      "file_size": 22000,
+      "sha256": "cbd848fb72f500172b9948d6e3458de4bf0687684894cbecc148431363700c41"
+    },
+    "Illum.dds": {
+      "compress_size": 1944,
+      "file_size": 699192,
+      "sha256": "5c4ff19246cd324163ed7766bcea3c228122101b6de72dc1ed0352479b92b41b"
+    },
+    "MainBody.Solid.Gbx": {
+      "compress_size": 21206,
+      "file_size": 25510,
+      "sha256": "88bf577b2cab096bd8ee87571f5ccaa06b50b6b3203cb2fe32e96bb45f09990c"
+    },
+    "MainBodyHigh.Solid.Gbx": {
+      "compress_size": 21206,
+      "file_size": 25510,
+      "sha256": "88bf577b2cab096bd8ee87571f5ccaa06b50b6b3203cb2fe32e96bb45f09990c"
+    },
+    "Projshad.dds": {
+      "compress_size": 15478,
+      "file_size": 43832,
+      "sha256": "58ae45e14fc0ea74f00496976839b3668fc41f470a1547d79bb957d94498c8a2"
+    },
+    "readme_carpark.txt": {
+      "compress_size": 175,
+      "file_size": 270,
+      "sha256": "a180d0fe658aeb844b15f547b9efb907462849e95f2fc583e3fb077fa7004727"
+    }
+  },
+  "evidence_label": "reference_only",
+  "filename_case_notes": [
+    {
+      "entry": "Projshad.dds",
+      "expected_canonical_case": "ProjShad.dds"
+    }
+  ],
+  "output_artifacts": {
+    "contact_sheet": "out/reference_analysis/steve-in-a-cart_by_WiiTRO_contact_sheet.png",
+    "report": "out/reference_analysis/steve-in-a-cart_by_WiiTRO_report.json"
+  },
+  "package_name": "steve-in-a-cart_by_WiiTRO.zip",
+  "package_route": "custom_fullcar_other_mesh_reference",
+  "safe_use": "Use only as custom full-car visual and packaging reference; mesh differs from the CH_2026 donor comparison.",
+  "schema": "tmuf_premium_skin_lab.reference_package_analysis.v1",
+  "size_bytes": 2756021,
+  "skin_json": {},
+  "source_path": "resources/reference_only/downloads/steve-in-a-cart_by_WiiTRO.zip",
+  "stock_lane_status": "not_stock_diffuse_only"
+}

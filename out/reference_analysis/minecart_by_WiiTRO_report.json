@@ -1,0 +1,124 @@
+{
+  "archive_sha256": "e849f0dc6469828c1d72db2a1dfc05f265976e4e71026d58118d9124ec909441",
+  "dds": {
+    "Details.dds": {
+      "fourcc": "DXT5",
+      "height": 1024,
+      "linear_size": 1048576,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    },
+    "Diffuse.dds": {
+      "fourcc": "DXT5",
+      "height": 1024,
+      "linear_size": 1048576,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    },
+    "Icon.dds": {
+      "fourcc": "DXT5",
+      "height": 256,
+      "linear_size": 65536,
+      "mip_count": 9,
+      "valid": true,
+      "width": 256
+    },
+    "Illum.dds": {
+      "fourcc": "DXT1",
+      "height": 1024,
+      "linear_size": 524288,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    }
+  },
+  "does_not_prove_stock_diffuse_mapping": true,
+  "does_not_prove_tmuf_smoke": true,
+  "donor_mesh_match": {
+    "MainBody.Solid.Gbx": false,
+    "MainBodyHigh.Solid.Gbx": false
+  },
+  "entries": {
+    "Details.dds": {
+      "compress_size": 15157,
+      "file_size": 1398256,
+      "sha256": "0816f52f8f7c6d9bbc842dbd3e284080cbd465066fbe47b567bc6d4d08808f79"
+    },
+    "Diffuse.dds": {
+      "compress_size": 76858,
+      "file_size": 1398256,
+      "sha256": "443b76faf7bad6d6e43d9781c539e223f03dbb445b58076129779ab605e04c86"
+    },
+    "EngineFast.ogg": {
+      "compress_size": 18812,
+      "file_size": 19584,
+      "sha256": "df2303c080c2a408958e001ea8cd594d42c8e1bc6c70fa7e5e90abd6117e401c"
+    },
+    "EngineIdle.wav": {
+      "compress_size": 257,
+      "file_size": 106274,
+      "sha256": "a631a45db67909131131ee054a053663115f80efe04c16667859649cc582494c"
+    },
+    "EngineLow.ogg": {
+      "compress_size": 14596,
+      "file_size": 15354,
+      "sha256": "eb1eab87b5ec779f976bc91b35665997870936ffcf111f3fc9a187b380bd5197"
+    },
+    "EngineMid.ogg": {
+      "compress_size": 14596,
+      "file_size": 15354,
+      "sha256": "eb1eab87b5ec779f976bc91b35665997870936ffcf111f3fc9a187b380bd5197"
+    },
+    "EngineRev.ogg": {
+      "compress_size": 14596,
+      "file_size": 15354,
+      "sha256": "eb1eab87b5ec779f976bc91b35665997870936ffcf111f3fc9a187b380bd5197"
+    },
+    "EngineRev2.ogg": {
+      "compress_size": 18812,
+      "file_size": 19584,
+      "sha256": "df2303c080c2a408958e001ea8cd594d42c8e1bc6c70fa7e5e90abd6117e401c"
+    },
+    "Icon.dds": {
+      "compress_size": 4542,
+      "file_size": 87536,
+      "sha256": "03d7e844561c7284811d43d36b5a079dbc77867be3050cdaf37a99ecd5c67438"
+    },
+    "Illum.dds": {
+      "compress_size": 2965,
+      "file_size": 699192,
+      "sha256": "11c5a635ec0ef1d672a6833dab117c72d18de6e7bc7fe45cdd1090c9516221eb"
+    },
+    "MainBody.Solid.Gbx": {
+      "compress_size": 1551,
+      "file_size": 1869,
+      "sha256": "30862f387a66b4ef0dc67bc9e373c87147385e69691ff63d0de2d518d6cfd399"
+    },
+    "MainBodyHigh.Solid.Gbx": {
+      "compress_size": 1551,
+      "file_size": 1869,
+      "sha256": "30862f387a66b4ef0dc67bc9e373c87147385e69691ff63d0de2d518d6cfd399"
+    },
+    "readme_carpark.txt": {
+      "compress_size": 173,
+      "file_size": 268,
+      "sha256": "3f66c2f3b3d9cc035fa2fe4cdcfce19a4163f701db3ab2518f8d73b576efbc38"
+    }
+  },
+  "evidence_label": "reference_only",
+  "filename_case_notes": [],
+  "output_artifacts": {
+    "contact_sheet": "out/reference_analysis/minecart_by_WiiTRO_contact_sheet.png",
+    "report": "out/reference_analysis/minecart_by_WiiTRO_report.json"
+  },
+  "package_name": "minecart_by_WiiTRO.zip",
+  "package_route": "custom_fullcar_other_mesh_reference",
+  "safe_use": "Use only as custom full-car visual and packaging reference; mesh differs from the CH_2026 donor comparison.",
+  "schema": "tmuf_premium_skin_lab.reference_package_analysis.v1",
+  "size_bytes": 186048,
+  "skin_json": {},
+  "source_path": "resources/reference_only/downloads/minecart_by_WiiTRO.zip",
+  "stock_lane_status": "not_stock_diffuse_only"
+}

@@ -1,0 +1,53 @@
+{
+  "archive_sha256": "62984146b3addb3175d66c13cf9b57540c6c40c6fc733514495ba19c99ff97ca",
+  "dds": {
+    "Diffuse.dds": {
+      "fourcc": "DXT5",
+      "height": 1024,
+      "linear_size": 1398128,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    },
+    "Icon.dds": {
+      "fourcc": "DXT1",
+      "height": 128,
+      "linear_size": 10936,
+      "mip_count": 8,
+      "valid": true,
+      "width": 128
+    }
+  },
+  "does_not_prove_stock_diffuse_mapping": true,
+  "does_not_prove_tmuf_smoke": true,
+  "donor_mesh_match": {
+    "MainBody.Solid.Gbx": false,
+    "MainBodyHigh.Solid.Gbx": false
+  },
+  "entries": {
+    "Diffuse.dds": {
+      "compress_size": 149658,
+      "file_size": 1398256,
+      "sha256": "5067a8ec503e2ef82676450a366c961d64a4776255936f2ecb3aab65343c44be"
+    },
+    "Icon.dds": {
+      "compress_size": 3192,
+      "file_size": 11064,
+      "sha256": "fd079e100887d72141b79957c2ad1891a407da3baafb331827b78aaac1ed8c60"
+    }
+  },
+  "evidence_label": "reference_only",
+  "filename_case_notes": [],
+  "output_artifacts": {
+    "contact_sheet": "out/reference_analysis/Azerbaijan_by_kekfeg_contact_sheet.png",
+    "report": "out/reference_analysis/Azerbaijan_by_kekfeg_report.json"
+  },
+  "package_name": "Azerbaijan_by_kekfeg.zip",
+  "package_route": "stock_diffuse_only_reference",
+  "safe_use": "Use as reference-only stock-format package; it still does not prove lab GBuffer mapping or TMUF load.",
+  "schema": "tmuf_premium_skin_lab.reference_package_analysis.v1",
+  "size_bytes": 153062,
+  "skin_json": {},
+  "source_path": "resources/reference_only/downloads/Azerbaijan_by_kekfeg.zip",
+  "stock_lane_status": "reference_only_not_generated_by_lab"
+}

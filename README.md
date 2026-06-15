@@ -94,6 +94,7 @@ python3 recipes/stock_calibration.py
 python3 recipes/stock_premium_neon.py
 python3 recipes/explore_stock_parts.py
 python3 recipes/explain_stock_panels.py
+python3 recipes/analyze_reference_packages.py --donor-zip resources/experimental/base_car/CH_2026_NOT_STOCK_STADIUM_DETAILS_CUSTOM_MESH.zip resources/reference_only/downloads/CH_Blu.zip resources/reference_only/downloads/CH_Bloom_Wheel_LED_Underglow.zip
 python3 recipes/tmuf_smoke_gate.py --write-template
 python3 recipes/prepare_tmuf_smoke_kit.py
 python3 recipes/find_tmuf_skin_dirs.py --write
@@ -121,6 +122,16 @@ Premium reports also include `panel_visual_coverage`, which maps each declared
 `panel_catalog_targets` entry to renderer mask metrics when a mapping exists.
 Mapped targets must be locally active; unmapped targets are kept explicit. This
 is local preview evidence only and still does not prove TMUF runtime visibility.
+
+External skin references can be analyzed with
+`recipes/analyze_reference_packages.py`. The current batch reports live under
+`out/reference_analysis/`; see `docs/reference_skin_batch_analysis.md` for the
+evidence split. The gallery at
+`out/reference_analysis/reference_package_gallery.png` is a package-identity
+scan aid and may choose `Icon.dds`. Use
+`out/reference_analysis/reference_livery_atlas_gallery.png` when comparing
+paint texture slots. Per-package contact sheets remain the safest review
+artifacts because they show every detected DDS slot.
 
 The generated batch summary lives at `out/reports/premium_batch_index.json`.
 It indexes all premium candidates, lanes, artifacts, style metrics, and pending

@@ -1,0 +1,151 @@
+{
+  "archive_sha256": "94a336d1babf89e1c837f31cfa8dc66e5275c816d99c21d52892a8ed1c238666",
+  "dds": {
+    "Details.dds": {
+      "fourcc": "DXT5",
+      "height": 4096,
+      "linear_size": 16777216,
+      "mip_count": 13,
+      "valid": true,
+      "width": 4096
+    },
+    "DetailsDirty.dds": {
+      "fourcc": "DXT5",
+      "height": 1024,
+      "linear_size": 1048576,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    },
+    "Diffuse.dds": {
+      "fourcc": "DXT5",
+      "height": 2048,
+      "linear_size": 4194304,
+      "mip_count": 12,
+      "valid": true,
+      "width": 2048
+    },
+    "DiffuseDirty.dds": {
+      "fourcc": "DXT5",
+      "height": 1024,
+      "linear_size": 1048576,
+      "mip_count": 11,
+      "valid": true,
+      "width": 1024
+    },
+    "Icon.dds": {
+      "fourcc": "DXT5",
+      "height": 128,
+      "linear_size": 16384,
+      "mip_count": 8,
+      "valid": true,
+      "width": 128
+    },
+    "ProjShad.dds": {
+      "fourcc": "DXT1",
+      "height": 512,
+      "linear_size": 131072,
+      "mip_count": 10,
+      "valid": true,
+      "width": 512
+    }
+  },
+  "does_not_prove_stock_diffuse_mapping": true,
+  "does_not_prove_tmuf_smoke": true,
+  "donor_mesh_match": {
+    "MainBody.Solid.Gbx": true,
+    "MainBodyHigh.Solid.Gbx": true
+  },
+  "entries": {
+    "Details.dds": {
+      "compress_size": 1926753,
+      "file_size": 22369776,
+      "sha256": "959fe4feb1be84cb86b603dbd4a00ea28068c7fda77e0760491a988e87f16ac2"
+    },
+    "DetailsDirty.dds": {
+      "compress_size": 421972,
+      "file_size": 1398256,
+      "sha256": "3bf5228d38bfa9c7b8cd4daaf29c0d305a2ac8433350333b0fd6ccd2cdd20a5f"
+    },
+    "Diffuse.dds": {
+      "compress_size": 1540249,
+      "file_size": 5592560,
+      "sha256": "1a207ef8ecd5309d96dc28b8b877be40e6591ad2929861dd04d72e9bf2a2c0ac"
+    },
+    "DiffuseDirty.dds": {
+      "compress_size": 559598,
+      "file_size": 1398256,
+      "sha256": "178bcbf6792cc0bb4c7d9458e848b400d6580c25bb958c98f003da43bf9e55c1"
+    },
+    "Icon.dds": {
+      "compress_size": 18228,
+      "file_size": 22000,
+      "sha256": "8792a4837cfbec73b6af48a832f2a905355e1b129dad5ba803866f0b22fa66ff"
+    },
+    "MainBody.Solid.Gbx": {
+      "compress_size": 67861,
+      "file_size": 79812,
+      "sha256": "c273680b4b4cfb07d942ec63d56f24a6d12778b6b3fd7b1a7bde133dcc04136c"
+    },
+    "MainBodyHigh.Solid.Gbx": {
+      "compress_size": 965159,
+      "file_size": 1126504,
+      "sha256": "4c29742a3940085a0d54af465c08e6e044ad8b3b25b883eadfc583103d5b1831"
+    },
+    "ProjShad.dds": {
+      "compress_size": 36961,
+      "file_size": 174904,
+      "sha256": "7905be3557ed50f9989b8699e0a4074b9c5819542cbf2e13c1e22b6d7a1550c4"
+    },
+    "skin.json": {
+      "compress_size": 170,
+      "file_size": 482,
+      "sha256": "75437e70447f75d5bae741df591f5e46e56c8f4f45b5f3699d8f009173dc1cb6"
+    }
+  },
+  "evidence_label": "reference_only",
+  "filename_case_notes": [],
+  "output_artifacts": {
+    "contact_sheet": "out/reference_analysis/CH_Blu_contact_sheet.png",
+    "report": "out/reference_analysis/CH_Blu_report.json"
+  },
+  "package_name": "CH_Blu.zip",
+  "package_route": "custom_fullcar_ch2026_reference",
+  "safe_use": "Use only as CH_2026 custom full-car reference for Details/ProjShad/GBX lane analysis; never as stock StadiumCar truth.",
+  "schema": "tmuf_premium_skin_lab.reference_package_analysis.v1",
+  "size_bytes": 5537903,
+  "skin_json": {
+    "finish": "CHROME",
+    "finish_alpha": 255,
+    "layers": [
+      {
+        "name": "abyss_field"
+      },
+      {
+        "name": "reactor_broad"
+      },
+      {
+        "name": "reactor_broad_nose"
+      },
+      {
+        "name": "reactor_sparkle"
+      },
+      {
+        "name": "reactor_sparkle_nose"
+      },
+      {
+        "name": "reactor_core"
+      },
+      {
+        "name": "reactor_core_nose"
+      },
+      {
+        "name": "reactor_hero_rays"
+      }
+    ],
+    "seed": 20261825,
+    "theme": "CH_TronBlue_L123_v2"
+  },
+  "source_path": "resources/reference_only/downloads/CH_Blu.zip",
+  "stock_lane_status": "not_stock_diffuse_only"
+}
