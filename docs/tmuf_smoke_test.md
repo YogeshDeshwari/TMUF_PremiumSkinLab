@@ -235,6 +235,20 @@ route such as `Skins/Vehicles/StadiumCar`. The install helper only copies
 `calibration_stock_diffuse.zip`; it does not promote reports or mark the smoke
 gate as passed.
 
+To also install the supplemental panel-family probe in the same StadiumCar skin
+folder, opt in explicitly:
+
+```bash
+python3 recipes/prepare_tmuf_smoke_kit.py \
+  --install-skins-dir /path/to/StadiumCar \
+  --install-panel-probe
+```
+
+This copies both `calibration_stock_diffuse.zip` and
+`calibration_panel_family_probe.zip`. The probe is still supplemental: its
+install receipt records it as `does_not_prove_tmuf_smoke=true`, and the smoke
+gate apply step skips its report.
+
 When `--install-skins-dir` is used, the helper also writes:
 
 ```text

@@ -20,12 +20,22 @@ def main(argv: list[str] | None = None) -> str:
     parser = argparse.ArgumentParser(description="Prepare TMUF calibration smoke-test files.")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "out" / "proof" / "tmuf_calibration_smoke_kit")
     parser.add_argument("--install-skins-dir", type=Path, help="existing TMUF/TMNF StadiumCar skin folder")
+    parser.add_argument(
+        "--install-panel-probe",
+        action="store_true",
+        help="with --install-skins-dir, also copy calibration_panel_family_probe.zip",
+    )
     parser.add_argument("--json", action="store_true", help="emit machine-readable JSON")
     args = parser.parse_args(argv)
+    if args.install_panel_probe and args.install_skins_dir is None:
+        parser.error("--install-panel-probe requires --install-skins-dir")
 
     result = build_smoke_kit(args.out_dir)
     if args.install_skins_dir is not None:
-        result["install"] = install_calibration_skin(args.install_skins_dir)
+        result["install"] = install_calibration_skin(
+            args.install_skins_dir,
+            include_panel_probe=args.install_panel_probe,
+        )
         result["install_receipt"] = str(write_install_receipt(result["install"], args.out_dir))
 
     if args.json:
@@ -39,6 +49,8 @@ def main(argv: list[str] | None = None) -> str:
         ]
         if "install" in result:
             lines.append(f"installed_skin={result['install']['installed_skin']}")
+            for supplemental in result["install"].get("installed_supplemental_skins", []):
+                lines.append(f"installed_supplemental_skin={supplemental['installed_skin']}")
             lines.append(f"install_receipt={result['install_receipt']}")
             lines.append("install_status=installed_not_tested")
         output = "\n".join(lines)

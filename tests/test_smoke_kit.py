@@ -131,6 +131,44 @@ class SmokeKitTests(unittest.TestCase):
 
             self.assertEqual(sorted(path.name for path in install_dir.iterdir()), ["calibration_stock_diffuse.zip"])
 
+    def test_install_calibration_skin_can_optionally_copy_panel_probe_with_receipt(self):
+        from src.evidence.smoke_kit import (
+            PANEL_PROBE_NAME,
+            PANEL_PROBE_SKIN,
+            install_calibration_skin,
+            write_install_receipt,
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            install_dir = root / "Skins" / "Vehicles" / "StadiumCar"
+            kit_dir = root / "kit"
+            install_dir.mkdir(parents=True)
+
+            result = install_calibration_skin(install_dir, include_panel_probe=True)
+
+            copied_probe = install_dir / f"{PANEL_PROBE_NAME}.zip"
+            self.assertTrue(copied_probe.exists())
+            self.assertEqual(copied_probe.read_bytes(), PANEL_PROBE_SKIN.read_bytes())
+            self.assertEqual(
+                sorted(path.name for path in install_dir.iterdir()),
+                ["calibration_panel_family_probe.zip", "calibration_stock_diffuse.zip"],
+            )
+
+            supplemental = result["installed_supplemental_skins"]
+            self.assertEqual(len(supplemental), 1)
+            self.assertEqual(supplemental[0]["name"], PANEL_PROBE_NAME)
+            self.assertEqual(supplemental[0]["installed_skin"], str(copied_probe))
+            self.assertTrue(supplemental[0]["does_not_prove_tmuf_smoke"])
+            self.assertEqual(supplemental[0]["sha256"], supplemental[0]["source_sha256"])
+
+            receipt_path = write_install_receipt(result, kit_dir)
+            receipt = json.loads(receipt_path.read_text())
+            self.assertTrue(receipt["does_not_prove_tmuf_smoke"])
+            self.assertEqual(receipt["installed_skin"], str(install_dir / "calibration_stock_diffuse.zip"))
+            self.assertEqual(receipt["installed_supplemental_skins"], supplemental)
+            self.assertIn("inspect_panel_family_probe_in_tmuf", receipt["next_required_evidence"])
+
     def test_install_calibration_skin_rejects_missing_or_implausible_targets(self):
         from src.evidence.smoke_kit import install_calibration_skin
 
@@ -190,6 +228,38 @@ class SmokeKitTests(unittest.TestCase):
             self.assertEqual(receipt["sha256"], data["install"]["sha256"])
             self.assertIn("run_tmuf_calibration_smoke_test", receipt["next_required_evidence"])
             self.assertEqual(sorted(path.name for path in install_dir.iterdir()), ["calibration_stock_diffuse.zip"])
+
+    def test_cli_install_can_include_panel_probe_when_explicitly_requested(self):
+        from recipes.prepare_tmuf_smoke_kit import main
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            kit_dir = root / "kit"
+            install_dir = root / "Skins" / "Vehicles" / "StadiumCar"
+            install_dir.mkdir(parents=True)
+
+            output = main(
+                [
+                    "--out-dir",
+                    str(kit_dir),
+                    "--install-skins-dir",
+                    str(install_dir),
+                    "--install-panel-probe",
+                    "--json",
+                ]
+            )
+            data = json.loads(output)
+
+            self.assertEqual(
+                sorted(path.name for path in install_dir.iterdir()),
+                ["calibration_panel_family_probe.zip", "calibration_stock_diffuse.zip"],
+            )
+            supplemental = data["install"]["installed_supplemental_skins"]
+            self.assertEqual(supplemental[0]["name"], "calibration_panel_family_probe")
+            self.assertTrue(supplemental[0]["does_not_prove_tmuf_smoke"])
+
+            receipt = json.loads(Path(data["install_receipt"]).read_text())
+            self.assertEqual(receipt["installed_supplemental_skins"], supplemental)
 
 
 if __name__ == "__main__":

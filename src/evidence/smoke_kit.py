@@ -264,7 +264,24 @@ def build_smoke_kit(out_dir: Path = DEFAULT_KIT_DIR) -> dict[str, str]:
     }
 
 
-def install_calibration_skin(skins_dir: Path) -> dict[str, str | bool]:
+def _install_entry(name: str, source: Path, destination: Path, *, purpose: str) -> dict[str, str | int | bool]:
+    return {
+        "name": name,
+        "installed_skin": str(destination),
+        "source_skin": str(source),
+        "sha256": _digest(destination),
+        "source_sha256": _digest(source),
+        "size_bytes": destination.stat().st_size,
+        "purpose": purpose,
+        "does_not_prove_tmuf_smoke": True,
+    }
+
+
+def install_calibration_skin(
+    skins_dir: Path,
+    *,
+    include_panel_probe: bool = False,
+) -> dict[str, Any]:
     skins_dir = Path(skins_dir)
     if not skins_dir.exists():
         raise FileNotFoundError(skins_dir)
@@ -276,6 +293,21 @@ def install_calibration_skin(skins_dir: Path) -> dict[str, str | bool]:
 
     dst = skins_dir / "calibration_stock_diffuse.zip"
     _copy_file(CALIBRATION_SKIN, dst)
+
+    supplemental: list[dict[str, str | int | bool]] = []
+    if include_panel_probe:
+        save_panel_probe_outputs()
+        probe_dst = skins_dir / f"{PANEL_PROBE_NAME}.zip"
+        _copy_file(PANEL_PROBE_SKIN, probe_dst)
+        supplemental.append(
+            _install_entry(
+                PANEL_PROBE_NAME,
+                PANEL_PROBE_SKIN,
+                probe_dst,
+                purpose="panel_family_runtime_visibility_probe",
+            )
+        )
+
     return {
         "status": "installed_not_tested",
         "installed_skin": str(dst),
@@ -284,6 +316,7 @@ def install_calibration_skin(skins_dir: Path) -> dict[str, str | bool]:
         "sha256": _digest(dst),
         "source_sha256": _digest(CALIBRATION_SKIN),
         "size_bytes": dst.stat().st_size,
+        "installed_supplemental_skins": supplemental,
         "does_not_prove_tmuf_smoke": True,
     }
 
@@ -300,10 +333,12 @@ def write_install_receipt(install_result: dict[str, Any], out_dir: Path = DEFAUL
         "sha256": install_result["sha256"],
         "source_sha256": install_result["source_sha256"],
         "size_bytes": install_result["size_bytes"],
+        "installed_supplemental_skins": install_result.get("installed_supplemental_skins", []),
         "does_not_prove_tmuf_smoke": True,
         "next_required_evidence": [
             "run_tmuf_calibration_smoke_test",
             "capture_front_side_rear_top_screenshots",
+            "inspect_panel_family_probe_in_tmuf",
             "record_tmuf_smoke_evidence",
             "evaluate_then_apply_tmuf_smoke_gate",
         ],
