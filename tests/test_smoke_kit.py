@@ -141,6 +141,39 @@ class SmokeKitTests(unittest.TestCase):
             self.assertTrue(Path(data["manifest"]).exists())
             self.assertTrue(Path(data["zip"]).exists())
 
+    def test_cli_install_writes_local_receipt_without_touching_skin_folder_extra_files(self):
+        from recipes.prepare_tmuf_smoke_kit import main
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            kit_dir = root / "kit"
+            install_dir = root / "Skins" / "Vehicles" / "StadiumCar"
+            install_dir.mkdir(parents=True)
+
+            output = main(
+                [
+                    "--out-dir",
+                    str(kit_dir),
+                    "--install-skins-dir",
+                    str(install_dir),
+                    "--json",
+                ]
+            )
+            data = json.loads(output)
+
+            receipt_path = Path(data["install_receipt"])
+            self.assertEqual(receipt_path, kit_dir / "proof" / "calibration_install_receipt.json")
+            self.assertTrue(receipt_path.exists())
+            receipt = json.loads(receipt_path.read_text())
+            self.assertEqual(receipt["schema"], "tmuf_premium_skin_lab.calibration_install_receipt.v1")
+            self.assertEqual(receipt["status"], "installed_not_tested")
+            self.assertEqual(receipt["route"], "skins_vehicles_stadiumcar")
+            self.assertTrue(receipt["does_not_prove_tmuf_smoke"])
+            self.assertEqual(receipt["installed_skin"], str(install_dir / "calibration_stock_diffuse.zip"))
+            self.assertEqual(receipt["sha256"], data["install"]["sha256"])
+            self.assertIn("run_tmuf_calibration_smoke_test", receipt["next_required_evidence"])
+            self.assertEqual(sorted(path.name for path in install_dir.iterdir()), ["calibration_stock_diffuse.zip"])
+
 
 if __name__ == "__main__":
     unittest.main()

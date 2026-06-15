@@ -9,7 +9,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.evidence.smoke_kit import build_smoke_kit, install_calibration_skin  # noqa: E402
+from src.evidence.smoke_kit import (  # noqa: E402
+    build_smoke_kit,
+    install_calibration_skin,
+    write_install_receipt,
+)
 
 
 def main(argv: list[str] | None = None) -> str:
@@ -22,6 +26,7 @@ def main(argv: list[str] | None = None) -> str:
     result = build_smoke_kit(args.out_dir)
     if args.install_skins_dir is not None:
         result["install"] = install_calibration_skin(args.install_skins_dir)
+        result["install_receipt"] = str(write_install_receipt(result["install"], args.out_dir))
 
     if args.json:
         output = json.dumps(result, indent=2, sort_keys=True)
@@ -34,6 +39,7 @@ def main(argv: list[str] | None = None) -> str:
         ]
         if "install" in result:
             lines.append(f"installed_skin={result['install']['installed_skin']}")
+            lines.append(f"install_receipt={result['install_receipt']}")
             lines.append("install_status=installed_not_tested")
         output = "\n".join(lines)
 

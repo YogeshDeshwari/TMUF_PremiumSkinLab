@@ -264,3 +264,28 @@ def install_calibration_skin(skins_dir: Path) -> dict[str, str | bool]:
         "size_bytes": dst.stat().st_size,
         "does_not_prove_tmuf_smoke": True,
     }
+
+
+def write_install_receipt(install_result: dict[str, Any], out_dir: Path = DEFAULT_KIT_DIR) -> Path:
+    out_dir = Path(out_dir)
+    receipt_path = out_dir / "proof" / "calibration_install_receipt.json"
+    data = {
+        "schema": "tmuf_premium_skin_lab.calibration_install_receipt.v1",
+        "status": install_result["status"],
+        "route": install_result["route"],
+        "installed_skin": install_result["installed_skin"],
+        "source_skin": install_result["source_skin"],
+        "sha256": install_result["sha256"],
+        "source_sha256": install_result["source_sha256"],
+        "size_bytes": install_result["size_bytes"],
+        "does_not_prove_tmuf_smoke": True,
+        "next_required_evidence": [
+            "run_tmuf_calibration_smoke_test",
+            "capture_front_side_rear_top_screenshots",
+            "record_tmuf_smoke_evidence",
+            "evaluate_then_apply_tmuf_smoke_gate",
+        ],
+    }
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    receipt_path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
+    return receipt_path

@@ -177,3 +177,12 @@ The install target must already exist and match a recognized StadiumCar skin
 route such as `Skins/Vehicles/StadiumCar`. The install helper only copies
 `calibration_stock_diffuse.zip`; it does not promote reports or mark the smoke
 gate as passed.
+
+When `--install-skins-dir` is used, the helper also writes:
+
+```text
+out/proof/tmuf_calibration_smoke_kit/proof/calibration_install_receipt.json
+```
+
+That receipt records the copied zip path, route, SHA256, and next required
+evidence. It still has `does_not_prove_tmuf_smoke=true`.
