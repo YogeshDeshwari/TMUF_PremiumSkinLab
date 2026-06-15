@@ -1,0 +1,202 @@
+from __future__ import annotations
+
+import json
+import struct
+import zipfile
+from pathlib import Path
+from typing import Any
+
+from src.evidence.input_trace import MANIFEST, STOCK_DIFFUSE_INPUTS
+from src.stock_diffuse.package import ZIP_TIMESTAMP
+from src.stock_diffuse.premium import CANDIDATE_NAMES
+
+
+ROOT = Path(__file__).resolve().parents[2]
+REQUIRED_STOCK_SKINS = ["calibration_stock_diffuse", *CANDIDATE_NAMES]
+STOCK_PACKAGE_FILES = {"Diffuse.dds", "Icon.dds"}
+FORBIDDEN_STOCK_FILES = {"Details.dds", "ProjShad.dds"}
+
+
+def dds_info(data: bytes) -> dict[str, Any]:
+    if len(data) < 128 or data[:4] != b"DDS ":
+        raise ValueError("not a DDS file")
+    return {
+        "width": struct.unpack("<I", data[16:20])[0],
+        "height": struct.unpack("<I", data[12:16])[0],
+        "mip_count": struct.unpack("<I", data[28:32])[0],
+        "fourcc": data[84:88].decode("ascii", errors="replace"),
+    }
+
+
+def _load_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text())
+
+
+def _manifest_by_path(manifest: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    return {entry["path"]: entry for entry in manifest["resources"]}
+
+
+def validate_input_evidence(report: dict[str, Any], manifest: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    by_path = _manifest_by_path(manifest)
+    input_evidence = report.get("input_evidence", {})
+
+    for path in STOCK_DIFFUSE_INPUTS:
+        if path not in input_evidence:
+            errors.append(f"missing input evidence: {path}")
+            continue
+        if path not in by_path:
+            errors.append(f"input evidence absent from manifest: {path}")
+            continue
+
+        actual = input_evidence[path]
+        expected = by_path[path]
+        if actual.get("evidence_label") != expected.get("evidence_label"):
+            errors.append(f"input evidence label mismatch: {path}")
+        elif actual.get("sha256") != expected.get("sha256"):
+            errors.append(f"input evidence sha256 mismatch: {path}")
+        elif actual.get("size_bytes") != expected.get("size_bytes"):
+            errors.append(f"input evidence size mismatch: {path}")
+
+    for path in input_evidence:
+        if path not in by_path:
+            errors.append(f"input evidence not in manifest: {path}")
+        elif by_path[path].get("evidence_label") == "reference_only":
+            errors.append(f"reference_only input used as stock truth: {path}")
+
+    return errors
+
+
+def _zip_checks(zip_path: Path) -> tuple[dict[str, bool], list[str]]:
+    checks = {
+        "zip_exists": zip_path.exists(),
+        "zip_stock_diffuse_only": False,
+        "zip_has_stable_timestamps": False,
+        "dds_headers_valid": False,
+    }
+    errors: list[str] = []
+    if not zip_path.exists():
+        errors.append(f"missing zip: {zip_path}")
+        return checks, errors
+
+    try:
+        with zipfile.ZipFile(zip_path) as zf:
+            names = set(zf.namelist())
+            checks["zip_stock_diffuse_only"] = names == STOCK_PACKAGE_FILES
+            checks["zip_has_stable_timestamps"] = all(
+                info.date_time == ZIP_TIMESTAMP for info in zf.infolist()
+            )
+            if not checks["zip_stock_diffuse_only"]:
+                errors.append(f"stock zip has unexpected files: {zip_path}")
+            if not checks["zip_has_stable_timestamps"]:
+                errors.append(f"stock zip has non-deterministic timestamps: {zip_path}")
+
+            if STOCK_PACKAGE_FILES.issubset(names):
+                diffuse = dds_info(zf.read("Diffuse.dds"))
+                icon = dds_info(zf.read("Icon.dds"))
+                checks["dds_headers_valid"] = (
+                    diffuse["width"] == 2048
+                    and diffuse["height"] == 2048
+                    and diffuse["fourcc"] == "DXT5"
+                    and icon["width"] == 64
+                    and icon["height"] == 64
+                    and icon["fourcc"] == "DXT5"
+                )
+    except (zipfile.BadZipFile, ValueError) as exc:
+        errors.append(f"invalid zip/dds: {zip_path}: {exc}")
+        return checks, errors
+
+    if not checks["dds_headers_valid"]:
+        errors.append(f"DDS headers invalid: {zip_path}")
+    return checks, errors
+
+
+def _report_checks(report_path: Path, manifest: dict[str, Any]) -> tuple[dict[str, bool], dict[str, Any], list[str]]:
+    checks = {
+        "report_exists": report_path.exists(),
+        "report_route_stock_diffuse_only": False,
+        "report_declares_no_donor_or_details_route": False,
+        "report_input_evidence_matches_manifest": False,
+        "tmuf_smoke_passed": False,
+    }
+    errors: list[str] = []
+    if not report_path.exists():
+        errors.append(f"missing report: {report_path}")
+        return checks, {}, errors
+
+    report = _load_json(report_path)
+    checks["report_route_stock_diffuse_only"] = report.get("route") == "stock_diffuse_only"
+    package_files = set(report.get("package_files", []))
+    forbidden = FORBIDDEN_STOCK_FILES & package_files
+    checks["report_declares_no_donor_or_details_route"] = (
+        package_files == STOCK_PACKAGE_FILES
+        and not forbidden
+        and report.get("evidence_status", {}).get("donor_gbx", "not_used") == "not_used"
+    )
+    input_errors = validate_input_evidence(report, manifest)
+    checks["report_input_evidence_matches_manifest"] = not input_errors
+    checks["tmuf_smoke_passed"] = (
+        report.get("tmuf_smoke_test") == "passed"
+        and report.get("evidence_status", {}).get("gbuffer_mapping") == "proven_by_tmuf_smoke"
+    )
+
+    if not checks["report_route_stock_diffuse_only"]:
+        errors.append(f"report route is not stock_diffuse_only: {report_path}")
+    if not checks["report_declares_no_donor_or_details_route"]:
+        errors.append(f"report does not declare a clean stock route: {report_path}")
+    errors.extend(f"{report_path}: {error}" for error in input_errors)
+    return checks, report, errors
+
+
+def _preview_checks(root: Path, skin_name: str) -> tuple[dict[str, bool], list[str]]:
+    atlas = root / "out" / "previews" / f"{skin_name}_atlas.png"
+    projection = root / "out" / "previews" / f"{skin_name}_projected_side_top_rear.png"
+    checks = {
+        "atlas_preview_exists": atlas.exists(),
+        "projection_preview_exists": projection.exists(),
+    }
+    errors: list[str] = []
+    if not atlas.exists():
+        errors.append(f"missing atlas preview: {atlas}")
+    if not projection.exists():
+        errors.append(f"missing projection preview: {projection}")
+    return checks, errors
+
+
+def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
+    root = Path(root)
+    manifest = _load_json(root / MANIFEST.relative_to(ROOT))
+    errors: list[str] = []
+    skins: list[dict[str, Any]] = []
+
+    for skin_name in REQUIRED_STOCK_SKINS:
+        zip_checks, zip_errors = _zip_checks(root / "out" / "skins" / f"{skin_name}.zip")
+        report_checks, report, report_errors = _report_checks(
+            root / "out" / "reports" / f"{skin_name}.json",
+            manifest,
+        )
+        preview_checks, preview_errors = _preview_checks(root, skin_name)
+        checks = {**zip_checks, **report_checks, **preview_checks}
+        skin_errors = [*zip_errors, *report_errors, *preview_errors]
+        errors.extend(skin_errors)
+        skins.append(
+            {
+                "skin_name": skin_name,
+                "checks": checks,
+                "errors": skin_errors,
+                "tmuf_smoke_test": report.get("tmuf_smoke_test", "missing"),
+                "gbuffer_mapping": report.get("evidence_status", {}).get("gbuffer_mapping", "missing"),
+            }
+        )
+
+    all_smoke_passed = all(skin["checks"]["tmuf_smoke_passed"] for skin in skins)
+    warnings = [] if all_smoke_passed else ["tmuf_smoke_pending"]
+    local_checks_passed = not errors
+    return {
+        "local_checks_passed": local_checks_passed,
+        "completion_status": "complete" if local_checks_passed and all_smoke_passed else "not_complete_tmuf_smoke_pending",
+        "tmuf_smoke_status": "passed" if all_smoke_passed else "pending",
+        "errors": errors,
+        "warnings": warnings,
+        "skins": skins,
+    }

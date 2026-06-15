@@ -4,6 +4,7 @@ Use this before calling any skin complete.
 
 ## Package Checks
 
+- [ ] Run `python3 recipes/validate_stock_outputs.py`.
 - [ ] Zip opens.
 - [ ] Stock Diffuse lane contains only `Diffuse.dds` and `Icon.dds`.
 - [ ] Full-car lane contains expected GBX, `Diffuse.dds`, `Details.dds`,
@@ -29,9 +30,10 @@ Use this before calling any skin complete.
 
 ## TMUF Smoke Check
 
+- [ ] Confirm the validator reports `tmuf_smoke_status=pending` before manual
+      TMUF evidence exists.
 - [ ] Put zip into the StadiumCar skin folder.
 - [ ] Load the skin in TMUF.
 - [ ] Capture at least front, side, rear, and top-ish views.
 - [ ] Update the report JSON from `tmuf_smoke_test: not_run` to the actual result.
 - [ ] Promote or keep evidence status based on the result.
-
