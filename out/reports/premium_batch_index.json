@@ -1,0 +1,356 @@
+{
+  "candidate_count": 5,
+  "candidates": [
+    {
+      "alpha_metrics": {
+        "high_alpha_pixel_ratio": 0.385069,
+        "max_alpha": 148,
+        "mean_alpha": 126.447809,
+        "min_alpha": 112,
+        "unique_alpha_values": [
+          112,
+          118,
+          136,
+          148
+        ]
+      },
+      "design_lane": {
+        "composition_focus": "wide lower side blades with a magenta nose spear and cyan side energy",
+        "distinctive_masks": [
+          "side_blade",
+          "secondary_blade",
+          "nose_spear",
+          "mudguard_edge"
+        ],
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_id": "side_blade_sweep",
+        "parameter_signature": {
+          "blade_offset": 0.16,
+          "blade_slope": 0.42,
+          "mudguard_mode": "primary_front",
+          "rear_louver_count": 16.0,
+          "spine_width": 0.05
+        }
+      },
+      "gbuffer_mapping": "experimental_until_tmuf_smoke",
+      "output_artifacts": {
+        "atlas_preview": {
+          "path": "out/previews/black_magenta_cyan_blade_atlas.png",
+          "sha256": "5ebf336c3d5fe0ed1bcba92dfb9ad1df8c46900a9bc76411d5d2d600a123c491",
+          "size_bytes": 922518
+        },
+        "projected_preview": {
+          "path": "out/previews/black_magenta_cyan_blade_projected_side_top_rear.png",
+          "sha256": "610a994916d1b95ee33679c8fe9023af0bca8103e2702396b5af95823357f308",
+          "size_bytes": 287284
+        },
+        "skin_zip": {
+          "path": "out/skins/black_magenta_cyan_blade.zip",
+          "sha256": "03415695d8c2203aa6b713f9a737d88df104404339002a3a65131e15ae6c2f0a",
+          "size_bytes": 553822
+        }
+      },
+      "package_files": [
+        "Diffuse.dds",
+        "Icon.dds"
+      ],
+      "panel_catalog_targets": [
+        "tailwing_bands",
+        "side_wings",
+        "mirrors_and_holders",
+        "underbody_dark"
+      ],
+      "route": "stock_diffuse_only",
+      "skin_name": "black_magenta_cyan_blade",
+      "style_metrics": {
+        "cyan_accent_ratio": 0.122051,
+        "dark_pixel_ratio": 0.839206,
+        "magenta_accent_ratio": 0.180442
+      },
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "alpha_metrics": {
+        "high_alpha_pixel_ratio": 0.438472,
+        "max_alpha": 148,
+        "mean_alpha": 128.37031,
+        "min_alpha": 112,
+        "unique_alpha_values": [
+          112,
+          118,
+          136,
+          148
+        ]
+      },
+      "design_lane": {
+        "composition_focus": "dominant cyan center spine with magenta guard and tail echoes",
+        "distinctive_masks": [
+          "center_spine",
+          "nose_spear",
+          "tailwing",
+          "mudguard_edge"
+        ],
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_id": "center_spine_focus",
+        "parameter_signature": {
+          "blade_offset": 0.21,
+          "blade_slope": 0.35,
+          "mudguard_mode": "secondary_front",
+          "rear_louver_count": 18.0,
+          "spine_width": 0.064
+        }
+      },
+      "gbuffer_mapping": "experimental_until_tmuf_smoke",
+      "output_artifacts": {
+        "atlas_preview": {
+          "path": "out/previews/black_cyan_spine_atlas.png",
+          "sha256": "8c7640236895538e839b9924fe8b0f09fd757e689123a0f5caa6701ad2f4e8bd",
+          "size_bytes": 935798
+        },
+        "projected_preview": {
+          "path": "out/previews/black_cyan_spine_projected_side_top_rear.png",
+          "sha256": "8b976a9a2fcc0cfaf2f244e72ce846ffb71f1e65f08954fa8fa6644622f92542",
+          "size_bytes": 295590
+        },
+        "skin_zip": {
+          "path": "out/skins/black_cyan_spine.zip",
+          "sha256": "68844fa4c779f283b275ef80616a080954ec590dc498128b5fb66ca7775f4479",
+          "size_bytes": 557069
+        }
+      },
+      "package_files": [
+        "Diffuse.dds",
+        "Icon.dds"
+      ],
+      "panel_catalog_targets": [
+        "tailwing_bands",
+        "side_wings",
+        "mirrors_and_holders",
+        "underbody_dark"
+      ],
+      "route": "stock_diffuse_only",
+      "skin_name": "black_cyan_spine",
+      "style_metrics": {
+        "cyan_accent_ratio": 0.250155,
+        "dark_pixel_ratio": 0.635672,
+        "magenta_accent_ratio": 0.108466
+      },
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "alpha_metrics": {
+        "high_alpha_pixel_ratio": 0.368407,
+        "max_alpha": 148,
+        "mean_alpha": 125.84797,
+        "min_alpha": 112,
+        "unique_alpha_values": [
+          112,
+          118,
+          136,
+          148
+        ]
+      },
+      "design_lane": {
+        "composition_focus": "violet/magenta flow with split guard color and cyan side structure",
+        "distinctive_masks": [
+          "mudguards",
+          "side_blade",
+          "rear_center_glow",
+          "tailwing"
+        ],
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_id": "split_guard_flow",
+        "parameter_signature": {
+          "blade_offset": 0.13,
+          "blade_slope": 0.5,
+          "mudguard_mode": "split",
+          "rear_louver_count": 14.0,
+          "spine_width": 0.044
+        }
+      },
+      "gbuffer_mapping": "experimental_until_tmuf_smoke",
+      "output_artifacts": {
+        "atlas_preview": {
+          "path": "out/previews/violet_cyber_flow_atlas.png",
+          "sha256": "f74d6f88a8faa22c4fd0372ef2b4c67ff7ee39539e645c1cfce8e90572aba294",
+          "size_bytes": 873546
+        },
+        "projected_preview": {
+          "path": "out/previews/violet_cyber_flow_projected_side_top_rear.png",
+          "sha256": "fc0903a73f13253a81b6c641c4830c316d4100457fa88487f9cea70706ce4588",
+          "size_bytes": 274818
+        },
+        "skin_zip": {
+          "path": "out/skins/violet_cyber_flow.zip",
+          "sha256": "37f279cf6f77511a7257d3cdfc152696239a164768e3ce7a9e535335bc40326a",
+          "size_bytes": 531747
+        }
+      },
+      "package_files": [
+        "Diffuse.dds",
+        "Icon.dds"
+      ],
+      "panel_catalog_targets": [
+        "tailwing_bands",
+        "side_wings",
+        "mirrors_and_holders",
+        "underbody_dark"
+      ],
+      "route": "stock_diffuse_only",
+      "skin_name": "violet_cyber_flow",
+      "style_metrics": {
+        "cyan_accent_ratio": 0.12117,
+        "dark_pixel_ratio": 0.84259,
+        "magenta_accent_ratio": 0.141098
+      },
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "alpha_metrics": {
+        "high_alpha_pixel_ratio": 0.34526,
+        "max_alpha": 148,
+        "mean_alpha": 125.014676,
+        "min_alpha": 112,
+        "unique_alpha_values": [
+          112,
+          118,
+          136,
+          148
+        ]
+      },
+      "design_lane": {
+        "composition_focus": "dense rear louver rhythm with restrained spine and alternating guard caps",
+        "distinctive_masks": [
+          "rear_louvers",
+          "rear_center_glow",
+          "tail_bar",
+          "tailwing"
+        ],
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_id": "rear_louver_focus",
+        "parameter_signature": {
+          "blade_offset": 0.24,
+          "blade_slope": 0.3,
+          "mudguard_mode": "secondary_front",
+          "rear_louver_count": 22.0,
+          "spine_width": 0.038
+        }
+      },
+      "gbuffer_mapping": "experimental_until_tmuf_smoke",
+      "output_artifacts": {
+        "atlas_preview": {
+          "path": "out/previews/dark_neon_louver_atlas.png",
+          "sha256": "4e21aa70ef601063724bd70b7cbc7676889005a413629dee3986938da1df9677",
+          "size_bytes": 862483
+        },
+        "projected_preview": {
+          "path": "out/previews/dark_neon_louver_projected_side_top_rear.png",
+          "sha256": "275af94d5eebae0497cbd455b8424fce2172082f03db76318b2c0c9229e8ce20",
+          "size_bytes": 289665
+        },
+        "skin_zip": {
+          "path": "out/skins/dark_neon_louver.zip",
+          "sha256": "0e85c4c498f967be4f9fbc63903ef69842e0441f645935fc9fc68896471f6b13",
+          "size_bytes": 510805
+        }
+      },
+      "package_files": [
+        "Diffuse.dds",
+        "Icon.dds"
+      ],
+      "panel_catalog_targets": [
+        "tailwing_bands",
+        "side_wings",
+        "mirrors_and_holders",
+        "underbody_dark"
+      ],
+      "route": "stock_diffuse_only",
+      "skin_name": "dark_neon_louver",
+      "style_metrics": {
+        "cyan_accent_ratio": 0.10903,
+        "dark_pixel_ratio": 0.852232,
+        "magenta_accent_ratio": 0.143308
+      },
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "alpha_metrics": {
+        "high_alpha_pixel_ratio": 0.40197,
+        "max_alpha": 148,
+        "mean_alpha": 127.056246,
+        "min_alpha": 112,
+        "unique_alpha_values": [
+          112,
+          118,
+          136,
+          148
+        ]
+      },
+      "design_lane": {
+        "composition_focus": "balanced race prototype layout using nose, spine, side blades, and local aero accents",
+        "distinctive_masks": [
+          "nose_spear",
+          "center_spine",
+          "side_wings",
+          "mirrors"
+        ],
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_id": "race_proto_balance",
+        "parameter_signature": {
+          "blade_offset": 0.18,
+          "blade_slope": 0.46,
+          "mudguard_mode": "primary_front",
+          "rear_louver_count": 17.0,
+          "spine_width": 0.056
+        }
+      },
+      "gbuffer_mapping": "experimental_until_tmuf_smoke",
+      "output_artifacts": {
+        "atlas_preview": {
+          "path": "out/previews/magenta_cyan_race_proto_atlas.png",
+          "sha256": "6e46cf061cb1bcc4e7f55e7c10b4810c1c832d3a828c473c1cc8a053d9735409",
+          "size_bytes": 907787
+        },
+        "projected_preview": {
+          "path": "out/previews/magenta_cyan_race_proto_projected_side_top_rear.png",
+          "sha256": "3fa5b24cb0f9df77262d40c71269af29d7a9b33d1f2b3128450e3aae5de3f19f",
+          "size_bytes": 287192
+        },
+        "skin_zip": {
+          "path": "out/skins/magenta_cyan_race_proto.zip",
+          "sha256": "ea1dc162b27b77129b346b21959bb52050675f20e2b5389cf542b137cf761d73",
+          "size_bytes": 524437
+        }
+      },
+      "package_files": [
+        "Diffuse.dds",
+        "Icon.dds"
+      ],
+      "panel_catalog_targets": [
+        "tailwing_bands",
+        "side_wings",
+        "mirrors_and_holders",
+        "underbody_dark"
+      ],
+      "route": "stock_diffuse_only",
+      "skin_name": "magenta_cyan_race_proto",
+      "style_metrics": {
+        "cyan_accent_ratio": 0.121439,
+        "dark_pixel_ratio": 0.822216,
+        "magenta_accent_ratio": 0.191734
+      },
+      "tmuf_smoke_test": "not_run"
+    }
+  ],
+  "completion_status": "not_complete_tmuf_smoke_pending",
+  "does_not_prove_tmuf_smoke": true,
+  "gbuffer_mapping": "experimental_until_tmuf_smoke",
+  "required_before_promotion": [
+    "run_tmuf_calibration_smoke_test",
+    "record_tmuf_smoke_evidence",
+    "evaluate_then_apply_tmuf_smoke_gate"
+  ],
+  "route": "stock_diffuse_only",
+  "schema": "tmuf_premium_skin_lab.premium_batch_index.v1",
+  "tmuf_smoke_status": "pending"
+}

@@ -223,6 +223,50 @@ def validate_premium_lane_distinctness(skins: list[dict[str, Any]]) -> list[str]
     return []
 
 
+def validate_premium_batch_index(index: dict[str, Any], premium_reports: list[dict[str, Any]]) -> list[str]:
+    errors: list[str] = []
+    if index.get("schema") != "tmuf_premium_skin_lab.premium_batch_index.v1":
+        errors.append("premium batch index schema mismatch")
+    if index.get("route") != "stock_diffuse_only":
+        errors.append("premium batch index route must be stock_diffuse_only")
+    if index.get("does_not_prove_tmuf_smoke") is not True:
+        errors.append("premium batch index must not prove TMUF smoke")
+
+    candidates = index.get("candidates")
+    if not isinstance(candidates, list):
+        return [*errors, "premium batch index candidates must be a list"]
+    if index.get("candidate_count") != len(candidates):
+        errors.append("premium batch index candidate_count mismatch")
+    if len(candidates) != len(premium_reports):
+        errors.append("premium batch index report count mismatch")
+
+    report_by_name = {report.get("skin_name"): report for report in premium_reports}
+    lane_ids: list[str] = []
+    for candidate in candidates:
+        name = candidate.get("skin_name")
+        report = report_by_name.get(name)
+        if not isinstance(report, dict):
+            errors.append(f"premium batch index has unknown candidate: {name}")
+            continue
+        lane_id = candidate.get("design_lane", {}).get("lane_id")
+        if lane_id:
+            lane_ids.append(lane_id)
+        if candidate.get("tmuf_smoke_test") != report.get("tmuf_smoke_test"):
+            errors.append(f"premium batch index smoke status mismatch: {name}")
+        if candidate.get("gbuffer_mapping") != report.get("evidence_status", {}).get("gbuffer_mapping"):
+            errors.append(f"premium batch index gbuffer status mismatch: {name}")
+        if candidate.get("package_files") != report.get("package_files"):
+            errors.append(f"premium batch index package files mismatch: {name}")
+        if candidate.get("design_lane", {}).get("lane_id") != report.get("design_lane", {}).get("lane_id"):
+            errors.append(f"premium batch index design lane mismatch: {name}")
+        if candidate.get("output_artifacts", {}).get("skin_zip", {}).get("path") != report.get("output_artifacts", {}).get("skin_zip", {}).get("path"):
+            errors.append(f"premium batch index artifact mismatch: {name}")
+
+    if len(set(lane_ids)) != len(lane_ids):
+        errors.append("premium batch index lane IDs must be distinct")
+    return errors
+
+
 def _zip_checks(zip_path: Path) -> tuple[dict[str, bool], list[str]]:
     checks = {
         "zip_exists": zip_path.exists(),
@@ -331,6 +375,7 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
     manifest = _load_json(root / MANIFEST.relative_to(ROOT))
     errors: list[str] = []
     skins: list[dict[str, Any]] = []
+    premium_reports: list[dict[str, Any]] = []
 
     for skin_name in REQUIRED_STOCK_SKINS:
         premium = skin_name != "calibration_stock_diffuse"
@@ -342,6 +387,8 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
         mask_errors = validate_mask_evidence(report, premium=premium)
         alpha_errors = validate_alpha_policy(report, premium=premium)
         lane_errors = validate_design_lane_evidence(report, premium=premium)
+        if premium:
+            premium_reports.append(report)
         report_checks["report_mask_evidence_valid"] = not mask_errors
         report_checks["report_alpha_policy_valid"] = not alpha_errors
         report_checks["report_design_lane_valid"] = not lane_errors
@@ -375,6 +422,15 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
         )
 
     errors.extend(validate_premium_lane_distinctness(skins))
+    batch_index_path = root / "out" / "reports" / "premium_batch_index.json"
+    batch_index: dict[str, Any] = {}
+    batch_index_errors: list[str] = []
+    if not batch_index_path.exists():
+        batch_index_errors.append("missing premium batch index")
+    else:
+        batch_index = _load_json(batch_index_path)
+        batch_index_errors.extend(validate_premium_batch_index(batch_index, premium_reports))
+    errors.extend(batch_index_errors)
     all_smoke_passed = all(skin["checks"]["tmuf_smoke_passed"] for skin in skins)
     warnings = [] if all_smoke_passed else ["tmuf_smoke_pending"]
     local_checks_passed = not errors
@@ -384,5 +440,11 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
         "tmuf_smoke_status": "passed" if all_smoke_passed else "pending",
         "errors": errors,
         "warnings": warnings,
+        "premium_batch_index": {
+            "valid": not batch_index_errors,
+            "candidate_count": batch_index.get("candidate_count", 0),
+            "does_not_prove_tmuf_smoke": batch_index.get("does_not_prove_tmuf_smoke", True),
+            "errors": batch_index_errors,
+        },
         "skins": skins,
     }

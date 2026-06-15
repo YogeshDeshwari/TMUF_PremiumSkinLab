@@ -220,6 +220,25 @@ class PremiumStockBatchTests(unittest.TestCase):
 
         self.assertEqual(len(lane_ids), len(CANDIDATE_NAMES))
 
+        batch_index_path = ROOT / "out" / "reports" / "premium_batch_index.json"
+        self.assertTrue(batch_index_path.exists())
+        batch_index = json.loads(batch_index_path.read_text())
+        self.assertEqual(batch_index["schema"], "tmuf_premium_skin_lab.premium_batch_index.v1")
+        self.assertEqual(batch_index["route"], "stock_diffuse_only")
+        self.assertTrue(batch_index["does_not_prove_tmuf_smoke"])
+        self.assertEqual(batch_index["candidate_count"], len(CANDIDATE_NAMES))
+        self.assertEqual([candidate["skin_name"] for candidate in batch_index["candidates"]], CANDIDATE_NAMES)
+        self.assertEqual(
+            len({candidate["design_lane"]["lane_id"] for candidate in batch_index["candidates"]}),
+            len(CANDIDATE_NAMES),
+        )
+        for candidate in batch_index["candidates"]:
+            self.assertEqual(candidate["tmuf_smoke_test"], "not_run")
+            self.assertEqual(candidate["gbuffer_mapping"], "experimental_until_tmuf_smoke")
+            self.assertEqual(candidate["package_files"], ["Diffuse.dds", "Icon.dds"])
+            self.assertIn("skin_zip", candidate["output_artifacts"])
+            self.assertIn("projected_preview", candidate["output_artifacts"])
+
 
 if __name__ == "__main__":
     unittest.main()

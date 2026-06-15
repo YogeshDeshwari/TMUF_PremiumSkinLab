@@ -104,6 +104,10 @@ Premium reports also include `design_lane`, which records each candidate's
 intended composition focus and distinctive masks. Lane metadata is recipe
 evidence only and must not be treated as TMUF visual proof.
 
+The generated batch summary lives at `out/reports/premium_batch_index.json`.
+It indexes all premium candidates, lanes, artifacts, style metrics, and pending
+proof gates, but it also explicitly does not prove TMUF smoke status.
+
 The smoke kit includes `previews/tmuf_smoke_contact_sheet.png` as a visual
 review aid only. It is not smoke evidence.
 

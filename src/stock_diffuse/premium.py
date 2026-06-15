@@ -20,6 +20,7 @@ from src.stock_diffuse.panel_masks import PremiumMaskParams, build_stock_panel_m
 
 ROOT = Path(__file__).resolve().parents[2]
 REF_DIR = ROOT / "resources" / "authoritative" / "reference"
+BATCH_INDEX = ROOT / "out" / "reports" / "premium_batch_index.json"
 CANDIDATE_NAMES = [
     "black_magenta_cyan_blade",
     "black_cyan_spine",
@@ -410,8 +411,47 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
     }
 
 
+def _batch_candidate_entry(report: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "skin_name": report["skin_name"],
+        "route": report["route"],
+        "package_files": report["package_files"],
+        "tmuf_smoke_test": report["tmuf_smoke_test"],
+        "gbuffer_mapping": report["evidence_status"]["gbuffer_mapping"],
+        "design_lane": report["design_lane"],
+        "style_metrics": report["style_metrics"],
+        "alpha_metrics": report["alpha_metrics"],
+        "panel_catalog_targets": report["panel_catalog_targets"],
+        "output_artifacts": report["output_artifacts"],
+    }
+
+
+def write_batch_index(outputs: list[dict[str, str]]) -> Path:
+    reports = [json.loads(Path(item["report"]).read_text()) for item in outputs]
+    index = {
+        "schema": "tmuf_premium_skin_lab.premium_batch_index.v1",
+        "route": "stock_diffuse_only",
+        "candidate_count": len(reports),
+        "does_not_prove_tmuf_smoke": True,
+        "tmuf_smoke_status": "pending",
+        "gbuffer_mapping": "experimental_until_tmuf_smoke",
+        "completion_status": "not_complete_tmuf_smoke_pending",
+        "required_before_promotion": [
+            "run_tmuf_calibration_smoke_test",
+            "record_tmuf_smoke_evidence",
+            "evaluate_then_apply_tmuf_smoke_gate",
+        ],
+        "candidates": [_batch_candidate_entry(report) for report in reports],
+    }
+    BATCH_INDEX.parent.mkdir(parents=True, exist_ok=True)
+    BATCH_INDEX.write_text(json.dumps(index, indent=2, sort_keys=True) + "\n")
+    return BATCH_INDEX
+
+
 def save_batch() -> list[dict[str, str]]:
-    return [_write_candidate(candidate) for candidate in CANDIDATES]
+    outputs = [_write_candidate(candidate) for candidate in CANDIDATES]
+    write_batch_index(outputs)
+    return outputs
 
 
 def main() -> int:

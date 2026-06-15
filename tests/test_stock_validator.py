@@ -40,6 +40,9 @@ class StockValidatorTests(unittest.TestCase):
             if skin["skin_name"] != "calibration_stock_diffuse"
         ]
         self.assertEqual(len(set(premium_lanes)), len(premium_lanes))
+        self.assertTrue(result["premium_batch_index"]["valid"])
+        self.assertEqual(result["premium_batch_index"]["candidate_count"], 5)
+        self.assertTrue(result["premium_batch_index"]["does_not_prove_tmuf_smoke"])
 
     def test_report_input_evidence_must_match_manifest(self):
         from src.evidence.input_trace import STOCK_DIFFUSE_INPUTS
@@ -269,6 +272,74 @@ class StockValidatorTests(unittest.TestCase):
         self.assertEqual(
             validate_premium_lane_distinctness(duplicate_lanes),
             ["premium design lanes must be distinct across candidates"],
+        )
+
+    def test_premium_batch_index_is_validated_against_reports(self):
+        from src.evidence.stock_validator import validate_premium_batch_index
+
+        reports = [
+            {
+                "skin_name": "a",
+                "route": "stock_diffuse_only",
+                "package_files": ["Diffuse.dds", "Icon.dds"],
+                "tmuf_smoke_test": "not_run",
+                "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
+                "design_lane": {"lane_id": "lane_a"},
+                "output_artifacts": {"skin_zip": {"path": "out/skins/a.zip"}},
+            },
+            {
+                "skin_name": "b",
+                "route": "stock_diffuse_only",
+                "package_files": ["Diffuse.dds", "Icon.dds"],
+                "tmuf_smoke_test": "not_run",
+                "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
+                "design_lane": {"lane_id": "lane_b"},
+                "output_artifacts": {"skin_zip": {"path": "out/skins/b.zip"}},
+            },
+        ]
+        valid_index = {
+            "schema": "tmuf_premium_skin_lab.premium_batch_index.v1",
+            "route": "stock_diffuse_only",
+            "does_not_prove_tmuf_smoke": True,
+            "candidate_count": 2,
+            "candidates": [
+                {
+                    "skin_name": "a",
+                    "tmuf_smoke_test": "not_run",
+                    "gbuffer_mapping": "experimental_until_tmuf_smoke",
+                    "design_lane": {"lane_id": "lane_a"},
+                    "package_files": ["Diffuse.dds", "Icon.dds"],
+                    "output_artifacts": {"skin_zip": {"path": "out/skins/a.zip"}},
+                },
+                {
+                    "skin_name": "b",
+                    "tmuf_smoke_test": "not_run",
+                    "gbuffer_mapping": "experimental_until_tmuf_smoke",
+                    "design_lane": {"lane_id": "lane_b"},
+                    "package_files": ["Diffuse.dds", "Icon.dds"],
+                    "output_artifacts": {"skin_zip": {"path": "out/skins/b.zip"}},
+                },
+            ],
+        }
+
+        self.assertEqual(validate_premium_batch_index(valid_index, reports), [])
+
+        duplicate = {
+            **valid_index,
+            "candidates": [
+                valid_index["candidates"][0],
+                {**valid_index["candidates"][1], "design_lane": {"lane_id": "lane_a"}},
+            ],
+        }
+        self.assertIn(
+            "premium batch index lane IDs must be distinct",
+            validate_premium_batch_index(duplicate, reports),
+        )
+
+        wrong_count = {**valid_index, "candidate_count": 3}
+        self.assertEqual(
+            validate_premium_batch_index(wrong_count, reports),
+            ["premium batch index candidate_count mismatch"],
         )
 
     def test_cli_outputs_json_summary(self):
