@@ -31,6 +31,7 @@
     "preflight_explicit": "python3 recipes/smoke_readiness.py --install-target /absolute/path/to/StadiumCar --write --write-command-packet",
     "record_smoke": "python3 recipes/record_tmuf_smoke.py --tester \"manual tester\" --tmuf-build \"TMUF local install\" --test-date-local YYYY-MM-DD --install-receipt /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit/proof/calibration_install_receipt.json --screenshot-role front=/absolute/path/to/tmuf_front.png --screenshot-role side=/absolute/path/to/tmuf_side.png --screenshot-role rear=/absolute/path/to/tmuf_rear.png --screenshot-role top=/absolute/path/to/tmuf_top.png --all-required-observations-passed",
     "scan_custom_root": "python3 recipes/find_tmuf_skin_dirs.py --root /absolute/path/to/TrackMania-or-Wine-prefix --write --json",
+    "scan_custom_root_bounded": "python3 recipes/find_tmuf_skin_dirs.py --root /absolute/path/to/TrackMania-or-Wine-prefix --max-depth 8 --write --json",
     "scan_skin_dirs": "python3 recipes/find_tmuf_skin_dirs.py --write"
   },
   "does_not_prove_tmuf_smoke": true,

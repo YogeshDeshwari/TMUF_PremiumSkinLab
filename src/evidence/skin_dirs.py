@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -69,14 +70,38 @@ def suggest_manual_creation_targets(roots: list[Path]) -> list[dict[str, Any]]:
     return targets
 
 
-def find_stadiumcar_skin_dirs(roots: list[Path] | None = None) -> list[dict[str, Any]]:
+def _relative_depth(path: Path, root: Path) -> int:
+    try:
+        relative = path.relative_to(root)
+    except ValueError:
+        return len(path.parts)
+    return 0 if relative == Path(".") else len(relative.parts)
+
+
+def _iter_stadiumcar_dirs(root: Path, max_depth: int | None) -> list[Path]:
+    if not root.exists():
+        return []
+    matches: list[Path] = []
+    for current, dirs, _files in os.walk(root):
+        current_path = Path(current)
+        depth = _relative_depth(current_path, root)
+        if current_path.name == "StadiumCar":
+            matches.append(current_path)
+        if max_depth is not None and depth >= max_depth:
+            dirs[:] = []
+    return matches
+
+
+def find_stadiumcar_skin_dirs(
+    roots: list[Path] | None = None,
+    *,
+    max_depth: int | None = None,
+) -> list[dict[str, Any]]:
     search_roots = [Path(root) for root in (roots if roots is not None else DEFAULT_SEARCH_ROOTS)]
     seen: set[Path] = set()
     candidates: list[dict[str, Any]] = []
     for root in search_roots:
-        if not root.exists():
-            continue
-        for path in root.rglob("StadiumCar"):
+        for path in _iter_stadiumcar_dirs(root, max_depth):
             if not path.is_dir():
                 continue
             route = route_for_stadiumcar_skin_dir(path)
@@ -94,9 +119,10 @@ def build_skin_dir_report(
     roots: list[Path] | None = None,
     *,
     include_creation_targets: bool = False,
+    max_depth: int | None = None,
 ) -> dict[str, Any]:
     search_roots = [Path(root) for root in (roots if roots is not None else DEFAULT_SEARCH_ROOTS)]
-    candidates = find_stadiumcar_skin_dirs(search_roots)
+    candidates = find_stadiumcar_skin_dirs(search_roots, max_depth=max_depth)
     manual_creation_targets = suggest_manual_creation_targets(search_roots) if include_creation_targets else []
     return {
         "schema_version": 1,
@@ -104,6 +130,11 @@ def build_skin_dir_report(
         "candidate_count": len(candidates),
         "candidates": candidates,
         "manual_creation_targets": manual_creation_targets,
+        "scan_boundary": {
+            "max_depth": max_depth,
+            "bounded_by_max_depth": max_depth is not None,
+            "does_not_prove_tmuf_smoke": True,
+        },
         "does_not_prove_tmuf_smoke": True,
         "safe_use": "Use a listed path only as an explicit install target; finding or planning a directory does not prove TMUF load.",
     }
@@ -114,12 +145,17 @@ def write_skin_dir_report(
     roots: list[Path] | None = None,
     *,
     include_creation_targets: bool = False,
+    max_depth: int | None = None,
 ) -> Path:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
         json.dumps(
-            build_skin_dir_report(roots, include_creation_targets=include_creation_targets),
+            build_skin_dir_report(
+                roots,
+                include_creation_targets=include_creation_targets,
+                max_depth=max_depth,
+            ),
             indent=2,
             sort_keys=True,
         )

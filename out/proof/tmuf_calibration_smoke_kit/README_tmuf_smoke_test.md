@@ -100,6 +100,17 @@ python3 recipes/find_tmuf_skin_dirs.py \
   --json
 ```
 
+For large roots, use a bounded scan so the search boundary is explicit in the
+report:
+
+```bash
+python3 recipes/find_tmuf_skin_dirs.py \
+  --root /absolute/path/to/TrackMania-or-Wine-prefix \
+  --max-depth 8 \
+  --write \
+  --json
+```
+
 If that scan finds no existing `StadiumCar` folder, generate manual creation
 targets under the same confirmed root:
 

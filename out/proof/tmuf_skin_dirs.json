@@ -4,6 +4,11 @@
   "does_not_prove_tmuf_smoke": true,
   "manual_creation_targets": [],
   "safe_use": "Use a listed path only as an explicit install target; finding or planning a directory does not prove TMUF load.",
+  "scan_boundary": {
+    "bounded_by_max_depth": false,
+    "does_not_prove_tmuf_smoke": true,
+    "max_depth": null
+  },
   "schema_version": 1,
   "status": "no_candidates_found"
 }
