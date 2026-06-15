@@ -60,6 +60,10 @@ separately from alpha, so transparent-alpha livery textures still contribute
 color evidence while alpha visibility remains recorded. Use those metrics for
 reference-only palette guidance; do not treat them as TMUF runtime proof.
 
+`out/reports/reference_style_guidance.json` is derived from those reference-only
+metrics and is cited by premium stock reports as recipe guidance. It does not
+make reference skins stock inputs and must not appear in stock `input_evidence`.
+
 ## Experimental
 
 These are copied into `resources/experimental/`.

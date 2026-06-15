@@ -135,6 +135,13 @@ artifacts because they show every detected DDS slot. `style_metrics` in each
 report are local RGB/alpha image metrics only; they do not prove TMUF runtime
 appearance or stock UV mapping.
 
+The stock premium generator also writes
+`out/reports/reference_style_guidance.json` from those reference metrics and
+cites it in each premium stock report. This is recipe guidance only:
+black/gray/white base, magenta as high-value accent, cyan as secondary contrast,
+and red kept as a separate lane. It is not included in `input_evidence` and must
+not be treated as stock mapping truth.
+
 The generated batch summary lives at `out/reports/premium_batch_index.json`.
 It indexes all premium candidates, lanes, artifacts, style metrics, and pending
 proof gates, but it also explicitly does not prove TMUF smoke status.

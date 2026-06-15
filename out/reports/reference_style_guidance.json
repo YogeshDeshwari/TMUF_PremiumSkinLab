@@ -1,0 +1,129 @@
+{
+  "closest_black_magenta_cyan_references": [
+    {
+      "alpha_visible_ratio": 1.0,
+      "black_magenta_cyan_score": 0.677366,
+      "black_ratio": 0.128235,
+      "cyan_ratio": 0.042679,
+      "magenta_ratio": 0.357056,
+      "mean_contrast": 58.298757,
+      "package_name": "CH_Bloom_Wheel_LED_Underglow.zip",
+      "package_route": "custom_fullcar_ch2026_reference",
+      "palette_tags": [
+        "blue",
+        "magenta"
+      ],
+      "primary_livery_slot": "Diffuse.dds",
+      "red_ratio": 0.0,
+      "safe_use": "reference_only_visual_style_guidance_not_stock_truth",
+      "stock_lane_status": "not_stock_diffuse_only"
+    },
+    {
+      "alpha_visible_ratio": 0.212082,
+      "black_magenta_cyan_score": 0.471054,
+      "black_ratio": 0.675385,
+      "cyan_ratio": 0.070496,
+      "magenta_ratio": 1.5e-05,
+      "mean_contrast": 52.414005,
+      "package_name": "steve-in-a-cart_by_WiiTRO.zip",
+      "package_route": "custom_fullcar_other_mesh_reference",
+      "palette_tags": [
+        "black"
+      ],
+      "primary_livery_slot": "Details.dds",
+      "red_ratio": 0.022995,
+      "safe_use": "reference_only_visual_style_guidance_not_stock_truth",
+      "stock_lane_status": "not_stock_diffuse_only"
+    },
+    {
+      "alpha_visible_ratio": 1.0,
+      "black_magenta_cyan_score": 0.45695,
+      "black_ratio": 0.930527,
+      "cyan_ratio": 0.009796,
+      "magenta_ratio": 0.0,
+      "mean_contrast": 18.20548,
+      "package_name": "CH_Blu.zip",
+      "package_route": "custom_fullcar_ch2026_reference",
+      "palette_tags": [
+        "black"
+      ],
+      "primary_livery_slot": "Details.dds",
+      "red_ratio": 0.0,
+      "safe_use": "reference_only_visual_style_guidance_not_stock_truth",
+      "stock_lane_status": "not_stock_diffuse_only"
+    },
+    {
+      "alpha_visible_ratio": 0.897568,
+      "black_magenta_cyan_score": 0.444459,
+      "black_ratio": 0.764954,
+      "cyan_ratio": 0.000732,
+      "magenta_ratio": 0.02536,
+      "mean_contrast": 47.361307,
+      "package_name": "hunter_by_WiiTRO.zip",
+      "package_route": "custom_fullcar_partial_ch2026_mesh_reference",
+      "palette_tags": [
+        "black"
+      ],
+      "primary_livery_slot": "Diffuse.dds",
+      "red_ratio": 0.079926,
+      "safe_use": "reference_only_visual_style_guidance_not_stock_truth",
+      "stock_lane_status": "not_stock_diffuse_only"
+    },
+    {
+      "alpha_visible_ratio": 0.750732,
+      "black_magenta_cyan_score": 0.429416,
+      "black_ratio": 0.275238,
+      "cyan_ratio": 0.147202,
+      "magenta_ratio": 0.000214,
+      "mean_contrast": 77.627197,
+      "package_name": "Azerbaijan_by_kekfeg.zip",
+      "package_route": "stock_diffuse_only_reference",
+      "palette_tags": [
+        "black",
+        "cyan",
+        "red"
+      ],
+      "primary_livery_slot": "Diffuse.dds",
+      "red_ratio": 0.347092,
+      "safe_use": "reference_only_visual_style_guidance_not_stock_truth",
+      "stock_lane_status": "reference_only_not_generated_by_lab"
+    }
+  ],
+  "does_not_prove_stock_diffuse_mapping": true,
+  "does_not_prove_tmuf_smoke": true,
+  "evidence_status": "reference_metrics_not_tmuf_proof",
+  "generator_guidance": {
+    "base_family": "black_gray_white",
+    "cyan_policy": "secondary_blades_spines_and_cold_light_contrast",
+    "magenta_policy": "high_value_accent_not_full_surface_flood",
+    "primary_accent": "magenta",
+    "red_policy": "separate_recipe_lane_not_first_black_magenta_cyan_family",
+    "scope": "stock Diffuse recipe metadata only; not stock UV or TMUF runtime proof",
+    "secondary_accent": "cyan"
+  },
+  "palette_tag_counts": {
+    "black": 28,
+    "blue": 6,
+    "cyan": 6,
+    "gray": 24,
+    "magenta": 2,
+    "red": 10,
+    "white": 25,
+    "yellow_gold": 4
+  },
+  "recommended_stock_design_rules": [
+    "black_gray_white_base",
+    "magenta_high_value_accent",
+    "cyan_secondary_contrast",
+    "red_separate_lane_not_first_bmc_family"
+  ],
+  "route_counts": {
+    "custom_fullcar_ch2026_reference": 22,
+    "custom_fullcar_other_mesh_reference": 4,
+    "custom_fullcar_partial_ch2026_mesh_reference": 1,
+    "stock_diffuse_only_reference": 1
+  },
+  "schema": "tmuf_premium_skin_lab.reference_style_guidance.v1",
+  "source_index": "out/reference_analysis/reference_package_index.json",
+  "source_report_count": 28
+}

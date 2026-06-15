@@ -14,6 +14,13 @@ from src.dds.tmnf_dds import build_dds_dxt5_bytes
 from src.evidence.artifact_trace import stock_output_artifacts
 from src.evidence.input_trace import PREMIUM_DIFFUSE_INPUTS, input_evidence
 from src.evidence.panel_visual_coverage import build_panel_visual_coverage
+from src.evidence.reference_style_guidance import (
+    DEFAULT_GUIDANCE,
+    DEFAULT_REFERENCE_INDEX,
+    build_reference_style_guidance,
+    guidance_report_block,
+    write_reference_style_guidance,
+)
 from src.stock_diffuse.calibration import SIZE, hx, load_fields, project_view
 from src.stock_diffuse.package import write_stable_zip_entry
 from src.stock_diffuse.panel_masks import PremiumMaskParams, build_stock_panel_masks, mask_report_entries
@@ -486,7 +493,14 @@ def _alpha_metrics(rgba: np.ndarray, coverage: np.ndarray) -> dict[str, float | 
     }
 
 
-def _write_candidate(candidate: Candidate) -> dict[str, str]:
+def _load_reference_guidance() -> dict[str, Any] | None:
+    if not DEFAULT_REFERENCE_INDEX.exists():
+        return None
+    write_reference_style_guidance(DEFAULT_REFERENCE_INDEX, DEFAULT_GUIDANCE)
+    return build_reference_style_guidance(DEFAULT_REFERENCE_INDEX)
+
+
+def _write_candidate(candidate: Candidate, reference_guidance: dict[str, Any] | None = None) -> dict[str, str]:
     out_skin = ROOT / "out" / "skins" / f"{candidate.name}.zip"
     out_preview = ROOT / "out" / "previews" / f"{candidate.name}_projected_side_top_rear.png"
     out_atlas = ROOT / "out" / "previews" / f"{candidate.name}_atlas.png"
@@ -607,6 +621,8 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
             "Diffuse alpha is conservative and not a fully tuned gloss/specular map yet.",
         ],
     }
+    if reference_guidance is not None:
+        report["reference_style_guidance"] = guidance_report_block(reference_guidance, DEFAULT_GUIDANCE)
     out_report.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
 
     return {
@@ -619,7 +635,7 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
 
 
 def _batch_candidate_entry(report: dict[str, Any]) -> dict[str, Any]:
-    return {
+    entry = {
         "skin_name": report["skin_name"],
         "route": report["route"],
         "package_files": report["package_files"],
@@ -632,9 +648,12 @@ def _batch_candidate_entry(report: dict[str, Any]) -> dict[str, Any]:
         "panel_catalog_targets": report["panel_catalog_targets"],
         "output_artifacts": report["output_artifacts"],
     }
+    if "reference_style_guidance" in report:
+        entry["reference_style_guidance"] = report["reference_style_guidance"]
+    return entry
 
 
-def write_batch_index(outputs: list[dict[str, str]]) -> Path:
+def write_batch_index(outputs: list[dict[str, str]], reference_guidance: dict[str, Any] | None = None) -> Path:
     reports = [json.loads(Path(item["report"]).read_text()) for item in outputs]
     index = {
         "schema": "tmuf_premium_skin_lab.premium_batch_index.v1",
@@ -651,14 +670,17 @@ def write_batch_index(outputs: list[dict[str, str]]) -> Path:
         ],
         "candidates": [_batch_candidate_entry(report) for report in reports],
     }
+    if reference_guidance is not None:
+        index["reference_style_guidance"] = guidance_report_block(reference_guidance, DEFAULT_GUIDANCE)
     BATCH_INDEX.parent.mkdir(parents=True, exist_ok=True)
     BATCH_INDEX.write_text(json.dumps(index, indent=2, sort_keys=True) + "\n")
     return BATCH_INDEX
 
 
 def save_batch() -> list[dict[str, str]]:
-    outputs = [_write_candidate(candidate) for candidate in CANDIDATES]
-    write_batch_index(outputs)
+    reference_guidance = _load_reference_guidance()
+    outputs = [_write_candidate(candidate, reference_guidance) for candidate in CANDIDATES]
+    write_batch_index(outputs, reference_guidance)
     return outputs
 
 

@@ -88,6 +88,15 @@ Evidence-backed generator guidance:
   black/magenta/cyan direction, but it is CH_2026 full-car reference-only and
   must not be treated as stock mapping truth.
 
+Generated stock guidance:
+
+- `out/reports/reference_style_guidance.json` is built from this batch index and
+  cited by premium stock reports.
+- It carries `evidence_status=reference_metrics_not_tmuf_proof`.
+- It is allowed to guide recipe metadata and palette choices.
+- It is not stock UV evidence, not GBuffer proof, not TMUF runtime proof, and not
+  part of stock `input_evidence`.
+
 ## Package Classification
 
 | Package | Route | DDS | GBX | Donor Mesh Evidence | Notes |
