@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from src.evidence.skin_dirs import DEFAULT_REPORT as DEFAULT_SKIN_DIR_REPORT
 from src.evidence.smoke_kit import DEFAULT_KIT_DIR, validate_smoke_kit
 from src.evidence.stock_validator import validate_stock_outputs
 from src.profiles.gates import evaluate_profile_gates
@@ -31,11 +32,35 @@ def _smoke_kit_status(root: Path) -> dict[str, Any]:
     }
 
 
+def _skin_dir_status(root: Path) -> dict[str, Any]:
+    report_path = root / DEFAULT_SKIN_DIR_REPORT.relative_to(ROOT)
+    if not report_path.exists():
+        return {
+            "exists": False,
+            "status": "not_scanned",
+            "candidate_count": 0,
+            "report": str(report_path),
+            "candidates": [],
+            "does_not_prove_tmuf_smoke": True,
+        }
+
+    report = json.loads(report_path.read_text())
+    return {
+        "exists": True,
+        "status": report.get("status", "unknown"),
+        "candidate_count": report.get("candidate_count", 0),
+        "report": str(report_path),
+        "candidates": report.get("candidates", []),
+        "does_not_prove_tmuf_smoke": report.get("does_not_prove_tmuf_smoke", True),
+    }
+
+
 def build_lab_status(root: Path = ROOT) -> dict[str, Any]:
     root = Path(root)
     stock = validate_stock_outputs(root)
     profiles = evaluate_profile_gates(root)
     smoke_kit = _smoke_kit_status(root)
+    skin_dirs = _skin_dir_status(root)
 
     blockers: list[str] = []
     next_required: list[str] = []
@@ -68,6 +93,7 @@ def build_lab_status(root: Path = ROOT) -> dict[str, Any]:
             "ch2026_nomud": profiles["profiles"]["ch2026_nomud"]["status"],
         },
         "smoke_kit": smoke_kit,
+        "skin_dirs": skin_dirs,
     }
 
 

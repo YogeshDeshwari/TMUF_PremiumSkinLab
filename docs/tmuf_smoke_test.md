@@ -54,6 +54,21 @@ out/proof/tmuf_calibration_smoke_kit.zip
 
 The kit is only a handoff bundle. It does not prove TMUF smoke status.
 
+Find existing StadiumCar skin directories before installing:
+
+```bash
+python3 recipes/find_tmuf_skin_dirs.py --write
+```
+
+This writes:
+
+```text
+out/proof/tmuf_skin_dirs.json
+```
+
+Finding a directory does not prove TMUF smoke status. It only identifies an
+explicit candidate target for the install helper.
+
 Create the template if you want a manual form:
 
 ```bash

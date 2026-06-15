@@ -1,0 +1,43 @@
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from src.evidence.skin_dirs import DEFAULT_REPORT, build_skin_dir_report, write_skin_dir_report  # noqa: E402
+
+
+def main(argv: list[str] | None = None) -> str:
+    parser = argparse.ArgumentParser(description="Find existing TMUF/TMNF StadiumCar skin directories.")
+    parser.add_argument("--root", action="append", type=Path, help="search root; may be passed more than once")
+    parser.add_argument("--write", type=Path, nargs="?", const=DEFAULT_REPORT, help="write JSON report")
+    parser.add_argument("--json", action="store_true", help="emit machine-readable JSON")
+    args = parser.parse_args(argv)
+
+    roots = args.root if args.root else None
+    report = build_skin_dir_report(roots)
+    if args.write is not None:
+        write_skin_dir_report(args.write, roots)
+
+    if args.json:
+        output = json.dumps(report, indent=2, sort_keys=True)
+    else:
+        lines = [
+            f"status={report['status']}",
+            f"candidate_count={report['candidate_count']}",
+        ]
+        lines.extend(f"candidate={candidate['path']}" for candidate in report["candidates"])
+        output = "\n".join(lines)
+
+    if argv is None:
+        print(output)
+    return output
+
+
+if __name__ == "__main__":
+    raise SystemExit(0 if "candidate_count" in main() else 1)

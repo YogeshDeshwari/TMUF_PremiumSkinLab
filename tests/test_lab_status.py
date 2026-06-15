@@ -20,6 +20,8 @@ class LabStatusTests(unittest.TestCase):
         self.assertIn("fresh", status["smoke_kit"])
         self.assertTrue(status["smoke_kit"]["fresh"])
         self.assertTrue(status["smoke_kit"]["exists"])
+        self.assertIn("skin_dirs", status)
+        self.assertIn("candidate_count", status["skin_dirs"])
         self.assertIn("run_tmuf_calibration_smoke_test", status["next_required_evidence"])
         self.assertIn("record_tmuf_smoke_evidence", status["next_required_evidence"])
 
@@ -43,6 +45,7 @@ class LabStatusTests(unittest.TestCase):
 
         self.assertIn("smoke_kit=not_run", output)
         self.assertIn("smoke_kit_fresh=True", output)
+        self.assertIn("skin_dir_candidates=", output)
 
 
 if __name__ == "__main__":

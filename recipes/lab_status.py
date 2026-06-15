@@ -33,6 +33,7 @@ def main(argv: list[str] | None = None) -> str:
                 f"profile_status={status['profiles']['overall_status']}",
                 f"smoke_kit={status['smoke_kit']['status']}",
                 f"smoke_kit_fresh={status['smoke_kit']['fresh']}",
+                f"skin_dir_candidates={status['skin_dirs']['candidate_count']}",
                 "next_required_evidence="
                 + (",".join(status["next_required_evidence"]) if status["next_required_evidence"] else "none"),
             ]

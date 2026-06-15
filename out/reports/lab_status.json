@@ -16,6 +16,14 @@
     "overall_status": "custom_profiles_locked",
     "stock_calibration_gate": "pending_tmuf_smoke"
   },
+  "skin_dirs": {
+    "candidate_count": 0,
+    "candidates": [],
+    "does_not_prove_tmuf_smoke": true,
+    "exists": true,
+    "report": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_skin_dirs.json",
+    "status": "no_candidates_found"
+  },
   "smoke_kit": {
     "does_not_prove_tmuf_smoke": true,
     "exists": true,
