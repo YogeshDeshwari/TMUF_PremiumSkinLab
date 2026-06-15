@@ -91,6 +91,16 @@ out/proof/tmuf_skin_dirs.json
 Finding a directory does not prove TMUF smoke status. It only identifies an
 explicit candidate target for the install helper.
 
+The first recommended manual target for a normal TMUF/TMNF user-data install is
+documented in `docs/tmuf_install_paths.md`:
+
+```text
+~/Documents/TrackMania/Skins/Vehicles/StadiumCar
+```
+
+This path is reference-only install guidance. Creating it and copying the
+calibration ZIP still does not prove TMUF loaded the skin.
+
 To scan a specific TMUF/TMNF, Steam, CrossOver, or Wine prefix manually:
 
 ```bash
@@ -145,6 +155,15 @@ python3 recipes/prepare_tmuf_smoke_kit.py \
 ```
 
 This writes an install receipt, but it still does not prove TMUF smoke status.
+
+For the standard documents target, the command is:
+
+```bash
+python3 recipes/prepare_tmuf_smoke_kit.py \
+  --install-skins-dir "$HOME/Documents/TrackMania/Skins/Vehicles/StadiumCar" \
+  --create-install-target \
+  --json
+```
 
 Recognized install targets must end in one of these suffixes:
 

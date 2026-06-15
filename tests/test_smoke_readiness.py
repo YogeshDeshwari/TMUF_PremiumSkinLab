@@ -217,6 +217,40 @@ class SmokeReadinessTests(unittest.TestCase):
             self.assertIn("valid=true", text)
             self.assertIn("does_not_prove_tmuf_smoke=true", text)
 
+    def test_command_packet_includes_recommended_documents_trackmania_target(self):
+        from src.evidence.skin_dirs import write_skin_dir_report
+        from src.evidence.smoke_kit import build_smoke_kit
+        from src.evidence.smoke_readiness import build_smoke_readiness
+        from src.evidence.smoke_readiness import write_smoke_command_packet
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            documents = root / "Documents"
+            documents.mkdir()
+            trackmania_root = documents / "TrackMania"
+            packet_path = root / "commands.txt"
+            build_smoke_kit(root / "out" / "proof" / "tmuf_calibration_smoke_kit")
+            write_skin_dir_report(
+                root / "out" / "proof" / "tmuf_skin_dirs.json",
+                roots=[trackmania_root],
+                include_creation_targets=True,
+            )
+
+            write_smoke_command_packet(packet_path, root)
+            readiness = build_smoke_readiness(root)
+
+            recommended_path = str(trackmania_root / "Skins" / "Vehicles" / "StadiumCar")
+            self.assertEqual(readiness["skin_dirs"]["recommended_creation_target"]["path"], recommended_path)
+            self.assertIn("preflight_recommended_creation_target", readiness["commands"])
+            self.assertIn("create_and_install_recommended_creation_target", readiness["commands"])
+            text = packet_path.read_text()
+            self.assertIn("Recommended manual creation target:", text)
+            self.assertIn(f"path={recommended_path}", text)
+            self.assertIn("requires_root_creation=true", text)
+            self.assertIn("preflight_recommended_creation_target:", text)
+            self.assertIn("create_and_install_recommended_creation_target:", text)
+            self.assertFalse(trackmania_root.exists())
+
     def test_cli_can_write_command_packet(self):
         from recipes.smoke_readiness import main
         from src.evidence.skin_dirs import write_skin_dir_report

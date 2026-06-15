@@ -42,6 +42,8 @@ def _skin_dir_status(root: Path) -> dict[str, Any]:
             "candidate_count": 0,
             "report": str(report_path),
             "candidates": [],
+            "manual_creation_targets": [],
+            "recommended_creation_target": None,
             "does_not_prove_tmuf_smoke": True,
         }
 
@@ -52,6 +54,8 @@ def _skin_dir_status(root: Path) -> dict[str, Any]:
         "candidate_count": report.get("candidate_count", 0),
         "report": str(report_path),
         "candidates": report.get("candidates", []),
+        "manual_creation_targets": report.get("manual_creation_targets", []),
+        "recommended_creation_target": report.get("recommended_creation_target"),
         "does_not_prove_tmuf_smoke": report.get("does_not_prove_tmuf_smoke", True),
     }
 

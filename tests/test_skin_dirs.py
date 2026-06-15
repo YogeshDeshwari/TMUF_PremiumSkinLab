@@ -74,6 +74,29 @@ class SkinDirLocatorTests(unittest.TestCase):
                 self.assertEqual(target["target_root"], root.as_posix())
                 self.assertIn(target["route"], set(KNOWN_SUFFIXES.values()))
 
+    def test_missing_documents_trackmania_root_gets_recommended_creation_target(self):
+        from src.evidence.skin_dirs import build_skin_dir_report
+
+        with tempfile.TemporaryDirectory() as tmp:
+            documents = Path(tmp) / "Documents"
+            documents.mkdir()
+            root = documents / "TrackMania"
+
+            report = build_skin_dir_report([root], include_creation_targets=True)
+
+            self.assertEqual(report["candidate_count"], 0)
+            self.assertEqual(report["status"], "no_candidates_found")
+            self.assertEqual(report["install_path_evidence_doc"], "docs/tmuf_install_paths.md")
+            recommended = report["recommended_creation_target"]
+            self.assertEqual(recommended["path"], (root / "Skins" / "Vehicles" / "StadiumCar").as_posix())
+            self.assertEqual(recommended["route"], "skins_vehicles_stadiumcar")
+            self.assertTrue(recommended["recommended_first_try"])
+            self.assertFalse(recommended["root_exists"])
+            self.assertTrue(recommended["root_parent_exists"])
+            self.assertTrue(recommended["requires_root_creation"])
+            self.assertFalse(root.exists())
+            self.assertFalse(Path(recommended["path"]).exists())
+
     def test_create_stadiumcar_skin_dir_requires_recognized_target(self):
         from src.evidence.skin_dirs import create_stadiumcar_skin_dir
 

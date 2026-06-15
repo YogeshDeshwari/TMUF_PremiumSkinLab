@@ -9,7 +9,11 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_REPORT = ROOT / "out" / "proof" / "tmuf_skin_dirs.json"
+DEFAULT_USER_DATA_ROOTS = [
+    Path.home() / "Documents" / "TrackMania",
+]
 DEFAULT_SEARCH_ROOTS = [
+    *DEFAULT_USER_DATA_ROOTS,
     Path.home() / "Documents",
     Path.home() / "Library" / "Application Support" / "Steam",
     Path.home() / "Library" / "Application Support" / "CrossOver",
@@ -24,6 +28,16 @@ KNOWN_SUFFIXES = {
     ("GameData", "Skins", "Vehicles", "StadiumCar"): "gamedata_skins_vehicles_stadiumcar",
     ("Skins", "Models", "StadiumCar"): "skins_models_stadiumcar",
 }
+ROUTE_PRIORITY = {
+    "skins_vehicles_stadiumcar": 0,
+    "skins_models_stadiumcar": 1,
+    "gamedata_skins_vehicles_stadiumcar": 2,
+}
+
+
+def _route_sort_key(item: tuple[tuple[str, ...], str]) -> tuple[int, str]:
+    suffix, route = item
+    return (ROUTE_PRIORITY.get(route, 99), "/".join(suffix))
 
 
 def route_for_stadiumcar_skin_dir(path: Path) -> str | None:
@@ -48,25 +62,40 @@ def _candidate(path: Path, root: Path, route: str) -> dict[str, Any]:
 
 def _manual_creation_target(root: Path, suffix: tuple[str, ...], route: str) -> dict[str, Any]:
     path = Path(root).joinpath(*suffix)
+    root_exists = Path(root).exists()
+    documents_trackmania_root = Path(root).name == "TrackMania" and Path(root).parent.name == "Documents"
     return {
         "path": path.as_posix(),
         "target_root": Path(root).as_posix(),
+        "root_exists": root_exists,
+        "root_parent_exists": Path(root).parent.exists(),
         "suffix": "/".join(suffix),
         "route": route,
         "exists": path.exists(),
         "requires_manual_creation": not path.exists(),
+        "requires_root_creation": not root_exists,
+        "preferred_suffix": route == "skins_vehicles_stadiumcar",
+        "recommended_first_try": documents_trackmania_root and route == "skins_vehicles_stadiumcar",
         "status": "existing_candidate_route" if path.exists() else "manual_target_hint_not_tmuf_proof",
         "does_not_prove_tmuf_smoke": True,
         "safe_use": "Create only after confirming this root is the intended TMUF/TMNF user-data or install-data folder.",
+        "evidence_boundary": "Install path hint only; not proof that TMUF/TMNF will load the skin.",
     }
+
+
+def _can_suggest_creation_root(root: Path) -> bool:
+    root = Path(root)
+    if root.exists() and root.is_dir():
+        return True
+    return root.name == "TrackMania" and root.parent.name == "Documents" and root.parent.exists()
 
 
 def suggest_manual_creation_targets(roots: list[Path]) -> list[dict[str, Any]]:
     targets: list[dict[str, Any]] = []
     for root in [Path(item) for item in roots]:
-        if not root.exists() or not root.is_dir():
+        if not _can_suggest_creation_root(root):
             continue
-        for suffix, route in sorted(KNOWN_SUFFIXES.items(), key=lambda item: item[1]):
+        for suffix, route in sorted(KNOWN_SUFFIXES.items(), key=_route_sort_key):
             targets.append(_manual_creation_target(root, suffix, route))
     return targets
 
@@ -149,12 +178,21 @@ def build_skin_dir_report(
     search_roots = [Path(root) for root in (roots if roots is not None else DEFAULT_SEARCH_ROOTS)]
     candidates = find_stadiumcar_skin_dirs(search_roots, max_depth=max_depth)
     manual_creation_targets = suggest_manual_creation_targets(search_roots) if include_creation_targets else []
+    recommended_creation_target = None
+    if not candidates and manual_creation_targets:
+        recommended_creation_target = next(
+            (target for target in manual_creation_targets if target.get("recommended_first_try")),
+            manual_creation_targets[0],
+        )
     return {
         "schema_version": 1,
         "status": "candidates_found" if candidates else "no_candidates_found",
         "candidate_count": len(candidates),
         "candidates": candidates,
         "manual_creation_targets": manual_creation_targets,
+        "recommended_creation_target": recommended_creation_target,
+        "default_user_data_roots": [path.as_posix() for path in DEFAULT_USER_DATA_ROOTS],
+        "install_path_evidence_doc": "docs/tmuf_install_paths.md",
         "scan_boundary": {
             "max_depth": max_depth,
             "bounded_by_max_depth": max_depth is not None,

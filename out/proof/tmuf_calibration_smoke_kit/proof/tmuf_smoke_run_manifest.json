@@ -56,8 +56,13 @@
   "install_discovery": {
     "candidate_count": 0,
     "candidates": [],
+    "default_user_data_roots": [
+      "/Users/ydeshwari/Documents/TrackMania"
+    ],
     "does_not_prove_tmuf_smoke": true,
+    "install_path_evidence_doc": "docs/tmuf_install_paths.md",
     "manual_creation_targets": [],
+    "recommended_creation_target": null,
     "safe_use": "Use a listed path only as an explicit install target; finding or planning a directory does not prove TMUF load.",
     "scan_boundary": {
       "bounded_by_max_depth": false,

@@ -42,6 +42,10 @@ def _load_skin_dirs(root: Path) -> dict[str, Any]:
         "status": data.get("status", "unknown"),
         "candidate_count": data.get("candidate_count", 0),
         "candidates": data.get("candidates", []),
+        "manual_creation_targets": data.get("manual_creation_targets", []),
+        "recommended_creation_target": data.get("recommended_creation_target"),
+        "default_user_data_roots": data.get("default_user_data_roots", []),
+        "install_path_evidence_doc": data.get("install_path_evidence_doc"),
         "report": str(report_path),
         "does_not_prove_tmuf_smoke": data.get("does_not_prove_tmuf_smoke", True),
     }
@@ -75,7 +79,7 @@ def _base_commands(root: Path) -> dict[str, str]:
     receipt = _relative_root_path(root, DEFAULT_INSTALL_RECEIPT)
     return {
         "build_smoke_kit": "python3 recipes/prepare_tmuf_smoke_kit.py",
-        "scan_skin_dirs": "python3 recipes/find_tmuf_skin_dirs.py --write",
+        "scan_skin_dirs": "python3 recipes/find_tmuf_skin_dirs.py --include-creation-targets --write",
         "scan_custom_root": (
             "python3 recipes/find_tmuf_skin_dirs.py "
             "--root /absolute/path/to/TrackMania-or-Wine-prefix --write --json"
@@ -194,6 +198,17 @@ def build_smoke_readiness(root: Path = ROOT, *, install_target: Path | None = No
             "--write --write-command-packet"
         )
     commands["install_discovered"] = _install_discovered_command(selected_candidate)
+    recommended_target = skin_dirs.get("recommended_creation_target")
+    if isinstance(recommended_target, dict) and recommended_target.get("path"):
+        recommended_path = shlex.quote(str(recommended_target["path"]))
+        commands["preflight_recommended_creation_target"] = (
+            "python3 recipes/smoke_readiness.py "
+            f"--install-target {recommended_path} --write --write-command-packet"
+        )
+        commands["create_and_install_recommended_creation_target"] = (
+            "python3 recipes/prepare_tmuf_smoke_kit.py "
+            f"--install-skins-dir {recommended_path} --create-install-target --json"
+        )
 
     if not kit["fresh"]:
         status = "needs_fresh_smoke_kit"
@@ -300,6 +315,26 @@ def format_smoke_command_packet(readiness: dict[str, Any]) -> str:
     lines.extend(f"- {observation}" for observation in required_observations)
     lines.extend(["", "Required screenshot roles:"])
     lines.extend(f"- {role}" for role in required_screenshot_roles)
+    skin_dirs = readiness.get("skin_dirs", {})
+    recommended = skin_dirs.get("recommended_creation_target")
+    if isinstance(recommended, dict):
+        lines.extend(
+            [
+                "",
+                "Recommended manual creation target:",
+                f"path={recommended['path']}",
+                f"route={recommended['route']}",
+                f"root_exists={str(recommended['root_exists']).lower()}",
+                f"requires_root_creation={str(recommended['requires_root_creation']).lower()}",
+                "does_not_prove_tmuf_smoke=true",
+            ]
+        )
+    manual_targets = skin_dirs.get("manual_creation_targets", [])
+    if manual_targets:
+        lines.extend(["", "Manual creation target candidates:"])
+        for target in manual_targets:
+            marker = "recommended" if target.get("recommended_first_try") else "alternate"
+            lines.append(f"- {target['path']} ({target['route']}, {marker})")
     lines.extend(["", "Commands:"])
     for name in [
         "build_smoke_kit",
@@ -309,6 +344,8 @@ def format_smoke_command_packet(readiness: dict[str, Any]) -> str:
         "plan_creation_targets",
         "create_explicit_target",
         "create_and_install_explicit",
+        "preflight_recommended_creation_target",
+        "create_and_install_recommended_creation_target",
         "preflight_explicit",
         "install_explicit",
         "install_discovered",

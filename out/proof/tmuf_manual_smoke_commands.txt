@@ -24,11 +24,32 @@ Required screenshot roles:
 - rear
 - top
 
+Recommended manual creation target:
+path=/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar
+route=skins_vehicles_stadiumcar
+root_exists=false
+requires_root_creation=true
+does_not_prove_tmuf_smoke=true
+
+Manual creation target candidates:
+- /Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar (skins_vehicles_stadiumcar, recommended)
+- /Users/ydeshwari/Documents/TrackMania/Skins/Models/StadiumCar (skins_models_stadiumcar, alternate)
+- /Users/ydeshwari/Documents/TrackMania/GameData/Skins/Vehicles/StadiumCar (gamedata_skins_vehicles_stadiumcar, alternate)
+- /Users/ydeshwari/Documents/Skins/Vehicles/StadiumCar (skins_vehicles_stadiumcar, alternate)
+- /Users/ydeshwari/Documents/Skins/Models/StadiumCar (skins_models_stadiumcar, alternate)
+- /Users/ydeshwari/Documents/GameData/Skins/Vehicles/StadiumCar (gamedata_skins_vehicles_stadiumcar, alternate)
+- /Applications/Skins/Vehicles/StadiumCar (skins_vehicles_stadiumcar, alternate)
+- /Applications/Skins/Models/StadiumCar (skins_models_stadiumcar, alternate)
+- /Applications/GameData/Skins/Vehicles/StadiumCar (gamedata_skins_vehicles_stadiumcar, alternate)
+- /Users/ydeshwari/Applications/Skins/Vehicles/StadiumCar (skins_vehicles_stadiumcar, alternate)
+- /Users/ydeshwari/Applications/Skins/Models/StadiumCar (skins_models_stadiumcar, alternate)
+- /Users/ydeshwari/Applications/GameData/Skins/Vehicles/StadiumCar (gamedata_skins_vehicles_stadiumcar, alternate)
+
 Commands:
 build_smoke_kit:
   python3 recipes/prepare_tmuf_smoke_kit.py
 scan_skin_dirs:
-  python3 recipes/find_tmuf_skin_dirs.py --write
+  python3 recipes/find_tmuf_skin_dirs.py --include-creation-targets --write
 scan_custom_root:
   python3 recipes/find_tmuf_skin_dirs.py --root /absolute/path/to/TrackMania-or-Wine-prefix --write --json
 scan_custom_root_bounded:
@@ -39,6 +60,10 @@ create_explicit_target:
   python3 recipes/create_tmuf_skin_dir.py --target /absolute/path/to/StadiumCar --json
 create_and_install_explicit:
   python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /absolute/path/to/StadiumCar --create-install-target --json
+preflight_recommended_creation_target:
+  python3 recipes/smoke_readiness.py --install-target /Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar --write --write-command-packet
+create_and_install_recommended_creation_target:
+  python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar --create-install-target --json
 preflight_explicit:
   python3 recipes/smoke_readiness.py --install-target /absolute/path/to/StadiumCar --write --write-command-packet
 install_explicit:
