@@ -382,6 +382,8 @@ def write_install_receipt(install_result: dict[str, Any], out_dir: Path = DEFAUL
         data["selected_candidate"] = install_result["selected_candidate"]
     if "discovery" in install_result:
         data["discovery"] = install_result["discovery"]
+    if "install_target_setup" in install_result:
+        data["install_target_setup"] = install_result["install_target_setup"]
     receipt_path.parent.mkdir(parents=True, exist_ok=True)
     receipt_path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
     return receipt_path

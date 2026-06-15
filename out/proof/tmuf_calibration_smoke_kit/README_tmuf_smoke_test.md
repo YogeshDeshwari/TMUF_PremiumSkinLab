@@ -135,6 +135,17 @@ python3 recipes/create_tmuf_skin_dir.py \
 
 This only prepares the folder. It does not prove TMUF/TMNF will load from it.
 
+To create the exact target and install the calibration zip in one audited step:
+
+```bash
+python3 recipes/prepare_tmuf_smoke_kit.py \
+  --install-skins-dir /absolute/path/to/StadiumCar \
+  --create-install-target \
+  --json
+```
+
+This writes an install receipt, but it still does not prove TMUF smoke status.
+
 Recognized install targets must end in one of these suffixes:
 
 ```text

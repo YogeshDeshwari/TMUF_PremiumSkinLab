@@ -230,6 +230,38 @@ class SmokeKitTests(unittest.TestCase):
             self.assertIn("run_tmuf_calibration_smoke_test", receipt["next_required_evidence"])
             self.assertEqual(sorted(path.name for path in install_dir.iterdir()), ["calibration_stock_diffuse.zip"])
 
+    def test_cli_install_can_create_explicit_recognized_target_when_requested(self):
+        from recipes.prepare_tmuf_smoke_kit import main
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            kit_dir = root / "kit"
+            install_dir = root / "GameData" / "Skins" / "Vehicles" / "StadiumCar"
+
+            output = main(
+                [
+                    "--out-dir",
+                    str(kit_dir),
+                    "--install-skins-dir",
+                    str(install_dir),
+                    "--create-install-target",
+                    "--json",
+                ]
+            )
+            data = json.loads(output)
+
+            self.assertTrue(install_dir.is_dir())
+            self.assertTrue((install_dir / "calibration_stock_diffuse.zip").exists())
+            self.assertEqual(data["install"]["route"], "gamedata_skins_vehicles_stadiumcar")
+            self.assertEqual(data["install"]["selection_mode"], "explicit_install_target_created")
+            self.assertTrue(data["install"]["install_target_setup"]["created"])
+            self.assertTrue(data["install"]["install_target_setup"]["does_not_prove_tmuf_smoke"])
+
+            receipt = json.loads(Path(data["install_receipt"]).read_text())
+            self.assertEqual(receipt["selection_mode"], "explicit_install_target_created")
+            self.assertTrue(receipt["install_target_setup"]["created"])
+            self.assertTrue(receipt["install_target_setup"]["does_not_prove_tmuf_smoke"])
+
     def test_cli_install_can_include_panel_probe_when_explicitly_requested(self):
         from recipes.prepare_tmuf_smoke_kit import main
 

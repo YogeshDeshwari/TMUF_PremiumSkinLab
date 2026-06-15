@@ -187,6 +187,8 @@ class SmokeReadinessTests(unittest.TestCase):
             self.assertIn("--include-creation-targets", text)
             self.assertIn("create_explicit_target:", text)
             self.assertIn("python3 recipes/create_tmuf_skin_dir.py --target /absolute/path/to/StadiumCar --json", text)
+            self.assertIn("create_and_install_explicit:", text)
+            self.assertIn("--create-install-target", text)
             self.assertIn("Skins/Vehicles/StadiumCar", text)
             self.assertIn("GameData/Skins/Vehicles/StadiumCar", text)
             self.assertIn("Skins/Models/StadiumCar", text)
