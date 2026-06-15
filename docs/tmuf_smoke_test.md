@@ -117,6 +117,7 @@ python3 recipes/record_tmuf_smoke.py \
   --tester "manual tester" \
   --tmuf-build "TMUF local install" \
   --test-date-local 2026-06-15 \
+  --install-receipt out/proof/tmuf_calibration_smoke_kit/proof/calibration_install_receipt.json \
   --screenshot-role front=/path/to/tmuf_calibration_front.png \
   --screenshot-role side=/path/to/tmuf_calibration_side.png \
   --screenshot-role rear=/path/to/tmuf_calibration_rear.png \
@@ -142,6 +143,11 @@ The helper rejects missing files, unreadable image files, and single-color blank
 images before it writes the evidence report. It also records each screenshot's
 SHA256, byte size, width, and height so later evaluation can detect changed
 proof files.
+
+When `--install-receipt` is provided, the helper copies that receipt into
+`out/proof/calibration_install_receipt.json` and records the receipt hash plus
+the installed calibration zip hash. Later smoke evaluation fails if the receipt
+or copied calibration zip no longer matches the recorded evidence.
 
 and writes:
 

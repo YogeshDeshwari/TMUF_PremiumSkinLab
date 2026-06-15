@@ -39,6 +39,11 @@ def main() -> int:
     parser.add_argument("--tmuf-build", required=True, help="TMUF/TMNF build or install used for the smoke test")
     parser.add_argument("--test-date-local", required=True, help="local test date, for example 2026-06-15")
     parser.add_argument(
+        "--install-receipt",
+        type=Path,
+        help="optional calibration_install_receipt.json from recipes/prepare_tmuf_smoke_kit.py --install-skins-dir",
+    )
+    parser.add_argument(
         "--screenshot-role",
         action="append",
         metavar="ROLE=PATH",
@@ -71,6 +76,7 @@ def main() -> int:
         screenshot_roles=screenshot_roles,
         all_required_observations_passed=args.all_required_observations_passed,
         confirmed_observations=args.confirm_observation,
+        install_receipt=args.install_receipt,
         notes=args.notes,
         base_dir=args.base_dir,
     )

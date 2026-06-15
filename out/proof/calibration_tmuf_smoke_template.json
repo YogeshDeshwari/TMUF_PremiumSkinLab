@@ -1,5 +1,7 @@
 {
   "artifact": "out/skins/calibration_stock_diffuse.zip",
+  "install_receipt": "",
+  "install_receipt_evidence": {},
   "notes": "",
   "observations": {
     "centerline_is_cyan": false,
@@ -17,6 +19,7 @@
     "Every required observation must be true.",
     "The front, side, rear, and top screenshot roles must each reference a readable, nonblank image.",
     "Recorded screenshot fingerprints must match the current screenshot files.",
+    "If an install receipt is included, its copied calibration zip hash must still match the receipt.",
     "This gate proves GBuffer mapping for this stock Diffuse route only."
   ],
   "route": "stock_diffuse_only",

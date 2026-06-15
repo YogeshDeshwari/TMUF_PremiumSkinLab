@@ -22,6 +22,8 @@
       "\"TMUF local install\"",
       "--test-date-local",
       "YYYY-MM-DD",
+      "--install-receipt",
+      "out/proof/tmuf_calibration_smoke_kit/proof/calibration_install_receipt.json",
       "--screenshot-role",
       "front=/absolute/path/to/tmuf_front.png",
       "--screenshot-role",

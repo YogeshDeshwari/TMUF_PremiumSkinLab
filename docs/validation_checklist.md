@@ -66,7 +66,9 @@ Use this before calling any skin complete.
 - [ ] Put zip into the StadiumCar skin folder.
 - [ ] Load the skin in TMUF.
 - [ ] Capture role-labeled `front`, `side`, `rear`, and `top` views.
-- [ ] Record evidence with `python3 recipes/record_tmuf_smoke.py ... --screenshot-role front=... --screenshot-role side=... --screenshot-role rear=... --screenshot-role top=...`.
+- [ ] Record evidence with `python3 recipes/record_tmuf_smoke.py ... --install-receipt ... --screenshot-role front=... --screenshot-role side=... --screenshot-role rear=... --screenshot-role top=...`.
+- [ ] Confirm smoke evaluation reports no missing, invalid, or mismatched install
+      receipt evidence before applying the gate.
 - [ ] Evaluate with `python3 recipes/tmuf_smoke_gate.py --evaluate out/proof/calibration_tmuf_smoke.json`.
 - [ ] Promote with `python3 recipes/tmuf_smoke_gate.py --apply out/proof/calibration_tmuf_smoke.json`
       only if the evaluation passes.

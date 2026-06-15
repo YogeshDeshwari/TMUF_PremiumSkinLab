@@ -68,6 +68,80 @@ class SmokeRecordTests(unittest.TestCase):
             self.assertEqual(result["gbuffer_mapping_status"], "proven_by_tmuf_smoke")
             self.assertEqual(result["missing_screenshot_roles"], [])
 
+    def test_record_can_attach_install_receipt_evidence(self):
+        from src.evidence.smoke_gate import evaluate_smoke_report
+        from src.evidence.smoke_kit import install_calibration_skin, write_install_receipt
+        from src.evidence.smoke_record import record_calibration_smoke_report
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            install_dir = base / "Skins" / "Vehicles" / "StadiumCar"
+            install_dir.mkdir(parents=True)
+            receipt_path = write_install_receipt(
+                install_calibration_skin(install_dir),
+                base / "kit",
+            )
+            role_paths = _write_role_screenshots(base)
+            output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
+
+            record_calibration_smoke_report(
+                output_path=output,
+                tester="manual tester",
+                tmuf_build="TMUF local install",
+                test_date_local="2026-06-15",
+                screenshot_roles=role_paths,
+                all_required_observations_passed=True,
+                install_receipt=receipt_path,
+                base_dir=base,
+            )
+
+            data = json.loads(output.read_text())
+            self.assertEqual(data["install_receipt"], "out/proof/calibration_install_receipt.json")
+            copied_receipt = base / data["install_receipt"]
+            self.assertTrue(copied_receipt.exists())
+            self.assertEqual(copied_receipt.read_text(), receipt_path.read_text())
+            install_evidence = data["install_receipt_evidence"]
+            self.assertEqual(install_evidence["installed_skin"], str(install_dir / "calibration_stock_diffuse.zip"))
+            self.assertEqual(install_evidence["installed_sha256"], install_evidence["source_sha256"])
+            self.assertRegex(install_evidence["receipt_sha256"], r"^[0-9a-f]{64}$")
+            self.assertTrue(evaluate_smoke_report(output, base_dir=base)["passed"])
+
+    def test_report_with_install_receipt_fails_if_installed_zip_changes(self):
+        from src.evidence.smoke_gate import evaluate_smoke_report
+        from src.evidence.smoke_kit import install_calibration_skin, write_install_receipt
+        from src.evidence.smoke_record import record_calibration_smoke_report
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            install_dir = base / "Skins" / "Vehicles" / "StadiumCar"
+            install_dir.mkdir(parents=True)
+            receipt_path = write_install_receipt(
+                install_calibration_skin(install_dir),
+                base / "kit",
+            )
+            output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
+
+            record_calibration_smoke_report(
+                output_path=output,
+                tester="manual tester",
+                tmuf_build="TMUF local install",
+                test_date_local="2026-06-15",
+                screenshot_roles=_write_role_screenshots(base),
+                all_required_observations_passed=True,
+                install_receipt=receipt_path,
+                base_dir=base,
+            )
+            data = json.loads(output.read_text())
+            (install_dir / "calibration_stock_diffuse.zip").write_bytes(b"not the recorded calibration zip")
+
+            result = evaluate_smoke_report(output, base_dir=base)
+            self.assertFalse(result["passed"])
+            self.assertEqual(result["invalid_install_receipts"], [data["install_receipt"]])
+            self.assertIn(
+                "installed_sha256_mismatch",
+                result["install_receipt_validation"][data["install_receipt"]]["errors"],
+            )
+
     def test_recorded_report_fails_if_copied_screenshot_changes(self):
         from src.evidence.smoke_gate import evaluate_smoke_report
         from src.evidence.smoke_record import record_calibration_smoke_report
@@ -320,6 +394,57 @@ class SmokeRecordTests(unittest.TestCase):
             data = json.loads(output.read_text())
             self.assertEqual(data["status"], "passed")
             self.assertEqual(set(data["screenshot_roles"]), set(REQUIRED_SCREENSHOT_ROLES))
+
+    def test_record_recipe_accepts_install_receipt(self):
+        from src.evidence.smoke_kit import install_calibration_skin, write_install_receipt
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            install_dir = base / "Skins" / "Vehicles" / "StadiumCar"
+            install_dir.mkdir(parents=True)
+            receipt_path = write_install_receipt(
+                install_calibration_skin(install_dir),
+                base / "kit",
+            )
+            role_paths = _write_role_screenshots(base)
+            output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
+            recipe = Path(__file__).resolve().parents[1] / "recipes" / "record_tmuf_smoke.py"
+
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(recipe),
+                    "--output",
+                    str(output),
+                    "--base-dir",
+                    str(base),
+                    "--tester",
+                    "manual tester",
+                    "--tmuf-build",
+                    "TMUF local install",
+                    "--test-date-local",
+                    "2026-06-15",
+                    "--install-receipt",
+                    str(receipt_path),
+                    *[
+                        flag
+                        for role, path in role_paths.items()
+                        for flag in ("--screenshot-role", f"{role}={path}")
+                    ],
+                    "--all-required-observations-passed",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            data = json.loads(output.read_text())
+            self.assertEqual(data["install_receipt"], "out/proof/calibration_install_receipt.json")
+            self.assertTrue((base / data["install_receipt"]).exists())
+            self.assertEqual(
+                data["install_receipt_evidence"]["installed_skin"],
+                str(install_dir / "calibration_stock_diffuse.zip"),
+            )
 
 
 if __name__ == "__main__":
