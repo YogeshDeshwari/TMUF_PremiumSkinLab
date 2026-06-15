@@ -8,6 +8,7 @@ from src.evidence.smoke_gate import (
     CALIBRATION_ARTIFACT,
     REQUIRED_OBSERVATIONS,
     evaluate_smoke_report,
+    fingerprint_screenshot_file,
     validate_screenshot_file,
 )
 
@@ -53,6 +54,7 @@ def record_calibration_smoke_report(
     screenshot_dir = base / "out" / "proof" / "tmuf_smoke_screenshots"
 
     copied_screenshots: list[str] = []
+    screenshot_evidence: dict[str, dict[str, object]] = {}
     for source_path in screenshot_paths:
         source = Path(source_path)
         if not source.is_file():
@@ -65,7 +67,9 @@ def record_calibration_smoke_report(
         screenshot_dir.mkdir(parents=True, exist_ok=True)
         destination = screenshot_dir / source.name
         shutil.copy2(source, destination)
-        copied_screenshots.append(_report_path(destination, base))
+        report_path = _report_path(destination, base)
+        copied_screenshots.append(report_path)
+        screenshot_evidence[report_path] = fingerprint_screenshot_file(destination)
 
     data = {
         "schema_version": 1,
@@ -76,6 +80,7 @@ def record_calibration_smoke_report(
         "tmuf_build": _require_nonempty("tmuf_build", tmuf_build),
         "test_date_local": _require_nonempty("test_date_local", test_date_local),
         "screenshots": copied_screenshots,
+        "screenshot_evidence": screenshot_evidence,
         "observations": {name: True for name in REQUIRED_OBSERVATIONS},
         "notes": notes,
         "recorded_by": "recipes/record_tmuf_smoke.py",

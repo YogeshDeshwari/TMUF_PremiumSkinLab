@@ -44,10 +44,45 @@ class SmokeRecordTests(unittest.TestCase):
             self.assertTrue(all(data["observations"].values()))
             self.assertEqual(data["screenshots"], ["out/proof/tmuf_smoke_screenshots/tmuf_front_left.png"])
             self.assertTrue((base / data["screenshots"][0]).exists())
+            fingerprint = data["screenshot_evidence"][data["screenshots"][0]]
+            self.assertEqual(fingerprint["width"], 64)
+            self.assertEqual(fingerprint["height"], 48)
+            self.assertEqual(fingerprint["size_bytes"], (base / data["screenshots"][0]).stat().st_size)
+            self.assertRegex(fingerprint["sha256"], r"^[0-9a-f]{64}$")
 
             result = evaluate_smoke_report(output, base_dir=base)
             self.assertTrue(result["passed"])
             self.assertEqual(result["gbuffer_mapping_status"], "proven_by_tmuf_smoke")
+
+    def test_recorded_report_fails_if_copied_screenshot_changes(self):
+        from src.evidence.smoke_gate import evaluate_smoke_report
+        from src.evidence.smoke_record import record_calibration_smoke_report
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            screenshot = base / "tmuf_front_left.png"
+            _write_nonblank_png(screenshot)
+            output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
+
+            record_calibration_smoke_report(
+                output_path=output,
+                tester="manual tester",
+                tmuf_build="TMUF local install",
+                test_date_local="2026-06-15",
+                screenshot_paths=[screenshot],
+                all_required_observations_passed=True,
+                base_dir=base,
+            )
+            data = json.loads(output.read_text())
+            copied = base / data["screenshots"][0]
+            with Image.open(copied) as image:
+                changed_image = image.convert("RGB")
+            ImageDraw.Draw(changed_image).point((0, 0), fill=(255, 255, 255))
+            changed_image.save(copied)
+
+            result = evaluate_smoke_report(output, base_dir=base)
+            self.assertFalse(result["passed"])
+            self.assertEqual(result["mismatched_screenshot_fingerprints"], [data["screenshots"][0]])
 
     def test_passed_report_requires_explicit_required_observation_confirmation(self):
         from src.evidence.smoke_record import record_calibration_smoke_report

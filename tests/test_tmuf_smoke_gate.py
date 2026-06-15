@@ -33,7 +33,12 @@ class TmufSmokeGateTests(unittest.TestCase):
             self.assertEqual(set(result["missing_observations"]), set(REQUIRED_OBSERVATIONS))
 
     def test_valid_manual_evidence_can_promote_generated_reports(self):
-        from src.evidence.smoke_gate import REQUIRED_OBSERVATIONS, apply_smoke_result, evaluate_smoke_report
+        from src.evidence.smoke_gate import (
+            REQUIRED_OBSERVATIONS,
+            apply_smoke_result,
+            evaluate_smoke_report,
+            fingerprint_screenshot_file,
+        )
 
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
@@ -50,6 +55,7 @@ class TmufSmokeGateTests(unittest.TestCase):
                         "tmuf_build": "TMUF local install",
                         "test_date_local": "2026-06-15",
                         "screenshots": [screenshot.name],
+                        "screenshot_evidence": {screenshot.name: fingerprint_screenshot_file(screenshot)},
                         "observations": {name: True for name in REQUIRED_OBSERVATIONS},
                     }
                 )
@@ -77,6 +83,49 @@ class TmufSmokeGateTests(unittest.TestCase):
             self.assertEqual(promoted["evidence_status"]["gbuffer_mapping"], "proven_by_tmuf_smoke")
             self.assertEqual(promoted["proof_gate"]["calibration_stock_diffuse"], "passed")
             self.assertEqual(promoted["tmuf_smoke_evidence"]["screenshots"], [screenshot.name])
+            self.assertIn(screenshot.name, promoted["tmuf_smoke_evidence"]["screenshot_evidence"])
+
+    def test_missing_or_changed_screenshot_fingerprint_prevents_promotion(self):
+        from src.evidence.smoke_gate import (
+            REQUIRED_OBSERVATIONS,
+            apply_smoke_result,
+            evaluate_smoke_report,
+            fingerprint_screenshot_file,
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            screenshot = base / "tmuf_calibration_front_side.png"
+            _write_nonblank_png(screenshot)
+            smoke_report = base / "calibration_tmuf_smoke.json"
+            report_data = {
+                "schema_version": 1,
+                "artifact": "out/skins/calibration_stock_diffuse.zip",
+                "status": "passed",
+                "tester": "manual tester",
+                "tmuf_build": "TMUF local install",
+                "test_date_local": "2026-06-15",
+                "screenshots": [screenshot.name],
+                "observations": {name: True for name in REQUIRED_OBSERVATIONS},
+            }
+            smoke_report.write_text(json.dumps(report_data))
+
+            missing = evaluate_smoke_report(smoke_report, base_dir=base)
+            self.assertFalse(missing["passed"])
+            self.assertEqual(missing["missing_screenshot_fingerprints"], [screenshot.name])
+
+            report_data["screenshot_evidence"] = {screenshot.name: fingerprint_screenshot_file(screenshot)}
+            smoke_report.write_text(json.dumps(report_data))
+            with Image.open(screenshot) as image:
+                changed_image = image.convert("RGB")
+            ImageDraw.Draw(changed_image).point((0, 0), fill=(255, 255, 255))
+            changed_image.save(screenshot)
+
+            changed = evaluate_smoke_report(smoke_report, base_dir=base)
+            self.assertFalse(changed["passed"])
+            self.assertEqual(changed["mismatched_screenshot_fingerprints"], [screenshot.name])
+            with self.assertRaises(ValueError):
+                apply_smoke_result(smoke_report, report_paths=[], base_dir=base)
 
     def test_invalid_or_blank_screenshot_prevents_promotion(self):
         from src.evidence.smoke_gate import REQUIRED_OBSERVATIONS, apply_smoke_result, evaluate_smoke_report

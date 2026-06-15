@@ -34,7 +34,8 @@ All observations must be true before the gate can pass:
 - package loads without custom GBX files
 
 At least one screenshot path must be recorded. Each referenced screenshot must
-exist locally, open as an image, and contain nonblank visual content.
+exist locally, open as an image, contain nonblank visual content, and match the
+fingerprint recorded in the smoke evidence file.
 
 ## Workflow
 
@@ -91,7 +92,9 @@ out/proof/tmuf_smoke_screenshots/
 ```
 
 The helper rejects missing files, unreadable image files, and single-color blank
-images before it writes the evidence report.
+images before it writes the evidence report. It also records each screenshot's
+SHA256, byte size, width, and height so later evaluation can detect changed
+proof files.
 
 and writes:
 

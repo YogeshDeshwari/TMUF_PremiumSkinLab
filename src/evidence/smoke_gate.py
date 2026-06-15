@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from hashlib import sha256
 from pathlib import Path
 from typing import Any
 
@@ -39,6 +40,22 @@ def validate_screenshot_file(path: Path) -> dict[str, Any]:
     return {"readable": True, "nonblank": nonblank, "size": [width, height]}
 
 
+def fingerprint_screenshot_file(path: Path) -> dict[str, Any]:
+    path = Path(path)
+    validation = validate_screenshot_file(path)
+    if not validation["readable"]:
+        raise ValueError(f"Screenshot must be a readable image: {path}")
+    if not validation["nonblank"]:
+        raise ValueError(f"Screenshot must be nonblank: {path}")
+    size = validation["size"] or [0, 0]
+    return {
+        "sha256": sha256(path.read_bytes()).hexdigest(),
+        "size_bytes": path.stat().st_size,
+        "width": size[0],
+        "height": size[1],
+    }
+
+
 def write_template(path: Path = DEFAULT_TEMPLATE) -> Path:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -57,6 +74,7 @@ def write_template(path: Path = DEFAULT_TEMPLATE) -> Path:
             "Set status to passed only after loading the calibration zip in TMUF/TMNF.",
             "Every required observation must be true.",
             "At least one referenced screenshot file must exist and be a readable, nonblank image.",
+            "Recorded screenshot fingerprints must match the current screenshot files.",
             "This gate proves GBuffer mapping for this stock Diffuse route only.",
         ],
     }
@@ -97,7 +115,30 @@ def evaluate_smoke_report(path: Path, base_dir: Path | None = None) -> dict[str,
         for item, validation in screenshot_validation.items()
         if validation["readable"] and not validation["nonblank"]
     ]
-    has_valid_screenshot = bool(screenshots) and not missing_screenshots and not invalid_screenshots and not blank_screenshots
+    screenshot_evidence = data.get("screenshot_evidence", {})
+    if not isinstance(screenshot_evidence, dict):
+        screenshot_evidence = {}
+    current_fingerprints = {
+        item: fingerprint_screenshot_file(_resolve_evidence_path(item, base))
+        for item in screenshots
+        if item not in missing_screenshots and item not in invalid_screenshots and item not in blank_screenshots
+    }
+    missing_screenshot_fingerprints = [
+        item for item in screenshots if item not in missing_screenshots and item not in screenshot_evidence
+    ]
+    mismatched_screenshot_fingerprints = [
+        item
+        for item, fingerprint in current_fingerprints.items()
+        if item in screenshot_evidence and screenshot_evidence[item] != fingerprint
+    ]
+    has_valid_screenshot = (
+        bool(screenshots)
+        and not missing_screenshots
+        and not invalid_screenshots
+        and not blank_screenshots
+        and not missing_screenshot_fingerprints
+        and not mismatched_screenshot_fingerprints
+    )
 
     passed = (
         data.get("status") == "passed"
@@ -118,6 +159,10 @@ def evaluate_smoke_report(path: Path, base_dir: Path | None = None) -> dict[str,
         "invalid_screenshots": invalid_screenshots,
         "blank_screenshots": blank_screenshots,
         "screenshot_validation": screenshot_validation,
+        "screenshot_evidence": screenshot_evidence,
+        "current_screenshot_fingerprints": current_fingerprints,
+        "missing_screenshot_fingerprints": missing_screenshot_fingerprints,
+        "mismatched_screenshot_fingerprints": mismatched_screenshot_fingerprints,
         "gbuffer_mapping_status": "proven_by_tmuf_smoke" if passed else "experimental_until_tmuf_smoke",
         "tester": data.get("tester", ""),
         "tmuf_build": data.get("tmuf_build", ""),
@@ -139,7 +184,9 @@ def apply_smoke_result(
             f"missing metadata: {result['missing_metadata']}; "
             f"missing screenshots: {result['missing_screenshots']}; "
             f"invalid screenshots: {result['invalid_screenshots']}; "
-            f"blank screenshots: {result['blank_screenshots']}"
+            f"blank screenshots: {result['blank_screenshots']}; "
+            f"missing screenshot fingerprints: {result['missing_screenshot_fingerprints']}; "
+            f"mismatched screenshot fingerprints: {result['mismatched_screenshot_fingerprints']}"
         )
 
     paths = (
@@ -158,6 +205,7 @@ def apply_smoke_result(
         data["tmuf_smoke_evidence"] = {
             "report": smoke_report_path.as_posix(),
             "screenshots": result["screenshots"],
+            "screenshot_evidence": result["screenshot_evidence"],
             "tester": result["tester"],
             "tmuf_build": result["tmuf_build"],
             "test_date_local": result["test_date_local"],
