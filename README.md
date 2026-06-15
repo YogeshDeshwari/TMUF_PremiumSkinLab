@@ -186,8 +186,14 @@ python3 recipes/tmuf_smoke_gate.py --evaluate out/proof/calibration_tmuf_smoke.j
 ```
 
 Premium candidate feedback is recorded separately from the calibration gate.
-After inspecting one candidate in TMUF/TMNF, record its role-labeled screenshots
-and verdict with:
+Prepare screenshot slots and per-candidate commands with:
+
+```bash
+python3 recipes/prepare_premium_visual_review_session.py --json
+```
+
+After inspecting one candidate in TMUF/TMNF, save screenshots into the prepared
+paths and record its verdict with:
 
 ```bash
 python3 recipes/record_premium_visual_review.py --skin-name black_magenta_cyan_blade --verdict needs_iteration --tester "manual tester" --tmuf-build "TMUF local install" --test-date-local 2026-06-15 --screenshot-role front=/path/to/premium_front.png --screenshot-role side=/path/to/premium_side.png --screenshot-role rear=/path/to/premium_rear.png --screenshot-role top=/path/to/premium_top.png --notes "tail stripe too weak" --json

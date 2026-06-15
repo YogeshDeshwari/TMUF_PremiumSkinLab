@@ -71,6 +71,8 @@ install_premium_review_explicit:
   python3 recipes/install_premium_review_skins.py --install-skins-dir /Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar --json
 install_premium_review_discovered:
   python3 recipes/install_premium_review_skins.py --install-discovered --search-root /Users/ydeshwari/Documents/TrackMania --json
+prepare_premium_visual_review_session:
+  python3 recipes/prepare_premium_visual_review_session.py --json
 record_premium_visual_review:
   python3 recipes/record_premium_visual_review.py --skin-name black_magenta_cyan_blade --verdict needs_iteration --tester "manual tester" --tmuf-build "TMUF local install" --test-date-local YYYY-MM-DD --screenshot-role front=/absolute/path/to/premium_front.png --screenshot-role side=/absolute/path/to/premium_side.png --screenshot-role rear=/absolute/path/to/premium_rear.png --screenshot-role top=/absolute/path/to/premium_top.png --notes "manual visual feedback" --json
 prepare_smoke_session:

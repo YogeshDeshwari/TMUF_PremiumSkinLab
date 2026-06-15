@@ -194,6 +194,8 @@ class SmokeReadinessTests(unittest.TestCase):
             self.assertIn("Skins/Models/StadiumCar", text)
             self.assertIn("prepare_smoke_session:", text)
             self.assertIn("python3 recipes/prepare_tmuf_smoke_session.py --json", text)
+            self.assertIn("prepare_premium_visual_review_session:", text)
+            self.assertIn("python3 recipes/prepare_premium_visual_review_session.py --json", text)
             self.assertIn("install_premium_review_explicit:", text)
             self.assertIn("python3 recipes/install_premium_review_skins.py --install-skins-dir", text)
             self.assertIn("record_premium_visual_review:", text)

@@ -109,6 +109,9 @@ def _base_commands(root: Path) -> dict[str, str]:
             "python3 recipes/install_premium_review_skins.py "
             "--install-skins-dir /absolute/path/to/StadiumCar --json"
         ),
+        "prepare_premium_visual_review_session": (
+            "python3 recipes/prepare_premium_visual_review_session.py --json"
+        ),
         "record_premium_visual_review": (
             "python3 recipes/record_premium_visual_review.py "
             "--skin-name black_magenta_cyan_blade "
@@ -381,6 +384,7 @@ def format_smoke_command_packet(readiness: dict[str, Any]) -> str:
         "install_discovered",
         "install_premium_review_explicit",
         "install_premium_review_discovered",
+        "prepare_premium_visual_review_session",
         "record_premium_visual_review",
         "prepare_smoke_session",
         "record_smoke",

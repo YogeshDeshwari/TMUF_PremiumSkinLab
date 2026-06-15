@@ -222,6 +222,23 @@ promote any premium candidate past the calibration smoke gate.
 After a premium candidate is inspected in TMUF/TMNF, record visual feedback for
 that one candidate with real role-labeled screenshots:
 
+Prepare exact screenshot slots and per-candidate commands:
+
+```bash
+python3 recipes/prepare_premium_visual_review_session.py --json
+```
+
+This writes:
+
+```text
+out/proof/premium_visual_review_session/session_manifest.json
+out/proof/premium_visual_review_session/record_premium_visual_review_commands.txt
+out/proof/premium_visual_review_session/README_premium_visual_review_session.md
+```
+
+The session scaffold creates folders only. It does not create screenshots, does
+not prove TMUF/TMNF loaded any premium skin, and does not prove GBuffer mapping.
+
 ```bash
 python3 recipes/record_premium_visual_review.py \
   --skin-name black_magenta_cyan_blade \

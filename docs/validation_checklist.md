@@ -62,6 +62,8 @@ Use this before calling any skin complete.
 - [ ] Atlas preview exists.
 - [ ] Projected side/top/rear preview exists.
 - [ ] Premium candidate review board exists for side-by-side local comparison.
+- [ ] Run `python3 recipes/prepare_premium_visual_review_session.py --json`
+      before collecting in-game candidate screenshots.
 - [ ] In-game premium feedback, when available, is recorded with
       `python3 recipes/record_premium_visual_review.py ... --screenshot-role front=... --screenshot-role side=... --screenshot-role rear=... --screenshot-role top=...`.
 - [ ] Broad graphics are readable.

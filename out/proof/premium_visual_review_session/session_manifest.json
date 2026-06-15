@@ -1,0 +1,662 @@
+{
+  "base_dir": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab",
+  "candidate_count": 20,
+  "candidates": [
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/black_magenta_cyan_blade.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name black_magenta_cyan_blade --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/black_magenta_cyan_blade.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_magenta_cyan_blade/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_magenta_cyan_blade/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_magenta_cyan_blade/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_magenta_cyan_blade/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_magenta_cyan_blade/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_magenta_cyan_blade/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_magenta_cyan_blade/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_magenta_cyan_blade/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "black_magenta_cyan_blade"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/black_cyan_spine.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name black_cyan_spine --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/black_cyan_spine.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_cyan_spine/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_cyan_spine/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_cyan_spine/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_cyan_spine/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_cyan_spine/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_cyan_spine/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_cyan_spine/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_cyan_spine/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "black_cyan_spine"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/violet_cyber_flow.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name violet_cyber_flow --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/violet_cyber_flow.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/violet_cyber_flow/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/violet_cyber_flow/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/violet_cyber_flow/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/violet_cyber_flow/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/violet_cyber_flow/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/violet_cyber_flow/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/violet_cyber_flow/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/violet_cyber_flow/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "violet_cyber_flow"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/dark_neon_louver.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name dark_neon_louver --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/dark_neon_louver.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/dark_neon_louver/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/dark_neon_louver/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/dark_neon_louver/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/dark_neon_louver/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/dark_neon_louver/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/dark_neon_louver/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/dark_neon_louver/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/dark_neon_louver/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "dark_neon_louver"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/magenta_cyan_race_proto.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name magenta_cyan_race_proto --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/magenta_cyan_race_proto.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/magenta_cyan_race_proto/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/magenta_cyan_race_proto/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/magenta_cyan_race_proto/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/magenta_cyan_race_proto/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/magenta_cyan_race_proto/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/magenta_cyan_race_proto/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/magenta_cyan_race_proto/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/magenta_cyan_race_proto/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "magenta_cyan_race_proto"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/black_red_cyber_minimal.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name black_red_cyber_minimal --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/black_red_cyber_minimal.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_red_cyber_minimal/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_red_cyber_minimal/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_red_cyber_minimal/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_red_cyber_minimal/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_red_cyber_minimal/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_red_cyber_minimal/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_red_cyber_minimal/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/black_red_cyber_minimal/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "black_red_cyber_minimal"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/carbon_gold_circuit.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name carbon_gold_circuit --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/carbon_gold_circuit.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/carbon_gold_circuit/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/carbon_gold_circuit/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/carbon_gold_circuit/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/carbon_gold_circuit/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/carbon_gold_circuit/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/carbon_gold_circuit/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/carbon_gold_circuit/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/carbon_gold_circuit/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "carbon_gold_circuit"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/teal_magenta_vector.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name teal_magenta_vector --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/teal_magenta_vector.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/teal_magenta_vector/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/teal_magenta_vector/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/teal_magenta_vector/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/teal_magenta_vector/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/teal_magenta_vector/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/teal_magenta_vector/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/teal_magenta_vector/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/teal_magenta_vector/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "teal_magenta_vector"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/shadow_magenta_split.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name shadow_magenta_split --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/shadow_magenta_split.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/shadow_magenta_split/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/shadow_magenta_split/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/shadow_magenta_split/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/shadow_magenta_split/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/shadow_magenta_split/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/shadow_magenta_split/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/shadow_magenta_split/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/shadow_magenta_split/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "shadow_magenta_split"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/white_cyan_nightcore.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name white_cyan_nightcore --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/white_cyan_nightcore.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_cyan_nightcore/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_cyan_nightcore/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_cyan_nightcore/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_cyan_nightcore/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_cyan_nightcore/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_cyan_nightcore/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_cyan_nightcore/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_cyan_nightcore/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "white_cyan_nightcore"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/monochrome_magenta_pinstripe.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name monochrome_magenta_pinstripe --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/monochrome_magenta_pinstripe.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/monochrome_magenta_pinstripe/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/monochrome_magenta_pinstripe/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/monochrome_magenta_pinstripe/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/monochrome_magenta_pinstripe/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/monochrome_magenta_pinstripe/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/monochrome_magenta_pinstripe/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/monochrome_magenta_pinstripe/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/monochrome_magenta_pinstripe/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "monochrome_magenta_pinstripe"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/cyan_white_gt_block.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name cyan_white_gt_block --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/cyan_white_gt_block.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/cyan_white_gt_block/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/cyan_white_gt_block/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/cyan_white_gt_block/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/cyan_white_gt_block/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/cyan_white_gt_block/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/cyan_white_gt_block/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/cyan_white_gt_block/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/cyan_white_gt_block/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "cyan_white_gt_block"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/neon_checker_tail.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name neon_checker_tail --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/neon_checker_tail.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/neon_checker_tail/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/neon_checker_tail/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/neon_checker_tail/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/neon_checker_tail/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/neon_checker_tail/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/neon_checker_tail/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/neon_checker_tail/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/neon_checker_tail/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "neon_checker_tail"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/asym_diagonal_sash.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name asym_diagonal_sash --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/asym_diagonal_sash.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/asym_diagonal_sash/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/asym_diagonal_sash/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/asym_diagonal_sash/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/asym_diagonal_sash/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/asym_diagonal_sash/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/asym_diagonal_sash/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/asym_diagonal_sash/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/asym_diagonal_sash/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "asym_diagonal_sash"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/guard_halo_cyan.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name guard_halo_cyan --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/guard_halo_cyan.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/guard_halo_cyan/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/guard_halo_cyan/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/guard_halo_cyan/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/guard_halo_cyan/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/guard_halo_cyan/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/guard_halo_cyan/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/guard_halo_cyan/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/guard_halo_cyan/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "guard_halo_cyan"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/full_panel_cyber_flood.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name full_panel_cyber_flood --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/full_panel_cyber_flood.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/full_panel_cyber_flood/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/full_panel_cyber_flood/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/full_panel_cyber_flood/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/full_panel_cyber_flood/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/full_panel_cyber_flood/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/full_panel_cyber_flood/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/full_panel_cyber_flood/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/full_panel_cyber_flood/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "full_panel_cyber_flood"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/mint_purple_split.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name mint_purple_split --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/mint_purple_split.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/mint_purple_split/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/mint_purple_split/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/mint_purple_split/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/mint_purple_split/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/mint_purple_split/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/mint_purple_split/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/mint_purple_split/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/mint_purple_split/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "mint_purple_split"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/orange_teal_circuit.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name orange_teal_circuit --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/orange_teal_circuit.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/orange_teal_circuit/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/orange_teal_circuit/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/orange_teal_circuit/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/orange_teal_circuit/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/orange_teal_circuit/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/orange_teal_circuit/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/orange_teal_circuit/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/orange_teal_circuit/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "orange_teal_circuit"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/white_magenta_rally_blocks.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name white_magenta_rally_blocks --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/white_magenta_rally_blocks.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_magenta_rally_blocks/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_magenta_rally_blocks/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_magenta_rally_blocks/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_magenta_rally_blocks/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_magenta_rally_blocks/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_magenta_rally_blocks/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_magenta_rally_blocks/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/white_magenta_rally_blocks/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "white_magenta_rally_blocks"
+    },
+    {
+      "default_verdict": "needs_iteration",
+      "output_report": "out/proof/premium_visual_review/reviews/crimson_cyan_arrow.json",
+      "record_command": "python3 recipes/record_premium_visual_review.py --skin-name crimson_cyan_arrow --verdict needs_iteration --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review/reviews/crimson_cyan_arrow.json --base-dir /Users/ydeshwari/Documents/TMUF_PremiumSkinLab --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/crimson_cyan_arrow/front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/crimson_cyan_arrow/side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/crimson_cyan_arrow/rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/crimson_cyan_arrow/top.png --notes 'manual visual feedback' --json",
+      "screenshot_slots": [
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/crimson_cyan_arrow/front.png",
+          "required": true,
+          "role": "front"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/crimson_cyan_arrow/side.png",
+          "required": true,
+          "role": "side"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/crimson_cyan_arrow/rear.png",
+          "required": true,
+          "role": "rear"
+        },
+        {
+          "exists": false,
+          "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots/crimson_cyan_arrow/top.png",
+          "required": true,
+          "role": "top"
+        }
+      ],
+      "skin_name": "crimson_cyan_arrow"
+    }
+  ],
+  "command_file": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/record_premium_visual_review_commands.txt",
+  "does_not_prove_gbuffer_mapping": true,
+  "does_not_prove_tmuf_smoke": true,
+  "output_dir": "out/proof/premium_visual_review/reviews",
+  "proof_boundary": "This session scaffold only prepares screenshot paths and review commands; it is not TMUF smoke evidence and does not prove GBuffer mapping.",
+  "readme": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/README_premium_visual_review_session.md",
+  "required_screenshot_roles": [
+    "front",
+    "side",
+    "rear",
+    "top"
+  ],
+  "schema": "tmuf_premium_skin_lab.premium_visual_review_session.v1",
+  "screenshots_dir": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session/screenshots",
+  "session_dir": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/premium_visual_review_session",
+  "status": "awaiting_tmuf_premium_screenshots"
+}
