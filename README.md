@@ -131,9 +131,12 @@ evidence split, route counts, and style metrics. The gallery at
 scan aid and may choose `Icon.dds`. Use
 `out/reference_analysis/reference_livery_atlas_gallery.png` when comparing
 paint texture slots. Per-package contact sheets remain the safest review
-artifacts because they show every detected DDS slot. `style_metrics` in each
-report are local RGB/alpha image metrics only; they do not prove TMUF runtime
-appearance or stock UV mapping.
+artifacts because they show every detected DDS slot. Per-package
+`*_alpha_diagnostic.png` files show raw RGB, alpha mask, and alpha-over-dark
+views side by side, which prevents transparent-alpha textures from being
+mistaken for empty DDS files. `style_metrics` in each report are local
+RGB/alpha image metrics only; they do not prove TMUF runtime appearance or
+stock UV mapping.
 
 The stock premium generator also writes
 `out/reports/reference_style_guidance.json` from those reference metrics and

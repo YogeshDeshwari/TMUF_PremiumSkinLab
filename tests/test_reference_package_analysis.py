@@ -101,6 +101,37 @@ class ReferencePackageAnalysisTests(unittest.TestCase):
             self.assertGreater(diffuse["magenta_ratio"], 0.8)
             self.assertLess(diffuse["black_ratio"], 0.1)
 
+    def test_alpha_diagnostic_sheet_exposes_rgb_and_alpha_separately(self):
+        from src.dds.tmnf_dds import build_dds_dxt5_bytes
+        from src.evidence.reference_package_analysis import analyze_reference_package
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            package_zip = root / "transparent_rgb.zip"
+            output_dir = root / "out"
+            with zipfile.ZipFile(package_zip, "w", zipfile.ZIP_DEFLATED) as zf:
+                zf.writestr(
+                    "Diffuse.dds",
+                    build_dds_dxt5_bytes(Image.new("RGBA", (512, 512), (255, 0, 180, 0))),
+                )
+                zf.writestr("Icon.dds", build_dds_dxt5_bytes(Image.new("RGBA", (8, 8), (20, 20, 20, 255))))
+
+            report = analyze_reference_package(package_zip, output_dir=output_dir)
+
+            diagnostic_path = Path(report["output_artifacts"]["alpha_diagnostic_sheet"])
+            self.assertTrue(diagnostic_path.exists())
+            self.assertEqual(
+                report["style_metrics"]["slots"]["Diffuse.dds"]["preview_policy"],
+                "rgb_and_alpha_recorded_separately",
+            )
+            diagnostic = Image.open(diagnostic_path).convert("RGB")
+            raw_rgb_sample = diagnostic.getpixel((40, 58))
+            alpha_sample = diagnostic.getpixel((302, 58))
+            self.assertGreater(raw_rgb_sample[0], 200)
+            self.assertLess(raw_rgb_sample[1], 50)
+            self.assertGreater(raw_rgb_sample[2], 120)
+            self.assertLess(max(alpha_sample), 10)
+
     def test_stock_diffuse_only_reference_package_stays_separate(self):
         from src.dds.tmnf_dds import build_dds_dxt5_bytes
         from src.evidence.reference_package_analysis import analyze_reference_package
@@ -171,6 +202,7 @@ class ReferencePackageAnalysisTests(unittest.TestCase):
             self.assertIn("reference_package_index.json", result.stdout)
             self.assertIn("reference_package_gallery.png", result.stdout)
             self.assertIn("reference_livery_atlas_gallery.png", result.stdout)
+            self.assertIn("sample_alpha_diagnostic.png", result.stdout)
             index = json.loads((output_dir / "reference_package_index.json").read_text())
             self.assertEqual(index["schema"], "tmuf_premium_skin_lab.reference_package_index.v1")
             self.assertEqual(index["reports"][0]["package_route"], "stock_diffuse_only_reference")
@@ -179,8 +211,10 @@ class ReferencePackageAnalysisTests(unittest.TestCase):
             self.assertEqual(index["reports"][0]["primary_livery_slot"], "Diffuse.dds")
             self.assertEqual(index["gallery"], str(output_dir / "reference_package_gallery.png"))
             self.assertEqual(index["livery_atlas_gallery"], str(output_dir / "reference_livery_atlas_gallery.png"))
+            self.assertEqual(index["reports"][0]["alpha_diagnostic_sheet"], str(output_dir / "sample_alpha_diagnostic.png"))
             self.assertTrue((output_dir / "reference_package_gallery.png").exists())
             self.assertTrue((output_dir / "reference_livery_atlas_gallery.png").exists())
+            self.assertTrue((output_dir / "sample_alpha_diagnostic.png").exists())
 
 
 if __name__ == "__main__":

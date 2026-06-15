@@ -106,6 +106,7 @@
   "evidence_label": "reference_only",
   "filename_case_notes": [],
   "output_artifacts": {
+    "alpha_diagnostic_sheet": "out/reference_analysis/Pink-Skin-(TMNF_UF)_by_SparkyTM_alpha_diagnostic.png",
     "contact_sheet": "out/reference_analysis/Pink-Skin-(TMNF_UF)_by_SparkyTM_contact_sheet.png",
     "report": "out/reference_analysis/Pink-Skin-(TMNF_UF)_by_SparkyTM_report.json"
   },
@@ -141,6 +142,7 @@
         "palette_tags": [
           "black"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.005432,
         "slot_role": "details",
         "valid": true,
@@ -160,6 +162,7 @@
         "mean_contrast": 2.377903,
         "mean_luminance": 91.392771,
         "palette_tags": [],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "dirty_map",
         "valid": true,
@@ -182,6 +185,7 @@
           "black",
           "gray"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.027206,
         "slot_role": "diffuse",
         "valid": true,
@@ -201,6 +205,7 @@
         "mean_contrast": 3.049092,
         "mean_luminance": 90.538172,
         "palette_tags": [],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "dirty_map",
         "valid": true,
@@ -222,6 +227,7 @@
         "palette_tags": [
           "black"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.011597,
         "slot_role": "icon",
         "valid": true,
@@ -243,6 +249,7 @@
         "palette_tags": [
           "white"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "projected_shadow_or_underglow",
         "valid": true,

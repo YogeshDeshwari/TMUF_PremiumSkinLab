@@ -57,6 +57,11 @@ def analyze_reference_package(
         skin_json = _skin_json(zf)
         donor_mesh_match = _donor_mesh_match(zf, donor_zip)
         contact_sheet = _write_contact_sheet(zf, names, output_dir / f"{package_zip.stem}_contact_sheet.png")
+        alpha_diagnostic_sheet = _write_alpha_diagnostic_sheet(
+            zf,
+            names,
+            output_dir / f"{package_zip.stem}_alpha_diagnostic.png",
+        )
 
     package_route, stock_lane_status = _classify_route(set(names), donor_mesh_match)
     report = {
@@ -79,6 +84,7 @@ def analyze_reference_package(
         "output_artifacts": {
             "report": str(output_dir / f"{package_zip.stem}_report.json"),
             "contact_sheet": str(contact_sheet),
+            "alpha_diagnostic_sheet": str(alpha_diagnostic_sheet),
         },
         "safe_use": _safe_use(package_route),
     }
@@ -117,6 +123,7 @@ def write_reference_package_index(
                         "archive_sha256": report["archive_sha256"],
                         "report": report["output_artifacts"]["report"],
                         "contact_sheet": report["output_artifacts"]["contact_sheet"],
+                        "alpha_diagnostic_sheet": report["output_artifacts"]["alpha_diagnostic_sheet"],
                         "primary_livery_slot": report.get("style_metrics", {}).get("primary_livery_slot"),
                         "dominant_palette_tags": report.get("style_metrics", {}).get("dominant_palette_tags", []),
                     }
@@ -346,6 +353,7 @@ def _image_style_metrics(image: Image.Image, slot_name: str) -> dict[str, Any]:
         "slot_role": _slot_role(slot_name),
         "width": image.width,
         "height": image.height,
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "alpha_visible_ratio": round(alpha_visible_ratio, 6),
         "mean_luminance": round(sum(stat.mean) / 3.0, 6),
         "mean_contrast": round(sum(stat.stddev) / 3.0, 6),
@@ -591,3 +599,55 @@ def _write_contact_sheet(zf: ZipFile, names: list[str], path: Path) -> Path:
         canvas.paste(preview, (x, y))
     canvas.save(path)
     return path
+
+
+def _write_alpha_diagnostic_sheet(zf: ZipFile, names: list[str], path: Path) -> Path:
+    dds_names = [name for name in names if name.lower().endswith(".dds")]
+    rows = max(len(dds_names), 1)
+    cell_w = 250
+    row_h = 270
+    view_size = 220
+    canvas = Image.new("RGB", (cell_w * 3, rows * row_h + 34), (8, 8, 10))
+    draw = ImageDraw.Draw(canvas)
+    headers = ["raw RGB", "alpha mask", "alpha over dark"]
+    for index, header in enumerate(headers):
+        draw.text((index * cell_w + 20, 12), header, fill=(230, 230, 235))
+
+    if not dds_names:
+        draw.text((20, 56), "no DDS textures", fill=(230, 170, 170))
+        canvas.save(path)
+        return path
+
+    for row, name in enumerate(dds_names):
+        y = row * row_h + 50
+        try:
+            image = Image.open(BytesIO(zf.read(name))).convert("RGBA")
+            rgb_view = _fit_slot_view(image.convert("RGB"), view_size)
+            alpha_view = _fit_slot_view(image.getchannel("A").convert("RGB"), view_size)
+            composite_view = _fit_slot_view(_alpha_over_dark(image), view_size)
+        except Exception:
+            rgb_view = Image.new("RGB", (view_size, view_size), (40, 10, 10))
+            alpha_view = Image.new("RGB", (view_size, view_size), (40, 10, 10))
+            composite_view = Image.new("RGB", (view_size, view_size), (40, 10, 10))
+
+        draw.text((20, y - 18), name, fill=(205, 207, 214))
+        canvas.paste(rgb_view, (20, y))
+        canvas.paste(alpha_view, (cell_w + 20, y))
+        canvas.paste(composite_view, (cell_w * 2 + 20, y))
+
+    canvas.save(path)
+    return path
+
+
+def _fit_slot_view(image: Image.Image, size: int) -> Image.Image:
+    preview = image.convert("RGB")
+    preview.thumbnail((size, size), Image.Resampling.LANCZOS)
+    canvas = Image.new("RGB", (size, size), (12, 12, 14))
+    canvas.paste(preview, ((size - preview.width) // 2, (size - preview.height) // 2))
+    return canvas
+
+
+def _alpha_over_dark(image: Image.Image) -> Image.Image:
+    rgba = image.convert("RGBA")
+    background = Image.new("RGBA", rgba.size, (12, 12, 14, 255))
+    return Image.alpha_composite(background, rgba).convert("RGB")

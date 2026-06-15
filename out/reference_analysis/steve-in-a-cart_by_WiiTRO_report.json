@@ -154,6 +154,7 @@
     }
   ],
   "output_artifacts": {
+    "alpha_diagnostic_sheet": "out/reference_analysis/steve-in-a-cart_by_WiiTRO_alpha_diagnostic.png",
     "contact_sheet": "out/reference_analysis/steve-in-a-cart_by_WiiTRO_contact_sheet.png",
     "report": "out/reference_analysis/steve-in-a-cart_by_WiiTRO_report.json"
   },
@@ -189,6 +190,7 @@
         "palette_tags": [
           "black"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.022995,
         "slot_role": "details",
         "valid": true,
@@ -208,6 +210,7 @@
         "mean_contrast": 9.972968,
         "mean_luminance": 150.488327,
         "palette_tags": [],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.000183,
         "slot_role": "dirty_map",
         "valid": true,
@@ -230,6 +233,7 @@
           "black",
           "gray"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "diffuse",
         "valid": true,
@@ -249,6 +253,7 @@
         "mean_contrast": 9.972968,
         "mean_luminance": 150.488327,
         "palette_tags": [],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.000183,
         "slot_role": "dirty_map",
         "valid": true,
@@ -271,6 +276,7 @@
           "black",
           "gray"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "icon",
         "valid": true,
@@ -292,6 +298,7 @@
         "palette_tags": [
           "black"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "illumination",
         "valid": true,
@@ -314,6 +321,7 @@
           "black",
           "white"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "projected_shadow_or_underglow",
         "valid": true,

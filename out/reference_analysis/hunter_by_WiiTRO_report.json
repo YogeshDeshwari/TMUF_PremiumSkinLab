@@ -119,6 +119,7 @@
   "evidence_label": "reference_only",
   "filename_case_notes": [],
   "output_artifacts": {
+    "alpha_diagnostic_sheet": "out/reference_analysis/hunter_by_WiiTRO_alpha_diagnostic.png",
     "contact_sheet": "out/reference_analysis/hunter_by_WiiTRO_contact_sheet.png",
     "report": "out/reference_analysis/hunter_by_WiiTRO_report.json"
   },
@@ -154,6 +155,7 @@
         "palette_tags": [
           "black"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.046585,
         "slot_role": "details",
         "valid": true,
@@ -173,6 +175,7 @@
         "mean_contrast": 2.377903,
         "mean_luminance": 91.392771,
         "palette_tags": [],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "dirty_map",
         "valid": true,
@@ -194,6 +197,7 @@
         "palette_tags": [
           "black"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.079926,
         "slot_role": "diffuse",
         "valid": true,
@@ -213,6 +217,7 @@
         "mean_contrast": 3.049092,
         "mean_luminance": 90.538172,
         "palette_tags": [],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "dirty_map",
         "valid": true,
@@ -234,6 +239,7 @@
         "palette_tags": [
           "red"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.602478,
         "slot_role": "icon",
         "valid": true,
@@ -255,6 +261,7 @@
         "palette_tags": [
           "black"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.000397,
         "slot_role": "illumination",
         "valid": true,
@@ -276,6 +283,7 @@
         "palette_tags": [
           "white"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "projected_shadow_or_underglow",
         "valid": true,

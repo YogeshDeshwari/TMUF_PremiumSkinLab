@@ -75,6 +75,7 @@
   "evidence_label": "reference_only",
   "filename_case_notes": [],
   "output_artifacts": {
+    "alpha_diagnostic_sheet": "out/reference_analysis/Fall-Public-SKIN-_by_MINA_TM_alpha_diagnostic.png",
     "contact_sheet": "out/reference_analysis/Fall-Public-SKIN-_by_MINA_TM_contact_sheet.png",
     "report": "out/reference_analysis/Fall-Public-SKIN-_by_MINA_TM_report.json"
   },
@@ -112,6 +113,7 @@
         "palette_tags": [
           "black"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.026047,
         "slot_role": "details",
         "valid": true,
@@ -135,6 +137,7 @@
           "gray",
           "red"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.172607,
         "slot_role": "diffuse",
         "valid": true,
@@ -158,6 +161,7 @@
           "red",
           "yellow_gold"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.325989,
         "slot_role": "icon",
         "valid": true,
@@ -179,6 +183,7 @@
         "palette_tags": [
           "white"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "projected_shadow_or_underglow",
         "valid": true,

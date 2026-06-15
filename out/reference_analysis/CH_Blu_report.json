@@ -106,6 +106,7 @@
   "evidence_label": "reference_only",
   "filename_case_notes": [],
   "output_artifacts": {
+    "alpha_diagnostic_sheet": "out/reference_analysis/CH_Blu_alpha_diagnostic.png",
     "contact_sheet": "out/reference_analysis/CH_Blu_contact_sheet.png",
     "report": "out/reference_analysis/CH_Blu_report.json"
   },
@@ -173,6 +174,7 @@
         "palette_tags": [
           "black"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "details",
         "valid": true,
@@ -192,6 +194,7 @@
         "mean_contrast": 25.475993,
         "mean_luminance": 83.780212,
         "palette_tags": [],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "dirty_map",
         "valid": true,
@@ -213,6 +216,7 @@
         "palette_tags": [
           "black"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "diffuse",
         "valid": true,
@@ -232,6 +236,7 @@
         "mean_contrast": 25.445585,
         "mean_luminance": 78.881922,
         "palette_tags": [],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "dirty_map",
         "valid": true,
@@ -253,6 +258,7 @@
         "palette_tags": [
           "black"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "icon",
         "valid": true,
@@ -276,6 +282,7 @@
           "cyan",
           "white"
         ],
+        "preview_policy": "rgb_and_alpha_recorded_separately",
         "red_ratio": 0.0,
         "slot_role": "projected_shadow_or_underglow",
         "valid": true,

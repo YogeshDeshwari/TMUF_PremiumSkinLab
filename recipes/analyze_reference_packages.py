@@ -44,6 +44,10 @@ def main(argv: list[str] | None = None) -> str:
         "livery_atlas_gallery": str(livery_gallery),
         "reports": [report["output_artifacts"]["report"] for report in reports],
         "contact_sheets": [report["output_artifacts"]["contact_sheet"] for report in reports],
+        "alpha_diagnostic_sheets": [
+            report["output_artifacts"]["alpha_diagnostic_sheet"]
+            for report in reports
+        ],
     }
     if args.json:
         output = json.dumps(summary, indent=2, sort_keys=True)
@@ -53,6 +57,7 @@ def main(argv: list[str] | None = None) -> str:
         lines.append(f"livery_atlas_gallery={livery_gallery}")
         lines.extend(f"report={path}" for path in summary["reports"])
         lines.extend(f"contact_sheet={path}" for path in summary["contact_sheets"])
+        lines.extend(f"alpha_diagnostic_sheet={path}" for path in summary["alpha_diagnostic_sheets"])
         output = "\n".join(lines)
 
     if argv is None:

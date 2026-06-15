@@ -53,7 +53,9 @@ readable slot. Use
 `out/reference_analysis/reference_livery_atlas_gallery.png` for paint-slot
 comparison because it prefers `Diffuse.dds`, `Details.dds`, and dirty-map
 variants. Per-package contact sheets are the safest review surface because they
-show all detected DDS slots.
+show all detected DDS slots. Per-package `*_alpha_diagnostic.png` files add
+raw RGB, alpha mask, and alpha-over-dark views so transparent-alpha textures are
+not mistaken for empty source data.
 
 Each generated report also includes `style_metrics`. These metrics preserve RGB
 separately from alpha, so transparent-alpha livery textures still contribute

@@ -7,6 +7,7 @@ Evidence source:
 - Generated package gallery: `out/reference_analysis/reference_package_gallery.png`
 - Generated livery atlas gallery: `out/reference_analysis/reference_livery_atlas_gallery.png`
 - Generated per-package contact sheets: `out/reference_analysis/*_contact_sheet.png`
+- Generated per-package alpha diagnostics: `out/reference_analysis/*_alpha_diagnostic.png`
 
 This is reference-only evidence. These packages do not prove TMUF smoke status,
 stock UV mapping, GBuffer accuracy, or generated-skin correctness.
@@ -15,7 +16,9 @@ The package gallery is a visual scanning aid for package identity and can choose
 `Icon.dds`. The livery atlas gallery is the correct overview for paint analysis
 because it prefers actual livery slots: `Diffuse.dds`, `Details.dds`, and dirty
 map variants. Per-package contact sheets are still the safest review surface
-because they show all detected DDS slots.
+because they show all detected DDS slots. Alpha diagnostics are the safest
+surface for the "looks blank" case because they show raw RGB, alpha mask, and
+alpha-over-dark views side by side for every DDS slot.
 
 ## Batch Result
 
@@ -34,6 +37,8 @@ Each report now includes `style_metrics`:
 
 - `primary_livery_slot`: the livery texture slot with the strongest paint-surface signal.
 - `slots`: per-DDS metrics for alpha visibility, contrast, luminance, and palette ratios.
+- `preview_policy=rgb_and_alpha_recorded_separately`: raw RGB and alpha are both
+  inspectable in the diagnostic sheet.
 - `dominant_palette_tags`: color-family tags derived from sampled RGB data.
 - `does_not_prove_tmuf_smoke=true`: these are local image metrics only.
 
@@ -41,6 +46,14 @@ The metric sampler preserves RGB separately from alpha. This matters because
 several reference packages have visible RGB data in a texture whose alpha is
 fully transparent. Alpha is recorded, but RGB is still counted as visual design
 evidence for analysis.
+
+The alpha diagnostic sheets make that visible:
+
+- `raw RGB` shows texture color data even when alpha is zero.
+- `alpha mask` shows whether the same texture is transparent, partially visible,
+  or opaque.
+- `alpha over dark` shows the local alpha-composited preview. A blank-looking
+  alpha-over-dark panel does not mean the DDS has no RGB paint data.
 
 Current aggregate evidence from `reference_package_index.json`:
 
