@@ -199,6 +199,7 @@ def apply_smoke_result(
         data = json.loads(path.read_text())
         evidence = data.setdefault("evidence_status", {})
         evidence["gbuffer_mapping"] = result["gbuffer_mapping_status"]
+        _promote_gbuffer_mask_evidence(data, result["gbuffer_mapping_status"])
         data["tmuf_smoke_test"] = "passed"
         if isinstance(data.get("proof_gate"), dict):
             data["proof_gate"]["calibration_stock_diffuse"] = "passed"
@@ -213,3 +214,17 @@ def apply_smoke_result(
         path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
         updated.append(path)
     return updated
+
+
+def _promote_gbuffer_mask_evidence(data: dict[str, Any], gbuffer_mapping_status: str) -> None:
+    if gbuffer_mapping_status != "proven_by_tmuf_smoke":
+        return
+    mask_evidence = data.get("mask_evidence")
+    if not isinstance(mask_evidence, dict):
+        return
+    for entry in mask_evidence.values():
+        if (
+            isinstance(entry, dict)
+            and entry.get("evidence_status") == "experimental_until_tmuf_smoke"
+        ):
+            entry["evidence_status"] = "proven_by_tmuf_smoke"

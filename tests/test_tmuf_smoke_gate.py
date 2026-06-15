@@ -68,6 +68,17 @@ class TmufSmokeGateTests(unittest.TestCase):
                         "tmuf_smoke_test": "not_run",
                         "proof_gate": {"calibration_stock_diffuse": "required_before_proven_use"},
                         "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
+                        "masks_used": ["mudguards", "center_spine"],
+                        "mask_evidence": {
+                            "mudguards": {
+                                "evidence_status": "proven_local_psd_parts_label_map",
+                                "pixel_count": 425340,
+                            },
+                            "center_spine": {
+                                "evidence_status": "experimental_until_tmuf_smoke",
+                                "pixel_count": 531368,
+                            },
+                        },
                     }
                 )
             )
@@ -82,6 +93,14 @@ class TmufSmokeGateTests(unittest.TestCase):
             self.assertEqual(promoted["tmuf_smoke_test"], "passed")
             self.assertEqual(promoted["evidence_status"]["gbuffer_mapping"], "proven_by_tmuf_smoke")
             self.assertEqual(promoted["proof_gate"]["calibration_stock_diffuse"], "passed")
+            self.assertEqual(
+                promoted["mask_evidence"]["mudguards"]["evidence_status"],
+                "proven_local_psd_parts_label_map",
+            )
+            self.assertEqual(
+                promoted["mask_evidence"]["center_spine"]["evidence_status"],
+                "proven_by_tmuf_smoke",
+            )
             self.assertEqual(promoted["tmuf_smoke_evidence"]["screenshots"], [screenshot.name])
             self.assertIn(screenshot.name, promoted["tmuf_smoke_evidence"]["screenshot_evidence"])
 

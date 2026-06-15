@@ -105,6 +105,11 @@ def validate_mask_evidence(report: dict[str, Any], premium: bool) -> list[str]:
         return ["premium report has no masks_used list"]
     if not isinstance(mask_evidence, dict):
         return ["premium report has no mask_evidence object"]
+    gbuffer_proven = (
+        report.get("tmuf_smoke_test") == "passed"
+        and report.get("evidence_status", {}).get("gbuffer_mapping") == "proven_by_tmuf_smoke"
+    )
+    expected_gbuffer_status = "proven_by_tmuf_smoke" if gbuffer_proven else "experimental_until_tmuf_smoke"
 
     for name in masks_used:
         entry = mask_evidence.get(name)
@@ -126,8 +131,11 @@ def validate_mask_evidence(report: dict[str, Any], premium: bool) -> list[str]:
         if name == "mudguards":
             continue
         entry = mask_evidence.get(name, {})
-        if entry.get("evidence_status") != "experimental_until_tmuf_smoke":
-            errors.append(f"{name} must stay experimental until TMUF smoke")
+        if entry.get("evidence_status") != expected_gbuffer_status:
+            if gbuffer_proven:
+                errors.append(f"{name} must be proven by TMUF smoke after promotion")
+            else:
+                errors.append(f"{name} must stay experimental until TMUF smoke")
 
     return errors
 

@@ -77,6 +77,8 @@ class StockValidatorTests(unittest.TestCase):
 
         valid_report = {
             "skin_name": "example",
+            "tmuf_smoke_test": "not_run",
+            "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
             "masks_used": ["mudguards", "center_spine"],
             "mask_evidence": {
                 "mudguards": {
@@ -93,6 +95,35 @@ class StockValidatorTests(unittest.TestCase):
         }
         self.assertEqual(validate_mask_evidence(valid_report, premium=True), [])
         self.assertEqual(validate_mask_evidence(valid_report, premium=False), [])
+
+        promoted_report = {
+            **valid_report,
+            "tmuf_smoke_test": "passed",
+            "evidence_status": {"gbuffer_mapping": "proven_by_tmuf_smoke"},
+            "mask_evidence": {
+                **valid_report["mask_evidence"],
+                "center_spine": {
+                    **valid_report["mask_evidence"]["center_spine"],
+                    "evidence_status": "proven_by_tmuf_smoke",
+                },
+            },
+        }
+        self.assertEqual(validate_mask_evidence(promoted_report, premium=True), [])
+
+        premature_report = {
+            **valid_report,
+            "mask_evidence": {
+                **valid_report["mask_evidence"],
+                "center_spine": {
+                    **valid_report["mask_evidence"]["center_spine"],
+                    "evidence_status": "proven_by_tmuf_smoke",
+                },
+            },
+        }
+        self.assertIn(
+            "center_spine must stay experimental until TMUF smoke",
+            validate_mask_evidence(premature_report, premium=True),
+        )
 
         broken_report = {
             "skin_name": "broken",

@@ -140,7 +140,8 @@ Only after it evaluates as passed, promote generated reports:
 python3 recipes/tmuf_smoke_gate.py --apply out/proof/calibration_tmuf_smoke.json
 ```
 
-This updates reports from:
+This updates report-level GBuffer status and GBuffer-derived `mask_evidence`
+entries from:
 
 ```text
 experimental_until_tmuf_smoke

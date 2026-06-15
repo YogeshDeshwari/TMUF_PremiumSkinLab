@@ -30,8 +30,10 @@ Use this before calling any skin complete.
 - [ ] Any TMUF/game behavior claim has a smoke-test note.
 - [ ] Premium candidate reports include `mask_evidence` for every `masks_used`
       entry.
-- [ ] Locally named PSD masks stay labeled as local proof, while GBuffer-derived
-      masks stay `experimental_until_tmuf_smoke`.
+- [ ] Locally named PSD masks stay labeled as local proof.
+- [ ] GBuffer-derived masks stay `experimental_until_tmuf_smoke` before smoke
+      proof and become `proven_by_tmuf_smoke` only after the smoke gate applies
+      passed TMUF evidence.
 - [ ] Run `python3 recipes/validate_profile_gates.py` before touching CH_2026
       full-car or no-mudguard lanes.
 
