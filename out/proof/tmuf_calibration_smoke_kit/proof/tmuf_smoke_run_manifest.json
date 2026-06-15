@@ -86,5 +86,14 @@
   ],
   "route": "stock_diffuse_only",
   "schema": "tmuf_premium_skin_lab.tmuf_smoke_run_manifest.v1",
-  "status": "not_run"
+  "status": "not_run",
+  "supplemental_artifacts": {
+    "panel_family_probe": {
+      "does_not_prove_tmuf_smoke": true,
+      "kit_projection_preview": "previews/calibration_panel_family_probe_projected_side_top_rear.png",
+      "kit_report": "reports/calibration_panel_family_probe.json",
+      "kit_skin": "skins/calibration_panel_family_probe.zip",
+      "purpose": "Inspect panel-family runtime visibility after the main calibration route loads."
+    }
+  }
 }

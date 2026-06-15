@@ -56,8 +56,25 @@ out/proof/tmuf_calibration_smoke_kit.zip
 The kit includes the calibration skin, smoke report template,
 `proof/tmuf_smoke_run_manifest.json`, calibration previews, and
 `previews/tmuf_smoke_contact_sheet.png`, a visual review sheet for the
-calibration preview and current premium candidates. The kit is only a handoff
-bundle. It does not prove TMUF smoke status.
+calibration preview, the supplemental panel-family probe, and current premium
+candidates. The kit is only a handoff bundle. It does not prove TMUF smoke
+status.
+
+The kit also includes:
+
+```text
+skins/calibration_panel_family_probe.zip
+reports/calibration_panel_family_probe.json
+previews/calibration_panel_family_probe_atlas.png
+previews/calibration_panel_family_probe_projected_side_top_rear.png
+```
+
+This probe colors the audited front/nose, cockpit/deck, side/flank, rear/tail,
+and support families using the local catalog evidence, with bright overlays for
+generator-only masks such as `nose_spear`, `side_blade`, `rear_louvers`,
+`rear_center_glow`, and `tail_bar`. It is stock Diffuse-only, but it is
+supplemental. It helps inspect panel-family runtime visibility and does not
+replace `calibration_stock_diffuse.zip` as the gate artifact.
 
 Find existing StadiumCar skin directories before installing:
 
@@ -197,8 +214,10 @@ proven_by_tmuf_smoke
 
 The apply step promotes only stock skin reports and
 `premium_batch_index.json`. It skips inventory, deep-dive, lab-status, and
-other non-skin evidence JSON files. The premium batch index is updated to carry
-the same smoke evidence and `tmuf_smoke_status=passed`.
+other non-skin evidence JSON files. It also skips supplemental smoke artifacts
+such as `calibration_panel_family_probe.json`; those probe files are visual
+inspection aids, not gate-passing reports. The premium batch index is updated
+to carry the same smoke evidence and `tmuf_smoke_status=passed`.
 Stock validation does not trust those promoted fields by themselves: it
 re-evaluates the referenced smoke report and its screenshot fingerprints before
 counting any skin as smoke-passed.

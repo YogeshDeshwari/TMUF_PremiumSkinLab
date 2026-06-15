@@ -226,15 +226,27 @@ class TmufSmokeGateTests(unittest.TestCase):
                 "evidence_status": {"tmuf_runtime_visibility": "not_proven_until_smoke"},
             }
             inventory.write_text(json.dumps(inventory_data))
+            supplemental_probe = base / "calibration_panel_family_probe.json"
+            supplemental_probe_data = {
+                "skin_name": "calibration_panel_family_probe",
+                "route": "stock_diffuse_only",
+                "package_files": ["Diffuse.dds", "Icon.dds"],
+                "supplemental_smoke_artifact": True,
+                "does_not_prove_tmuf_smoke": True,
+                "tmuf_smoke_test": "not_run",
+                "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
+            }
+            supplemental_probe.write_text(json.dumps(supplemental_probe_data))
 
             updated = apply_smoke_result(
                 smoke_report,
-                report_paths=[skin_report, batch_index, inventory],
+                report_paths=[skin_report, batch_index, inventory, supplemental_probe],
                 base_dir=base,
             )
 
             self.assertEqual(updated, [skin_report, batch_index])
             self.assertEqual(json.loads(inventory.read_text()), inventory_data)
+            self.assertEqual(json.loads(supplemental_probe.read_text()), supplemental_probe_data)
 
             promoted_skin = json.loads(skin_report.read_text())
             self.assertEqual(promoted_skin["tmuf_smoke_test"], "passed")

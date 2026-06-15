@@ -12,6 +12,7 @@ from PIL import Image, ImageDraw
 from src.evidence.skin_dirs import build_skin_dir_report, route_for_stadiumcar_skin_dir
 from src.evidence.smoke_gate import REQUIRED_OBSERVATIONS, REQUIRED_SCREENSHOT_ROLES
 from src.stock_diffuse.package import write_stable_zip_entry
+from src.stock_diffuse.panel_probe import PANEL_PROBE_NAME, save_outputs as save_panel_probe_outputs
 from src.stock_diffuse.premium import CANDIDATE_NAMES
 
 
@@ -21,15 +22,23 @@ CALIBRATION_SKIN = ROOT / "out" / "skins" / "calibration_stock_diffuse.zip"
 SMOKE_TEMPLATE = ROOT / "out" / "proof" / "calibration_tmuf_smoke_template.json"
 CALIBRATION_ATLAS = ROOT / "out" / "previews" / "calibration_stock_diffuse_atlas.png"
 CALIBRATION_PROJECTION = ROOT / "out" / "previews" / "calibration_stock_diffuse_projected_side_top_rear.png"
+PANEL_PROBE_SKIN = ROOT / "out" / "skins" / f"{PANEL_PROBE_NAME}.zip"
+PANEL_PROBE_REPORT = ROOT / "out" / "reports" / f"{PANEL_PROBE_NAME}.json"
+PANEL_PROBE_ATLAS = ROOT / "out" / "previews" / f"{PANEL_PROBE_NAME}_atlas.png"
+PANEL_PROBE_PROJECTION = ROOT / "out" / "previews" / f"{PANEL_PROBE_NAME}_projected_side_top_rear.png"
 SMOKE_CONTACT_SHEET = ROOT / "out" / "proof" / "tmuf_smoke_contact_sheet.png"
 SMOKE_RUN_MANIFEST = ROOT / "out" / "proof" / "tmuf_smoke_run_manifest.json"
 SMOKE_DOC = ROOT / "docs" / "tmuf_smoke_test.md"
 KIT_FILES = {
     "skins/calibration_stock_diffuse.zip": CALIBRATION_SKIN,
+    f"skins/{PANEL_PROBE_NAME}.zip": PANEL_PROBE_SKIN,
+    f"reports/{PANEL_PROBE_NAME}.json": PANEL_PROBE_REPORT,
     "proof/calibration_tmuf_smoke_template.json": SMOKE_TEMPLATE,
     "proof/tmuf_smoke_run_manifest.json": SMOKE_RUN_MANIFEST,
     "previews/calibration_stock_diffuse_atlas.png": CALIBRATION_ATLAS,
     "previews/calibration_stock_diffuse_projected_side_top_rear.png": CALIBRATION_PROJECTION,
+    f"previews/{PANEL_PROBE_NAME}_atlas.png": PANEL_PROBE_ATLAS,
+    f"previews/{PANEL_PROBE_NAME}_projected_side_top_rear.png": PANEL_PROBE_PROJECTION,
     "previews/tmuf_smoke_contact_sheet.png": SMOKE_CONTACT_SHEET,
     "README_tmuf_smoke_test.md": SMOKE_DOC,
 }
@@ -48,6 +57,7 @@ def _kit_manifest(files: list[str]) -> dict[str, Any]:
         "status": "not_run",
         "does_not_prove_tmuf_smoke": True,
         "calibration_skin": "skins/calibration_stock_diffuse.zip",
+        "supplemental_panel_probe_skin": f"skins/{PANEL_PROBE_NAME}.zip",
         "smoke_report_template": "proof/calibration_tmuf_smoke_template.json",
         "smoke_run_manifest": "proof/tmuf_smoke_run_manifest.json",
         "instructions": "README_tmuf_smoke_test.md",
@@ -55,6 +65,7 @@ def _kit_manifest(files: list[str]) -> dict[str, Any]:
         "next_steps": [
             "Copy skins/calibration_stock_diffuse.zip into the TMUF/TMNF StadiumCar skin folder.",
             "Load the skin in TMUF/TMNF.",
+            f"Optionally load skins/{PANEL_PROBE_NAME}.zip after the main calibration skin to inspect panel-family visibility.",
             "Record required observations and front/side/rear/top screenshot roles with recipes/record_tmuf_smoke.py.",
             "Run recipes/tmuf_smoke_gate.py --evaluate before applying any promotion.",
         ],
@@ -92,6 +103,15 @@ def build_smoke_run_manifest(path: Path = SMOKE_RUN_MANIFEST) -> Path:
         "route": "stock_diffuse_only",
         "artifact": "out/skins/calibration_stock_diffuse.zip",
         "kit_calibration_skin": "skins/calibration_stock_diffuse.zip",
+        "supplemental_artifacts": {
+            "panel_family_probe": {
+                "kit_skin": f"skins/{PANEL_PROBE_NAME}.zip",
+                "kit_report": f"reports/{PANEL_PROBE_NAME}.json",
+                "kit_projection_preview": f"previews/{PANEL_PROBE_NAME}_projected_side_top_rear.png",
+                "does_not_prove_tmuf_smoke": True,
+                "purpose": "Inspect panel-family runtime visibility after the main calibration route loads.",
+            },
+        },
         "kit_smoke_report_template": "proof/calibration_tmuf_smoke_template.json",
         "required_screenshot_roles": REQUIRED_SCREENSHOT_ROLES,
         "required_observations": REQUIRED_OBSERVATIONS,
@@ -126,6 +146,7 @@ def build_smoke_run_manifest(path: Path = SMOKE_RUN_MANIFEST) -> Path:
 def build_smoke_contact_sheet(path: Path = SMOKE_CONTACT_SHEET) -> Path:
     items = [
         ("calibration_stock_diffuse", CALIBRATION_PROJECTION),
+        (PANEL_PROBE_NAME, PANEL_PROBE_PROJECTION),
         *[
             (name, ROOT / "out" / "previews" / f"{name}_projected_side_top_rear.png")
             for name in CANDIDATE_NAMES
@@ -216,6 +237,7 @@ def validate_smoke_kit(out_dir: Path = DEFAULT_KIT_DIR) -> dict[str, Any]:
 def build_smoke_kit(out_dir: Path = DEFAULT_KIT_DIR) -> dict[str, str]:
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    save_panel_probe_outputs()
     build_smoke_contact_sheet()
     build_smoke_run_manifest()
 

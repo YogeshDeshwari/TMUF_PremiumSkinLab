@@ -273,6 +273,7 @@ def _is_stock_skin_report(data: dict[str, Any]) -> bool:
         isinstance(data.get("skin_name"), str)
         and data.get("route") == "stock_diffuse_only"
         and data.get("package_files") == ["Diffuse.dds", "Icon.dds"]
+        and data.get("supplemental_smoke_artifact") is not True
     )
 
 
