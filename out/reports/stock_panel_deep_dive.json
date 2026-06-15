@@ -1,0 +1,1400 @@
+{
+  "candidate_usage_by_target": {
+    "center_spine": [
+      "black_cyan_spine",
+      "magenta_cyan_race_proto"
+    ],
+    "engine_rear_deck": [
+      "dark_neon_louver"
+    ],
+    "front_mudguard_caps": [
+      "black_cyan_spine",
+      "black_magenta_cyan_blade",
+      "violet_cyber_flow"
+    ],
+    "front_mudguard_edge_details": [
+      "black_magenta_cyan_blade",
+      "violet_cyber_flow"
+    ],
+    "licence_plate_blocks": [
+      "magenta_cyan_race_proto"
+    ],
+    "mirrors_and_holders": [
+      "black_cyan_spine",
+      "black_magenta_cyan_blade",
+      "dark_neon_louver",
+      "magenta_cyan_race_proto",
+      "violet_cyber_flow"
+    ],
+    "nose_deck_generated_panels": [
+      "black_magenta_cyan_blade",
+      "magenta_cyan_race_proto"
+    ],
+    "nose_identity_panel": [
+      "black_cyan_spine",
+      "black_magenta_cyan_blade",
+      "magenta_cyan_race_proto"
+    ],
+    "nose_side_generated_panels": [
+      "black_magenta_cyan_blade"
+    ],
+    "rear_deck_fine_louver_rows": [
+      "dark_neon_louver"
+    ],
+    "rear_floor_generated_panels": [
+      "dark_neon_louver"
+    ],
+    "rear_mudguard_caps": [
+      "black_cyan_spine",
+      "dark_neon_louver",
+      "violet_cyber_flow"
+    ],
+    "rear_mudguard_edge_details": [
+      "black_cyan_spine",
+      "dark_neon_louver",
+      "violet_cyber_flow"
+    ],
+    "rear_side_generated_panels": [
+      "dark_neon_louver",
+      "violet_cyber_flow"
+    ],
+    "side_wings": [
+      "black_cyan_spine",
+      "black_magenta_cyan_blade",
+      "dark_neon_louver",
+      "magenta_cyan_race_proto",
+      "violet_cyber_flow"
+    ],
+    "sidepod_blades": [
+      "black_magenta_cyan_blade",
+      "magenta_cyan_race_proto",
+      "violet_cyber_flow"
+    ],
+    "tailwing_bands": [
+      "black_cyan_spine",
+      "black_magenta_cyan_blade",
+      "dark_neon_louver",
+      "magenta_cyan_race_proto",
+      "violet_cyber_flow"
+    ],
+    "underbody_dark": [
+      "black_cyan_spine",
+      "black_magenta_cyan_blade",
+      "dark_neon_louver",
+      "magenta_cyan_race_proto",
+      "violet_cyber_flow"
+    ]
+  },
+  "catalog_target_count": 26,
+  "evidence_boundary": {
+    "gbuffer": "experimental_until_tmuf_smoke",
+    "known_limits": [
+      "no roof named PSD zone",
+      "no DDS orientation claim until TMUF smoke",
+      "no UV seam quality claim until TMUF smoke",
+      "no material gloss claim from Diffuse alpha until TMUF smoke",
+      "generated panel names provide token evidence only"
+    ],
+    "local_label_maps": "proven local atlas evidence",
+    "stock_package_route": "stock_diffuse_only",
+    "tmuf_runtime_status": "not_proven_until_smoke"
+  },
+  "label_map_counts": {
+    "panels_fine": 107,
+    "panels_high": 60,
+    "psd_parts": 41
+  },
+  "locked_or_non_stock_routes": [
+    {
+      "display": "Details.dds",
+      "notes": [
+        "not stock_diffuse_only",
+        "belongs behind the CH_2026 full-car proof gate",
+        "does not prove tyre sidewall, tread, hub material, or stock wheel routing"
+      ],
+      "proof_gates": [
+        "stock_calibration_tmuf_smoke_passed",
+        "ch2026_fullcar_package_build_report",
+        "ch2026_fullcar_tmuf_smoke_passed"
+      ],
+      "route": "details_dds",
+      "source_files": [
+        "src/profiles/gates.py",
+        "resources/evidence_manifest.json"
+      ],
+      "status": "locked_custom_profile"
+    },
+    {
+      "display": "ProjShad.dds",
+      "notes": [
+        "not stock_diffuse_only",
+        "optional underglow/shadow route only after CH_2026 full-car proof"
+      ],
+      "proof_gates": [
+        "stock_calibration_tmuf_smoke_passed",
+        "ch2026_fullcar_tmuf_smoke_passed"
+      ],
+      "route": "projshad_dds",
+      "source_files": [
+        "src/profiles/gates.py",
+        "resources/experimental/flows/canvas_compose/composer.py"
+      ],
+      "status": "locked_custom_profile"
+    },
+    {
+      "display": "custom mesh / no mudguard",
+      "notes": [
+        "not stock_diffuse_only",
+        "custom GBX and no-mudguard work cannot be used in the stock generator"
+      ],
+      "proof_gates": [
+        "CH_2026 full-car package build report",
+        "CH_2026 full-car TMUF smoke passed",
+        "nomud package build report",
+        "nomud TMUF smoke passed"
+      ],
+      "route": "custom_mesh_nomud",
+      "source_files": [
+        "resources/experimental/base_car/CH_2026_NOT_STOCK_STADIUM_DETAILS_CUSTOM_MESH.zip",
+        "resources/experimental/flows/remove_guards",
+        "src/profiles/gates.py"
+      ],
+      "status": "locked_custom_profile"
+    }
+  ],
+  "more_panel_opportunities": [
+    {
+      "candidate_usage": [],
+      "proof_gates": [
+        "run TMUF smoke calibration before treating GBuffer/generated placement as runtime truth",
+        "capture front/side/rear/top screenshots before promoting visual claims"
+      ],
+      "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+      "source_zones": [
+        "mid_deck_C_79",
+        "mid_deck_C_48",
+        "mid_deck_C_82",
+        "mid_deck_C_78"
+      ],
+      "target": "mid_deck_generated_panels",
+      "tmuf_runtime_status": "not_proven_until_smoke",
+      "total_label_area": 723443,
+      "why_it_matters": "large cockpit and roof-flow deck fields for symmetric extra panels near the engine cover."
+    },
+    {
+      "candidate_usage": [],
+      "proof_gates": [
+        "run TMUF smoke calibration before treating GBuffer/generated placement as runtime truth",
+        "capture front/side/rear/top screenshots before promoting visual claims"
+      ],
+      "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+      "source_zones": [
+        "mid_side_C_02"
+      ],
+      "target": "mid_side_generated_panel",
+      "tmuf_runtime_status": "not_proven_until_smoke",
+      "total_label_area": 623575,
+      "why_it_matters": "very large flank field for broad side blades and blank sponsor-like geometry without text."
+    },
+    {
+      "candidate_usage": [
+        "dark_neon_louver"
+      ],
+      "proof_gates": [
+        "run TMUF smoke calibration before treating GBuffer/generated placement as runtime truth",
+        "capture front/side/rear/top screenshots before promoting visual claims"
+      ],
+      "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+      "source_zones": [
+        "rear_deck_C_140",
+        "rear_deck_C_118",
+        "rear_deck_C_122",
+        "rear_deck_C_146",
+        "rear_deck_C_133"
+      ],
+      "target": "rear_deck_fine_louver_rows",
+      "tmuf_runtime_status": "not_proven_until_smoke",
+      "total_label_area": 272437,
+      "why_it_matters": "fine rear deck rows for technical louver rhythm and paired glow accents."
+    },
+    {
+      "candidate_usage": [],
+      "proof_gates": [
+        "run TMUF smoke calibration before treating GBuffer/generated placement as runtime truth",
+        "capture front/side/rear/top screenshots before promoting visual claims"
+      ],
+      "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+      "source_zones": [
+        "nose_floor_C_09",
+        "nose_floor_C_33",
+        "nose_floor_C_34",
+        "nose_floor_C_149"
+      ],
+      "target": "nose_floor_generated_panels",
+      "tmuf_runtime_status": "not_proven_until_smoke",
+      "total_label_area": 788929,
+      "why_it_matters": "front floor returns for splitter-like lower wedge continuation probes."
+    },
+    {
+      "candidate_usage": [
+        "dark_neon_louver"
+      ],
+      "proof_gates": [
+        "run TMUF smoke calibration before treating GBuffer/generated placement as runtime truth",
+        "capture front/side/rear/top screenshots before promoting visual claims"
+      ],
+      "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+      "source_zones": [
+        "rear_floor_C_15",
+        "rear_floor_C_17",
+        "rear_floor_C_36"
+      ],
+      "target": "rear_floor_generated_panels",
+      "tmuf_runtime_status": "not_proven_until_smoke",
+      "total_label_area": 256274,
+      "why_it_matters": "low rear support blocks for shadow fields and tail color echoes."
+    }
+  ],
+  "panel_aliases": {
+    "engine_louver_rows": "rear_deck_fine_louver_rows",
+    "front_splitter_floor_probe": "nose_floor_generated_panels",
+    "front_winglet_panels": "side_wings",
+    "large_side_flank_panel": "mid_side_generated_panel",
+    "nose_top_deck_panels": "nose_deck_generated_panels",
+    "upper_center_roof_spine": "center_spine + main_body_top_quadrants"
+  },
+  "schema": "tmuf_premium_skin_lab.stock_panel_deep_dive.v1",
+  "source_inventory": "out/reports/stock_part_inventory.json",
+  "source_inventory_schema": "tmuf_premium_skin_lab.stock_part_inventory.v1",
+  "surface_families": {
+    "cockpit_mid_deck": {
+      "description": "Top body quadrants, cockpit-adjacent deck fields, large flank panels, and pilot harmony.",
+      "source_statuses": [
+        "mixed_generated_labels_and_experimental_gbuffer",
+        "proven_local_label_map"
+      ],
+      "target_count": 6,
+      "target_entries": [
+        {
+          "candidate_usage": [],
+          "design_role": "large base fields, hard-edge blocks, long stripe clipping, and broad abstract panels",
+          "geometry_constraints": [
+            "named PSD quadrants only"
+          ],
+          "proof_notes": [
+            "local atlas labels are proven; TMUF runtime visibility still requires calibration smoke"
+          ],
+          "risk_classes": [
+            "broad_design_surface"
+          ],
+          "safe_design_scale": "broad_identity_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "MainBodyTOP_TL",
+            "MainBodyTOP_TR",
+            "MainBodyTOP_BL",
+            "MainBodyTOP_BR"
+          ],
+          "symmetry_policy": "paired TL/TR/BL/BR named atlas zones; runtime left/right interpretation pending smoke",
+          "target": "main_body_top_quadrants",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 1622702
+        },
+        {
+          "candidate_usage": [],
+          "design_role": "cockpit-adjacent deck panels, roof flow breaks, and mid-body geometric blocks",
+          "geometry_constraints": [
+            "generated mid/deck tokens",
+            "HGT/Y upper placement remains experimental"
+          ],
+          "proof_notes": [
+            "large local segmentation evidence; no exact cockpit seam claim until visual review"
+          ],
+          "risk_classes": [
+            "broad_design_surface",
+            "medium_accent_surface"
+          ],
+          "safe_design_scale": "broad_identity_surface",
+          "source_maps": [
+            "panels_high"
+          ],
+          "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+          "source_zones": [
+            "mid_deck_C_79",
+            "mid_deck_C_48",
+            "mid_deck_C_82",
+            "mid_deck_C_78"
+          ],
+          "symmetry_policy": "generated mid/deck token zones; cockpit/deck reading pending TMUF smoke",
+          "target": "mid_deck_generated_panels",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 723443
+        },
+        {
+          "candidate_usage": [],
+          "design_role": "large mid-side field for readable speed blades and blank sponsor-like geometry without text",
+          "geometry_constraints": [
+            "generated mid/side token",
+            "LAT/X side split remains experimental"
+          ],
+          "proof_notes": [
+            "broad area is useful for preview composition; TMUF side wrap remains smoke-pending"
+          ],
+          "risk_classes": [
+            "broad_design_surface"
+          ],
+          "safe_design_scale": "broad_identity_surface",
+          "source_maps": [
+            "panels_high"
+          ],
+          "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+          "source_zones": [
+            "mid_side_C_02"
+          ],
+          "symmetry_policy": "single broad generated mid/side token zone; side split remains GBuffer-dependent",
+          "target": "mid_side_generated_panel",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 623575
+        },
+        {
+          "candidate_usage": [],
+          "design_role": "mid-floor support blocks, lower shadow fields, and underside accent probes",
+          "geometry_constraints": [
+            "generated mid/floor tokens",
+            "HGT/Y lower placement remains experimental"
+          ],
+          "proof_notes": [
+            "support material only before TMUF screenshot acceptance"
+          ],
+          "risk_classes": [
+            "broad_design_surface",
+            "medium_accent_surface",
+            "small_detail_surface"
+          ],
+          "safe_design_scale": "medium_to_broad_support_surface",
+          "source_maps": [
+            "panels_fine"
+          ],
+          "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+          "source_zones": [
+            "mid_floor_C_35",
+            "mid_floor_C_38",
+            "mid_floor_C_36"
+          ],
+          "symmetry_policy": "generated mid/floor token zones; floor visibility remains unproven",
+          "target": "mid_floor_generated_panels",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 196123
+        },
+        {
+          "candidate_usage": [],
+          "design_role": "driver color harmony and restrained glass/visor shading",
+          "geometry_constraints": [
+            "named PSD helmet and glass zones only"
+          ],
+          "proof_notes": [
+            "helmet is visible local atlas evidence but should not drive main car identity"
+          ],
+          "risk_classes": [
+            "broad_design_surface",
+            "medium_accent_surface"
+          ],
+          "safe_design_scale": "medium_accent_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "Helmet_TL",
+            "Helmet_TR",
+            "Helmet_BL",
+            "Helmet_BR",
+            "HelmetGlass_L",
+            "HelmetGlass_R"
+          ],
+          "symmetry_policy": "paired helmet/glass quadrants; keep subordinate to car-body symmetry",
+          "target": "helmet_and_visor",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 622098
+        },
+        {
+          "candidate_usage": [],
+          "design_role": "small vent interior accent and dark technical inset",
+          "geometry_constraints": [
+            "named PSD side vent zone only"
+          ],
+          "proof_notes": [
+            "small area atlas evidence only; not a proof of visible vent depth in TMUF"
+          ],
+          "risk_classes": [
+            "small_detail_surface"
+          ],
+          "safe_design_scale": "small_detail_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "BigSideVentOneInSideColor"
+          ],
+          "symmetry_policy": "single named vent zone; use as restrained accent until visibility is accepted",
+          "target": "side_vent_inside",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 19322
+        }
+      ],
+      "targets": [
+        "main_body_top_quadrants",
+        "mid_deck_generated_panels",
+        "mid_side_generated_panel",
+        "mid_floor_generated_panels",
+        "helmet_and_visor",
+        "side_vent_inside"
+      ],
+      "total_label_area": 3807263
+    },
+    "front_nose_centerline": {
+      "description": "Front identity, nose flow, splitter-like support panels, and centerline probes.",
+      "source_statuses": [
+        "experimental_until_tmuf_smoke",
+        "mixed_generated_labels_and_experimental_gbuffer",
+        "mixed_local_label_and_experimental_gbuffer",
+        "proven_local_label_map"
+      ],
+      "target_count": 8,
+      "target_entries": [
+        {
+          "candidate_usage": [
+            "black_cyan_spine",
+            "black_magenta_cyan_blade",
+            "magenta_cyan_race_proto"
+          ],
+          "design_role": "front identity wedge, spear tip, and number-free badge field",
+          "geometry_constraints": [
+            "named PSD nose zone only"
+          ],
+          "proof_notes": [
+            "local NosePart label is proven; front direction confirmation still belongs to smoke calibration"
+          ],
+          "risk_classes": [
+            "broad_design_surface"
+          ],
+          "safe_design_scale": "broad_identity_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "NosePart"
+          ],
+          "symmetry_policy": "single named nose zone; use centered graphics unless TMUF review accepts asymmetry",
+          "target": "nose_identity_panel",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 101934
+        },
+        {
+          "candidate_usage": [
+            "black_cyan_spine",
+            "magenta_cyan_race_proto"
+          ],
+          "design_role": "long center stripe, symmetry probe, and top-flow alignment",
+          "geometry_constraints": [
+            "LAT/X symmetry",
+            "LEN/Z flow",
+            "HGT/Y upper surfaces"
+          ],
+          "proof_notes": [
+            "GBuffer centerline placement remains experimental until TMUF smoke"
+          ],
+          "risk_classes": [
+            "broad_design_surface"
+          ],
+          "safe_design_scale": "medium_to_broad_accent",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "experimental_until_tmuf_smoke",
+          "source_zones": [
+            "MainBodyTOP_TL",
+            "MainBodyTOP_TR",
+            "MainBodyTOP_BL",
+            "MainBodyTOP_BR"
+          ],
+          "symmetry_policy": "GBuffer LAT/X center symmetry; experimental until calibration smoke",
+          "target": "center_spine",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 1622702
+        },
+        {
+          "candidate_usage": [
+            "black_magenta_cyan_blade",
+            "magenta_cyan_race_proto"
+          ],
+          "design_role": "front deck blocks, wedge clipping, and large nose-adjacent color surfaces",
+          "geometry_constraints": [
+            "generated nose/deck tokens",
+            "high LEN/Z front placement remains experimental"
+          ],
+          "proof_notes": [
+            "generated panel tokens are local segmentation evidence, not stock semantic truth"
+          ],
+          "risk_classes": [
+            "medium_accent_surface"
+          ],
+          "safe_design_scale": "medium_to_broad_accent",
+          "source_maps": [
+            "panels_high"
+          ],
+          "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+          "source_zones": [
+            "nose_deck_C_84",
+            "nose_deck_C_85",
+            "nose_deck_C_09",
+            "nose_deck_C_92"
+          ],
+          "symmetry_policy": "generated nose/deck token zones; use mirrored/centered graphics until TMUF smoke",
+          "target": "nose_deck_generated_panels",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 220398
+        },
+        {
+          "candidate_usage": [],
+          "design_role": "front floor returns, lower wedge continuation, and dark/bright underside split probes",
+          "geometry_constraints": [
+            "generated nose/floor tokens",
+            "HGT/Y lower placement remains experimental"
+          ],
+          "proof_notes": [
+            "use for probe and support fields; exact TMUF visibility remains smoke-pending"
+          ],
+          "risk_classes": [
+            "broad_design_surface",
+            "medium_accent_surface"
+          ],
+          "safe_design_scale": "broad_support_surface",
+          "source_maps": [
+            "panels_fine"
+          ],
+          "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+          "source_zones": [
+            "nose_floor_C_09",
+            "nose_floor_C_33",
+            "nose_floor_C_34",
+            "nose_floor_C_149"
+          ],
+          "symmetry_policy": "generated nose/floor token zones; not a runtime underside visibility claim",
+          "target": "nose_floor_generated_panels",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 788929
+        },
+        {
+          "candidate_usage": [
+            "black_magenta_cyan_blade"
+          ],
+          "design_role": "front side sweeps and large lower-side color returns",
+          "geometry_constraints": [
+            "generated nose/side tokens",
+            "LAT/X side split remains experimental"
+          ],
+          "proof_notes": [
+            "broad atlas areas support large graphics; exact side wrapping remains unproven"
+          ],
+          "risk_classes": [
+            "broad_design_surface",
+            "medium_accent_surface"
+          ],
+          "safe_design_scale": "broad_identity_surface",
+          "source_maps": [
+            "panels_high"
+          ],
+          "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+          "source_zones": [
+            "nose_side_C_04",
+            "nose_side_C_83"
+          ],
+          "symmetry_policy": "generated nose/side token zones; side interpretation pending smoke",
+          "target": "nose_side_generated_panels",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 1078213
+        },
+        {
+          "candidate_usage": [
+            "black_cyan_spine",
+            "black_magenta_cyan_blade",
+            "dark_neon_louver",
+            "magenta_cyan_race_proto",
+            "violet_cyber_flow"
+          ],
+          "design_role": "small aero flicks and secondary color hits",
+          "geometry_constraints": [
+            "named PSD side wing zones only"
+          ],
+          "proof_notes": [
+            "local labels are proven; visibility and seam quality still require TMUF review"
+          ],
+          "risk_classes": [
+            "medium_accent_surface"
+          ],
+          "safe_design_scale": "medium_accent_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "SIdeWings",
+            "SideWingsUNDER"
+          ],
+          "symmetry_policy": "named side wing and underside labels; use balanced accent colors until TMUF review",
+          "target": "side_wings",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 125401
+        },
+        {
+          "candidate_usage": [
+            "black_cyan_spine",
+            "black_magenta_cyan_blade",
+            "violet_cyber_flow"
+          ],
+          "design_role": "front guard caps, edge highlights, and calibration-visible color checks",
+          "geometry_constraints": [
+            "named PSD mudguard labels",
+            "LEN/Z front split"
+          ],
+          "proof_notes": [
+            "LEN/Z front split remains experimental until TMUF smoke"
+          ],
+          "risk_classes": [
+            "medium_accent_surface",
+            "small_detail_surface"
+          ],
+          "safe_design_scale": "medium_to_broad_accent",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "mixed_local_label_and_experimental_gbuffer",
+          "source_zones": [
+            "FrontMudGuards",
+            "FrontMudguards.Inside",
+            "FrontMudguardUnderColor",
+            "FrontMudguardEdgeColor"
+          ],
+          "symmetry_policy": "named front guard group; front split by LEN/Z remains experimental",
+          "target": "front_mudguard_caps",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 192838
+        },
+        {
+          "candidate_usage": [
+            "black_magenta_cyan_blade",
+            "violet_cyber_flow"
+          ],
+          "design_role": "front guard pinstripe edge, underside fill, and inner accent details",
+          "geometry_constraints": [
+            "named PSD front mudguard detail zones only"
+          ],
+          "proof_notes": [
+            "front detail labels are proven atlas evidence; in-game seam quality remains unproven"
+          ],
+          "risk_classes": [
+            "medium_accent_surface",
+            "small_detail_surface"
+          ],
+          "safe_design_scale": "medium_accent_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "FrontMudguardEdgeColor",
+            "FrontMudguardUnderColor",
+            "FrontMudguards.Inside"
+          ],
+          "symmetry_policy": "front guard named detail zones; keep paired with cap colors until visual review",
+          "target": "front_mudguard_edge_details",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 111436
+        }
+      ],
+      "targets": [
+        "nose_identity_panel",
+        "center_spine",
+        "nose_deck_generated_panels",
+        "nose_floor_generated_panels",
+        "nose_side_generated_panels",
+        "side_wings",
+        "front_mudguard_caps",
+        "front_mudguard_edge_details"
+      ],
+      "total_label_area": 4241851
+    },
+    "rear_engine_tail": {
+      "description": "Rear deck, louver rows, tailwing bands, rear guard rhythm, and lower rear support panels.",
+      "source_statuses": [
+        "mixed_generated_labels_and_experimental_gbuffer",
+        "mixed_local_label_and_experimental_gbuffer",
+        "proven_local_label_map"
+      ],
+      "target_count": 7,
+      "target_entries": [
+        {
+          "candidate_usage": [
+            "dark_neon_louver"
+          ],
+          "design_role": "rear deck louvers, glow blocks, technical vent rhythm, and symmetric rear highlights",
+          "geometry_constraints": [
+            "low LEN/Z",
+            "high HGT/Y",
+            "LAT/X mirrored offset bands"
+          ],
+          "proof_notes": [
+            "generated panel names support only deck/rear token evidence",
+            "exact TMUF visual interpretation and louver placement remain experimental until smoke"
+          ],
+          "risk_classes": [
+            "broad_design_surface"
+          ],
+          "safe_design_scale": "medium_to_broad_accent",
+          "source_maps": [
+            "panels_high",
+            "panels_fine"
+          ],
+          "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+          "source_zones": [
+            "rear_deck_C_63",
+            "rear_deck_C_08",
+            "rear_deck_C_21",
+            "rear_deck_C_140"
+          ],
+          "symmetry_policy": "generated rear/deck token zones plus LAT/X mirrored offset bands; runtime symmetry unproven",
+          "target": "engine_rear_deck",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 480151
+        },
+        {
+          "candidate_usage": [
+            "dark_neon_louver"
+          ],
+          "design_role": "fine rear deck louver rows, paired glow blocks, and technical vent rhythm",
+          "geometry_constraints": [
+            "generated rear/deck tokens",
+            "low LEN/Z",
+            "high HGT/Y",
+            "LAT/X mirrored offset bands"
+          ],
+          "proof_notes": [
+            "generated panel tokens support louver-like probes only; exact in-game rows need TMUF screenshots"
+          ],
+          "risk_classes": [
+            "broad_design_surface",
+            "medium_accent_surface",
+            "small_detail_surface"
+          ],
+          "safe_design_scale": "medium_accent_surface",
+          "source_maps": [
+            "panels_fine"
+          ],
+          "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+          "source_zones": [
+            "rear_deck_C_140",
+            "rear_deck_C_118",
+            "rear_deck_C_122",
+            "rear_deck_C_146",
+            "rear_deck_C_133"
+          ],
+          "symmetry_policy": "generated rear/deck fine tokens with LAT/X mirrored offset bands; runtime rows unproven",
+          "target": "rear_deck_fine_louver_rows",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 272437
+        },
+        {
+          "candidate_usage": [
+            "dark_neon_louver",
+            "violet_cyber_flow"
+          ],
+          "design_role": "rear side sweeps, color echoes, and side-to-tail transitions",
+          "geometry_constraints": [
+            "generated rear/side tokens",
+            "low LEN/Z rear placement remains experimental"
+          ],
+          "proof_notes": [
+            "good candidate for symmetric rear side panels, but exact TMUF interpretation is pending"
+          ],
+          "risk_classes": [
+            "broad_design_surface",
+            "medium_accent_surface"
+          ],
+          "safe_design_scale": "medium_to_broad_accent",
+          "source_maps": [
+            "panels_fine"
+          ],
+          "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+          "source_zones": [
+            "rear_side_C_30",
+            "rear_side_C_152",
+            "rear_side_C_154",
+            "rear_side_C_153"
+          ],
+          "symmetry_policy": "generated rear/side token zones; mirror by LAT/X until smoke proves wrap",
+          "target": "rear_side_generated_panels",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 383268
+        },
+        {
+          "candidate_usage": [
+            "dark_neon_louver"
+          ],
+          "design_role": "rear floor shadows, dark support fields, and low rear accent returns",
+          "geometry_constraints": [
+            "generated rear/floor tokens",
+            "low LEN/Z and low HGT/Y placement remain experimental"
+          ],
+          "proof_notes": [
+            "support-only until real rear/lower screenshots prove readability"
+          ],
+          "risk_classes": [
+            "broad_design_surface",
+            "medium_accent_surface",
+            "small_detail_surface"
+          ],
+          "safe_design_scale": "medium_to_broad_support_surface",
+          "source_maps": [
+            "panels_high"
+          ],
+          "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+          "source_zones": [
+            "rear_floor_C_15",
+            "rear_floor_C_17",
+            "rear_floor_C_36"
+          ],
+          "symmetry_policy": "generated rear/floor token zones; lower visibility pending TMUF smoke",
+          "target": "rear_floor_generated_panels",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 256274
+        },
+        {
+          "candidate_usage": [
+            "black_cyan_spine",
+            "black_magenta_cyan_blade",
+            "dark_neon_louver",
+            "magenta_cyan_race_proto",
+            "violet_cyber_flow"
+          ],
+          "design_role": "rear wing bands, edge trim, and high-contrast rear identity",
+          "geometry_constraints": [
+            "named PSD tailwing zones only"
+          ],
+          "proof_notes": [
+            "tailwing labels are proven local atlas evidence; runtime visibility still requires smoke"
+          ],
+          "risk_classes": [
+            "medium_accent_surface"
+          ],
+          "safe_design_scale": "medium_to_broad_accent",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "Tailwing_L",
+            "Tailwing_R",
+            "TailWingUnderBorderColor"
+          ],
+          "symmetry_policy": "paired L/R tailwing labels plus under-border zone; keep bands mirrored until review",
+          "target": "tailwing_bands",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 177929
+        },
+        {
+          "candidate_usage": [
+            "black_cyan_spine",
+            "dark_neon_louver",
+            "violet_cyber_flow"
+          ],
+          "design_role": "rear guard caps, rear color echo, and wheel-arch rhythm",
+          "geometry_constraints": [
+            "named PSD mudguard labels",
+            "LEN/Z rear split"
+          ],
+          "proof_notes": [
+            "LEN/Z rear split remains experimental until TMUF smoke"
+          ],
+          "risk_classes": [
+            "medium_accent_surface",
+            "small_detail_surface"
+          ],
+          "safe_design_scale": "medium_to_broad_accent",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "mixed_local_label_and_experimental_gbuffer",
+          "source_zones": [
+            "RearMudGuards",
+            "RearMudGuardsInside",
+            "RearMudguardUnderColor",
+            "RearMudguardsTip",
+            "RearMudguardsedgeColor"
+          ],
+          "symmetry_policy": "named rear guard group; rear split by LEN/Z remains experimental",
+          "target": "rear_mudguard_caps",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 232502
+        },
+        {
+          "candidate_usage": [
+            "black_cyan_spine",
+            "dark_neon_louver",
+            "violet_cyber_flow"
+          ],
+          "design_role": "rear guard pinstripe edge, tip highlight, and underside fill",
+          "geometry_constraints": [
+            "named PSD rear mudguard detail zones only"
+          ],
+          "proof_notes": [
+            "rear detail labels are proven atlas evidence; in-game seam quality remains unproven"
+          ],
+          "risk_classes": [
+            "medium_accent_surface",
+            "small_detail_surface"
+          ],
+          "safe_design_scale": "medium_accent_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "RearMudguardsedgeColor",
+            "RearMudguardsTip",
+            "RearMudguardUnderColor",
+            "RearMudGuardsInside"
+          ],
+          "symmetry_policy": "rear guard named detail zones; mirror with front/rear rhythm until review",
+          "target": "rear_mudguard_edge_details",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 159801
+        }
+      ],
+      "targets": [
+        "engine_rear_deck",
+        "rear_deck_fine_louver_rows",
+        "rear_side_generated_panels",
+        "rear_floor_generated_panels",
+        "tailwing_bands",
+        "rear_mudguard_caps",
+        "rear_mudguard_edge_details"
+      ],
+      "total_label_area": 1962362
+    },
+    "side_flanks_aero": {
+      "description": "Sidepod blades, side winglets, mirrors, vents, and side-to-tail color rhythm.",
+      "source_statuses": [
+        "mixed_generated_labels_and_experimental_gbuffer",
+        "mixed_local_label_and_experimental_gbuffer",
+        "proven_local_label_map"
+      ],
+      "target_count": 7,
+      "target_entries": [
+        {
+          "candidate_usage": [
+            "black_magenta_cyan_blade",
+            "magenta_cyan_race_proto",
+            "violet_cyber_flow"
+          ],
+          "design_role": "lower side sweeps, sponsor-like blank blocks, and side color returns",
+          "geometry_constraints": [
+            "LAT/X side split",
+            "HGT/Y lower side band",
+            "LEN/Z flow"
+          ],
+          "proof_notes": [
+            "SideUnderColor labels are proven; 3D blade placement remains experimental until TMUF smoke"
+          ],
+          "risk_classes": [
+            "broad_design_surface"
+          ],
+          "safe_design_scale": "broad_identity_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "mixed_local_label_and_experimental_gbuffer",
+          "source_zones": [
+            "SideUnderColor_L",
+            "SideUnderColor_R"
+          ],
+          "symmetry_policy": "paired L/R named zones with GBuffer side-band clipping experimental until smoke",
+          "target": "sidepod_blades",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 263234
+        },
+        {
+          "candidate_usage": [],
+          "design_role": "large mid-side field for readable speed blades and blank sponsor-like geometry without text",
+          "geometry_constraints": [
+            "generated mid/side token",
+            "LAT/X side split remains experimental"
+          ],
+          "proof_notes": [
+            "broad area is useful for preview composition; TMUF side wrap remains smoke-pending"
+          ],
+          "risk_classes": [
+            "broad_design_surface"
+          ],
+          "safe_design_scale": "broad_identity_surface",
+          "source_maps": [
+            "panels_high"
+          ],
+          "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+          "source_zones": [
+            "mid_side_C_02"
+          ],
+          "symmetry_policy": "single broad generated mid/side token zone; side split remains GBuffer-dependent",
+          "target": "mid_side_generated_panel",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 623575
+        },
+        {
+          "candidate_usage": [
+            "dark_neon_louver",
+            "violet_cyber_flow"
+          ],
+          "design_role": "rear side sweeps, color echoes, and side-to-tail transitions",
+          "geometry_constraints": [
+            "generated rear/side tokens",
+            "low LEN/Z rear placement remains experimental"
+          ],
+          "proof_notes": [
+            "good candidate for symmetric rear side panels, but exact TMUF interpretation is pending"
+          ],
+          "risk_classes": [
+            "broad_design_surface",
+            "medium_accent_surface"
+          ],
+          "safe_design_scale": "medium_to_broad_accent",
+          "source_maps": [
+            "panels_fine"
+          ],
+          "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+          "source_zones": [
+            "rear_side_C_30",
+            "rear_side_C_152",
+            "rear_side_C_154",
+            "rear_side_C_153"
+          ],
+          "symmetry_policy": "generated rear/side token zones; mirror by LAT/X until smoke proves wrap",
+          "target": "rear_side_generated_panels",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 383268
+        },
+        {
+          "candidate_usage": [
+            "black_cyan_spine",
+            "black_magenta_cyan_blade",
+            "dark_neon_louver",
+            "magenta_cyan_race_proto",
+            "violet_cyber_flow"
+          ],
+          "design_role": "small aero flicks and secondary color hits",
+          "geometry_constraints": [
+            "named PSD side wing zones only"
+          ],
+          "proof_notes": [
+            "local labels are proven; visibility and seam quality still require TMUF review"
+          ],
+          "risk_classes": [
+            "medium_accent_surface"
+          ],
+          "safe_design_scale": "medium_accent_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "SIdeWings",
+            "SideWingsUNDER"
+          ],
+          "symmetry_policy": "named side wing and underside labels; use balanced accent colors until TMUF review",
+          "target": "side_wings",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 125401
+        },
+        {
+          "candidate_usage": [
+            "black_cyan_spine",
+            "black_magenta_cyan_blade",
+            "dark_neon_louver",
+            "magenta_cyan_race_proto",
+            "violet_cyber_flow"
+          ],
+          "design_role": "small contrast checks and polished micro-detail",
+          "geometry_constraints": [
+            "named PSD mirror zones only"
+          ],
+          "proof_notes": [
+            "small details can disappear in game; use for probe and restraint until visual acceptance"
+          ],
+          "risk_classes": [
+            "medium_accent_surface",
+            "small_detail_surface"
+          ],
+          "safe_design_scale": "small_detail_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "SideMirrors",
+            "MirrorHolders"
+          ],
+          "symmetry_policy": "named mirror/holder atlas zones; tiny visibility must be visually accepted",
+          "target": "mirrors_and_holders",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 47755
+        },
+        {
+          "candidate_usage": [],
+          "design_role": "small vent interior accent and dark technical inset",
+          "geometry_constraints": [
+            "named PSD side vent zone only"
+          ],
+          "proof_notes": [
+            "small area atlas evidence only; not a proof of visible vent depth in TMUF"
+          ],
+          "risk_classes": [
+            "small_detail_surface"
+          ],
+          "safe_design_scale": "small_detail_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "BigSideVentOneInSideColor"
+          ],
+          "symmetry_policy": "single named vent zone; use as restrained accent until visibility is accepted",
+          "target": "side_vent_inside",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 19322
+        },
+        {
+          "candidate_usage": [
+            "black_cyan_spine",
+            "black_magenta_cyan_blade",
+            "dark_neon_louver",
+            "magenta_cyan_race_proto",
+            "violet_cyber_flow"
+          ],
+          "design_role": "rear wing bands, edge trim, and high-contrast rear identity",
+          "geometry_constraints": [
+            "named PSD tailwing zones only"
+          ],
+          "proof_notes": [
+            "tailwing labels are proven local atlas evidence; runtime visibility still requires smoke"
+          ],
+          "risk_classes": [
+            "medium_accent_surface"
+          ],
+          "safe_design_scale": "medium_to_broad_accent",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "Tailwing_L",
+            "Tailwing_R",
+            "TailWingUnderBorderColor"
+          ],
+          "symmetry_policy": "paired L/R tailwing labels plus under-border zone; keep bands mirrored until review",
+          "target": "tailwing_bands",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 177929
+        }
+      ],
+      "targets": [
+        "sidepod_blades",
+        "mid_side_generated_panel",
+        "rear_side_generated_panels",
+        "side_wings",
+        "mirrors_and_holders",
+        "side_vent_inside",
+        "tailwing_bands"
+      ],
+      "total_label_area": 1640484
+    },
+    "support_auxiliary": {
+      "description": "Non-hero support surfaces that can polish a skin without proving custom materials.",
+      "source_statuses": [
+        "proven_local_label_map"
+      ],
+      "target_count": 5,
+      "target_entries": [
+        {
+          "candidate_usage": [
+            "black_cyan_spine",
+            "black_magenta_cyan_blade",
+            "dark_neon_louver",
+            "magenta_cyan_race_proto",
+            "violet_cyber_flow"
+          ],
+          "design_role": "dark material continuity, low reflections, and non-hero shadow fields",
+          "geometry_constraints": [
+            "named PSD underside and underplate zones only"
+          ],
+          "proof_notes": [
+            "use as support material; not a proof of wheel, tyre, Details.dds, or ProjShad behavior"
+          ],
+          "risk_classes": [
+            "broad_design_surface",
+            "medium_accent_surface"
+          ],
+          "safe_design_scale": "broad_support_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "MainBodyUNDER_TL",
+            "MainBodyUNDER_TR",
+            "MainBodyUNDER_BL",
+            "MainBodyUNDER_BR",
+            "UnderPlate_L",
+            "UnderPlate_R",
+            "UnderPlate.insidecolor :)"
+          ],
+          "symmetry_policy": "named underside quadrants and underplate zones; support material with no hero asymmetry",
+          "target": "underbody_dark",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 489634
+        },
+        {
+          "candidate_usage": [
+            "magenta_cyan_race_proto"
+          ],
+          "design_role": "abstract plaque blocks, small color balance fields, and no-text graphic anchors",
+          "geometry_constraints": [
+            "named PSD licence plate zones only"
+          ],
+          "proof_notes": [
+            "no real sponsor text or copied trade dress; texture readability still requires TMUF review"
+          ],
+          "risk_classes": [
+            "medium_accent_surface"
+          ],
+          "safe_design_scale": "medium_accent_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "LicencePlate",
+            "LicencePlateBlock"
+          ],
+          "symmetry_policy": "named plaque zones only; no runtime placement claim before smoke",
+          "target": "licence_plate_blocks",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 143240
+        },
+        {
+          "candidate_usage": [],
+          "design_role": "stock Diffuse rear wheel-adjacent blocks and tiny mechanical color echoes",
+          "geometry_constraints": [
+            "named PSD wheel-adjacent zones only"
+          ],
+          "proof_notes": [
+            "not Details.dds, tyre sidewall, tread, hub material, or custom wheel proof"
+          ],
+          "risk_classes": [
+            "medium_accent_surface",
+            "small_detail_surface"
+          ],
+          "safe_design_scale": "small_to_medium_probe_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "RearWheelsSideBlock",
+            "KNob.Gouing.inside.Rear.wheel"
+          ],
+          "symmetry_policy": "named wheel-adjacent atlas zones only; not a wheel/tyre route claim",
+          "target": "rear_wheel_diffuse_blocks",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 64829
+        },
+        {
+          "candidate_usage": [],
+          "design_role": "driver color harmony and restrained glass/visor shading",
+          "geometry_constraints": [
+            "named PSD helmet and glass zones only"
+          ],
+          "proof_notes": [
+            "helmet is visible local atlas evidence but should not drive main car identity"
+          ],
+          "risk_classes": [
+            "broad_design_surface",
+            "medium_accent_surface"
+          ],
+          "safe_design_scale": "medium_accent_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "Helmet_TL",
+            "Helmet_TR",
+            "Helmet_BL",
+            "Helmet_BR",
+            "HelmetGlass_L",
+            "HelmetGlass_R"
+          ],
+          "symmetry_policy": "paired helmet/glass quadrants; keep subordinate to car-body symmetry",
+          "target": "helmet_and_visor",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 622098
+        },
+        {
+          "candidate_usage": [
+            "black_cyan_spine",
+            "black_magenta_cyan_blade",
+            "dark_neon_louver",
+            "magenta_cyan_race_proto",
+            "violet_cyber_flow"
+          ],
+          "design_role": "small contrast checks and polished micro-detail",
+          "geometry_constraints": [
+            "named PSD mirror zones only"
+          ],
+          "proof_notes": [
+            "small details can disappear in game; use for probe and restraint until visual acceptance"
+          ],
+          "risk_classes": [
+            "medium_accent_surface",
+            "small_detail_surface"
+          ],
+          "safe_design_scale": "small_detail_surface",
+          "source_maps": [
+            "psd_parts"
+          ],
+          "source_status": "proven_local_label_map",
+          "source_zones": [
+            "SideMirrors",
+            "MirrorHolders"
+          ],
+          "symmetry_policy": "named mirror/holder atlas zones; tiny visibility must be visually accepted",
+          "target": "mirrors_and_holders",
+          "tmuf_runtime_status": "not_proven_until_smoke",
+          "total_label_area": 47755
+        }
+      ],
+      "targets": [
+        "underbody_dark",
+        "licence_plate_blocks",
+        "rear_wheel_diffuse_blocks",
+        "helmet_and_visor",
+        "mirrors_and_holders"
+      ],
+      "total_label_area": 1367556
+    }
+  }
+}

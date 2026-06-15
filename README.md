@@ -39,8 +39,19 @@ Regenerate it with:
 python3 recipes/explore_stock_parts.py
 ```
 
+The generated stock panel deep dive is:
+
+`out/reports/stock_panel_deep_dive.json`
+
+Regenerate it with:
+
+```bash
+python3 recipes/explain_stock_panels.py
+```
+
 See `docs/panel_geometry_livery_plan.md` for the current panel map, livery
-research lanes, and proof gates.
+research lanes, and proof gates. See `docs/stock_panel_deep_dive.md` for the
+evidence-backed surface-family breakdown.
 
 ## Current Milestone
 
@@ -82,6 +93,7 @@ Those skins intentionally remain behind the same calibration proof gate.
 python3 recipes/stock_calibration.py
 python3 recipes/stock_premium_neon.py
 python3 recipes/explore_stock_parts.py
+python3 recipes/explain_stock_panels.py
 python3 recipes/tmuf_smoke_gate.py --write-template
 python3 recipes/prepare_tmuf_smoke_kit.py
 python3 recipes/find_tmuf_skin_dirs.py --write

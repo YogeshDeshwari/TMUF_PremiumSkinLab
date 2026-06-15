@@ -83,6 +83,12 @@ local-plus-GBuffer panels and GBuffer-only geometry panels. Every catalog entry
 keeps `tmuf_runtime_status=not_proven_until_smoke`; it is evidence for atlas
 targeting, not proof of in-game visibility.
 
+`out/reports/stock_panel_deep_dive.json` and
+`docs/stock_panel_deep_dive.md` regroup the same catalog into practical surface
+families: front/nose/centerline, cockpit/mid deck, side/flank/aero, rear/engine
+tail, and support/auxiliary. Regenerate them with
+`python3 recipes/explain_stock_panels.py`.
+
 ## Named PSD Surface Families
 
 `psd_parts` is the primary named map.
