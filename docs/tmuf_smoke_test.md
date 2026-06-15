@@ -91,6 +91,23 @@ out/proof/tmuf_skin_dirs.json
 Finding a directory does not prove TMUF smoke status. It only identifies an
 explicit candidate target for the install helper.
 
+To summarize the current setup state and get the next exact command, write the
+readiness report:
+
+```bash
+python3 recipes/smoke_readiness.py --write
+```
+
+This writes:
+
+```text
+out/proof/tmuf_smoke_readiness.json
+```
+
+The readiness report does not prove TMUF smoke status. It only reports whether
+the local kit is fresh, how many StadiumCar folders were found, whether an
+install receipt exists, and which command should be run next.
+
 Create the template if you want a manual form:
 
 ```bash

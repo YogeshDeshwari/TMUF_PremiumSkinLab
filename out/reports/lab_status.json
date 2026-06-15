@@ -36,6 +36,23 @@
     "zip": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit.zip",
     "zip_missing_or_stale": []
   },
+  "smoke_readiness": {
+    "commands": {
+      "apply_after_pass_only": "python3 recipes/tmuf_smoke_gate.py --apply out/proof/calibration_tmuf_smoke.json",
+      "build_smoke_kit": "python3 recipes/prepare_tmuf_smoke_kit.py",
+      "evaluate": "python3 recipes/tmuf_smoke_gate.py --evaluate out/proof/calibration_tmuf_smoke.json",
+      "install_discovered": "python3 recipes/prepare_tmuf_smoke_kit.py --install-discovered",
+      "install_explicit": "python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /absolute/path/to/StadiumCar",
+      "record_smoke": "python3 recipes/record_tmuf_smoke.py --tester \"manual tester\" --tmuf-build \"TMUF local install\" --test-date-local YYYY-MM-DD --install-receipt /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit/proof/calibration_install_receipt.json --screenshot-role front=/absolute/path/to/tmuf_front.png --screenshot-role side=/absolute/path/to/tmuf_side.png --screenshot-role rear=/absolute/path/to/tmuf_rear.png --screenshot-role top=/absolute/path/to/tmuf_top.png --all-required-observations-passed",
+      "scan_skin_dirs": "python3 recipes/find_tmuf_skin_dirs.py --write"
+    },
+    "does_not_prove_tmuf_smoke": true,
+    "next_actions": [
+      "choose_or_create_tmuf_stadiumcar_skin_dir",
+      "install_with_explicit_target"
+    ],
+    "status": "needs_explicit_stadiumcar_dir"
+  },
   "stock": {
     "candidate_count": 5,
     "completion_status": "not_complete_tmuf_smoke_pending",

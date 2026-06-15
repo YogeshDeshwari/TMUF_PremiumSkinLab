@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from src.evidence.skin_dirs import DEFAULT_REPORT as DEFAULT_SKIN_DIR_REPORT
+from src.evidence.smoke_readiness import build_smoke_readiness
 from src.evidence.smoke_kit import DEFAULT_KIT_DIR, validate_smoke_kit
 from src.evidence.stock_validator import validate_stock_outputs
 from src.profiles.gates import evaluate_profile_gates
@@ -61,6 +62,7 @@ def build_lab_status(root: Path = ROOT) -> dict[str, Any]:
     profiles = evaluate_profile_gates(root)
     smoke_kit = _smoke_kit_status(root)
     skin_dirs = _skin_dir_status(root)
+    smoke_readiness = build_smoke_readiness(root)
 
     blockers: list[str] = []
     next_required: list[str] = []
@@ -94,6 +96,12 @@ def build_lab_status(root: Path = ROOT) -> dict[str, Any]:
         },
         "smoke_kit": smoke_kit,
         "skin_dirs": skin_dirs,
+        "smoke_readiness": {
+            "status": smoke_readiness["status"],
+            "next_actions": smoke_readiness["next_actions"],
+            "commands": smoke_readiness["commands"],
+            "does_not_prove_tmuf_smoke": smoke_readiness["does_not_prove_tmuf_smoke"],
+        },
     }
 
 
