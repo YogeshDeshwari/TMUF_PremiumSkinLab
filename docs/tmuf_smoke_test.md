@@ -152,5 +152,7 @@ To copy the calibration skin into an explicit StadiumCar skin folder:
 python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /path/to/StadiumCar
 ```
 
-The install helper only copies `calibration_stock_diffuse.zip`; it does not
-promote reports or mark the smoke gate as passed.
+The install target must already exist and match a recognized StadiumCar skin
+route such as `Skins/Vehicles/StadiumCar`. The install helper only copies
+`calibration_stock_diffuse.zip`; it does not promote reports or mark the smoke
+gate as passed.

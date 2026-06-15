@@ -7,6 +7,7 @@ from hashlib import sha256
 from pathlib import Path
 from typing import Any
 
+from src.evidence.skin_dirs import route_for_stadiumcar_skin_dir
 from src.stock_diffuse.package import write_stable_zip_entry
 
 
@@ -134,11 +135,23 @@ def build_smoke_kit(out_dir: Path = DEFAULT_KIT_DIR) -> dict[str, str]:
 
 def install_calibration_skin(skins_dir: Path) -> dict[str, str | bool]:
     skins_dir = Path(skins_dir)
-    skins_dir.mkdir(parents=True, exist_ok=True)
+    if not skins_dir.exists():
+        raise FileNotFoundError(skins_dir)
+    if not skins_dir.is_dir():
+        raise NotADirectoryError(skins_dir)
+    route = route_for_stadiumcar_skin_dir(skins_dir)
+    if route is None:
+        raise ValueError(f"Install target is not a recognized StadiumCar skin directory: {skins_dir}")
+
     dst = skins_dir / "calibration_stock_diffuse.zip"
     _copy_file(CALIBRATION_SKIN, dst)
     return {
         "status": "installed_not_tested",
         "installed_skin": str(dst),
+        "source_skin": str(CALIBRATION_SKIN),
+        "route": route,
+        "sha256": _digest(dst),
+        "source_sha256": _digest(CALIBRATION_SKIN),
+        "size_bytes": dst.stat().st_size,
         "does_not_prove_tmuf_smoke": True,
     }

@@ -24,7 +24,7 @@ KNOWN_SUFFIXES = {
 }
 
 
-def _route_for(path: Path) -> str | None:
+def route_for_stadiumcar_skin_dir(path: Path) -> str | None:
     parts = path.parts
     for suffix, route in KNOWN_SUFFIXES.items():
         if len(parts) >= len(suffix) and tuple(parts[-len(suffix) :]) == suffix:
@@ -54,7 +54,7 @@ def find_stadiumcar_skin_dirs(roots: list[Path] | None = None) -> list[dict[str,
         for path in root.rglob("StadiumCar"):
             if not path.is_dir():
                 continue
-            route = _route_for(path)
+            route = route_for_stadiumcar_skin_dir(path)
             if route is None:
                 continue
             resolved = path.resolve()

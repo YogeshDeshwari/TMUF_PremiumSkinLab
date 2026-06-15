@@ -49,10 +49,11 @@ class SmokeKitTests(unittest.TestCase):
             self.assertIn("README_tmuf_smoke_test.md", stale["stale_files"])
 
     def test_install_calibration_skin_requires_explicit_target_and_only_copies_skin(self):
-        from src.evidence.smoke_kit import install_calibration_skin
+        from src.evidence.smoke_kit import CALIBRATION_SKIN, install_calibration_skin
 
         with tempfile.TemporaryDirectory() as tmp:
-            install_dir = Path(tmp) / "StadiumCar"
+            install_dir = Path(tmp) / "Skins" / "Vehicles" / "StadiumCar"
+            install_dir.mkdir(parents=True)
             result = install_calibration_skin(install_dir)
 
             copied = Path(result["installed_skin"])
@@ -60,13 +61,32 @@ class SmokeKitTests(unittest.TestCase):
             self.assertEqual(copied.name, "calibration_stock_diffuse.zip")
             self.assertTrue(copied.exists())
             self.assertEqual(result["status"], "installed_not_tested")
+            self.assertEqual(result["route"], "skins_vehicles_stadiumcar")
             self.assertTrue(result["does_not_prove_tmuf_smoke"])
+            self.assertEqual(result["sha256"], result["source_sha256"])
+            self.assertEqual(result["size_bytes"], CALIBRATION_SKIN.stat().st_size)
             self.assertEqual(
                 copied.read_bytes(),
-                (Path(__file__).resolve().parents[1] / "out" / "skins" / "calibration_stock_diffuse.zip").read_bytes(),
+                CALIBRATION_SKIN.read_bytes(),
             )
 
             self.assertEqual(sorted(path.name for path in install_dir.iterdir()), ["calibration_stock_diffuse.zip"])
+
+    def test_install_calibration_skin_rejects_missing_or_implausible_targets(self):
+        from src.evidence.smoke_kit import install_calibration_skin
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            missing = root / "Skins" / "Vehicles" / "StadiumCar"
+            with self.assertRaises(FileNotFoundError):
+                install_calibration_skin(missing)
+            self.assertFalse(missing.exists())
+
+            wrong = root / "StadiumCar"
+            wrong.mkdir()
+            with self.assertRaises(ValueError):
+                install_calibration_skin(wrong)
+            self.assertEqual(list(wrong.iterdir()), [])
 
     def test_cli_outputs_smoke_kit_json(self):
         from recipes.prepare_tmuf_smoke_kit import main

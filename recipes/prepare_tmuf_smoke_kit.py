@@ -15,7 +15,7 @@ from src.evidence.smoke_kit import build_smoke_kit, install_calibration_skin  # 
 def main(argv: list[str] | None = None) -> str:
     parser = argparse.ArgumentParser(description="Prepare TMUF calibration smoke-test files.")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "out" / "proof" / "tmuf_calibration_smoke_kit")
-    parser.add_argument("--install-skins-dir", type=Path, help="explicit TMUF/TMNF StadiumCar skin folder")
+    parser.add_argument("--install-skins-dir", type=Path, help="existing TMUF/TMNF StadiumCar skin folder")
     parser.add_argument("--json", action="store_true", help="emit machine-readable JSON")
     args = parser.parse_args(argv)
 
