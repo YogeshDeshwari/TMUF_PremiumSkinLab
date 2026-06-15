@@ -149,7 +149,7 @@ The generated batch summary lives at `out/reports/premium_batch_index.json`.
 It indexes all premium candidates, lanes, artifacts, style metrics, and pending
 proof gates, but it also explicitly does not prove TMUF smoke status.
 It also cites `out/previews/premium_candidate_review_board.png`, a local
-side-by-side comparison board for the five premium candidates. That board is a
+side-by-side comparison board for the premium candidate batch. That board is a
 manual visual-review aid only; it does not prove TMUF smoke, GBuffer mapping, or
 in-game acceptance.
 

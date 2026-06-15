@@ -10,6 +10,7 @@ from PIL import Image, ImageDraw
 class StockValidatorTests(unittest.TestCase):
     def test_current_stock_outputs_pass_local_checks_but_keep_smoke_pending(self):
         from src.evidence.stock_validator import REQUIRED_STOCK_SKINS, validate_stock_outputs
+        from src.stock_diffuse.premium import CANDIDATE_NAMES
 
         result = validate_stock_outputs()
 
@@ -51,7 +52,7 @@ class StockValidatorTests(unittest.TestCase):
         ]
         self.assertEqual(len(set(premium_lanes)), len(premium_lanes))
         self.assertTrue(result["premium_batch_index"]["valid"])
-        self.assertEqual(result["premium_batch_index"]["candidate_count"], 5)
+        self.assertEqual(result["premium_batch_index"]["candidate_count"], len(CANDIDATE_NAMES))
         self.assertTrue(result["premium_batch_index"]["does_not_prove_tmuf_smoke"])
 
     def test_stock_validation_uses_passed_root_for_report_artifact_hashes(self):

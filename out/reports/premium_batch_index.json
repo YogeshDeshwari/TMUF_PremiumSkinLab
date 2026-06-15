@@ -1,5 +1,5 @@
 {
-  "candidate_count": 5,
+  "candidate_count": 10,
   "candidates": [
     {
       "alpha_metrics": {
@@ -799,6 +799,807 @@
         "magenta_accent_ratio": 0.194132
       },
       "tmuf_smoke_test": "not_run"
+    },
+    {
+      "alpha_metrics": {
+        "high_alpha_pixel_ratio": 0.350753,
+        "max_alpha": 148,
+        "mean_alpha": 126.561986,
+        "min_alpha": 112,
+        "unique_alpha_values": [
+          112,
+          118,
+          124,
+          136,
+          148
+        ]
+      },
+      "design_lane": {
+        "catalog_target_count": 10,
+        "composition_focus": "minimal black/red cyber speedmark with narrow cyan counter-lines and low visual noise",
+        "distinctive_masks": [
+          "nose_spear",
+          "shoulder_line",
+          "tail_bar",
+          "mudguard_edge"
+        ],
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_id": "minimal_red_speedmark",
+        "parameter_signature": {
+          "blade_offset": 0.3,
+          "blade_slope": 0.28,
+          "mudguard_mode": "primary_front",
+          "rear_louver_count": 12.0,
+          "spine_width": 0.034
+        },
+        "primary_catalog_targets": [
+          "nose_identity_panel",
+          "center_spine",
+          "mid_side_generated_panel",
+          "rear_side_generated_panels",
+          "tailwing_bands",
+          "front_mudguard_edge_details",
+          "rear_mudguard_edge_details",
+          "side_wings",
+          "mirrors_and_holders",
+          "underbody_dark"
+        ]
+      },
+      "gbuffer_mapping": "experimental_until_tmuf_smoke",
+      "output_artifacts": {
+        "atlas_preview": {
+          "path": "out/previews/black_red_cyber_minimal_atlas.png",
+          "sha256": "5fe3eea9f2e41441e50c5b2835704fb6194553de5a40b448580a7ddf92b9418a",
+          "size_bytes": 845944
+        },
+        "projected_preview": {
+          "path": "out/previews/black_red_cyber_minimal_projected_side_top_rear.png",
+          "sha256": "28313a98a98a5dc7a4212151cebcd4a89513da69de6828f21bdc08d91d5a89e0",
+          "size_bytes": 285742
+        },
+        "skin_zip": {
+          "path": "out/skins/black_red_cyber_minimal.zip",
+          "sha256": "ae7f1dceef9394694f8d8c7092191ac82b12b340c5886d7438beaf789abe0202",
+          "size_bytes": 537446
+        }
+      },
+      "package_files": [
+        "Diffuse.dds",
+        "Icon.dds"
+      ],
+      "panel_catalog_targets": [
+        "nose_identity_panel",
+        "center_spine",
+        "mid_side_generated_panel",
+        "rear_side_generated_panels",
+        "tailwing_bands",
+        "front_mudguard_edge_details",
+        "rear_mudguard_edge_details",
+        "side_wings",
+        "mirrors_and_holders",
+        "underbody_dark"
+      ],
+      "reference_style_guidance": {
+        "applied_rules": [
+          "black_gray_white_base",
+          "magenta_high_value_accent",
+          "cyan_secondary_contrast",
+          "red_separate_lane_not_first_bmc_family"
+        ],
+        "closest_reference_packages": [
+          "CH_Bloom_Wheel_LED_Underglow.zip",
+          "steve-in-a-cart_by_WiiTRO.zip",
+          "CH_Blu.zip"
+        ],
+        "does_not_prove_stock_diffuse_mapping": true,
+        "does_not_prove_tmuf_smoke": true,
+        "evidence_status": "reference_metrics_not_tmuf_proof",
+        "generator_guidance": {
+          "base_family": "black_gray_white",
+          "cyan_policy": "secondary_blades_spines_and_cold_light_contrast",
+          "magenta_policy": "high_value_accent_not_full_surface_flood",
+          "primary_accent": "magenta",
+          "red_policy": "separate_recipe_lane_not_first_black_magenta_cyan_family",
+          "scope": "stock Diffuse recipe metadata only; not stock UV or TMUF runtime proof",
+          "secondary_accent": "cyan"
+        },
+        "path": "out/reports/reference_style_guidance.json"
+      },
+      "render_profile": {
+        "damped_masks": [
+          "side_blade",
+          "secondary_blade",
+          "rear_louvers"
+        ],
+        "distinctive_mask_strengths": {
+          "mudguard_edge": 1.1,
+          "nose_spear": 1.36,
+          "shoulder_line": 1.32,
+          "tail_bar": 1.18
+        },
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_specific_strengths": true,
+        "mask_strengths": {
+          "center_spine": 1.0,
+          "main_body_under": 1.0,
+          "mid_deck_generated_panels": 1.0,
+          "mid_floor_generated_panels": 1.0,
+          "mid_side_generated_panel": 1.0,
+          "mirrors": 1.0,
+          "mudguard_edge": 1.1,
+          "mudguards": 1.0,
+          "nose_deck_generated_panels": 1.0,
+          "nose_floor_generated_panels": 1.0,
+          "nose_side_generated_panels": 1.0,
+          "nose_spear": 1.36,
+          "rear_center_glow": 1.0,
+          "rear_deck_fine_louver_rows": 1.0,
+          "rear_floor_generated_panels": 1.0,
+          "rear_louvers": 0.38,
+          "rear_side_generated_panels": 1.0,
+          "secondary_blade": 0.92,
+          "shoulder_line": 1.32,
+          "side_blade": 0.32,
+          "side_wings": 1.0,
+          "tail_bar": 1.18,
+          "tailwing": 1.0,
+          "underplate": 1.0
+        },
+        "panel_family_strengths": {
+          "mid_side_generated_panel": 1.0,
+          "rear_side_generated_panels": 1.0
+        }
+      },
+      "route": "stock_diffuse_only",
+      "skin_name": "black_red_cyber_minimal",
+      "style_metrics": {
+        "cyan_accent_ratio": 0.090838,
+        "dark_pixel_ratio": 0.856411,
+        "magenta_accent_ratio": 0.061043
+      },
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "alpha_metrics": {
+        "high_alpha_pixel_ratio": 0.373311,
+        "max_alpha": 148,
+        "mean_alpha": 127.944799,
+        "min_alpha": 112,
+        "unique_alpha_values": [
+          112,
+          118,
+          124,
+          136,
+          148
+        ]
+      },
+      "design_lane": {
+        "catalog_target_count": 10,
+        "composition_focus": "carbon base with restrained gold highlights and cyan/magenta circuit-trace accents",
+        "distinctive_masks": [
+          "center_spine",
+          "side_blade",
+          "mirrors",
+          "rear_louvers"
+        ],
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_id": "gold_circuit_trace",
+        "parameter_signature": {
+          "blade_offset": 0.11,
+          "blade_slope": 0.58,
+          "mudguard_mode": "secondary_front",
+          "rear_louver_count": 20.0,
+          "spine_width": 0.046
+        },
+        "primary_catalog_targets": [
+          "center_spine",
+          "sidepod_blades",
+          "mid_deck_generated_panels",
+          "mid_floor_generated_panels",
+          "engine_rear_deck",
+          "rear_deck_fine_louver_rows",
+          "mirrors_and_holders",
+          "tailwing_bands",
+          "side_wings",
+          "underbody_dark"
+        ]
+      },
+      "gbuffer_mapping": "experimental_until_tmuf_smoke",
+      "output_artifacts": {
+        "atlas_preview": {
+          "path": "out/previews/carbon_gold_circuit_atlas.png",
+          "sha256": "5ec328404ef09bb63d0ac20a59652d8d965dcf7477b1d4625ab057cca26cfabb",
+          "size_bytes": 948541
+        },
+        "projected_preview": {
+          "path": "out/previews/carbon_gold_circuit_projected_side_top_rear.png",
+          "sha256": "e6e0ca761783fa1caef3e2ee9aaca3281a897e4815d0f15b9818fd481b3f075a",
+          "size_bytes": 286744
+        },
+        "skin_zip": {
+          "path": "out/skins/carbon_gold_circuit.zip",
+          "sha256": "c859fc37b82fc978f45f76c2103fdbf931d2fe42e4b2d89cc9101615ba2020b4",
+          "size_bytes": 566808
+        }
+      },
+      "package_files": [
+        "Diffuse.dds",
+        "Icon.dds"
+      ],
+      "panel_catalog_targets": [
+        "center_spine",
+        "sidepod_blades",
+        "mid_deck_generated_panels",
+        "mid_floor_generated_panels",
+        "engine_rear_deck",
+        "rear_deck_fine_louver_rows",
+        "mirrors_and_holders",
+        "tailwing_bands",
+        "side_wings",
+        "underbody_dark"
+      ],
+      "reference_style_guidance": {
+        "applied_rules": [
+          "black_gray_white_base",
+          "magenta_high_value_accent",
+          "cyan_secondary_contrast",
+          "red_separate_lane_not_first_bmc_family"
+        ],
+        "closest_reference_packages": [
+          "CH_Bloom_Wheel_LED_Underglow.zip",
+          "steve-in-a-cart_by_WiiTRO.zip",
+          "CH_Blu.zip"
+        ],
+        "does_not_prove_stock_diffuse_mapping": true,
+        "does_not_prove_tmuf_smoke": true,
+        "evidence_status": "reference_metrics_not_tmuf_proof",
+        "generator_guidance": {
+          "base_family": "black_gray_white",
+          "cyan_policy": "secondary_blades_spines_and_cold_light_contrast",
+          "magenta_policy": "high_value_accent_not_full_surface_flood",
+          "primary_accent": "magenta",
+          "red_policy": "separate_recipe_lane_not_first_black_magenta_cyan_family",
+          "scope": "stock Diffuse recipe metadata only; not stock UV or TMUF runtime proof",
+          "secondary_accent": "cyan"
+        },
+        "path": "out/reports/reference_style_guidance.json"
+      },
+      "render_profile": {
+        "damped_masks": [
+          "mudguards",
+          "tailwing"
+        ],
+        "distinctive_mask_strengths": {
+          "center_spine": 1.02,
+          "mirrors": 1.42,
+          "rear_louvers": 1.18,
+          "side_blade": 1.24
+        },
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_specific_strengths": true,
+        "mask_strengths": {
+          "center_spine": 1.02,
+          "main_body_under": 1.0,
+          "mid_deck_generated_panels": 1.0,
+          "mid_floor_generated_panels": 1.0,
+          "mid_side_generated_panel": 1.0,
+          "mirrors": 1.42,
+          "mudguard_edge": 1.0,
+          "mudguards": 0.44,
+          "nose_deck_generated_panels": 1.0,
+          "nose_floor_generated_panels": 1.0,
+          "nose_side_generated_panels": 1.0,
+          "nose_spear": 1.0,
+          "rear_center_glow": 1.0,
+          "rear_deck_fine_louver_rows": 1.0,
+          "rear_floor_generated_panels": 1.0,
+          "rear_louvers": 1.18,
+          "rear_side_generated_panels": 1.0,
+          "secondary_blade": 1.18,
+          "shoulder_line": 1.0,
+          "side_blade": 1.24,
+          "side_wings": 1.0,
+          "tail_bar": 1.0,
+          "tailwing": 0.84,
+          "underplate": 1.0
+        },
+        "panel_family_strengths": {
+          "mid_deck_generated_panels": 1.0,
+          "mid_floor_generated_panels": 1.0,
+          "rear_deck_fine_louver_rows": 1.0
+        }
+      },
+      "route": "stock_diffuse_only",
+      "skin_name": "carbon_gold_circuit",
+      "style_metrics": {
+        "cyan_accent_ratio": 0.106766,
+        "dark_pixel_ratio": 0.702769,
+        "magenta_accent_ratio": 0.180277
+      },
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "alpha_metrics": {
+        "high_alpha_pixel_ratio": 0.394295,
+        "max_alpha": 148,
+        "mean_alpha": 129.576519,
+        "min_alpha": 112,
+        "unique_alpha_values": [
+          112,
+          118,
+          124,
+          128,
+          136,
+          148
+        ]
+      },
+      "design_lane": {
+        "catalog_target_count": 10,
+        "composition_focus": "teal/cyan vector sweep over black with magenta wing and guard punctuation",
+        "distinctive_masks": [
+          "side_blade",
+          "center_spine",
+          "side_wings",
+          "mudguards"
+        ],
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_id": "teal_vector_sweep",
+        "parameter_signature": {
+          "blade_offset": 0.09,
+          "blade_slope": 0.62,
+          "mudguard_mode": "split",
+          "rear_louver_count": 15.0,
+          "spine_width": 0.052
+        },
+        "primary_catalog_targets": [
+          "center_spine",
+          "sidepod_blades",
+          "nose_side_generated_panels",
+          "mid_side_generated_panel",
+          "side_wings",
+          "front_mudguard_caps",
+          "rear_mudguard_caps",
+          "tailwing_bands",
+          "mirrors_and_holders",
+          "underbody_dark"
+        ]
+      },
+      "gbuffer_mapping": "experimental_until_tmuf_smoke",
+      "output_artifacts": {
+        "atlas_preview": {
+          "path": "out/previews/teal_magenta_vector_atlas.png",
+          "sha256": "622166e94b90041366ccf0f20e92d2ada08cbe8068728fe8c2ad5f03ea0ef9cf",
+          "size_bytes": 1000647
+        },
+        "projected_preview": {
+          "path": "out/previews/teal_magenta_vector_projected_side_top_rear.png",
+          "sha256": "79193c5a19dbdb3f4e6d31133ddfd8efacb0ad77199947df461b53c7cea50c0f",
+          "size_bytes": 307369
+        },
+        "skin_zip": {
+          "path": "out/skins/teal_magenta_vector.zip",
+          "sha256": "01c16aab45613e492602b96cf48e9ce0797ce8c203d75a036d868af4be51c511",
+          "size_bytes": 623376
+        }
+      },
+      "package_files": [
+        "Diffuse.dds",
+        "Icon.dds"
+      ],
+      "panel_catalog_targets": [
+        "center_spine",
+        "sidepod_blades",
+        "nose_side_generated_panels",
+        "mid_side_generated_panel",
+        "side_wings",
+        "front_mudguard_caps",
+        "rear_mudguard_caps",
+        "tailwing_bands",
+        "mirrors_and_holders",
+        "underbody_dark"
+      ],
+      "reference_style_guidance": {
+        "applied_rules": [
+          "black_gray_white_base",
+          "magenta_high_value_accent",
+          "cyan_secondary_contrast",
+          "red_separate_lane_not_first_bmc_family"
+        ],
+        "closest_reference_packages": [
+          "CH_Bloom_Wheel_LED_Underglow.zip",
+          "steve-in-a-cart_by_WiiTRO.zip",
+          "CH_Blu.zip"
+        ],
+        "does_not_prove_stock_diffuse_mapping": true,
+        "does_not_prove_tmuf_smoke": true,
+        "evidence_status": "reference_metrics_not_tmuf_proof",
+        "generator_guidance": {
+          "base_family": "black_gray_white",
+          "cyan_policy": "secondary_blades_spines_and_cold_light_contrast",
+          "magenta_policy": "high_value_accent_not_full_surface_flood",
+          "primary_accent": "magenta",
+          "red_policy": "separate_recipe_lane_not_first_black_magenta_cyan_family",
+          "scope": "stock Diffuse recipe metadata only; not stock UV or TMUF runtime proof",
+          "secondary_accent": "cyan"
+        },
+        "path": "out/reports/reference_style_guidance.json"
+      },
+      "render_profile": {
+        "damped_masks": [
+          "nose_spear",
+          "rear_center_glow"
+        ],
+        "distinctive_mask_strengths": {
+          "center_spine": 1.28,
+          "mudguards": 1.18,
+          "side_blade": 1.38,
+          "side_wings": 1.34
+        },
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_specific_strengths": true,
+        "mask_strengths": {
+          "center_spine": 1.28,
+          "main_body_under": 1.0,
+          "mid_deck_generated_panels": 1.0,
+          "mid_floor_generated_panels": 1.0,
+          "mid_side_generated_panel": 1.0,
+          "mirrors": 1.0,
+          "mudguard_edge": 1.0,
+          "mudguards": 1.18,
+          "nose_deck_generated_panels": 1.0,
+          "nose_floor_generated_panels": 1.0,
+          "nose_side_generated_panels": 1.0,
+          "nose_spear": 0.72,
+          "rear_center_glow": 0.78,
+          "rear_deck_fine_louver_rows": 1.0,
+          "rear_floor_generated_panels": 1.0,
+          "rear_louvers": 1.0,
+          "rear_side_generated_panels": 1.0,
+          "secondary_blade": 1.0,
+          "shoulder_line": 1.0,
+          "side_blade": 1.38,
+          "side_wings": 1.34,
+          "tail_bar": 1.0,
+          "tailwing": 1.0,
+          "underplate": 1.0
+        },
+        "panel_family_strengths": {
+          "mid_side_generated_panel": 1.0,
+          "nose_side_generated_panels": 1.0
+        }
+      },
+      "route": "stock_diffuse_only",
+      "skin_name": "teal_magenta_vector",
+      "style_metrics": {
+        "cyan_accent_ratio": 0.140852,
+        "dark_pixel_ratio": 0.796239,
+        "magenta_accent_ratio": 0.178904
+      },
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "alpha_metrics": {
+        "high_alpha_pixel_ratio": 0.346364,
+        "max_alpha": 148,
+        "mean_alpha": 126.883903,
+        "min_alpha": 112,
+        "unique_alpha_values": [
+          112,
+          118,
+          124,
+          128,
+          136,
+          148
+        ]
+      },
+      "design_lane": {
+        "catalog_target_count": 11,
+        "composition_focus": "shadow-heavy split layout with magenta engine deck and cyan rear/underbody structure",
+        "distinctive_masks": [
+          "rear_center_glow",
+          "rear_louvers",
+          "underplate",
+          "tailwing"
+        ],
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_id": "shadow_split_engine",
+        "parameter_signature": {
+          "blade_offset": 0.2,
+          "blade_slope": 0.4,
+          "mudguard_mode": "split",
+          "rear_louver_count": 24.0,
+          "spine_width": 0.04
+        },
+        "primary_catalog_targets": [
+          "engine_rear_deck",
+          "rear_deck_fine_louver_rows",
+          "rear_side_generated_panels",
+          "rear_floor_generated_panels",
+          "mid_floor_generated_panels",
+          "rear_mudguard_caps",
+          "rear_mudguard_edge_details",
+          "tailwing_bands",
+          "side_wings",
+          "mirrors_and_holders",
+          "underbody_dark"
+        ]
+      },
+      "gbuffer_mapping": "experimental_until_tmuf_smoke",
+      "output_artifacts": {
+        "atlas_preview": {
+          "path": "out/previews/shadow_magenta_split_atlas.png",
+          "sha256": "0cd221b9d80cc55edcaa3e7609329f42f5d6c509198d4642f84adf81eaecd23c",
+          "size_bytes": 866176
+        },
+        "projected_preview": {
+          "path": "out/previews/shadow_magenta_split_projected_side_top_rear.png",
+          "sha256": "a98fcd54b902bb1d846a646190c0ef10d7782793177da43946850e3b5ee19895",
+          "size_bytes": 291463
+        },
+        "skin_zip": {
+          "path": "out/skins/shadow_magenta_split.zip",
+          "sha256": "9b69fbeef7b4b10d15e912382aafc2dc08d8fad653abed97aae72248cacd4dbd",
+          "size_bytes": 555816
+        }
+      },
+      "package_files": [
+        "Diffuse.dds",
+        "Icon.dds"
+      ],
+      "panel_catalog_targets": [
+        "engine_rear_deck",
+        "rear_deck_fine_louver_rows",
+        "rear_side_generated_panels",
+        "rear_floor_generated_panels",
+        "mid_floor_generated_panels",
+        "rear_mudguard_caps",
+        "rear_mudguard_edge_details",
+        "tailwing_bands",
+        "side_wings",
+        "mirrors_and_holders",
+        "underbody_dark"
+      ],
+      "reference_style_guidance": {
+        "applied_rules": [
+          "black_gray_white_base",
+          "magenta_high_value_accent",
+          "cyan_secondary_contrast",
+          "red_separate_lane_not_first_bmc_family"
+        ],
+        "closest_reference_packages": [
+          "CH_Bloom_Wheel_LED_Underglow.zip",
+          "steve-in-a-cart_by_WiiTRO.zip",
+          "CH_Blu.zip"
+        ],
+        "does_not_prove_stock_diffuse_mapping": true,
+        "does_not_prove_tmuf_smoke": true,
+        "evidence_status": "reference_metrics_not_tmuf_proof",
+        "generator_guidance": {
+          "base_family": "black_gray_white",
+          "cyan_policy": "secondary_blades_spines_and_cold_light_contrast",
+          "magenta_policy": "high_value_accent_not_full_surface_flood",
+          "primary_accent": "magenta",
+          "red_policy": "separate_recipe_lane_not_first_black_magenta_cyan_family",
+          "scope": "stock Diffuse recipe metadata only; not stock UV or TMUF runtime proof",
+          "secondary_accent": "cyan"
+        },
+        "path": "out/reports/reference_style_guidance.json"
+      },
+      "render_profile": {
+        "damped_masks": [
+          "nose_spear",
+          "side_blade",
+          "secondary_blade"
+        ],
+        "distinctive_mask_strengths": {
+          "rear_center_glow": 1.42,
+          "rear_louvers": 1.36,
+          "tailwing": 1.26,
+          "underplate": 1.18
+        },
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_specific_strengths": true,
+        "mask_strengths": {
+          "center_spine": 1.0,
+          "main_body_under": 1.0,
+          "mid_deck_generated_panels": 1.0,
+          "mid_floor_generated_panels": 1.0,
+          "mid_side_generated_panel": 1.0,
+          "mirrors": 1.0,
+          "mudguard_edge": 1.0,
+          "mudguards": 1.0,
+          "nose_deck_generated_panels": 1.0,
+          "nose_floor_generated_panels": 1.0,
+          "nose_side_generated_panels": 1.0,
+          "nose_spear": 0.54,
+          "rear_center_glow": 1.42,
+          "rear_deck_fine_louver_rows": 1.0,
+          "rear_floor_generated_panels": 1.0,
+          "rear_louvers": 1.36,
+          "rear_side_generated_panels": 1.0,
+          "secondary_blade": 0.62,
+          "shoulder_line": 1.0,
+          "side_blade": 0.58,
+          "side_wings": 1.0,
+          "tail_bar": 1.0,
+          "tailwing": 1.26,
+          "underplate": 1.18
+        },
+        "panel_family_strengths": {
+          "mid_floor_generated_panels": 1.0,
+          "rear_deck_fine_louver_rows": 1.0,
+          "rear_floor_generated_panels": 1.0,
+          "rear_side_generated_panels": 1.0
+        }
+      },
+      "route": "stock_diffuse_only",
+      "skin_name": "shadow_magenta_split",
+      "style_metrics": {
+        "cyan_accent_ratio": 0.114089,
+        "dark_pixel_ratio": 0.842479,
+        "magenta_accent_ratio": 0.126633
+      },
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "alpha_metrics": {
+        "high_alpha_pixel_ratio": 0.415294,
+        "max_alpha": 148,
+        "mean_alpha": 129.16139,
+        "min_alpha": 112,
+        "unique_alpha_values": [
+          112,
+          118,
+          124,
+          136,
+          148
+        ]
+      },
+      "design_lane": {
+        "catalog_target_count": 10,
+        "composition_focus": "high-contrast white/cyan deck panels over black with magenta identity marks",
+        "distinctive_masks": [
+          "center_spine",
+          "nose_spear",
+          "mirrors",
+          "tail_bar"
+        ],
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_id": "white_contrast_nightcore",
+        "parameter_signature": {
+          "blade_offset": 0.25,
+          "blade_slope": 0.33,
+          "mudguard_mode": "secondary_front",
+          "rear_louver_count": 19.0,
+          "spine_width": 0.058
+        },
+        "primary_catalog_targets": [
+          "center_spine",
+          "nose_identity_panel",
+          "nose_deck_generated_panels",
+          "mid_deck_generated_panels",
+          "rear_floor_generated_panels",
+          "mirrors_and_holders",
+          "front_mudguard_caps",
+          "tailwing_bands",
+          "side_wings",
+          "underbody_dark"
+        ]
+      },
+      "gbuffer_mapping": "experimental_until_tmuf_smoke",
+      "output_artifacts": {
+        "atlas_preview": {
+          "path": "out/previews/white_cyan_nightcore_atlas.png",
+          "sha256": "2469e06eeb6327f1f5536bd63dfac93cfe94f1f33bacf01aeb2109e00fe5ee1a",
+          "size_bytes": 960102
+        },
+        "projected_preview": {
+          "path": "out/previews/white_cyan_nightcore_projected_side_top_rear.png",
+          "sha256": "f6f93fa6de1bf9489041414705daf86c82f9cb3129d4b7778c2c25dd308cc219",
+          "size_bytes": 297251
+        },
+        "skin_zip": {
+          "path": "out/skins/white_cyan_nightcore.zip",
+          "sha256": "69bf4c8f73ce0e308176a299e2fbc5f45aa00af276f0e5acea0e6315945f921e",
+          "size_bytes": 584228
+        }
+      },
+      "package_files": [
+        "Diffuse.dds",
+        "Icon.dds"
+      ],
+      "panel_catalog_targets": [
+        "center_spine",
+        "nose_identity_panel",
+        "nose_deck_generated_panels",
+        "mid_deck_generated_panels",
+        "rear_floor_generated_panels",
+        "mirrors_and_holders",
+        "front_mudguard_caps",
+        "tailwing_bands",
+        "side_wings",
+        "underbody_dark"
+      ],
+      "reference_style_guidance": {
+        "applied_rules": [
+          "black_gray_white_base",
+          "magenta_high_value_accent",
+          "cyan_secondary_contrast",
+          "red_separate_lane_not_first_bmc_family"
+        ],
+        "closest_reference_packages": [
+          "CH_Bloom_Wheel_LED_Underglow.zip",
+          "steve-in-a-cart_by_WiiTRO.zip",
+          "CH_Blu.zip"
+        ],
+        "does_not_prove_stock_diffuse_mapping": true,
+        "does_not_prove_tmuf_smoke": true,
+        "evidence_status": "reference_metrics_not_tmuf_proof",
+        "generator_guidance": {
+          "base_family": "black_gray_white",
+          "cyan_policy": "secondary_blades_spines_and_cold_light_contrast",
+          "magenta_policy": "high_value_accent_not_full_surface_flood",
+          "primary_accent": "magenta",
+          "red_policy": "separate_recipe_lane_not_first_black_magenta_cyan_family",
+          "scope": "stock Diffuse recipe metadata only; not stock UV or TMUF runtime proof",
+          "secondary_accent": "cyan"
+        },
+        "path": "out/reports/reference_style_guidance.json"
+      },
+      "render_profile": {
+        "damped_masks": [
+          "side_blade",
+          "secondary_blade",
+          "mudguards"
+        ],
+        "distinctive_mask_strengths": {
+          "center_spine": 1.26,
+          "mirrors": 1.54,
+          "nose_spear": 1.2,
+          "tail_bar": 1.24
+        },
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_specific_strengths": true,
+        "mask_strengths": {
+          "center_spine": 1.26,
+          "main_body_under": 1.0,
+          "mid_deck_generated_panels": 1.0,
+          "mid_floor_generated_panels": 1.0,
+          "mid_side_generated_panel": 1.0,
+          "mirrors": 1.54,
+          "mudguard_edge": 1.0,
+          "mudguards": 0.62,
+          "nose_deck_generated_panels": 1.0,
+          "nose_floor_generated_panels": 1.0,
+          "nose_side_generated_panels": 1.0,
+          "nose_spear": 1.2,
+          "rear_center_glow": 1.0,
+          "rear_deck_fine_louver_rows": 1.0,
+          "rear_floor_generated_panels": 1.0,
+          "rear_louvers": 1.0,
+          "rear_side_generated_panels": 1.0,
+          "secondary_blade": 0.76,
+          "shoulder_line": 1.0,
+          "side_blade": 0.7,
+          "side_wings": 1.0,
+          "tail_bar": 1.24,
+          "tailwing": 1.0,
+          "underplate": 1.0
+        },
+        "panel_family_strengths": {
+          "mid_deck_generated_panels": 1.0,
+          "nose_deck_generated_panels": 1.0,
+          "rear_floor_generated_panels": 1.0
+        }
+      },
+      "route": "stock_diffuse_only",
+      "skin_name": "white_cyan_nightcore",
+      "style_metrics": {
+        "cyan_accent_ratio": 0.109294,
+        "dark_pixel_ratio": 0.810237,
+        "magenta_accent_ratio": 0.213685
+      },
+      "tmuf_smoke_test": "not_run"
     }
   ],
   "completion_status": "not_complete_tmuf_smoke_pending",
@@ -840,8 +1641,8 @@
   "tmuf_smoke_status": "pending",
   "visual_review_board": {
     "path": "out/previews/premium_candidate_review_board.png",
-    "sha256": "644a835851a3f001cb09320bd123d9fdb96f9c60aee5dd59be7f46e49e7875db",
-    "size_bytes": 603894
+    "sha256": "1dd0c15ffed1f4d67b97601a852e2fef5b466e1394a387ec876af0857751ec3f",
+    "size_bytes": 1197553
   },
   "visual_review_board_policy": {
     "does_not_prove_tmuf_smoke": true,

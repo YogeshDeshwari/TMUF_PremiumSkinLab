@@ -7,6 +7,7 @@ import unittest
 class LabStatusTests(unittest.TestCase):
     def test_lab_status_summarizes_current_goal_state_without_completion(self):
         from src.evidence.lab_status import build_lab_status
+        from src.stock_diffuse.premium import CANDIDATE_NAMES
 
         status = build_lab_status()
 
@@ -14,7 +15,7 @@ class LabStatusTests(unittest.TestCase):
         self.assertIn("stock_calibration_tmuf_smoke_pending", status["goal_completion_blockers"])
         self.assertEqual(status["stock"]["tmuf_smoke_status"], "pending")
         self.assertTrue(status["stock"]["local_checks_passed"])
-        self.assertEqual(status["stock"]["candidate_count"], 5)
+        self.assertEqual(status["stock"]["candidate_count"], len(CANDIDATE_NAMES))
         self.assertEqual(status["profiles"]["overall_status"], "custom_profiles_locked")
         self.assertEqual(status["smoke_kit"]["status"], "not_run")
         self.assertIn("fresh", status["smoke_kit"])
