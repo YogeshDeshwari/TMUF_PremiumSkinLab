@@ -54,8 +54,17 @@
   },
   "does_not_prove_tmuf_smoke": true,
   "install_discovery": {
-    "candidate_count": 0,
-    "candidates": [],
+    "candidate_count": 1,
+    "candidates": [
+      {
+        "confidence": "high",
+        "does_not_prove_tmuf_smoke": true,
+        "existing_zip_count": 2,
+        "path": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar",
+        "route": "skins_vehicles_stadiumcar",
+        "search_root": "/Users/ydeshwari/Documents/TrackMania"
+      }
+    ],
     "default_user_data_roots": [
       "/Users/ydeshwari/Documents/TrackMania"
     ],
@@ -70,7 +79,7 @@
       "max_depth": null
     },
     "schema_version": 1,
-    "status": "no_candidates_found"
+    "status": "candidates_found"
   },
   "kit_calibration_skin": "skins/calibration_stock_diffuse.zip",
   "kit_smoke_report_template": "proof/calibration_tmuf_smoke_template.json",

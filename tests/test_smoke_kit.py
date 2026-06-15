@@ -108,6 +108,17 @@ class SmokeKitTests(unittest.TestCase):
             self.assertFalse(stale_contact["fresh"])
             self.assertIn("previews/tmuf_smoke_contact_sheet.png", stale_contact["stale_files"])
 
+    def test_building_temp_smoke_kit_does_not_rewrite_repo_run_manifest(self):
+        from src.evidence.smoke_kit import SMOKE_RUN_MANIFEST, build_smoke_kit
+
+        before = SMOKE_RUN_MANIFEST.read_bytes() if SMOKE_RUN_MANIFEST.exists() else b""
+
+        with tempfile.TemporaryDirectory() as tmp:
+            build_smoke_kit(Path(tmp) / "kit")
+
+        after = SMOKE_RUN_MANIFEST.read_bytes() if SMOKE_RUN_MANIFEST.exists() else b""
+        self.assertEqual(after, before)
+
     def test_install_calibration_skin_requires_explicit_target_and_only_copies_skin(self):
         from src.evidence.smoke_kit import CALIBRATION_SKIN, install_calibration_skin
 

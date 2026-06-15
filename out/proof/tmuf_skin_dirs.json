@@ -1,6 +1,15 @@
 {
-  "candidate_count": 0,
-  "candidates": [],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "confidence": "high",
+      "does_not_prove_tmuf_smoke": true,
+      "existing_zip_count": 2,
+      "path": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar",
+      "route": "skins_vehicles_stadiumcar",
+      "search_root": "/Users/ydeshwari/Documents/TrackMania"
+    }
+  ],
   "default_user_data_roots": [
     "/Users/ydeshwari/Documents/TrackMania"
   ],
@@ -10,17 +19,17 @@
     {
       "does_not_prove_tmuf_smoke": true,
       "evidence_boundary": "Install path hint only; not proof that TMUF/TMNF will load the skin.",
-      "exists": false,
+      "exists": true,
       "path": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar",
       "preferred_suffix": true,
       "recommended_first_try": true,
-      "requires_manual_creation": true,
-      "requires_root_creation": true,
-      "root_exists": false,
+      "requires_manual_creation": false,
+      "requires_root_creation": false,
+      "root_exists": true,
       "root_parent_exists": true,
       "route": "skins_vehicles_stadiumcar",
       "safe_use": "Create only after confirming this root is the intended TMUF/TMNF user-data or install-data folder.",
-      "status": "manual_target_hint_not_tmuf_proof",
+      "status": "existing_candidate_route",
       "suffix": "Skins/Vehicles/StadiumCar",
       "target_root": "/Users/ydeshwari/Documents/TrackMania"
     },
@@ -32,8 +41,8 @@
       "preferred_suffix": false,
       "recommended_first_try": false,
       "requires_manual_creation": true,
-      "requires_root_creation": true,
-      "root_exists": false,
+      "requires_root_creation": false,
+      "root_exists": true,
       "root_parent_exists": true,
       "route": "skins_models_stadiumcar",
       "safe_use": "Create only after confirming this root is the intended TMUF/TMNF user-data or install-data folder.",
@@ -49,8 +58,8 @@
       "preferred_suffix": false,
       "recommended_first_try": false,
       "requires_manual_creation": true,
-      "requires_root_creation": true,
-      "root_exists": false,
+      "requires_root_creation": false,
+      "root_exists": true,
       "root_parent_exists": true,
       "route": "gamedata_skins_vehicles_stadiumcar",
       "safe_use": "Create only after confirming this root is the intended TMUF/TMNF user-data or install-data folder.",
@@ -212,23 +221,7 @@
       "target_root": "/Users/ydeshwari/Applications"
     }
   ],
-  "recommended_creation_target": {
-    "does_not_prove_tmuf_smoke": true,
-    "evidence_boundary": "Install path hint only; not proof that TMUF/TMNF will load the skin.",
-    "exists": false,
-    "path": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar",
-    "preferred_suffix": true,
-    "recommended_first_try": true,
-    "requires_manual_creation": true,
-    "requires_root_creation": true,
-    "root_exists": false,
-    "root_parent_exists": true,
-    "route": "skins_vehicles_stadiumcar",
-    "safe_use": "Create only after confirming this root is the intended TMUF/TMNF user-data or install-data folder.",
-    "status": "manual_target_hint_not_tmuf_proof",
-    "suffix": "Skins/Vehicles/StadiumCar",
-    "target_root": "/Users/ydeshwari/Documents/TrackMania"
-  },
+  "recommended_creation_target": null,
   "safe_use": "Use a listed path only as an explicit install target; finding or planning a directory does not prove TMUF load.",
   "scan_boundary": {
     "bounded_by_max_depth": true,
@@ -236,5 +229,5 @@
     "max_depth": 8
   },
   "schema_version": 1,
-  "status": "no_candidates_found"
+  "status": "candidates_found"
 }

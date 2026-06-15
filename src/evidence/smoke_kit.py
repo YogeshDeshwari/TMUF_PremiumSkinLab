@@ -47,11 +47,24 @@ KIT_FILES = {
 def _copy_file(src: Path, dst: Path) -> None:
     if not src.exists():
         raise FileNotFoundError(src)
+    if _same_path(src, dst):
+        return
     dst.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(src, dst)
 
 
-def _kit_manifest(files: list[str]) -> dict[str, Any]:
+def _same_path(left: Path, right: Path) -> bool:
+    try:
+        return left.resolve() == right.resolve()
+    except FileNotFoundError:
+        return left.absolute() == right.absolute()
+
+
+def _is_default_kit_dir(out_dir: Path) -> bool:
+    return _same_path(Path(out_dir), DEFAULT_KIT_DIR)
+
+
+def _kit_manifest(files: list[str], file_sha256: dict[str, str]) -> dict[str, Any]:
     return {
         "schema_version": 1,
         "status": "not_run",
@@ -62,6 +75,7 @@ def _kit_manifest(files: list[str]) -> dict[str, Any]:
         "smoke_run_manifest": "proof/tmuf_smoke_run_manifest.json",
         "instructions": "README_tmuf_smoke_test.md",
         "files": files,
+        "file_sha256": file_sha256,
         "next_steps": [
             "Copy skins/calibration_stock_diffuse.zip into the TMUF/TMNF StadiumCar skin folder.",
             "Load the skin in TMUF/TMNF.",
@@ -194,25 +208,50 @@ def validate_smoke_kit(out_dir: Path = DEFAULT_KIT_DIR) -> dict[str, Any]:
     out_dir = Path(out_dir)
     manifest_path = out_dir / "kit_manifest.json"
     zip_path = out_dir.with_suffix(".zip")
+    if manifest_path.exists():
+        manifest = json.loads(manifest_path.read_text())
+        manifest_status = manifest.get("status", "unknown")
+    else:
+        manifest = {}
+        manifest_status = "missing"
 
-    missing_files = [rel for rel in sorted(KIT_FILES) if not (out_dir / rel).exists()]
-    stale_files = [
-        rel
-        for rel, source in KIT_FILES.items()
-        if (out_dir / rel).exists() and source.exists() and _digest(out_dir / rel) != _digest(source)
-    ]
+    expected_files = sorted(manifest.get("files", sorted(KIT_FILES)))
+    manifest_hashes = manifest.get("file_sha256") if isinstance(manifest.get("file_sha256"), dict) else None
+    use_manifest_hashes = manifest_hashes is not None and not _is_default_kit_dir(out_dir)
+
+    missing_files = [rel for rel in expected_files if not (out_dir / rel).exists()]
+    stale_files: list[str] = []
+    if use_manifest_hashes:
+        stale_files = [
+            rel
+            for rel in expected_files
+            if (out_dir / rel).exists() and _digest(out_dir / rel) != manifest_hashes.get(rel)
+        ]
+    else:
+        stale_files = [
+            rel
+            for rel, source in KIT_FILES.items()
+            if (out_dir / rel).exists() and source.exists() and _digest(out_dir / rel) != _digest(source)
+        ]
 
     zip_missing_or_stale: list[str] = []
     if not zip_path.exists():
-        zip_missing_or_stale = sorted(KIT_FILES) + ["kit_manifest.json"]
+        zip_missing_or_stale = expected_files + ["kit_manifest.json"]
     else:
         with zipfile.ZipFile(zip_path) as zf:
             names = set(zf.namelist())
-            expected_names = set(KIT_FILES) | {"kit_manifest.json"}
+            expected_names = set(expected_files) | {"kit_manifest.json"}
             zip_missing_or_stale.extend(sorted(expected_names - names))
-            for rel, source in KIT_FILES.items():
-                if rel in names and source.exists() and sha256(zf.read(rel)).hexdigest() != _digest(source):
-                    zip_missing_or_stale.append(rel)
+            for rel in expected_files:
+                if rel not in names:
+                    continue
+                if use_manifest_hashes:
+                    if sha256(zf.read(rel)).hexdigest() != manifest_hashes.get(rel):
+                        zip_missing_or_stale.append(rel)
+                else:
+                    source = KIT_FILES.get(rel)
+                    if source is not None and source.exists() and sha256(zf.read(rel)).hexdigest() != _digest(source):
+                        zip_missing_or_stale.append(rel)
             if "kit_manifest.json" in names and manifest_path.exists():
                 if sha256(zf.read("kit_manifest.json")).hexdigest() != _digest(manifest_path):
                     zip_missing_or_stale.append("kit_manifest.json")
@@ -220,12 +259,6 @@ def validate_smoke_kit(out_dir: Path = DEFAULT_KIT_DIR) -> dict[str, Any]:
     exists = manifest_path.exists() and zip_path.exists() and not missing_files
     fresh = exists and not stale_files and not zip_missing_or_stale
     status = "fresh_not_run" if fresh else "stale_or_missing"
-    if manifest_path.exists():
-        manifest = json.loads(manifest_path.read_text())
-        manifest_status = manifest.get("status", "unknown")
-    else:
-        manifest_status = "missing"
-
     return {
         "exists": exists,
         "fresh": fresh,
@@ -248,14 +281,26 @@ def build_smoke_kit(
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     save_panel_probe_outputs()
-    build_smoke_contact_sheet()
-    build_smoke_run_manifest(discovery_roots=discovery_roots)
+    sources = dict(KIT_FILES)
+    if _is_default_kit_dir(out_dir):
+        sources["previews/tmuf_smoke_contact_sheet.png"] = build_smoke_contact_sheet()
+        sources["proof/tmuf_smoke_run_manifest.json"] = build_smoke_run_manifest(
+            discovery_roots=discovery_roots,
+        )
+    else:
+        sources["previews/tmuf_smoke_contact_sheet.png"] = build_smoke_contact_sheet(
+            out_dir / "previews" / "tmuf_smoke_contact_sheet.png",
+        )
+        sources["proof/tmuf_smoke_run_manifest.json"] = build_smoke_run_manifest(
+            out_dir / "proof" / "tmuf_smoke_run_manifest.json",
+            discovery_roots=discovery_roots,
+        )
 
-    files = sorted(KIT_FILES)
-    for rel, src in KIT_FILES.items():
+    files = sorted(sources)
+    for rel, src in sources.items():
         _copy_file(src, out_dir / rel)
 
-    manifest = _kit_manifest(files)
+    manifest = _kit_manifest(files, {rel: _digest(out_dir / rel) for rel in files})
     manifest_path = out_dir / "kit_manifest.json"
     manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
 

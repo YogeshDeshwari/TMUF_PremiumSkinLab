@@ -1,11 +1,19 @@
 TMUF PremiumSkinLab Manual Smoke Command Packet
-status=needs_explicit_stadiumcar_dir
+status=ready_to_run_tmuf_smoke
 does_not_prove_tmuf_smoke=true
 proof_boundary=This readiness report guides manual smoke setup only; it does not prove TMUF/TMNF load or GBuffer mapping.
 
 Next actions:
-- choose_or_create_tmuf_stadiumcar_skin_dir
-- install_with_explicit_target
+- run_tmuf_calibration_smoke_test
+- record_tmuf_smoke_evidence
+- evaluate_then_apply_tmuf_smoke_gate
+
+Install target preflight:
+path=/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar
+route=skins_vehicles_stadiumcar
+valid=true
+errors=none
+does_not_prove_tmuf_smoke=true
 
 Calibration observations to verify:
 - nose_is_red
@@ -23,13 +31,6 @@ Required screenshot roles:
 - side
 - rear
 - top
-
-Recommended manual creation target:
-path=/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar
-route=skins_vehicles_stadiumcar
-root_exists=false
-requires_root_creation=true
-does_not_prove_tmuf_smoke=true
 
 Manual creation target candidates:
 - /Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar (skins_vehicles_stadiumcar, recommended)
@@ -60,16 +61,12 @@ create_explicit_target:
   python3 recipes/create_tmuf_skin_dir.py --target /absolute/path/to/StadiumCar --json
 create_and_install_explicit:
   python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /absolute/path/to/StadiumCar --create-install-target --json
-preflight_recommended_creation_target:
-  python3 recipes/smoke_readiness.py --install-target /Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar --write --write-command-packet
-create_and_install_recommended_creation_target:
-  python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar --create-install-target --json
 preflight_explicit:
-  python3 recipes/smoke_readiness.py --install-target /absolute/path/to/StadiumCar --write --write-command-packet
+  python3 recipes/smoke_readiness.py --install-target /Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar --write --write-command-packet
 install_explicit:
-  python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /absolute/path/to/StadiumCar
+  python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar
 install_discovered:
-  python3 recipes/prepare_tmuf_smoke_kit.py --install-discovered
+  python3 recipes/prepare_tmuf_smoke_kit.py --install-discovered --search-root /Users/ydeshwari/Documents/TrackMania
 record_smoke:
   python3 recipes/record_tmuf_smoke.py --tester "manual tester" --tmuf-build "TMUF local install" --test-date-local YYYY-MM-DD --install-receipt /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit/proof/calibration_install_receipt.json --screenshot-role front=/absolute/path/to/tmuf_front.png --screenshot-role side=/absolute/path/to/tmuf_side.png --screenshot-role rear=/absolute/path/to/tmuf_rear.png --screenshot-role top=/absolute/path/to/tmuf_top.png --all-required-observations-passed
 evaluate:

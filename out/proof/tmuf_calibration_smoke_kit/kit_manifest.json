@@ -1,6 +1,19 @@
 {
   "calibration_skin": "skins/calibration_stock_diffuse.zip",
   "does_not_prove_tmuf_smoke": true,
+  "file_sha256": {
+    "README_tmuf_smoke_test.md": "4f09630321070517204d93e2b56b28202d92bc8c53d89c406d223fa0056b93c2",
+    "previews/calibration_panel_family_probe_atlas.png": "7797f13f8b824c7c090541fe17be8dc7a8896a32921bba46027a9f22cc381cd9",
+    "previews/calibration_panel_family_probe_projected_side_top_rear.png": "118ef4b73a1b049d419c439355222bf3936855b50872e670f6120ce533a0c2e2",
+    "previews/calibration_stock_diffuse_atlas.png": "45cf2b38dcf54296bd33cb8825f10fcdb168ca2b978f4eee71d20fa79059e72c",
+    "previews/calibration_stock_diffuse_projected_side_top_rear.png": "47708bad004104b6341dbff173bd186b48a3e95715d1bd4d744682b088999b2f",
+    "previews/tmuf_smoke_contact_sheet.png": "a638878c6392063d331e5d2e5351411718f1b719f25ae58a348a08b370c8a98a",
+    "proof/calibration_tmuf_smoke_template.json": "953fd91702fca83a41241e44989562451591e2a38b9b283bcdaaf09ce8eb72c6",
+    "proof/tmuf_smoke_run_manifest.json": "46523dcdea1ab205e996c32525e9c9f3c722f0ba6dd0769bb62b3fec4e854f20",
+    "reports/calibration_panel_family_probe.json": "a139f06f33284085fcb62969e7b3437f66c915fde4cc87c52ea87e838f28e082",
+    "skins/calibration_panel_family_probe.zip": "ab138dd48c04fc247ab27f5b7edda85c336a746a781810273b35a52fe0a84852",
+    "skins/calibration_stock_diffuse.zip": "9e51e0bc7b11aedc0cefa3a1ae58334b93a7858392c07f0e8552bec46da7c70e"
+  },
   "files": [
     "README_tmuf_smoke_test.md",
     "previews/calibration_panel_family_probe_atlas.png",

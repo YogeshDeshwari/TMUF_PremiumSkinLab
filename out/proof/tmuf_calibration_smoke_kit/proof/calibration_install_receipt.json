@@ -1,0 +1,42 @@
+{
+  "does_not_prove_tmuf_smoke": true,
+  "install_target_setup": {
+    "created": true,
+    "does_not_prove_tmuf_smoke": true,
+    "next_install_command": "python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar",
+    "next_preflight_command": "python3 recipes/smoke_readiness.py --install-target /Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar --write --write-command-packet",
+    "path": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar",
+    "route": "skins_vehicles_stadiumcar",
+    "safe_use": "This only prepares a recognized StadiumCar skin folder; it does not prove TMUF/TMNF loads skins from this path.",
+    "schema": "tmuf_premium_skin_lab.stadiumcar_skin_dir_create.v1",
+    "status": "directory_ready_not_tested"
+  },
+  "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/calibration_stock_diffuse.zip",
+  "installed_supplemental_skins": [
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/calibration_panel_family_probe.zip",
+      "name": "calibration_panel_family_probe",
+      "purpose": "panel_family_runtime_visibility_probe",
+      "sha256": "ab138dd48c04fc247ab27f5b7edda85c336a746a781810273b35a52fe0a84852",
+      "size_bytes": 565222,
+      "source_sha256": "ab138dd48c04fc247ab27f5b7edda85c336a746a781810273b35a52fe0a84852",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/calibration_panel_family_probe.zip"
+    }
+  ],
+  "next_required_evidence": [
+    "run_tmuf_calibration_smoke_test",
+    "capture_front_side_rear_top_screenshots",
+    "inspect_panel_family_probe_in_tmuf",
+    "record_tmuf_smoke_evidence",
+    "evaluate_then_apply_tmuf_smoke_gate"
+  ],
+  "route": "skins_vehicles_stadiumcar",
+  "schema": "tmuf_premium_skin_lab.calibration_install_receipt.v1",
+  "selection_mode": "explicit_install_target_created",
+  "sha256": "9e51e0bc7b11aedc0cefa3a1ae58334b93a7858392c07f0e8552bec46da7c70e",
+  "size_bytes": 488418,
+  "source_sha256": "9e51e0bc7b11aedc0cefa3a1ae58334b93a7858392c07f0e8552bec46da7c70e",
+  "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/calibration_stock_diffuse.zip",
+  "status": "installed_not_tested"
+}
