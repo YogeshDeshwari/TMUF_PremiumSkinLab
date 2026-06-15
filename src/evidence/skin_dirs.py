@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import shlex
 from pathlib import Path
 from typing import Any
 
@@ -27,7 +28,7 @@ KNOWN_SUFFIXES = {
 
 def route_for_stadiumcar_skin_dir(path: Path) -> str | None:
     parts = path.parts
-    for suffix, route in KNOWN_SUFFIXES.items():
+    for suffix, route in sorted(KNOWN_SUFFIXES.items(), key=lambda item: len(item[0]), reverse=True):
         if len(parts) >= len(suffix) and tuple(parts[-len(suffix) :]) == suffix:
             return route
     return None
@@ -68,6 +69,30 @@ def suggest_manual_creation_targets(roots: list[Path]) -> list[dict[str, Any]]:
         for suffix, route in sorted(KNOWN_SUFFIXES.items(), key=lambda item: item[1]):
             targets.append(_manual_creation_target(root, suffix, route))
     return targets
+
+
+def create_stadiumcar_skin_dir(path: Path) -> dict[str, Any]:
+    target = Path(path)
+    route = route_for_stadiumcar_skin_dir(target)
+    if route is None:
+        raise ValueError(f"Target is not a recognized StadiumCar skin directory path: {target}")
+    if target.exists() and not target.is_dir():
+        raise NotADirectoryError(target)
+
+    created = not target.exists()
+    target.mkdir(parents=True, exist_ok=True)
+    quoted = shlex.quote(target.as_posix())
+    return {
+        "schema": "tmuf_premium_skin_lab.stadiumcar_skin_dir_create.v1",
+        "status": "directory_ready_not_tested",
+        "path": target.as_posix(),
+        "route": route,
+        "created": created,
+        "does_not_prove_tmuf_smoke": True,
+        "safe_use": "This only prepares a recognized StadiumCar skin folder; it does not prove TMUF/TMNF loads skins from this path.",
+        "next_preflight_command": f"python3 recipes/smoke_readiness.py --install-target {quoted} --write --write-command-packet",
+        "next_install_command": f"python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir {quoted}",
+    }
 
 
 def _relative_depth(path: Path, root: Path) -> int:

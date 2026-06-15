@@ -24,6 +24,7 @@
   "commands": {
     "apply_after_pass_only": "python3 recipes/tmuf_smoke_gate.py --apply out/proof/calibration_tmuf_smoke.json",
     "build_smoke_kit": "python3 recipes/prepare_tmuf_smoke_kit.py",
+    "create_explicit_target": "python3 recipes/create_tmuf_skin_dir.py --target /absolute/path/to/StadiumCar --json",
     "evaluate": "python3 recipes/tmuf_smoke_gate.py --evaluate out/proof/calibration_tmuf_smoke.json",
     "install_discovered": "python3 recipes/prepare_tmuf_smoke_kit.py --install-discovered",
     "install_explicit": "python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /absolute/path/to/StadiumCar",

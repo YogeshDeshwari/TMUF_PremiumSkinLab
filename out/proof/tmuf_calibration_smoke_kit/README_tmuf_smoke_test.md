@@ -125,6 +125,16 @@ These target paths are not created automatically and are not TMUF smoke proof.
 Use them only after confirming the root is the intended TMUF/TMNF user-data or
 install-data folder.
 
+To create one exact recognized target after choosing it:
+
+```bash
+python3 recipes/create_tmuf_skin_dir.py \
+  --target /absolute/path/to/StadiumCar \
+  --json
+```
+
+This only prepares the folder. It does not prove TMUF/TMNF will load from it.
+
 Recognized install targets must end in one of these suffixes:
 
 ```text

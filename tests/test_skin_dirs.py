@@ -74,6 +74,32 @@ class SkinDirLocatorTests(unittest.TestCase):
                 self.assertEqual(target["target_root"], root.as_posix())
                 self.assertIn(target["route"], set(KNOWN_SUFFIXES.values()))
 
+    def test_create_stadiumcar_skin_dir_requires_recognized_target(self):
+        from src.evidence.skin_dirs import create_stadiumcar_skin_dir
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            target = root / "Skins" / "Vehicles" / "StadiumCar"
+
+            result = create_stadiumcar_skin_dir(target)
+
+            self.assertTrue(target.is_dir())
+            self.assertEqual(result["status"], "directory_ready_not_tested")
+            self.assertEqual(result["route"], "skins_vehicles_stadiumcar")
+            self.assertEqual(result["path"], target.as_posix())
+            self.assertTrue(result["created"])
+            self.assertTrue(result["does_not_prove_tmuf_smoke"])
+            self.assertIn("prepare_tmuf_smoke_kit.py --install-skins-dir", result["next_install_command"])
+
+            second = create_stadiumcar_skin_dir(target)
+            self.assertFalse(second["created"])
+            self.assertEqual(second["status"], "directory_ready_not_tested")
+
+            wrong = root / "StadiumCar"
+            with self.assertRaises(ValueError):
+                create_stadiumcar_skin_dir(wrong)
+            self.assertFalse(wrong.exists())
+
     def test_cli_can_write_candidate_report(self):
         from recipes.find_tmuf_skin_dirs import main
 
@@ -123,6 +149,22 @@ class SkinDirLocatorTests(unittest.TestCase):
             self.assertTrue(all(item["path"].startswith(root.as_posix()) for item in data["manual_creation_targets"]))
             self.assertTrue(all(item["requires_manual_creation"] for item in data["manual_creation_targets"]))
             self.assertFalse(any(Path(item["path"]).exists() for item in data["manual_creation_targets"]))
+
+    def test_create_cli_writes_explicit_stadiumcar_target(self):
+        from recipes.create_tmuf_skin_dir import main
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            target = root / "GameData" / "Skins" / "Vehicles" / "StadiumCar"
+
+            output = main(["--target", str(target), "--json"])
+            data = json.loads(output)
+
+            self.assertTrue(target.is_dir())
+            self.assertEqual(data["status"], "directory_ready_not_tested")
+            self.assertEqual(data["route"], "gamedata_skins_vehicles_stadiumcar")
+            self.assertTrue(data["created"])
+            self.assertTrue(data["does_not_prove_tmuf_smoke"])
 
 
 if __name__ == "__main__":
