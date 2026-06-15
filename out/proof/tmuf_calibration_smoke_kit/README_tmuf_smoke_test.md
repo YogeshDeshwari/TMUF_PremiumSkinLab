@@ -95,18 +95,20 @@ To summarize the current setup state and get the next exact command, write the
 readiness report:
 
 ```bash
-python3 recipes/smoke_readiness.py --write
+python3 recipes/smoke_readiness.py --write --write-command-packet
 ```
 
 This writes:
 
 ```text
 out/proof/tmuf_smoke_readiness.json
+out/proof/tmuf_manual_smoke_commands.txt
 ```
 
 The readiness report does not prove TMUF smoke status. It only reports whether
 the local kit is fresh, how many StadiumCar folders were found, whether an
-install receipt exists, and which command should be run next.
+install receipt exists, and which command should be run next. The command
+packet is the same setup guidance in copy-friendly text form.
 
 Create the template if you want a manual form:
 

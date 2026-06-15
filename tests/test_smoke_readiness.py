@@ -85,6 +85,45 @@ class SmokeReadinessTests(unittest.TestCase):
             self.assertTrue(out_path.exists())
             self.assertEqual(json.loads(out_path.read_text())["status"], data["status"])
 
+    def test_command_packet_is_human_readable_and_keeps_proof_boundary(self):
+        from src.evidence.skin_dirs import write_skin_dir_report
+        from src.evidence.smoke_kit import build_smoke_kit
+        from src.evidence.smoke_readiness import write_smoke_command_packet
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            packet_path = root / "out" / "proof" / "tmuf_manual_smoke_commands.txt"
+            build_smoke_kit(root / "out" / "proof" / "tmuf_calibration_smoke_kit")
+            write_skin_dir_report(root / "out" / "proof" / "tmuf_skin_dirs.json", roots=[root / "missing"])
+
+            written = write_smoke_command_packet(packet_path, root)
+
+            self.assertEqual(written, packet_path)
+            text = packet_path.read_text()
+            self.assertIn("status=needs_explicit_stadiumcar_dir", text)
+            self.assertIn("does_not_prove_tmuf_smoke=true", text)
+            self.assertIn("choose_or_create_tmuf_stadiumcar_skin_dir", text)
+            self.assertIn("python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir", text)
+            self.assertIn("python3 recipes/record_tmuf_smoke.py", text)
+            self.assertIn("Do not run apply until evaluate passes", text)
+
+    def test_cli_can_write_command_packet(self):
+        from recipes.smoke_readiness import main
+        from src.evidence.skin_dirs import write_skin_dir_report
+        from src.evidence.smoke_kit import build_smoke_kit
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            packet_path = root / "commands.txt"
+            build_smoke_kit(root / "out" / "proof" / "tmuf_calibration_smoke_kit")
+            write_skin_dir_report(root / "out" / "proof" / "tmuf_skin_dirs.json", roots=[root / "missing"])
+
+            output = main(["--root", str(root), "--write-command-packet", str(packet_path)])
+
+            self.assertTrue(packet_path.exists())
+            self.assertIn("command_packet=", output)
+            self.assertIn(str(packet_path), output)
+
 
 if __name__ == "__main__":
     unittest.main()

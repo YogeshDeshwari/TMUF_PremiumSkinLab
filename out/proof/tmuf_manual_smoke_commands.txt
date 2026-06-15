@@ -1,0 +1,29 @@
+TMUF PremiumSkinLab Manual Smoke Command Packet
+status=needs_explicit_stadiumcar_dir
+does_not_prove_tmuf_smoke=true
+proof_boundary=This readiness report guides manual smoke setup only; it does not prove TMUF/TMNF load or GBuffer mapping.
+
+Next actions:
+- choose_or_create_tmuf_stadiumcar_skin_dir
+- install_with_explicit_target
+
+Commands:
+build_smoke_kit:
+  python3 recipes/prepare_tmuf_smoke_kit.py
+scan_skin_dirs:
+  python3 recipes/find_tmuf_skin_dirs.py --write
+install_explicit:
+  python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /absolute/path/to/StadiumCar
+install_discovered:
+  python3 recipes/prepare_tmuf_smoke_kit.py --install-discovered
+record_smoke:
+  python3 recipes/record_tmuf_smoke.py --tester "manual tester" --tmuf-build "TMUF local install" --test-date-local YYYY-MM-DD --install-receipt /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit/proof/calibration_install_receipt.json --screenshot-role front=/absolute/path/to/tmuf_front.png --screenshot-role side=/absolute/path/to/tmuf_side.png --screenshot-role rear=/absolute/path/to/tmuf_rear.png --screenshot-role top=/absolute/path/to/tmuf_top.png --all-required-observations-passed
+evaluate:
+  python3 recipes/tmuf_smoke_gate.py --evaluate out/proof/calibration_tmuf_smoke.json
+apply_after_pass_only:
+  python3 recipes/tmuf_smoke_gate.py --apply out/proof/calibration_tmuf_smoke.json
+
+Rules:
+- Replace placeholder paths before recording smoke evidence.
+- Do not run apply until evaluate passes.
+- This packet is a setup aid only; it is not TMUF smoke evidence.

@@ -99,7 +99,7 @@ python3 recipes/prepare_tmuf_smoke_kit.py
 python3 recipes/find_tmuf_skin_dirs.py --write
 python3 recipes/validate_stock_outputs.py
 python3 recipes/validate_profile_gates.py
-python3 recipes/smoke_readiness.py --write
+python3 recipes/smoke_readiness.py --write --write-command-packet
 python3 recipes/lab_status.py --write
 python3 -m unittest discover -s tests
 ```
@@ -125,9 +125,10 @@ The smoke kit includes `proof/tmuf_smoke_run_manifest.json` as a
 machine-readable checklist and `previews/tmuf_smoke_contact_sheet.png` as a
 visual review aid. Neither file is smoke evidence.
 
-`python3 recipes/smoke_readiness.py --write` summarizes the current manual
-smoke-test setup state and exact next commands. It is a setup report only; it
-does not prove TMUF smoke status.
+`python3 recipes/smoke_readiness.py --write --write-command-packet` summarizes
+the current manual smoke-test setup state and writes a human-readable command
+packet at `out/proof/tmuf_manual_smoke_commands.txt`. These are setup aids only;
+they do not prove TMUF smoke status.
 
 See `docs/tmuf_smoke_test.md` before promoting any report from
 `experimental_until_tmuf_smoke` to `proven_by_tmuf_smoke`.

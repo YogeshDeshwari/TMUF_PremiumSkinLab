@@ -11,6 +11,7 @@ from src.evidence.smoke_kit import DEFAULT_KIT_DIR, validate_smoke_kit
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_READINESS_PATH = ROOT / "out" / "proof" / "tmuf_smoke_readiness.json"
+DEFAULT_COMMAND_PACKET = ROOT / "out" / "proof" / "tmuf_manual_smoke_commands.txt"
 DEFAULT_INSTALL_RECEIPT = DEFAULT_KIT_DIR / "proof" / "calibration_install_receipt.json"
 
 
@@ -155,4 +156,46 @@ def write_smoke_readiness(path: Path = DEFAULT_READINESS_PATH, root: Path = ROOT
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(build_smoke_readiness(root), indent=2, sort_keys=True) + "\n")
+    return path
+
+
+def format_smoke_command_packet(readiness: dict[str, Any]) -> str:
+    lines = [
+        "TMUF PremiumSkinLab Manual Smoke Command Packet",
+        f"status={readiness['status']}",
+        "does_not_prove_tmuf_smoke=true",
+        f"proof_boundary={readiness['proof_boundary']}",
+        "",
+        "Next actions:",
+    ]
+    lines.extend(f"- {action}" for action in readiness["next_actions"])
+    lines.extend(["", "Commands:"])
+    for name in [
+        "build_smoke_kit",
+        "scan_skin_dirs",
+        "install_explicit",
+        "install_discovered",
+        "record_smoke",
+        "evaluate",
+        "apply_after_pass_only",
+    ]:
+        command = readiness["commands"].get(name)
+        if command:
+            lines.extend([f"{name}:", f"  {command}"])
+    lines.extend(
+        [
+            "",
+            "Rules:",
+            "- Replace placeholder paths before recording smoke evidence.",
+            "- Do not run apply until evaluate passes.",
+            "- This packet is a setup aid only; it is not TMUF smoke evidence.",
+        ]
+    )
+    return "\n".join(lines) + "\n"
+
+
+def write_smoke_command_packet(path: Path = DEFAULT_COMMAND_PACKET, root: Path = ROOT) -> Path:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(format_smoke_command_packet(build_smoke_readiness(root)))
     return path

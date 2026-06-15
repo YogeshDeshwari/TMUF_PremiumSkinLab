@@ -63,8 +63,8 @@ Use this before calling any skin complete.
 
 - [ ] Confirm the validator reports `tmuf_smoke_status=pending` before manual
       TMUF evidence exists.
-- [ ] Run `python3 recipes/smoke_readiness.py --write` and follow the reported
-      install/setup status.
+- [ ] Run `python3 recipes/smoke_readiness.py --write --write-command-packet`
+      and follow the reported install/setup status.
 - [ ] Put zip into the StadiumCar skin folder using either an explicit
       `--install-skins-dir` target or guarded `--install-discovered` with one
       candidate.
