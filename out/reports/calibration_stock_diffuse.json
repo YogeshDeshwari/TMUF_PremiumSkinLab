@@ -1,0 +1,28 @@
+{
+  "calibration_colors": {
+    "centerline": "cyan",
+    "left": "green",
+    "lower_floor": "dark",
+    "mudguards": "magenta",
+    "nose": "red",
+    "right": "yellow",
+    "roof_high": "white",
+    "tail": "blue"
+  },
+  "evidence_status": {
+    "dds_package": "generated_and_header_checked_by_tests",
+    "gbuffer_mapping": "experimental_until_tmuf_smoke",
+    "stock_diffuse_route": "proven_by_local_docs_and_package_contract"
+  },
+  "known_risks": [
+    "GBuffer direction and nearest-neighbour footprint fill require TMUF visual confirmation.",
+    "Diffuse alpha is kept conservative; gloss behavior is not considered proven by this artifact."
+  ],
+  "package_files": [
+    "Diffuse.dds",
+    "Icon.dds"
+  ],
+  "route": "stock_diffuse_only",
+  "skin_name": "calibration_stock_diffuse",
+  "tmuf_smoke_test": "not_run"
+}

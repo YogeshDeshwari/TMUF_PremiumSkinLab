@@ -1,0 +1,255 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>3D Model Conversion for Trackmania United</title>
+</head>
+
+<body background="BK_Grey.jpg">
+
+<p align="center"><u><b><font size="6" color="#FFCC00">3D Model Conversion for Trackmania United</font></b></u></p>
+
+<p align="center"><font color="#800080">&nbsp;&nbsp;&nbsp; Disclaimer: This 
+tutorial is meant as a guide and not as the only way of achieving the goal. My 
+experience with modeling is completely self taught from other tutorials on the 
+web. I learned this stuff so that I could convert and create car models for 
+Trackmania Sunrise. I only use 3D Studio Max, version 7. Some of the terms used here are 
+from Max, please use the help for explanations.&nbsp; </font>
+</p>
+
+<p align="center">
+<font color="#FFCC00"><font color="#800080">Please direct any comments or 
+suggestions to </font><a href="mailto:trick@ugghost.com"><font color="#800080">
+trick@ugghost.com</font></a></font></p>
+
+<p align="center"><font color="#800080"><span style="background-color: #FFFF00">
+This tutorial is still a work in progress as of
+<!--webbot bot="Timestamp" S-Type="EDITED" S-Format="%d/%m/%Y" startspan -->03/09/2008<!--webbot bot="Timestamp" endspan i-checksum="12642" -->. 
+Please check back often. </span></font></p>
+
+<p align="center"><font size="4"><a href="TM_Modelling_Tutorial.zip">Download  
+this tutorial</a></font></p>
+
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; <a href="Setup.htm">3D Studio 
+Max Scene Setup</a></font></p>
+<p align="left"><font size="4" color="#FFCC00">&nbsp;&nbsp;&nbsp; </font>
+<font size="4">Requirements:</font></p>
+<p align="left"><font size="4" color="#FFCC00">&nbsp;&nbsp;&nbsp; 
+<a href="model3d.htm">3D model with:</a></font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp;
+<img border="0" src="selectobjects_icon.jpg" width="30" height="30"> <u>
+<font color="#FFCC00"><a href="objects.htm">Objects as follows</a></font></u>:</font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; <u>Editable meshes with the
+<b>names</b></u>...</font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<u>These objects are required</u></font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp;
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+sBody -</b> the parts of the model that can be repainted in the in-game painter, 
+this is usually the body of the car).<b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dBody - </b>the interior, the window rubber, the lights, the front grill, all 
+other except glass and wheels).<b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+gBody - </b>all parts that will be shown transparent in the game, windows, 
+sunroof, headlight and taillight covers).<b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dFLWheel - </b>the front, left wheel part that cannot be painted in the in-game 
+painter, this is usually the tire).<b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+sFLWheel -</b> the front, left wheel part that can be painted in the in-game 
+painter, this is usually the rim).<b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dFRWheel -</b> the front, right wheel part that cannot be painted in the in-game 
+painter, this is usually the tire).<b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+sFRWheel - </b>the front, right wheel part that can be painted in the in-game 
+painter, this is usually the rim).<b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dRLWheel -</b> the rear, left wheel part that cannot be painted in the in-game 
+painter, this is usually the tire).<b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+sRLWheel -</b> the rear, left wheel part that can be painted in the in-game 
+painter, this is usually the rim).<b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+dRRWheel -</b> the rear, right wheel part that cannot be painted in the in-game 
+painter, this is usually the tire).<b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+sRRWheel - </b>the rear, right wheel part that can be painted in the in-game 
+painter, this is usually the rim).</font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<u>Wheel suspension parts</u></font> <font size="4">(optional)</font><p align="left"><font size="4">&nbsp;&nbsp;&nbsp;
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dxxHub</b> - xx can be FL,FR,RL,RR (the 'kingpin'). 
+Must be used to make the other suspension parts to work.</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b></b><font size="4"><b>dxxArmTop</b> - xx can be FL,FR,RL,RR (an upper control 
+arm)</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b></b><font size="4"><b>dxxArmBot </b>- xx can be FL,FR,RL,RR (a lower control 
+arm)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>dxxArmDir</b> - xx can be FL,FR,RL,RR (the steering rod)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>dxxSusp</b> - xx can be FL,FR,RL,RR (the spring/shock absorber)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>sxxGuard</b> - can also be dxxGuard (xx can only be FL or FR) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>dxxCardan</b> - rear wheel driveshafts (xx can only be RL or RR)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<u>Other</u> </font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><b><font size="4">pPilHead -</font></b> <font size="4">the head of the 
+driver, which will 'bauble'.</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<font size="4"><b>ProjShad </b></font>- <font size="4">a cone shaped, unseen 
+mesh that will be used to project a shadow on the road below the car, uses the Projshad.dds file.</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b><font size="4">LightFProj -</font></b><font size="4"> a cone shaped object, 
+which will not be visible in game, that is used to project a light on the road 
+in front of the car, uses the default CarLights.dds file.</font><br>
+&nbsp;</p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <u>8 Helpers/Dummys 
+with the</u> <b>names</b>...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>LightFL1</b> and <b>LightFR1</b> (front lights, left and right, big flare)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>LightFL2</b> and <b>LightFR2</b> (front lights, left and right, small flare1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>LightFL3</b> and <b>LightFR3</b> (front lights, left and right, small flare2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>LightRL</b> and <b>LightRR</b> (rear lights, left and right)</font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; <u>
+<img border="0" src="Scale_icon.jpg" width="28" height="28"><font color="#FFCC00"><a href="Scale.htm">Scale</a></font></u></font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; The scale of size of the model 
+should be 0.1% from actual size. This means that a car with a 2800mm wheel base 
+and a track width of 1500mm will scale 
+down to a 2.8mm wheel base and 1.5mm track. A wheel with a 660mm diameter will 
+have a scaled diameter of .660mm and be placed with its center .330mm above the x,y-axis plane. Be sure that the 'center' of the model is placed as close to the 
+center of the scene as possible. This will keep most scaled models 
+within the limitations of the 'max box'. The maximum size of any object in the 
+model cannot exceed 6mm long (y axis), 3mm wide (x axis), and 2.5mm high (z 
+axis). </font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; <u>
+<img border="0" src="Vertices_icon.jpg" width="32" height="32"><font color="#FFCC00"><a href="vertices.htm">Vertices Count</a></font></u></font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; The game supports a 'low poly' 
+model for decreased bandwidth connections and better performance on slower 
+systems. The 'high poly' model is displayed when a player chooses to show all 
+models high. The overall number of vertices 
+cannot exceed (~100,000) for the 'high poly' (MainBodyHigh.Solid.gbx) and 3,600 for 
+the 'low poly' (MainBody.Solid.gbx).</font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp;
+<img border="0" src="hierarchy_icon.jpg" width="31" height="31"><font color="#FFCC00"><u><a href="pivots.htm">Pivots</a></u></font></font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; Place the pivot of each of the 
+required objects 
+at the object's center. All other objects must have their pivots placed 
+accordingly. <u>Note:</u> Versions of Trackmania prior to 
+Nations/United had fixed wheel positions. That is the pivot of each wheel object 
+was always placed in the same place (no matter which car you chose). The 
+different environments had different wheel positions. The trick here is to place 
+the wheel object pivots of your model at these 'fixed' locations. </font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp;
+<img border="0" src="utils_icon.jpg" width="32" height="32"><font color="#FFCC00"><u><a href="XForm_modifier.htm">Reset 
+Xform</a></u></font></font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; For the users of 3D Studio Max, 
+whenever you move the pivot of an object, you must reset the Xform modifier of 
+that object before you export to .3ds file.</font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; <u><font color="#FFCC00">
+<img border="0" src="UVW_icon.jpg" width="32" height="32">UWV 
+Mapping</font></u></font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp;&nbsp; The dBody, gBody, and 
+dXXWheel objects will use the Details.dds 
+as their texture file. The sBody and sXXWheel objects will use the Diffuse.dds as 
+their texture file. The gBody object should be 
+mapped in an area that corresponds to an empty area of the mapped details. The 
+same goes for the dXXWheel objects, but they can be all mapped in the same area. 
+Mapped parts of the dBody object can overlap in the details mapping. The 
+sXXWheel 
+objects should be mapped to an area that corresponds to an empty area in the 
+diffuse mapping. Mapped parts of the sBody object should not overlap in the skin 
+mapping.</font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; <font color="#FFCC00"><u>
+Exporting</u></font></font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; Select all of the objects. From the file pull-down menu choose Export 
+Selected. You must export to a .3ds 
+file.</font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; <font color="#FFCC00"><u>
+Importing the model for use in the game</u></font></font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; From the game launcher, select 
+Help, then Custom data, then under Data importer, choose Car geometry. An 'Import 
+car geometry' dialog will appear which allows you to browse to a folder and choose the 
+.3ds file you want to import. Click open to import the file. A new file is 
+created in the folder where the .3ds file resides. It will be given the 
+extension of .Solid.Gbx. This importer does not return any errors that 
+might be in the .3ds file that you choose. You won't know if there is a problem 
+until you try to see it in the game.</font></p>
+<p align="left"> <font size="4">&nbsp;&nbsp;&nbsp; </font> 
+<font color="#FFCC00" size="4"><u>The 
+Car.Zip file </u></font></p>
+<p align="left"><font size="4">The car zip file contains the files needed to 
+make the car appear in the game. The required files (mainbodyhigh or mainbody 
+may be used) are: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Icon.dds</b> (icon displayed when 
+choosing a vehicle)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Diffuse.dds</b> (the skin and rim 
+texture map)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Details.dds</b> (the details, tire 
+and glass texture map)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>MainBodyHigh.Solid.gbx</b> (the 
+model for high performance and bandwidth)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>MainBody.Solid.gbx</b> ( the model 
+for low performance and bandwidth).<br>
+&nbsp;</font></p>
+<p align="left"><font size="4">The optional files needed to support other 
+features of the game are:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Horn.wav</b> or <b>Horn.ogg </b>(a 
+sound file that will be heard when the player presses the 'horn button')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>EngineIdle.ogg</b> (engine idle 
+sound file).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>EngineLow.ogg</b> (engine low rpm 
+sound file).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>EngineMid.ogg</b> (engine mid rpm 
+sound file).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>EngineFast.ogg</b> (engine fast 
+rpm sound file).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>ProjShad.dds</b> (a texture file, 
+that gets projected on the road, under the model).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Illum.dds</b> (a texture file, 
+that will brighten up chosen details in the darker environments).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>DetailsDirty.dds</b> (a texture 
+file, that will gradually show, over the details, as you progress through the 
+dirtier environments).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>DiffuseDirty.dds</b> (a texture 
+file, that will gradually show, over the diffuse, as you progress through the 
+dirtier environments).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Credits.txt</b> (a text file 
+explaining the origins of the model and texture files).</font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; <font color="#FFCC00"><u>
+Trouble Shooting</u></font></font></p>
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; If you experience a problem, 
+things to check are: spelling of object names, vertices count, scale, pivot and 
+xform. Check the spelling of the file names contained within the zip folder. The vertices count might increase after you've exported to 3ds. The best 
+way to check the vertices count after you export is to import the 3ds file into 
+an empty scene and look at the file /summary info dialog.</font></p>
+
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; <font color="#FFCC00"><u>Tips 
+and Tricks</u></font></font></p>
+
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; The best tip I can give is to 
+collapse the modifier stack after every successful modification (resetting xform, 
+unwrapping the uvw's, symmetry, mesh smooth). Before exporting to .3DS you 
+should only have an editable mesh showing in the modify tab.</font></p>
+
+<p align="left"><font size="4">&nbsp;&nbsp;&nbsp; The trick with working with 
+any 3D program is the ability to move your view around at will. You should be 
+able to zoom in and out and move your scene around to achieve proper positioning 
+for the modifications you want to do. Practice this and perfect it and you won't 
+be so frustrated with making models.</font></p>
+
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+{
+  "min": [
+    -0.9189990162849426,
+    0.14718753099441528,
+    -1.7695561647415161
+  ],
+  "max": [
+    0.9179993867874146,
+    1.055527687072754,
+    2.1350998878479004
+  ],
+  "span": [
+    1.836998462677002,
+    0.9083401560783386,
+    3.904655933380127
+  ],
+  "axis_roles": {
+    "LEN": 2,
+    "LAT": 0,
+    "HGT": 1
+  },
+  "objs": [
+    "020__1__1RLHub__Unassigned_0_2__hub_skin.obj",
+    "026__1__1RRHub__Unassigned_0_3__hub_skin.obj",
+    "028__1__1Body__Unassigned_0_4__body_skin.obj",
+    "043__2__2FLGuard__Unassigned_0_9__mudguard_skin.obj",
+    "049__2__2FRGuard__Unassigned_0_10__mudguard_skin.obj",
+    "052__2__2PilHead__pilot_head_skin.obj",
+    "055__2__2RLHub__Unassigned_0_11__hub_skin.obj",
+    "060__2__2RRHub__Unassigned_0_12__hub_skin.obj",
+    "062__2__2Body__Unassigned_0_13__body_skin.obj",
+    "085__3__3Fixed_1__fixed_skin.obj"
+  ]
+}

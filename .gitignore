@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+resources/experimental/flows/remove_guards/bin/Debug/
+resources/experimental/flows/remove_guards/obj/

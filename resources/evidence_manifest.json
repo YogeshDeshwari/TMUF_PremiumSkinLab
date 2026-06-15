@@ -1,0 +1,767 @@
+{
+  "generated_at": "2026-06-15T00:14:56.047221+00:00",
+  "resources": [
+    {
+      "evidence_label": "experimental",
+      "limits": "Strong local provenance, but mapping remains experimental until calibration passes in TMUF.",
+      "metadata": {
+        "npy": {
+          "dtype": "uint8",
+          "shape": [
+            2048,
+            2048
+          ]
+        }
+      },
+      "path": "authoritative/gbuffer/coverage_2048.npy",
+      "safe_use": "Use for 3D-position-driven calibration and candidate painting.",
+      "sha256": "20aeb9313da4b6307bcee0ecd01ca7e60bfc50b53d75be92e00482ea5aa97c32",
+      "size_bytes": 4194432
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Strong local provenance, but mapping remains experimental until calibration passes in TMUF.",
+      "metadata": {
+        "image": {
+          "height": 2048,
+          "mode": "RGB",
+          "width": 2048
+        }
+      },
+      "path": "authoritative/gbuffer/coverage_debug_2048.png",
+      "safe_use": "Use for 3D-position-driven calibration and candidate painting.",
+      "sha256": "b1c61020233faf0bfbc26cfa5cc4d2aec9d101914b7f1c41b235b35cc6f61a02",
+      "size_bytes": 58891
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Strong local provenance, but mapping remains experimental until calibration passes in TMUF.",
+      "metadata": {},
+      "path": "authoritative/gbuffer/extents_2048.json",
+      "safe_use": "Use for 3D-position-driven calibration and candidate painting.",
+      "sha256": "d55086ba027e9620aabdf3886ad01e1e40d00f70f62575e1296874fae81c1584",
+      "size_bytes": 863
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Strong local provenance, but mapping remains experimental until calibration passes in TMUF.",
+      "metadata": {
+        "npy": {
+          "dtype": "float32",
+          "shape": [
+            2048,
+            2048,
+            3
+          ]
+        }
+      },
+      "path": "authoritative/gbuffer/normal_2048.npy",
+      "safe_use": "Use for 3D-position-driven calibration and candidate painting.",
+      "sha256": "c04608bc2c9814609e734e98ff3526282857d08ac0fe2b69f7ee290b0a04d29e",
+      "size_bytes": 50331776
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Strong local provenance, but mapping remains experimental until calibration passes in TMUF.",
+      "metadata": {
+        "image": {
+          "height": 2048,
+          "mode": "RGB",
+          "width": 2048
+        }
+      },
+      "path": "authoritative/gbuffer/normal_debug_2048.png",
+      "safe_use": "Use for 3D-position-driven calibration and candidate painting.",
+      "sha256": "ad02709e19ff4ca94d5bcd8ea4c32c231d3ff3b0e0d8f2a24e7cce132b7a5a4b",
+      "size_bytes": 1397004
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Strong local provenance, but mapping remains experimental until calibration passes in TMUF.",
+      "metadata": {
+        "npy": {
+          "dtype": "float32",
+          "shape": [
+            2048,
+            2048,
+            3
+          ]
+        }
+      },
+      "path": "authoritative/gbuffer/position_2048.npy",
+      "safe_use": "Use for 3D-position-driven calibration and candidate painting.",
+      "sha256": "5aa1f34419b4de82d8475046b6154754f0a6c92afd97f44f18ab5068b25228eb",
+      "size_bytes": 50331776
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Strong local provenance, but mapping remains experimental until calibration passes in TMUF.",
+      "metadata": {
+        "image": {
+          "height": 2048,
+          "mode": "RGB",
+          "width": 2048
+        }
+      },
+      "path": "authoritative/gbuffer/position_debug_2048.png",
+      "safe_use": "Use for 3D-position-driven calibration and candidate painting.",
+      "sha256": "3bc6588e563f2649a9716c436bd46d931378f421519e668cfecf5b44767e2725",
+      "size_bytes": 491312
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/mesh/004__1__1FLGuard__Unassigned_0__mudguard_skin.obj",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "94b1c707fb0f296e93d17fc5bd461865389a08b904c7e96dcc88d70a96c04da2",
+      "size_bytes": 56445
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/mesh/011__1__1FRGuard__Unassigned_0_1__mudguard_skin.obj",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "575fb22729696c1e9a55596345452a15a5d926b821314d62bf4e5990cf5b901a",
+      "size_bytes": 56788
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/mesh/014__1__1PilHead__pilot_head_skin.obj",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "9f98b53529e006c4f3c871affa646bbd33998b767dfcb27da7dabde27cfafede",
+      "size_bytes": 211970
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/mesh/020__1__1RLHub__Unassigned_0_2__hub_skin.obj",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "6342cb1da0087fd0ea5180c0919e7d0cc829eb9b6bce56f47cbcb97516b37a98",
+      "size_bytes": 143596
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/mesh/026__1__1RRHub__Unassigned_0_3__hub_skin.obj",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "4fd43376e0b29445795db4dc4ae8cfe847c5ee358f53f319a0ee0ec5ea39a880",
+      "size_bytes": 144637
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/mesh/028__1__1Body__Unassigned_0_4__body_skin.obj",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "1abef133bbef4623ebede63f55ac43fd74f6640f75937b5cebffc2262796c42a",
+      "size_bytes": 1521155
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/mesh/043__2__2FLGuard__Unassigned_0_9__mudguard_skin.obj",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "84c57d90546d377b14d8b19b51d2c2905766d6c9260f7493e19a2a128f9273de",
+      "size_bytes": 15676
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/mesh/049__2__2FRGuard__Unassigned_0_10__mudguard_skin.obj",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "e01e101ec1c7595f4e4c08d7d27378269ff4e95a3431227843ba4c2ff21acc80",
+      "size_bytes": 15759
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/mesh/052__2__2PilHead__pilot_head_skin.obj",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "41fcaf5571932188135d4ae2ea10a50026fba8e729b056a50d58cf3881494576",
+      "size_bytes": 113119
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/mesh/055__2__2RLHub__Unassigned_0_11__hub_skin.obj",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "3796cab0f3cb529a615bbd704c0b56862acb5bc00f3278c60300a926b36ac7fa",
+      "size_bytes": 40760
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/mesh/060__2__2RRHub__Unassigned_0_12__hub_skin.obj",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "08f9b483e3a5c44b5095fcd0df1c630e657c3754c5d56edcd2fbb16d1870a6be",
+      "size_bytes": 40638
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/mesh/062__2__2Body__Unassigned_0_13__body_skin.obj",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "57a992c95e0cda6a45dd27ab06cc1cf178c3d42b5db1730aa2d61f6c7cc1030b",
+      "size_bytes": 377219
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/mesh/085__3__3Fixed_1__fixed_skin.obj",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "c94d0e8ac66ea795c08b7d19c4efc4359cdf600e936f406678e52baddd7f08b6",
+      "size_bytes": 170283
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/parts/panels_fine.json",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "3d8c46a54416d1dd05b9beec127d350c119707053247c092589ffc7d73a33598",
+      "size_bytes": 25866
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {
+        "npy": {
+          "dtype": "int32",
+          "shape": [
+            2048,
+            2048
+          ]
+        }
+      },
+      "path": "authoritative/parts/panels_fine_labels.npy",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "0050febba84ef8257bdbafa38468c06d03920f7621d96c6e4fcdea81847bc51f",
+      "size_bytes": 16777344
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/parts/panels_high.json",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "74f1ed937863751afa6863d6188ba26fc3c526377bb729a61b9051dc6cba458e",
+      "size_bytes": 14455
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {
+        "npy": {
+          "dtype": "int32",
+          "shape": [
+            2048,
+            2048
+          ]
+        }
+      },
+      "path": "authoritative/parts/panels_high_labels.npy",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "21397a36f33279115b7b0ab52bec0b69f98be78019ef146e115ee0852ef30bb5",
+      "size_bytes": 16777344
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/parts/psd_parts.json",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "b66a67e53ae6d51f3a405d0117e2ee162503ac10bdd17433b119de19f961ad8a",
+      "size_bytes": 9966
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {
+        "npy": {
+          "dtype": "int32",
+          "shape": [
+            2048,
+            2048
+          ]
+        }
+      },
+      "path": "authoritative/parts/psd_parts_labels.npy",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "4953c579dbab9099fce856ffbaf0bffd86aa902d1f24fd21087efeec77dca6ee",
+      "size_bytes": 16777344
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {},
+      "path": "authoritative/reference/official_StadiumCar_template.psd",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "2e3ca49ce01e07048641d7387795156bc0a4476e11ad10cbf93b5a1a69171f1e",
+      "size_bytes": 10863838
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {
+        "image": {
+          "height": 2048,
+          "mode": "L",
+          "width": 2048
+        }
+      },
+      "path": "authoritative/reference/official_prelight_AO.png",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "5186c3d20f2b267da826fb0ed4632e824976c48ca87e597b4f0a3f398ad4dc55",
+      "size_bytes": 556252
+    },
+    {
+      "evidence_label": "proven",
+      "limits": "Still requires TMUF smoke testing for final generated skins.",
+      "metadata": {
+        "image": {
+          "height": 1024,
+          "mode": "RGB",
+          "width": 1024
+        }
+      },
+      "path": "authoritative/reference/wire_stadiumcar.jpg",
+      "safe_use": "Use as stock StadiumCar source evidence for Diffuse-only generation.",
+      "sha256": "ee4767b19c64f5a6ade1f4986534dffa2790eca84323c23492b7186f4d938086",
+      "size_bytes": 633185
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental donor/custom mesh path; not official stock country-skin packaging.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "MainBody.Solid.Gbx",
+            "MainBodyHigh.Solid.Gbx",
+            "DiffuseDirty.dds",
+            "DetailsDirty.dds",
+            "ProjShad.dds",
+            "Icon.dds",
+            "Details.dds",
+            "Diffuse.dds"
+          ]
+        }
+      },
+      "path": "experimental/base_car/CH_2026_NOT_STOCK_STADIUM_DETAILS_CUSTOM_MESH.zip",
+      "safe_use": "Use only as explicit CH_2026 full-car donor profile for Details, ProjShad, and GBX experiments.",
+      "sha256": "227d422b2c68c62ee0947bd19fb7cd5e7c972a3c96a8bae2fdc3d8f678a38dcc",
+      "size_bytes": 5277845
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until rewired to explicit profiles and tested in this lab.",
+      "metadata": {},
+      "path": "experimental/flows/canvas_compose/__init__.py",
+      "safe_use": "Use as historical implementation reference for CH_2026 full-car lane.",
+      "sha256": "502564b69b2ac90b7a2c9053fb8a21012d7ec7741b8a375af98467fa1a2f7480",
+      "size_bytes": 1264
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until rewired to explicit profiles and tested in this lab.",
+      "metadata": {},
+      "path": "experimental/flows/canvas_compose/composer.py",
+      "safe_use": "Use as historical implementation reference for CH_2026 full-car lane.",
+      "sha256": "5054246d87e47ff9dd9562392cb7faf377af93f552dc7aa86dbaecd12279a21f",
+      "size_bytes": 63392
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until rewired to explicit profiles and tested in this lab.",
+      "metadata": {},
+      "path": "experimental/flows/canvas_compose/finish.py",
+      "safe_use": "Use as historical implementation reference for CH_2026 full-car lane.",
+      "sha256": "49fee347b6fe0ba4bf566e9df7476bef9a49ab2f6ccf4c0ba98990058a161de6",
+      "size_bytes": 5173
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until rewired to explicit profiles and tested in this lab.",
+      "metadata": {},
+      "path": "experimental/flows/canvas_compose/motifs.py",
+      "safe_use": "Use as historical implementation reference for CH_2026 full-car lane.",
+      "sha256": "5ba32cbbfe68f92c24ae703d4103741d56afa8e06c862b68d0fd72d072ed0641",
+      "size_bytes": 60990
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until rewired to explicit profiles and tested in this lab.",
+      "metadata": {},
+      "path": "experimental/flows/canvas_compose/motifs_v3.py",
+      "safe_use": "Use as historical implementation reference for CH_2026 full-car lane.",
+      "sha256": "559ab2d4b921df57cf15c89c8eb120614849337db41e5feae327299c267af971",
+      "size_bytes": 20116
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until rewired to explicit profiles and tested in this lab.",
+      "metadata": {},
+      "path": "experimental/flows/canvas_compose/tyre_patch.py",
+      "safe_use": "Use as historical implementation reference for CH_2026 full-car lane.",
+      "sha256": "420738c7904c827480561610adef4116ce0984ab0add77e241458e2401ebf57b",
+      "size_bytes": 5522
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/Program.cs",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "c6e51b47c977510341cadb67a6d27d4d1fe2da484bdb15d49bbc05cc94b32676",
+      "size_bytes": 1490
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/GBX.NET.LZO.dll",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "49dc4cdddf48a0c03f7d7da732d34707bae8b19839a2d2ed1ad7472fa1655935",
+      "size_bytes": 10240
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/GBX.NET.dll",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "a152e827b77673975d9183781c249082c52ee70d92b86fa4f12d56474ad6808e",
+      "size_bytes": 2737664
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "9db4f9347c2b009ac7bc28d254395c3771157acef1f189418b6971f4895a352f",
+      "size_bytes": 66320
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/Microsoft.Extensions.Logging.Abstractions.dll",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "24e456e4b5b3facecb8709e6f5c71c06cf928e31492cae0a7a3ec1b3918c193b",
+      "size_bytes": 67336
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/SharpLzo.dll",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "30c1305280620db319bca0459f77dcfc349f35f7faff8e82da4f38e06b0112b0",
+      "size_bytes": 10240
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/System.Diagnostics.DiagnosticSource.dll",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "453ea6da39e00b262b7594576892376027f32f7b5bd5c8d926f641011bc52f1a",
+      "size_bytes": 203016
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/TmEssentials.dll",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "fd04ec0043568a9f20b0da8c62f84ebb238cac97e2e38b7a2f35fc804846218f",
+      "size_bytes": 30720
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/remove_guards",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "624aeb2c5527c87622c36d55fc214a6d4237383a4960ac842fdae15134f4fb0c",
+      "size_bytes": 138704
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/remove_guards.deps.json",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "2fb31f15532f87bfad06b6ea71c07d1e835a16a8ae210a7d9a034c45613acf63",
+      "size_bytes": 6061
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/remove_guards.dll",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "89d2129953a56146b5dc46cbde1440114486e07197e4db6a2a7e205001b2a2b2",
+      "size_bytes": 7168
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/remove_guards.pdb",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "24250ac54f56be62781de6b4673ad86c4a27480d03a1ae75d2c2cf6e58f63cd7",
+      "size_bytes": 12276
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/remove_guards.runtimeconfig.json",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "ee2db86d0e2150bfd0d217ba315e056b9bad8f69c4c2cf72cc7a44d97de4e50f",
+      "size_bytes": 433
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/runtimes/browser-wasm/native/liblzo2.a",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "9b42e8a1064af75a228e2713184607c52eb82cc3dae8b92cf0f6dab2be3cd952",
+      "size_bytes": 184494
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/runtimes/linux-arm/native/liblzo2.so",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "6fbd17465367ddd352daa4aa15385d3c9c23b275317761b921ae7352131426ad",
+      "size_bytes": 175212
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/runtimes/linux-arm64/native/liblzo2.so",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "426752e130fe7e7ace1fcaa0573f0745873bb25f4f934e6104631fe186d07d5e",
+      "size_bytes": 195360
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/runtimes/linux-x64/native/liblzo2.so",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "30562cce6f6a29222842d65761e4bd84f80fdefbb8294f783297b2fdb4fe6517",
+      "size_bytes": 229520
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/runtimes/win-x64/native/liblzo2.dll",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "47c52a7e5f1dd57bcc5b97df7e8c62b61481231db825e510d0e7404a99b5a4df",
+      "size_bytes": 316250
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/bin/Release/net9.0/runtimes/win-x86/native/liblzo2.dll",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "63da66c2fa546c5fa6fbfefdf0bdf4f9edad689e71f8cd7564e94196f3d16578",
+      "size_bytes": 253487
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/nuget.config",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "b12be0c0ead6b01b57d02ad0fa3d4d6ed87c1a13ce26640f07e5170c2d105ef6",
+      "size_bytes": 151
+    },
+    {
+      "evidence_label": "experimental",
+      "limits": "Experimental until package output is smoke-tested in TMUF.",
+      "metadata": {},
+      "path": "experimental/flows/remove_guards/remove_guards.csproj",
+      "safe_use": "Use as historical GBX.NET guard-removal tool for CH_2026 no-mudguard experiments.",
+      "sha256": "bcf68e906929b49a41ba5a80903eb27360159834df43198754ccb18f2ad1c51b",
+      "size_bytes": 472
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only because StadiumCar V2 uses new mapping and is not stock UV truth.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "Details.dds",
+            "MainBodyHigh.Solid.Gbx",
+            "readme.txt",
+            "ProjShad.dds",
+            "DetailsDirty.dds",
+            "DiffuseDirty.dds",
+            "Icon.dds",
+            "Diffuse.dds",
+            "MainBody.Solid.Gbx",
+            "Illum.dds",
+            "readme_maniapark.txt"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/StadiumCarV2_primary_skin.zip",
+      "safe_use": "Use as TMUF-era full package reference for file names, DDS slots, and visual inspiration.",
+      "sha256": "48addadd26494ce16d112bfb0d09a0027238923c2898d12c055516027527473b",
+      "size_bytes": 4805409
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only because it is not the local stock PSD source of truth.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "ao_stadiumcar.jpg",
+            "prelight_stadiumcar.jpg",
+            "wire_stadiumcar.jpg"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/StadiumCar_HQ_Templates.zip",
+      "safe_use": "Use high-resolution AO/prelight/wire overlays as visual reference.",
+      "sha256": "6f209fad0603b7abc85d3a6473c1b2a957f5d2b170ad671e97447a2938ccac3a",
+      "size_bytes": 4662588
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only because V2 mapping is not stock StadiumCar mapping.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "prelight.tga",
+            "Stadiumv2-wire-sbody.tga",
+            "readme_maniapark.txt"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Stafiumv2-DiffuseTemplate.zip",
+      "safe_use": "Use as StadiumCar V2 wire/prelight reference.",
+      "sha256": "02b05766e6b17142e93c12c6323bf55b6eba108d51fb4bbbd04c296fbcb29b0d",
+      "size_bytes": 3026992
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Reference-only because hash differs from the local CarPark PSD and provenance is community-uploaded.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "StadiumCar.psd"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/The_Diffuse_PSD_file.zip",
+      "safe_use": "Use as community PSD cross-check.",
+      "sha256": "ce5400f26254f1640d15d48b06f45788b1ed41649a2259649187375161b8caac",
+      "size_bytes": 5107475
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Rejected as TMUF/TMNF classic material-route authority.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "ReadMe.txt",
+            "UV_Details.png",
+            "UV_Details_Hollow.png",
+            "UV_Skin.png",
+            "UV_Skin_Hollow.png"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/Trackmania-Skin-Details-2021-02-18.zip",
+      "safe_use": "Use only as modern Trackmania media reference.",
+      "sha256": "d2ade95ad06f104cbe588126f27ef2ef6fd6f4aaf31620cd579c3b2a95a25a14",
+      "size_bytes": 5049224
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Old guide; not proof that any generated package is TMUF-smoke-tested.",
+      "metadata": {},
+      "path": "reference_only/downloads/ugghost_3d_model_conversion_for_tmu.html",
+      "safe_use": "Use as TMU/TMUF technical routing and custom-model workflow reference.",
+      "sha256": "905a1c1305ed7d7894d049415e5cc11f5acfd90ba5b11aed358f19e0c23d51d6",
+      "size_bytes": 17391
+    },
+    {
+      "evidence_label": "reference_only",
+      "limits": "Old guide; not proof that any generated package is TMUF-smoke-tested.",
+      "metadata": {
+        "zip": {
+          "entries": [
+            "vertices_count.jpg",
+            "Vertices_icon.jpg",
+            "XForm_modifier.htm",
+            "Xform_modifier.jpg",
+            "Xform_modifier_collapse.jpg",
+            "3d_model_conversion_for_tmu.htm",
+            "BK_Grey.jpg",
+            "CollapseXFormDialog.jpg",
+            "GridSetng.jpg",
+            "hierarchy_icon.jpg",
+            "Maxbox.jpg",
+            "objects.htm",
+            "Pivot.jpg",
+            "pivots.htm",
+            "pivots_lights-shadow.jpg",
+            "pivots_suspen-1.jpg",
+            "pivots_suspen-2.jpg",
+            "Scale1.jpg",
+            "Scale2.jpg",
+            "Scale.htm",
+            "Scale_icon.jpg",
+            "SelectObjects.jpg",
+            "selectobjects_icon.jpg",
+            "Setup.htm",
+            "summary_info.jpg",
+            "Sysunits.jpg",
+            "utils_icon.jpg",
+            "UVW_icon.jpg",
+            "vertices.htm",
+            "trick_tmf_tutorial_car.zip",
+            "imported.jpg",
+            "model3d.htm"
+          ]
+        }
+      },
+      "path": "reference_only/downloads/ugghost_TM_Modelling_Tutorial.zip",
+      "safe_use": "Use as TMU/TMUF technical routing and custom-model workflow reference.",
+      "sha256": "bd3cba592545764cab8d0d659f3e9560b8791d24d539d7a1660b384d786e0ab0",
+      "size_bytes": 1701701
+    }
+  ],
+  "root": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab",
+  "rules": {
+    "experimental": "Usable only behind proof gates; never a default truth.",
+    "proven": "Verified by local evidence or direct source file identity; still needs skin-output validation.",
+    "reference_only": "Useful for comparison or visual study, not authoritative for stock TMUF StadiumCar.",
+    "rejected": "Known wrong for this target."
+  },
+  "schema_version": 1
+}

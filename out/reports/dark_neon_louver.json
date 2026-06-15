@@ -1,0 +1,53 @@
+{
+  "design_rules": [
+    "black_charcoal_base",
+    "magenta_cyan_accents",
+    "broad_gbuffer_aligned_shapes",
+    "symmetric_rear_engine_panels",
+    "no_vignette",
+    "no_random_scatter",
+    "no_stadiumcar_v2_uvs",
+    "no_ch2026_donor_assumptions"
+  ],
+  "evidence_status": {
+    "ao_prelight": "local_authoritative_input",
+    "details_dds": "not_used",
+    "donor_gbx": "not_used",
+    "gbuffer_mapping": "experimental_until_tmuf_smoke",
+    "projshad_dds": "not_used",
+    "psd_parts_masks": "local_authoritative_input",
+    "stock_diffuse_route": "proven_by_local_docs_and_package_contract"
+  },
+  "known_risks": [
+    "GBuffer placement remains experimental until the calibration skin is smoke-tested in TMUF.",
+    "Projected previews are local proof aids; they are not a substitute for in-game visual acceptance.",
+    "Diffuse alpha is conservative and not a fully tuned gloss/specular map yet."
+  ],
+  "masks_used": [
+    "center_spine",
+    "nose_spear",
+    "side_blade",
+    "secondary_blade",
+    "rear_louvers",
+    "rear_center_glow",
+    "shoulder_line",
+    "tail_bar",
+    "mudguard_edge"
+  ],
+  "package_files": [
+    "Diffuse.dds",
+    "Icon.dds"
+  ],
+  "proof_gate": {
+    "calibration_stock_diffuse": "required_before_proven_use",
+    "premium_visual_acceptance": "required_after_generation"
+  },
+  "route": "stock_diffuse_only",
+  "skin_name": "dark_neon_louver",
+  "style_metrics": {
+    "cyan_accent_ratio": 0.112401,
+    "dark_pixel_ratio": 0.870386,
+    "magenta_accent_ratio": 0.157825
+  },
+  "tmuf_smoke_test": "not_run"
+}
