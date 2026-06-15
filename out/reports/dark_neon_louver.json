@@ -756,6 +756,162 @@
     "mirrors_and_holders",
     "underbody_dark"
   ],
+  "panel_visual_coverage": {
+    "activation_rule": "accent_or_alpha_or_dark_support",
+    "boundary": "Local atlas/render-mask coverage only; this does not prove TMUF runtime visibility, seam quality, or GBuffer mapping.",
+    "does_not_prove_tmuf_smoke": true,
+    "evidence_status": "local_preview_metric_not_tmuf_proof",
+    "mapped_target_count": 10,
+    "schema": "tmuf_premium_skin_lab.panel_visual_coverage.v1",
+    "targets": {
+      "engine_rear_deck": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "rear_louvers",
+          "rear_center_glow",
+          "tail_bar"
+        ],
+        "max_high_alpha_pixel_ratio": 1.0,
+        "max_mean_alpha": 148.0,
+        "max_mean_chroma": 195.830368,
+        "min_mean_luminance": 83.812546,
+        "pixel_count": 449199,
+        "target": "engine_rear_deck",
+        "visual_active": true
+      },
+      "mirrors_and_holders": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "mirrors"
+        ],
+        "max_high_alpha_pixel_ratio": 1.0,
+        "max_mean_alpha": 145.132111,
+        "max_mean_chroma": 21.817591,
+        "min_mean_luminance": 136.992691,
+        "pixel_count": 47755,
+        "target": "mirrors_and_holders",
+        "visual_active": true
+      },
+      "rear_deck_fine_louver_rows": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "rear_deck_fine_louver_rows",
+          "rear_louvers"
+        ],
+        "max_high_alpha_pixel_ratio": 1.0,
+        "max_mean_alpha": 147.643234,
+        "max_mean_chroma": 193.622513,
+        "min_mean_luminance": 93.618462,
+        "pixel_count": 391576,
+        "target": "rear_deck_fine_louver_rows",
+        "visual_active": true
+      },
+      "rear_floor_generated_panels": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "rear_floor_generated_panels"
+        ],
+        "max_high_alpha_pixel_ratio": 0.110237,
+        "max_mean_alpha": 126.638817,
+        "max_mean_chroma": 10.598769,
+        "min_mean_luminance": 26.525385,
+        "pixel_count": 256274,
+        "target": "rear_floor_generated_panels",
+        "visual_active": true
+      },
+      "rear_mudguard_caps": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "mudguards"
+        ],
+        "max_high_alpha_pixel_ratio": 0.974192,
+        "max_mean_alpha": 147.111435,
+        "max_mean_chroma": 177.37468,
+        "min_mean_luminance": 94.853813,
+        "pixel_count": 425340,
+        "target": "rear_mudguard_caps",
+        "visual_active": true
+      },
+      "rear_mudguard_edge_details": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "mudguard_edge"
+        ],
+        "max_high_alpha_pixel_ratio": 1.0,
+        "max_mean_alpha": 148.0,
+        "max_mean_chroma": 180.288788,
+        "min_mean_luminance": 96.414505,
+        "pixel_count": 414363,
+        "target": "rear_mudguard_edge_details",
+        "visual_active": true
+      },
+      "rear_side_generated_panels": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "rear_side_generated_panels"
+        ],
+        "max_high_alpha_pixel_ratio": 0.494513,
+        "max_mean_alpha": 135.816803,
+        "max_mean_chroma": 106.617622,
+        "min_mean_luminance": 60.874355,
+        "pixel_count": 383268,
+        "target": "rear_side_generated_panels",
+        "visual_active": true
+      },
+      "side_wings": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "side_wings"
+        ],
+        "max_high_alpha_pixel_ratio": 1.0,
+        "max_mean_alpha": 148.0,
+        "max_mean_chroma": 98.940254,
+        "min_mean_luminance": 75.983879,
+        "pixel_count": 125401,
+        "target": "side_wings",
+        "visual_active": true
+      },
+      "tailwing_bands": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "tailwing",
+          "tail_bar"
+        ],
+        "max_high_alpha_pixel_ratio": 1.0,
+        "max_mean_alpha": 147.999664,
+        "max_mean_chroma": 195.830368,
+        "min_mean_luminance": 101.899231,
+        "pixel_count": 372404,
+        "target": "tailwing_bands",
+        "visual_active": true
+      },
+      "underbody_dark": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "main_body_under",
+          "underplate"
+        ],
+        "max_high_alpha_pixel_ratio": 0.0,
+        "max_mean_alpha": 118.000008,
+        "max_mean_chroma": 11.657125,
+        "min_mean_luminance": 12.231786,
+        "pixel_count": 489634,
+        "target": "underbody_dark",
+        "visual_active": true
+      }
+    },
+    "unmapped_target_count": 0
+  },
   "proof_gate": {
     "calibration_stock_diffuse": "required_before_proven_use",
     "premium_visual_acceptance": "required_after_generation"

@@ -35,6 +35,9 @@ class StockValidatorTests(unittest.TestCase):
             self.assertTrue(checks["report_design_lane_valid"])
             self.assertTrue(checks["report_panel_catalog_targets_valid"])
             self.assertTrue(checks["report_render_profile_valid"])
+            if skin["skin_name"] != "calibration_stock_diffuse":
+                self.assertTrue(checks["report_panel_visual_coverage_valid"])
+                self.assertIn("panel_visual_coverage", skin)
             self.assertTrue(checks["atlas_preview_exists"])
             self.assertTrue(checks["projection_preview_exists"])
             self.assertTrue(checks["preview_visual_quality_passed"])
@@ -507,6 +510,89 @@ class StockValidatorTests(unittest.TestCase):
         self.assertIn(
             "missing mask style metrics: tailwing",
             validate_render_profile(missing_metric, premium=True),
+        )
+
+    def test_premium_panel_visual_coverage_is_validated(self):
+        from src.evidence.stock_validator import validate_panel_visual_coverage
+
+        valid_report = {
+            "skin_name": "example",
+            "panel_catalog_targets": ["center_spine", "underbody_dark", "licence_plate_blocks"],
+            "panel_visual_coverage": {
+                "schema": "tmuf_premium_skin_lab.panel_visual_coverage.v1",
+                "evidence_status": "local_preview_metric_not_tmuf_proof",
+                "does_not_prove_tmuf_smoke": True,
+                "targets": {
+                    "center_spine": {
+                        "mapped": True,
+                        "mask_names": ["center_spine"],
+                        "pixel_count": 100,
+                        "visual_active": True,
+                        "activation_rule": "accent_or_alpha_or_dark_support",
+                    },
+                    "underbody_dark": {
+                        "mapped": True,
+                        "mask_names": ["main_body_under", "underplate"],
+                        "pixel_count": 100,
+                        "visual_active": True,
+                        "activation_rule": "accent_or_alpha_or_dark_support",
+                    },
+                    "licence_plate_blocks": {
+                        "mapped": False,
+                        "mask_names": [],
+                        "pixel_count": 0,
+                        "visual_active": False,
+                        "activation_rule": "not_mapped_to_renderer_mask",
+                    },
+                },
+            },
+        }
+        self.assertEqual(validate_panel_visual_coverage(valid_report, premium=True), [])
+        self.assertEqual(validate_panel_visual_coverage(valid_report, premium=False), [])
+
+        missing = {"skin_name": "missing", "panel_catalog_targets": ["center_spine"]}
+        self.assertEqual(
+            validate_panel_visual_coverage(missing, premium=True),
+            ["premium report has no panel_visual_coverage object"],
+        )
+
+        inactive = {
+            **valid_report,
+            "panel_visual_coverage": {
+                **valid_report["panel_visual_coverage"],
+                "targets": {
+                    **valid_report["panel_visual_coverage"]["targets"],
+                    "center_spine": {
+                        **valid_report["panel_visual_coverage"]["targets"]["center_spine"],
+                        "visual_active": False,
+                    },
+                },
+            },
+        }
+        self.assertIn(
+            "panel visual coverage inactive: center_spine",
+            validate_panel_visual_coverage(inactive, premium=True),
+        )
+
+        proof_claim = {
+            **valid_report,
+            "panel_visual_coverage": {
+                **valid_report["panel_visual_coverage"],
+                "does_not_prove_tmuf_smoke": False,
+            },
+        }
+        self.assertIn(
+            "panel visual coverage must not claim TMUF proof",
+            validate_panel_visual_coverage(proof_claim, premium=True),
+        )
+
+        missing_target = {
+            **valid_report,
+            "panel_catalog_targets": ["center_spine", "tailwing_bands"],
+        }
+        self.assertIn(
+            "missing panel visual coverage target: tailwing_bands",
+            validate_panel_visual_coverage(missing_target, premium=True),
         )
 
     def test_premium_batch_index_is_validated_against_reports(self):

@@ -13,6 +13,7 @@ from scipy.ndimage import binary_dilation, gaussian_filter
 from src.dds.tmnf_dds import build_dds_dxt5_bytes
 from src.evidence.artifact_trace import stock_output_artifacts
 from src.evidence.input_trace import PREMIUM_DIFFUSE_INPUTS, input_evidence
+from src.evidence.panel_visual_coverage import build_panel_visual_coverage
 from src.stock_diffuse.calibration import SIZE, hx, load_fields, project_view
 from src.stock_diffuse.package import write_stable_zip_entry
 from src.stock_diffuse.panel_masks import PremiumMaskParams, build_stock_panel_masks, mask_report_entries
@@ -589,6 +590,10 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
             "no_ch2026_donor_assumptions",
         ],
         "panel_catalog_targets": _candidate_catalog_targets(candidate),
+        "panel_visual_coverage": build_panel_visual_coverage(
+            _candidate_catalog_targets(candidate),
+            mask_style_metrics,
+        ),
         "masks_used": PREMIUM_MASK_NAMES,
         "mask_evidence": mask_report_entries(
             build_stock_panel_masks(load_fields(), _mask_params(candidate)),

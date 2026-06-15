@@ -758,6 +758,172 @@
     "tailwing_bands",
     "underbody_dark"
   ],
+  "panel_visual_coverage": {
+    "activation_rule": "accent_or_alpha_or_dark_support",
+    "boundary": "Local atlas/render-mask coverage only; this does not prove TMUF runtime visibility, seam quality, or GBuffer mapping.",
+    "does_not_prove_tmuf_smoke": true,
+    "evidence_status": "local_preview_metric_not_tmuf_proof",
+    "mapped_target_count": 10,
+    "schema": "tmuf_premium_skin_lab.panel_visual_coverage.v1",
+    "targets": {
+      "center_spine": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "center_spine"
+        ],
+        "max_high_alpha_pixel_ratio": 1.0,
+        "max_mean_alpha": 148.0,
+        "max_mean_chroma": 219.224777,
+        "min_mean_luminance": 64.959488,
+        "pixel_count": 616837,
+        "target": "center_spine",
+        "visual_active": true
+      },
+      "licence_plate_blocks": {
+        "activation_rule": "not_mapped_to_renderer_mask",
+        "mapped": false,
+        "mask_names": [],
+        "max_high_alpha_pixel_ratio": 0.0,
+        "max_mean_alpha": 0.0,
+        "max_mean_chroma": 0.0,
+        "min_mean_luminance": 0.0,
+        "pixel_count": 0,
+        "target": "licence_plate_blocks",
+        "visual_active": false
+      },
+      "mid_deck_generated_panels": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "mid_deck_generated_panels"
+        ],
+        "max_high_alpha_pixel_ratio": 0.565217,
+        "max_mean_alpha": 137.565186,
+        "max_mean_chroma": 148.083237,
+        "min_mean_luminance": 43.192337,
+        "pixel_count": 723443,
+        "target": "mid_deck_generated_panels",
+        "visual_active": true
+      },
+      "mid_side_generated_panel": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "mid_side_generated_panel"
+        ],
+        "max_high_alpha_pixel_ratio": 0.159772,
+        "max_mean_alpha": 127.761414,
+        "max_mean_chroma": 63.999622,
+        "min_mean_luminance": 57.353783,
+        "pixel_count": 623575,
+        "target": "mid_side_generated_panel",
+        "visual_active": true
+      },
+      "mirrors_and_holders": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "mirrors"
+        ],
+        "max_high_alpha_pixel_ratio": 1.0,
+        "max_mean_alpha": 145.132111,
+        "max_mean_chroma": 19.974411,
+        "min_mean_luminance": 167.191605,
+        "pixel_count": 47755,
+        "target": "mirrors_and_holders",
+        "visual_active": true
+      },
+      "nose_deck_generated_panels": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "nose_deck_generated_panels"
+        ],
+        "max_high_alpha_pixel_ratio": 0.812866,
+        "max_mean_alpha": 143.499313,
+        "max_mean_chroma": 168.036087,
+        "min_mean_luminance": 55.27499,
+        "pixel_count": 220398,
+        "target": "nose_deck_generated_panels",
+        "visual_active": true
+      },
+      "nose_identity_panel": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "nose_spear"
+        ],
+        "max_high_alpha_pixel_ratio": 0.659312,
+        "max_mean_alpha": 137.779343,
+        "max_mean_chroma": 170.232529,
+        "min_mean_luminance": 57.645508,
+        "pixel_count": 226603,
+        "target": "nose_identity_panel",
+        "visual_active": true
+      },
+      "side_wings": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "side_wings"
+        ],
+        "max_high_alpha_pixel_ratio": 1.0,
+        "max_mean_alpha": 148.0,
+        "max_mean_chroma": 114.643669,
+        "min_mean_luminance": 104.201447,
+        "pixel_count": 125401,
+        "target": "side_wings",
+        "visual_active": true
+      },
+      "sidepod_blades": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "side_blade",
+          "secondary_blade"
+        ],
+        "max_high_alpha_pixel_ratio": 1.0,
+        "max_mean_alpha": 148.0,
+        "max_mean_chroma": 213.699753,
+        "min_mean_luminance": 105.346512,
+        "pixel_count": 73248,
+        "target": "sidepod_blades",
+        "visual_active": true
+      },
+      "tailwing_bands": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "tailwing",
+          "tail_bar"
+        ],
+        "max_high_alpha_pixel_ratio": 1.0,
+        "max_mean_alpha": 147.999664,
+        "max_mean_chroma": 203.260635,
+        "min_mean_luminance": 86.044075,
+        "pixel_count": 372404,
+        "target": "tailwing_bands",
+        "visual_active": true
+      },
+      "underbody_dark": {
+        "activation_rule": "accent_or_alpha_or_dark_support",
+        "mapped": true,
+        "mask_names": [
+          "main_body_under",
+          "underplate"
+        ],
+        "max_high_alpha_pixel_ratio": 0.0,
+        "max_mean_alpha": 118.000008,
+        "max_mean_chroma": 26.117598,
+        "min_mean_luminance": 12.639991,
+        "pixel_count": 489634,
+        "target": "underbody_dark",
+        "visual_active": true
+      }
+    },
+    "unmapped_target_count": 1
+  },
   "proof_gate": {
     "calibration_stock_diffuse": "required_before_proven_use",
     "premium_visual_acceptance": "required_after_generation"

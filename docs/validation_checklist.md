@@ -44,6 +44,9 @@ Use this before calling any skin complete.
       each report's `panel_catalog_targets`.
 - [ ] Premium reports include `render_profile` and `mask_style_metrics`, and
       distinctive masks have recorded lane-specific strengths.
+- [ ] Premium reports include `panel_visual_coverage`; every mapped
+      `panel_catalog_targets` entry is locally active, unmapped entries are
+      explicit, and the block keeps `does_not_prove_tmuf_smoke=true`.
 - [ ] `out/reports/premium_batch_index.json` matches the individual premium
       reports and keeps `does_not_prove_tmuf_smoke=true`.
 - [ ] Run `python3 recipes/validate_profile_gates.py` before touching CH_2026

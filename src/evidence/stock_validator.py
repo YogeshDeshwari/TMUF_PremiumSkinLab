@@ -8,6 +8,12 @@ from typing import Any
 
 from src.evidence.artifact_trace import sha256
 from src.evidence.input_trace import MANIFEST, STOCK_DIFFUSE_INPUTS
+from src.evidence.panel_visual_coverage import (
+    ACTIVATION_RULE,
+    PANEL_VISUAL_COVERAGE_SCHEMA,
+    PANEL_VISUAL_COVERAGE_STATUS,
+    UNMAPPED_RULE,
+)
 from src.evidence.smoke_gate import evaluate_smoke_report
 from src.evidence.visual_quality import validate_visual_quality
 from src.stock_diffuse.package import ZIP_TIMESTAMP
@@ -297,6 +303,61 @@ def validate_panel_catalog_targets(
     return errors
 
 
+def validate_panel_visual_coverage(report: dict[str, Any], premium: bool) -> list[str]:
+    if not premium:
+        return []
+
+    coverage = report.get("panel_visual_coverage")
+    if not isinstance(coverage, dict):
+        return ["premium report has no panel_visual_coverage object"]
+
+    errors: list[str] = []
+    if coverage.get("schema") != PANEL_VISUAL_COVERAGE_SCHEMA:
+        errors.append("panel visual coverage schema mismatch")
+    if coverage.get("evidence_status") != PANEL_VISUAL_COVERAGE_STATUS:
+        errors.append("panel visual coverage must be local preview evidence")
+    if coverage.get("does_not_prove_tmuf_smoke") is not True:
+        errors.append("panel visual coverage must not claim TMUF proof")
+
+    targets = report.get("panel_catalog_targets")
+    if not isinstance(targets, list) or not targets:
+        errors.append("panel visual coverage requires panel_catalog_targets")
+        targets = []
+    entries = coverage.get("targets")
+    if not isinstance(entries, dict):
+        errors.append("panel_visual_coverage targets must be an object")
+        entries = {}
+
+    for target in targets:
+        entry = entries.get(target)
+        if not isinstance(entry, dict):
+            errors.append(f"missing panel visual coverage target: {target}")
+            continue
+        mapped = entry.get("mapped")
+        if mapped is True:
+            if not isinstance(entry.get("mask_names"), list) or not entry["mask_names"]:
+                errors.append(f"panel visual coverage missing masks: {target}")
+            if int(entry.get("pixel_count", 0)) <= 0:
+                errors.append(f"panel visual coverage has no pixels: {target}")
+            if entry.get("visual_active") is not True:
+                errors.append(f"panel visual coverage inactive: {target}")
+            if entry.get("activation_rule") != ACTIVATION_RULE:
+                errors.append(f"panel visual coverage activation rule mismatch: {target}")
+        elif mapped is False:
+            if entry.get("activation_rule") != UNMAPPED_RULE:
+                errors.append(f"unmapped panel visual coverage rule mismatch: {target}")
+            if entry.get("visual_active") is not False:
+                errors.append(f"unmapped panel visual coverage must stay inactive: {target}")
+        else:
+            errors.append(f"panel visual coverage mapped flag invalid: {target}")
+
+    extra_targets = set(entries) - set(targets)
+    for target in sorted(extra_targets):
+        errors.append(f"panel visual coverage target not declared: {target}")
+
+    return errors
+
+
 def validate_render_profile(report: dict[str, Any], premium: bool) -> list[str]:
     if not premium:
         return []
@@ -476,6 +537,7 @@ def _report_checks(
         "report_alpha_policy_valid": False,
         "report_design_lane_valid": False,
         "report_panel_catalog_targets_valid": False,
+        "report_panel_visual_coverage_valid": False,
         "report_render_profile_valid": False,
         "tmuf_smoke_passed": False,
     }
@@ -548,6 +610,7 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
         alpha_errors = validate_alpha_policy(report, premium=premium)
         lane_errors = validate_design_lane_evidence(report, premium=premium)
         panel_catalog_errors = validate_panel_catalog_targets(report, premium=premium, root=root)
+        panel_visual_errors = validate_panel_visual_coverage(report, premium=premium)
         render_profile_errors = validate_render_profile(report, premium=premium)
         if premium:
             premium_reports.append(report)
@@ -555,6 +618,7 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
         report_checks["report_alpha_policy_valid"] = not alpha_errors
         report_checks["report_design_lane_valid"] = not lane_errors
         report_checks["report_panel_catalog_targets_valid"] = not panel_catalog_errors
+        report_checks["report_panel_visual_coverage_valid"] = not panel_visual_errors
         report_checks["report_render_profile_valid"] = not render_profile_errors
         preview_checks, preview_errors = _preview_checks(root, skin_name)
         visual_checks, visual_metrics, visual_errors = validate_visual_quality(
@@ -570,6 +634,7 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
             *alpha_errors,
             *lane_errors,
             *panel_catalog_errors,
+            *panel_visual_errors,
             *render_profile_errors,
             *preview_errors,
             *visual_errors,
@@ -584,6 +649,7 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
                 "tmuf_smoke_test": report.get("tmuf_smoke_test", "missing"),
                 "gbuffer_mapping": report.get("evidence_status", {}).get("gbuffer_mapping", "missing"),
                 "design_lane": report.get("design_lane", {}),
+                "panel_visual_coverage": report.get("panel_visual_coverage", {}),
             }
         )
 

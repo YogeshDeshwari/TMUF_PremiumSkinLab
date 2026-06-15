@@ -117,6 +117,11 @@ Premium reports also include `design_lane`, which records each candidate's
 intended composition focus and distinctive masks. Lane metadata is recipe
 evidence only and must not be treated as TMUF visual proof.
 
+Premium reports also include `panel_visual_coverage`, which maps each declared
+`panel_catalog_targets` entry to renderer mask metrics when a mapping exists.
+Mapped targets must be locally active; unmapped targets are kept explicit. This
+is local preview evidence only and still does not prove TMUF runtime visibility.
+
 The generated batch summary lives at `out/reports/premium_batch_index.json`.
 It indexes all premium candidates, lanes, artifacts, style metrics, and pending
 proof gates, but it also explicitly does not prove TMUF smoke status.
