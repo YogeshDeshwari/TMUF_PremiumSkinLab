@@ -2,6 +2,12 @@
 
 Use this before calling any skin complete.
 
+## Status Check
+
+- [ ] Run `python3 recipes/lab_status.py --write`.
+- [ ] Confirm `objective_status` is not `complete` unless TMUF smoke evidence
+      has passed.
+
 ## Package Checks
 
 - [ ] Run `python3 recipes/validate_stock_outputs.py`.

@@ -1,0 +1,35 @@
+{
+  "goal_completion_blockers": [
+    "stock_calibration_tmuf_smoke_pending",
+    "custom_profiles_locked_until_stock_and_profile_smoke"
+  ],
+  "next_required_evidence": [
+    "run_tmuf_calibration_smoke_test",
+    "fill_out/proof/calibration_tmuf_smoke.json",
+    "evaluate_then_apply_tmuf_smoke_gate"
+  ],
+  "objective_status": "not_complete_tmuf_smoke_pending",
+  "profiles": {
+    "ch2026_fullcar": "locked",
+    "ch2026_nomud": "locked",
+    "overall_status": "custom_profiles_locked",
+    "stock_calibration_gate": "pending_tmuf_smoke"
+  },
+  "smoke_kit": {
+    "does_not_prove_tmuf_smoke": true,
+    "exists": true,
+    "manifest": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit/kit_manifest.json",
+    "status": "not_run",
+    "zip": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit.zip"
+  },
+  "stock": {
+    "candidate_count": 5,
+    "completion_status": "not_complete_tmuf_smoke_pending",
+    "errors": [],
+    "local_checks_passed": true,
+    "tmuf_smoke_status": "pending",
+    "warnings": [
+      "tmuf_smoke_pending"
+    ]
+  }
+}
