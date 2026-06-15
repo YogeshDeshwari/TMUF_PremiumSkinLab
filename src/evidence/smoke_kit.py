@@ -9,7 +9,8 @@ from typing import Any
 
 from PIL import Image, ImageDraw
 
-from src.evidence.skin_dirs import route_for_stadiumcar_skin_dir
+from src.evidence.skin_dirs import build_skin_dir_report, route_for_stadiumcar_skin_dir
+from src.evidence.smoke_gate import REQUIRED_OBSERVATIONS, REQUIRED_SCREENSHOT_ROLES
 from src.stock_diffuse.package import write_stable_zip_entry
 from src.stock_diffuse.premium import CANDIDATE_NAMES
 
@@ -21,10 +22,12 @@ SMOKE_TEMPLATE = ROOT / "out" / "proof" / "calibration_tmuf_smoke_template.json"
 CALIBRATION_ATLAS = ROOT / "out" / "previews" / "calibration_stock_diffuse_atlas.png"
 CALIBRATION_PROJECTION = ROOT / "out" / "previews" / "calibration_stock_diffuse_projected_side_top_rear.png"
 SMOKE_CONTACT_SHEET = ROOT / "out" / "proof" / "tmuf_smoke_contact_sheet.png"
+SMOKE_RUN_MANIFEST = ROOT / "out" / "proof" / "tmuf_smoke_run_manifest.json"
 SMOKE_DOC = ROOT / "docs" / "tmuf_smoke_test.md"
 KIT_FILES = {
     "skins/calibration_stock_diffuse.zip": CALIBRATION_SKIN,
     "proof/calibration_tmuf_smoke_template.json": SMOKE_TEMPLATE,
+    "proof/tmuf_smoke_run_manifest.json": SMOKE_RUN_MANIFEST,
     "previews/calibration_stock_diffuse_atlas.png": CALIBRATION_ATLAS,
     "previews/calibration_stock_diffuse_projected_side_top_rear.png": CALIBRATION_PROJECTION,
     "previews/tmuf_smoke_contact_sheet.png": SMOKE_CONTACT_SHEET,
@@ -46,6 +49,7 @@ def _kit_manifest(files: list[str]) -> dict[str, Any]:
         "does_not_prove_tmuf_smoke": True,
         "calibration_skin": "skins/calibration_stock_diffuse.zip",
         "smoke_report_template": "proof/calibration_tmuf_smoke_template.json",
+        "smoke_run_manifest": "proof/tmuf_smoke_run_manifest.json",
         "instructions": "README_tmuf_smoke_test.md",
         "files": files,
         "next_steps": [
@@ -59,6 +63,64 @@ def _kit_manifest(files: list[str]) -> dict[str, Any]:
 
 def _digest(path: Path) -> str:
     return sha256(path.read_bytes()).hexdigest()
+
+
+def _record_command_template() -> list[str]:
+    command = [
+        "python3",
+        "recipes/record_tmuf_smoke.py",
+        "--tester",
+        "\"manual tester\"",
+        "--tmuf-build",
+        "\"TMUF local install\"",
+        "--test-date-local",
+        "YYYY-MM-DD",
+    ]
+    for role in REQUIRED_SCREENSHOT_ROLES:
+        command.extend(["--screenshot-role", f"{role}=/absolute/path/to/tmuf_{role}.png"])
+    for observation in REQUIRED_OBSERVATIONS:
+        command.extend(["--confirm-observation", observation])
+    return command
+
+
+def build_smoke_run_manifest(path: Path = SMOKE_RUN_MANIFEST) -> Path:
+    path = Path(path)
+    data = {
+        "schema": "tmuf_premium_skin_lab.tmuf_smoke_run_manifest.v1",
+        "status": "not_run",
+        "does_not_prove_tmuf_smoke": True,
+        "route": "stock_diffuse_only",
+        "artifact": "out/skins/calibration_stock_diffuse.zip",
+        "kit_calibration_skin": "skins/calibration_stock_diffuse.zip",
+        "kit_smoke_report_template": "proof/calibration_tmuf_smoke_template.json",
+        "required_screenshot_roles": REQUIRED_SCREENSHOT_ROLES,
+        "required_observations": REQUIRED_OBSERVATIONS,
+        "install_discovery": build_skin_dir_report(),
+        "commands": {
+            "record_explicit_observations": _record_command_template(),
+            "evaluate": [
+                "python3",
+                "recipes/tmuf_smoke_gate.py",
+                "--evaluate",
+                "out/proof/calibration_tmuf_smoke.json",
+            ],
+            "apply_after_pass_only": [
+                "python3",
+                "recipes/tmuf_smoke_gate.py",
+                "--apply",
+                "out/proof/calibration_tmuf_smoke.json",
+            ],
+        },
+        "promotion_rule": "Do not apply the smoke gate unless evaluation returns passed.",
+        "known_limits": [
+            "This manifest does not prove TMUF smoke status.",
+            "Projected previews and contact sheets are review aids only.",
+            "GBuffer mapping remains experimental until this run is completed and evaluated.",
+        ],
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
+    return path
 
 
 def build_smoke_contact_sheet(path: Path = SMOKE_CONTACT_SHEET) -> Path:
@@ -155,6 +217,7 @@ def build_smoke_kit(out_dir: Path = DEFAULT_KIT_DIR) -> dict[str, str]:
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     build_smoke_contact_sheet()
+    build_smoke_run_manifest()
 
     files = sorted(KIT_FILES)
     for rel, src in KIT_FILES.items():

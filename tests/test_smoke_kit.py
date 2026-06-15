@@ -23,10 +23,30 @@ class SmokeKitTests(unittest.TestCase):
             self.assertEqual(manifest["status"], "not_run")
             self.assertTrue(manifest["does_not_prove_tmuf_smoke"])
             self.assertEqual(manifest["calibration_skin"], "skins/calibration_stock_diffuse.zip")
+            self.assertEqual(manifest["smoke_run_manifest"], "proof/tmuf_smoke_run_manifest.json")
             self.assertIn("proof/calibration_tmuf_smoke_template.json", manifest["files"])
+            self.assertIn("proof/tmuf_smoke_run_manifest.json", manifest["files"])
             self.assertIn("previews/calibration_stock_diffuse_projected_side_top_rear.png", manifest["files"])
             self.assertIn("previews/tmuf_smoke_contact_sheet.png", manifest["files"])
             self.assertTrue(any("recipes/record_tmuf_smoke.py" in step for step in manifest["next_steps"]))
+
+            run_manifest_path = manifest_path.parent / "proof" / "tmuf_smoke_run_manifest.json"
+            self.assertTrue(run_manifest_path.exists())
+            run_manifest = json.loads(run_manifest_path.read_text())
+            self.assertEqual(run_manifest["schema"], "tmuf_premium_skin_lab.tmuf_smoke_run_manifest.v1")
+            self.assertEqual(run_manifest["status"], "not_run")
+            self.assertTrue(run_manifest["does_not_prove_tmuf_smoke"])
+            self.assertEqual(run_manifest["route"], "stock_diffuse_only")
+            self.assertEqual(run_manifest["required_screenshot_roles"], ["front", "side", "rear", "top"])
+            self.assertIn("nose_is_red", run_manifest["required_observations"])
+            self.assertIn("package_loads_without_custom_gbx", run_manifest["required_observations"])
+            record_command = " ".join(run_manifest["commands"]["record_explicit_observations"])
+            self.assertIn("--screenshot-role front=", record_command)
+            self.assertIn("--screenshot-role side=", record_command)
+            self.assertIn("--screenshot-role rear=", record_command)
+            self.assertIn("--screenshot-role top=", record_command)
+            self.assertIn("--confirm-observation nose_is_red", record_command)
+            self.assertEqual(run_manifest["install_discovery"]["does_not_prove_tmuf_smoke"], True)
 
             contact_sheet = manifest_path.parent / "previews" / "tmuf_smoke_contact_sheet.png"
             self.assertTrue(contact_sheet.exists())
@@ -57,6 +77,12 @@ class SmokeKitTests(unittest.TestCase):
             stale = validate_smoke_kit(kit_dir)
             self.assertFalse(stale["fresh"])
             self.assertIn("README_tmuf_smoke_test.md", stale["stale_files"])
+
+            (kit_dir / "proof" / "tmuf_smoke_run_manifest.json").write_text("{}\n")
+
+            stale_manifest = validate_smoke_kit(kit_dir)
+            self.assertFalse(stale_manifest["fresh"])
+            self.assertIn("proof/tmuf_smoke_run_manifest.json", stale_manifest["stale_files"])
 
             (kit_dir / "previews" / "tmuf_smoke_contact_sheet.png").write_bytes(b"stale contact sheet\n")
 

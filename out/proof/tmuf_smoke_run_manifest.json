@@ -1,0 +1,90 @@
+{
+  "artifact": "out/skins/calibration_stock_diffuse.zip",
+  "commands": {
+    "apply_after_pass_only": [
+      "python3",
+      "recipes/tmuf_smoke_gate.py",
+      "--apply",
+      "out/proof/calibration_tmuf_smoke.json"
+    ],
+    "evaluate": [
+      "python3",
+      "recipes/tmuf_smoke_gate.py",
+      "--evaluate",
+      "out/proof/calibration_tmuf_smoke.json"
+    ],
+    "record_explicit_observations": [
+      "python3",
+      "recipes/record_tmuf_smoke.py",
+      "--tester",
+      "\"manual tester\"",
+      "--tmuf-build",
+      "\"TMUF local install\"",
+      "--test-date-local",
+      "YYYY-MM-DD",
+      "--screenshot-role",
+      "front=/absolute/path/to/tmuf_front.png",
+      "--screenshot-role",
+      "side=/absolute/path/to/tmuf_side.png",
+      "--screenshot-role",
+      "rear=/absolute/path/to/tmuf_rear.png",
+      "--screenshot-role",
+      "top=/absolute/path/to/tmuf_top.png",
+      "--confirm-observation",
+      "nose_is_red",
+      "--confirm-observation",
+      "tail_is_blue",
+      "--confirm-observation",
+      "left_side_is_green",
+      "--confirm-observation",
+      "right_side_is_yellow",
+      "--confirm-observation",
+      "roof_high_surfaces_are_white",
+      "--confirm-observation",
+      "lower_floor_surfaces_are_dark",
+      "--confirm-observation",
+      "mudguards_are_magenta",
+      "--confirm-observation",
+      "centerline_is_cyan",
+      "--confirm-observation",
+      "package_loads_without_custom_gbx"
+    ]
+  },
+  "does_not_prove_tmuf_smoke": true,
+  "install_discovery": {
+    "candidate_count": 0,
+    "candidates": [],
+    "does_not_prove_tmuf_smoke": true,
+    "safe_use": "Use a listed path only as an explicit install target; finding a directory does not prove TMUF load.",
+    "schema_version": 1,
+    "status": "no_candidates_found"
+  },
+  "kit_calibration_skin": "skins/calibration_stock_diffuse.zip",
+  "kit_smoke_report_template": "proof/calibration_tmuf_smoke_template.json",
+  "known_limits": [
+    "This manifest does not prove TMUF smoke status.",
+    "Projected previews and contact sheets are review aids only.",
+    "GBuffer mapping remains experimental until this run is completed and evaluated."
+  ],
+  "promotion_rule": "Do not apply the smoke gate unless evaluation returns passed.",
+  "required_observations": [
+    "nose_is_red",
+    "tail_is_blue",
+    "left_side_is_green",
+    "right_side_is_yellow",
+    "roof_high_surfaces_are_white",
+    "lower_floor_surfaces_are_dark",
+    "mudguards_are_magenta",
+    "centerline_is_cyan",
+    "package_loads_without_custom_gbx"
+  ],
+  "required_screenshot_roles": [
+    "front",
+    "side",
+    "rear",
+    "top"
+  ],
+  "route": "stock_diffuse_only",
+  "schema": "tmuf_premium_skin_lab.tmuf_smoke_run_manifest.v1",
+  "status": "not_run"
+}

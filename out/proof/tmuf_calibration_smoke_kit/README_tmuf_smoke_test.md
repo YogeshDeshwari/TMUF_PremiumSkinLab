@@ -53,10 +53,11 @@ out/proof/tmuf_calibration_smoke_kit/
 out/proof/tmuf_calibration_smoke_kit.zip
 ```
 
-The kit includes the calibration skin, smoke report template, calibration
-previews, and `previews/tmuf_smoke_contact_sheet.png`, a visual review sheet
-for the calibration preview and current premium candidates. The kit is only a
-handoff bundle. It does not prove TMUF smoke status.
+The kit includes the calibration skin, smoke report template,
+`proof/tmuf_smoke_run_manifest.json`, calibration previews, and
+`previews/tmuf_smoke_contact_sheet.png`, a visual review sheet for the
+calibration preview and current premium candidates. The kit is only a handoff
+bundle. It does not prove TMUF smoke status.
 
 Find existing StadiumCar skin directories before installing:
 
@@ -133,6 +134,11 @@ out/proof/calibration_tmuf_smoke.json
 
 It does not promote generated reports. It only records a filled evidence file
 that the smoke gate can evaluate.
+
+The run manifest in the smoke kit is machine-readable checklist data. It
+records the required screenshot roles, required observations, command
+templates, and current install-directory discovery status. It is not evidence
+that TMUF loaded the package.
 
 Evaluate it without changing generated reports:
 

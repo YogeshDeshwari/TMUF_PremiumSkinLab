@@ -108,8 +108,9 @@ The generated batch summary lives at `out/reports/premium_batch_index.json`.
 It indexes all premium candidates, lanes, artifacts, style metrics, and pending
 proof gates, but it also explicitly does not prove TMUF smoke status.
 
-The smoke kit includes `previews/tmuf_smoke_contact_sheet.png` as a visual
-review aid only. It is not smoke evidence.
+The smoke kit includes `proof/tmuf_smoke_run_manifest.json` as a
+machine-readable checklist and `previews/tmuf_smoke_contact_sheet.png` as a
+visual review aid. Neither file is smoke evidence.
 
 See `docs/tmuf_smoke_test.md` before promoting any report from
 `experimental_until_tmuf_smoke` to `proven_by_tmuf_smoke`.

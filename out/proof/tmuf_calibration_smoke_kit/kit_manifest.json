@@ -7,6 +7,7 @@
     "previews/calibration_stock_diffuse_projected_side_top_rear.png",
     "previews/tmuf_smoke_contact_sheet.png",
     "proof/calibration_tmuf_smoke_template.json",
+    "proof/tmuf_smoke_run_manifest.json",
     "skins/calibration_stock_diffuse.zip"
   ],
   "instructions": "README_tmuf_smoke_test.md",
@@ -18,5 +19,6 @@
   ],
   "schema_version": 1,
   "smoke_report_template": "proof/calibration_tmuf_smoke_template.json",
+  "smoke_run_manifest": "proof/tmuf_smoke_run_manifest.json",
   "status": "not_run"
 }
