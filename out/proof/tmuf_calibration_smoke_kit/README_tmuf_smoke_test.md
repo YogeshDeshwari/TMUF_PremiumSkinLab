@@ -33,8 +33,8 @@ All observations must be true before the gate can pass:
 - centerline is cyan
 - package loads without custom GBX files
 
-At least one screenshot path must be recorded and the screenshot file must
-exist locally.
+At least one screenshot path must be recorded. Each referenced screenshot must
+exist locally, open as an image, and contain nonblank visual content.
 
 ## Workflow
 
@@ -89,6 +89,9 @@ The helper copies screenshots into:
 ```text
 out/proof/tmuf_smoke_screenshots/
 ```
+
+The helper rejects missing files, unreadable image files, and single-color blank
+images before it writes the evidence report.
 
 and writes:
 

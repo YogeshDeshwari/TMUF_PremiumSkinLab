@@ -3,6 +3,15 @@ from pathlib import Path
 import tempfile
 import unittest
 
+from PIL import Image, ImageDraw
+
+
+def _write_nonblank_png(path: Path) -> None:
+    image = Image.new("RGB", (64, 48), (10, 12, 14))
+    draw = ImageDraw.Draw(image)
+    draw.rectangle((8, 8, 56, 40), fill=(220, 20, 180))
+    image.save(path)
+
 
 class TmufSmokeGateTests(unittest.TestCase):
     def test_template_is_not_a_pass_and_lists_required_observations(self):
@@ -29,7 +38,7 @@ class TmufSmokeGateTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
             screenshot = base / "tmuf_calibration_front_side.png"
-            screenshot.write_bytes(b"fake screenshot bytes")
+            _write_nonblank_png(screenshot)
             smoke_report = base / "calibration_tmuf_smoke.json"
             smoke_report.write_text(
                 json.dumps(
@@ -68,6 +77,38 @@ class TmufSmokeGateTests(unittest.TestCase):
             self.assertEqual(promoted["evidence_status"]["gbuffer_mapping"], "proven_by_tmuf_smoke")
             self.assertEqual(promoted["proof_gate"]["calibration_stock_diffuse"], "passed")
             self.assertEqual(promoted["tmuf_smoke_evidence"]["screenshots"], [screenshot.name])
+
+    def test_invalid_or_blank_screenshot_prevents_promotion(self):
+        from src.evidence.smoke_gate import REQUIRED_OBSERVATIONS, apply_smoke_result, evaluate_smoke_report
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            invalid = base / "not_an_image.png"
+            invalid.write_bytes(b"not image bytes")
+            blank = base / "blank.png"
+            Image.new("RGB", (64, 48), (12, 12, 12)).save(blank)
+            smoke_report = base / "calibration_tmuf_smoke.json"
+            smoke_report.write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "artifact": "out/skins/calibration_stock_diffuse.zip",
+                        "status": "passed",
+                        "tester": "manual tester",
+                        "tmuf_build": "TMUF local install",
+                        "test_date_local": "2026-06-15",
+                        "screenshots": [invalid.name, blank.name],
+                        "observations": {name: True for name in REQUIRED_OBSERVATIONS},
+                    }
+                )
+            )
+
+            result = evaluate_smoke_report(smoke_report, base_dir=base)
+            self.assertFalse(result["passed"])
+            self.assertEqual(result["invalid_screenshots"], [invalid.name])
+            self.assertEqual(result["blank_screenshots"], [blank.name])
+            with self.assertRaises(ValueError):
+                apply_smoke_result(smoke_report, report_paths=[], base_dir=base)
 
     def test_missing_screenshot_prevents_promotion(self):
         from src.evidence.smoke_gate import REQUIRED_OBSERVATIONS, apply_smoke_result, evaluate_smoke_report

@@ -8,6 +8,7 @@ from src.evidence.smoke_gate import (
     CALIBRATION_ARTIFACT,
     REQUIRED_OBSERVATIONS,
     evaluate_smoke_report,
+    validate_screenshot_file,
 )
 
 
@@ -56,6 +57,11 @@ def record_calibration_smoke_report(
         source = Path(source_path)
         if not source.is_file():
             raise FileNotFoundError(source)
+        validation = validate_screenshot_file(source)
+        if not validation["readable"]:
+            raise ValueError(f"Screenshot must be a readable image: {source}")
+        if not validation["nonblank"]:
+            raise ValueError(f"Screenshot must be nonblank: {source}")
         screenshot_dir.mkdir(parents=True, exist_ok=True)
         destination = screenshot_dir / source.name
         shutil.copy2(source, destination)

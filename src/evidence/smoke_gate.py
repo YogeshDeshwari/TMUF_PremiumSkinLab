@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from PIL import Image, UnidentifiedImageError
+
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_TEMPLATE = ROOT / "out" / "proof" / "calibration_tmuf_smoke_template.json"
@@ -23,6 +25,20 @@ REQUIRED_OBSERVATIONS = [
 REQUIRED_METADATA = ["tester", "tmuf_build", "test_date_local"]
 
 
+def validate_screenshot_file(path: Path) -> dict[str, Any]:
+    path = Path(path)
+    try:
+        with Image.open(path) as image:
+            rgb = image.convert("RGB")
+            extrema = rgb.getextrema()
+            width, height = rgb.size
+    except (OSError, UnidentifiedImageError):
+        return {"readable": False, "nonblank": False, "size": None}
+
+    nonblank = any(channel_min != channel_max for channel_min, channel_max in extrema)
+    return {"readable": True, "nonblank": nonblank, "size": [width, height]}
+
+
 def write_template(path: Path = DEFAULT_TEMPLATE) -> Path:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -40,7 +56,7 @@ def write_template(path: Path = DEFAULT_TEMPLATE) -> Path:
         "pass_requires": [
             "Set status to passed only after loading the calibration zip in TMUF/TMNF.",
             "Every required observation must be true.",
-            "At least one referenced screenshot file must exist.",
+            "At least one referenced screenshot file must exist and be a readable, nonblank image.",
             "This gate proves GBuffer mapping for this stock Diffuse route only.",
         ],
     }
@@ -68,14 +84,27 @@ def evaluate_smoke_report(path: Path, base_dir: Path | None = None) -> dict[str,
     missing_screenshots = [
         item for item in screenshots if not _resolve_evidence_path(item, base).exists()
     ]
-    has_existing_screenshot = bool(screenshots) and not missing_screenshots
+    screenshot_validation = {
+        item: validate_screenshot_file(_resolve_evidence_path(item, base))
+        for item in screenshots
+        if item not in missing_screenshots
+    }
+    invalid_screenshots = [
+        item for item, validation in screenshot_validation.items() if not validation["readable"]
+    ]
+    blank_screenshots = [
+        item
+        for item, validation in screenshot_validation.items()
+        if validation["readable"] and not validation["nonblank"]
+    ]
+    has_valid_screenshot = bool(screenshots) and not missing_screenshots and not invalid_screenshots and not blank_screenshots
 
     passed = (
         data.get("status") == "passed"
         and data.get("artifact") == CALIBRATION_ARTIFACT
         and not missing_observations
         and not missing_metadata
-        and has_existing_screenshot
+        and has_valid_screenshot
     )
 
     return {
@@ -86,6 +115,9 @@ def evaluate_smoke_report(path: Path, base_dir: Path | None = None) -> dict[str,
         "missing_metadata": missing_metadata,
         "screenshots": screenshots,
         "missing_screenshots": missing_screenshots,
+        "invalid_screenshots": invalid_screenshots,
+        "blank_screenshots": blank_screenshots,
+        "screenshot_validation": screenshot_validation,
         "gbuffer_mapping_status": "proven_by_tmuf_smoke" if passed else "experimental_until_tmuf_smoke",
         "tester": data.get("tester", ""),
         "tmuf_build": data.get("tmuf_build", ""),
@@ -105,7 +137,9 @@ def apply_smoke_result(
             "TMUF smoke evidence did not pass; reports remain experimental. "
             f"Missing observations: {result['missing_observations']}; "
             f"missing metadata: {result['missing_metadata']}; "
-            f"missing screenshots: {result['missing_screenshots']}"
+            f"missing screenshots: {result['missing_screenshots']}; "
+            f"invalid screenshots: {result['invalid_screenshots']}; "
+            f"blank screenshots: {result['blank_screenshots']}"
         )
 
     paths = (

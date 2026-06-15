@@ -5,6 +5,15 @@ import sys
 import tempfile
 import unittest
 
+from PIL import Image, ImageDraw
+
+
+def _write_nonblank_png(path: Path) -> None:
+    image = Image.new("RGB", (64, 48), (9, 10, 12))
+    draw = ImageDraw.Draw(image)
+    draw.rectangle((6, 6, 58, 42), fill=(0, 210, 240))
+    image.save(path)
+
 
 class SmokeRecordTests(unittest.TestCase):
     def test_record_copies_screenshots_and_writes_passable_report(self):
@@ -14,7 +23,7 @@ class SmokeRecordTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
             screenshot = base / "tmuf_front_left.png"
-            screenshot.write_bytes(b"real screenshot bytes")
+            _write_nonblank_png(screenshot)
             output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
 
             written = record_calibration_smoke_report(
@@ -46,7 +55,7 @@ class SmokeRecordTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
             screenshot = base / "tmuf_front_left.png"
-            screenshot.write_bytes(b"real screenshot bytes")
+            _write_nonblank_png(screenshot)
             output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
 
             with self.assertRaises(ValueError) as context:
@@ -83,11 +92,47 @@ class SmokeRecordTests(unittest.TestCase):
 
             self.assertFalse(output.exists())
 
+    def test_passed_report_requires_readable_nonblank_screenshots(self):
+        from src.evidence.smoke_record import record_calibration_smoke_report
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            invalid = base / "not_an_image.png"
+            invalid.write_bytes(b"not image bytes")
+            blank = base / "blank.png"
+            Image.new("RGB", (64, 48), (12, 12, 12)).save(blank)
+            output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
+
+            with self.assertRaises(ValueError) as invalid_context:
+                record_calibration_smoke_report(
+                    output_path=output,
+                    tester="manual tester",
+                    tmuf_build="TMUF local install",
+                    test_date_local="2026-06-15",
+                    screenshot_paths=[invalid],
+                    all_required_observations_passed=True,
+                    base_dir=base,
+                )
+            self.assertIn("readable image", str(invalid_context.exception))
+
+            with self.assertRaises(ValueError) as blank_context:
+                record_calibration_smoke_report(
+                    output_path=output,
+                    tester="manual tester",
+                    tmuf_build="TMUF local install",
+                    test_date_local="2026-06-15",
+                    screenshot_paths=[blank],
+                    all_required_observations_passed=True,
+                    base_dir=base,
+                )
+            self.assertIn("nonblank", str(blank_context.exception))
+            self.assertFalse(output.exists())
+
     def test_record_recipe_creates_evaluable_report(self):
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
             screenshot = base / "tmuf_front_left.png"
-            screenshot.write_bytes(b"real screenshot bytes")
+            _write_nonblank_png(screenshot)
             output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
             recipe = Path(__file__).resolve().parents[1] / "recipes" / "record_tmuf_smoke.py"
 
