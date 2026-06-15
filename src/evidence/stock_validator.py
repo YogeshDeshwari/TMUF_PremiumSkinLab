@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from src.evidence.input_trace import MANIFEST, STOCK_DIFFUSE_INPUTS
+from src.evidence.visual_quality import validate_visual_quality
 from src.stock_diffuse.package import ZIP_TIMESTAMP
 from src.stock_diffuse.premium import CANDIDATE_NAMES
 
@@ -176,13 +177,19 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
             manifest,
         )
         preview_checks, preview_errors = _preview_checks(root, skin_name)
-        checks = {**zip_checks, **report_checks, **preview_checks}
-        skin_errors = [*zip_errors, *report_errors, *preview_errors]
+        visual_checks, visual_metrics, visual_errors = validate_visual_quality(
+            root,
+            skin_name,
+            premium=skin_name != "calibration_stock_diffuse",
+        )
+        checks = {**zip_checks, **report_checks, **preview_checks, **visual_checks}
+        skin_errors = [*zip_errors, *report_errors, *preview_errors, *visual_errors]
         errors.extend(skin_errors)
         skins.append(
             {
                 "skin_name": skin_name,
                 "checks": checks,
+                "visual_metrics": visual_metrics,
                 "errors": skin_errors,
                 "tmuf_smoke_test": report.get("tmuf_smoke_test", "missing"),
                 "gbuffer_mapping": report.get("evidence_status", {}).get("gbuffer_mapping", "missing"),

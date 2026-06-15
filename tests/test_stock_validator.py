@@ -27,7 +27,9 @@ class StockValidatorTests(unittest.TestCase):
             self.assertTrue(checks["report_input_evidence_matches_manifest"])
             self.assertTrue(checks["atlas_preview_exists"])
             self.assertTrue(checks["projection_preview_exists"])
+            self.assertTrue(checks["preview_visual_quality_passed"])
             self.assertFalse(checks["tmuf_smoke_passed"])
+            self.assertIn("visual_metrics", skin)
 
     def test_report_input_evidence_must_match_manifest(self):
         from src.evidence.input_trace import STOCK_DIFFUSE_INPUTS

@@ -22,6 +22,8 @@ Use this before calling any skin complete.
 
 ## Visual Checks
 
+- [ ] Validator reports `preview_visual_quality_passed=True`.
+- [ ] Premium candidates report `premium_style_quality_passed=True`.
 - [ ] Atlas preview exists.
 - [ ] Projected side/top/rear preview exists.
 - [ ] Broad graphics are readable.
