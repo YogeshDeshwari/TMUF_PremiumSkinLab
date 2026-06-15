@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT))
 from src.evidence.smoke_kit import (  # noqa: E402
     build_smoke_kit,
     install_calibration_skin,
+    install_discovered_calibration_skin,
     write_install_receipt,
 )
 
@@ -21,19 +22,41 @@ def main(argv: list[str] | None = None) -> str:
     parser.add_argument("--out-dir", type=Path, default=ROOT / "out" / "proof" / "tmuf_calibration_smoke_kit")
     parser.add_argument("--install-skins-dir", type=Path, help="existing TMUF/TMNF StadiumCar skin folder")
     parser.add_argument(
+        "--install-discovered",
+        action="store_true",
+        help="install into the only StadiumCar skin folder found by discovery",
+    )
+    parser.add_argument(
+        "--search-root",
+        action="append",
+        type=Path,
+        help="discovery root for --install-discovered; may be passed more than once",
+    )
+    parser.add_argument(
         "--install-panel-probe",
         action="store_true",
-        help="with --install-skins-dir, also copy calibration_panel_family_probe.zip",
+        help="with an install target, also copy calibration_panel_family_probe.zip",
     )
     parser.add_argument("--json", action="store_true", help="emit machine-readable JSON")
     args = parser.parse_args(argv)
-    if args.install_panel_probe and args.install_skins_dir is None:
-        parser.error("--install-panel-probe requires --install-skins-dir")
+    if args.install_skins_dir is not None and args.install_discovered:
+        parser.error("--install-skins-dir and --install-discovered are mutually exclusive")
+    if args.search_root and not args.install_discovered:
+        parser.error("--search-root requires --install-discovered")
+    if args.install_panel_probe and args.install_skins_dir is None and not args.install_discovered:
+        parser.error("--install-panel-probe requires --install-skins-dir or --install-discovered")
 
-    result = build_smoke_kit(args.out_dir)
+    discovery_roots = args.search_root if args.search_root else None
+    result = build_smoke_kit(args.out_dir, discovery_roots=discovery_roots)
     if args.install_skins_dir is not None:
         result["install"] = install_calibration_skin(
             args.install_skins_dir,
+            include_panel_probe=args.install_panel_probe,
+        )
+        result["install_receipt"] = str(write_install_receipt(result["install"], args.out_dir))
+    elif args.install_discovered:
+        result["install"] = install_discovered_calibration_skin(
+            discovery_roots,
             include_panel_probe=args.install_panel_probe,
         )
         result["install_receipt"] = str(write_install_receipt(result["install"], args.out_dir))

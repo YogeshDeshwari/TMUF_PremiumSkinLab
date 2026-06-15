@@ -58,6 +58,7 @@ class SmokeKitTests(unittest.TestCase):
             self.assertIn("nose_is_red", run_manifest["required_observations"])
             self.assertIn("package_loads_without_custom_gbx", run_manifest["required_observations"])
             record_command = " ".join(run_manifest["commands"]["record_explicit_observations"])
+            self.assertIn("--install-receipt", record_command)
             self.assertIn("--screenshot-role front=", record_command)
             self.assertIn("--screenshot-role side=", record_command)
             self.assertIn("--screenshot-role rear=", record_command)
@@ -260,6 +261,77 @@ class SmokeKitTests(unittest.TestCase):
 
             receipt = json.loads(Path(data["install_receipt"]).read_text())
             self.assertEqual(receipt["installed_supplemental_skins"], supplemental)
+
+    def test_cli_install_discovered_single_candidate_writes_receipt_and_discovery_audit(self):
+        from recipes.prepare_tmuf_smoke_kit import main
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            kit_dir = root / "kit"
+            install_dir = root / "TrackMania" / "Skins" / "Vehicles" / "StadiumCar"
+            install_dir.mkdir(parents=True)
+
+            output = main(
+                [
+                    "--out-dir",
+                    str(kit_dir),
+                    "--install-discovered",
+                    "--search-root",
+                    str(root),
+                    "--json",
+                ]
+            )
+            data = json.loads(output)
+
+            copied = install_dir / "calibration_stock_diffuse.zip"
+            self.assertTrue(copied.exists())
+            self.assertEqual(data["install"]["selection_mode"], "single_discovered_candidate")
+            self.assertEqual(data["install"]["selected_candidate"]["path"], install_dir.as_posix())
+            self.assertEqual(data["install"]["discovery"]["candidate_count"], 1)
+
+            receipt = json.loads(Path(data["install_receipt"]).read_text())
+            self.assertEqual(receipt["selection_mode"], "single_discovered_candidate")
+            self.assertEqual(receipt["selected_candidate"]["path"], install_dir.as_posix())
+            self.assertEqual(receipt["discovery"]["candidate_count"], 1)
+
+            run_manifest = json.loads((kit_dir / "proof" / "tmuf_smoke_run_manifest.json").read_text())
+            self.assertEqual(run_manifest["install_discovery"]["candidate_count"], 1)
+
+    def test_cli_install_discovered_refuses_zero_or_multiple_candidates(self):
+        from recipes.prepare_tmuf_smoke_kit import main
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            with self.assertRaises(ValueError) as missing_context:
+                main(
+                    [
+                        "--out-dir",
+                        str(root / "missing_kit"),
+                        "--install-discovered",
+                        "--search-root",
+                        str(root),
+                    ]
+                )
+            self.assertIn("exactly one", str(missing_context.exception))
+            self.assertIn("found 0", str(missing_context.exception))
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "one" / "Skins" / "Vehicles" / "StadiumCar").mkdir(parents=True)
+            (root / "two" / "Skins" / "Vehicles" / "StadiumCar").mkdir(parents=True)
+
+            with self.assertRaises(ValueError) as multiple_context:
+                main(
+                    [
+                        "--out-dir",
+                        str(root / "ambiguous_kit"),
+                        "--install-discovered",
+                        "--search-root",
+                        str(root),
+                    ]
+                )
+            self.assertIn("exactly one", str(multiple_context.exception))
+            self.assertIn("found 2", str(multiple_context.exception))
 
 
 if __name__ == "__main__":

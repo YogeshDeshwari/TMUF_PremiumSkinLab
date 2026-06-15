@@ -127,6 +127,14 @@ visual review aid. Neither file is smoke evidence.
 See `docs/tmuf_smoke_test.md` before promoting any report from
 `experimental_until_tmuf_smoke` to `proven_by_tmuf_smoke`.
 
+To install the calibration skin for manual smoke testing, use an explicit
+StadiumCar folder or the guarded single-candidate discovery path:
+
+```bash
+python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /path/to/StadiumCar
+python3 recipes/prepare_tmuf_smoke_kit.py --install-discovered --search-root /path/to/TrackMania-or-Wine-prefix
+```
+
 After the calibration skin is loaded in TMUF/TMNF, record the real screenshots
 and explicit observation confirmation with:
 

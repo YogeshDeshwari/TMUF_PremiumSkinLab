@@ -241,6 +241,27 @@ route such as `Skins/Vehicles/StadiumCar`. The install helper only copies
 `calibration_stock_diffuse.zip`; it does not promote reports or mark the smoke
 gate as passed.
 
+If discovery finds exactly one recognized StadiumCar skin folder, the helper can
+install there without copying the path manually:
+
+```bash
+python3 recipes/prepare_tmuf_smoke_kit.py --install-discovered
+```
+
+To limit discovery to a known parent folder, pass one or more search roots:
+
+```bash
+python3 recipes/prepare_tmuf_smoke_kit.py \
+  --install-discovered \
+  --search-root /path/to/TrackMania-or-Wine-prefix
+```
+
+This route refuses to install when discovery finds zero candidates or multiple
+candidates. The install receipt records `selection_mode`,
+`selected_candidate`, and the discovery audit. Finding one directory still does
+not prove TMUF smoke status; it only proves which folder received the copied
+calibration zip.
+
 To also install the supplemental panel-family probe in the same StadiumCar skin
 folder, opt in explicitly:
 
@@ -255,7 +276,8 @@ This copies both `calibration_stock_diffuse.zip` and
 install receipt records it as `does_not_prove_tmuf_smoke=true`, and the smoke
 gate apply step skips its report.
 
-When `--install-skins-dir` is used, the helper also writes:
+When `--install-skins-dir` or `--install-discovered` is used, the helper also
+writes:
 
 ```text
 out/proof/tmuf_calibration_smoke_kit/proof/calibration_install_receipt.json

@@ -96,7 +96,11 @@ def _record_command_template() -> list[str]:
     return command
 
 
-def build_smoke_run_manifest(path: Path = SMOKE_RUN_MANIFEST) -> Path:
+def build_smoke_run_manifest(
+    path: Path = SMOKE_RUN_MANIFEST,
+    *,
+    discovery_roots: list[Path] | None = None,
+) -> Path:
     path = Path(path)
     data = {
         "schema": "tmuf_premium_skin_lab.tmuf_smoke_run_manifest.v1",
@@ -117,7 +121,7 @@ def build_smoke_run_manifest(path: Path = SMOKE_RUN_MANIFEST) -> Path:
         "kit_smoke_report_template": "proof/calibration_tmuf_smoke_template.json",
         "required_screenshot_roles": REQUIRED_SCREENSHOT_ROLES,
         "required_observations": REQUIRED_OBSERVATIONS,
-        "install_discovery": build_skin_dir_report(),
+        "install_discovery": build_skin_dir_report(discovery_roots),
         "commands": {
             "record_explicit_observations": _record_command_template(),
             "evaluate": [
@@ -236,12 +240,16 @@ def validate_smoke_kit(out_dir: Path = DEFAULT_KIT_DIR) -> dict[str, Any]:
     }
 
 
-def build_smoke_kit(out_dir: Path = DEFAULT_KIT_DIR) -> dict[str, str]:
+def build_smoke_kit(
+    out_dir: Path = DEFAULT_KIT_DIR,
+    *,
+    discovery_roots: list[Path] | None = None,
+) -> dict[str, str]:
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     save_panel_probe_outputs()
     build_smoke_contact_sheet()
-    build_smoke_run_manifest()
+    build_smoke_run_manifest(discovery_roots=discovery_roots)
 
     files = sorted(KIT_FILES)
     for rel, src in KIT_FILES.items():
@@ -312,6 +320,7 @@ def install_calibration_skin(
 
     return {
         "status": "installed_not_tested",
+        "selection_mode": "explicit_install_target",
         "installed_skin": str(dst),
         "source_skin": str(CALIBRATION_SKIN),
         "route": route,
@@ -323,12 +332,36 @@ def install_calibration_skin(
     }
 
 
+def install_discovered_calibration_skin(
+    roots: list[Path] | None = None,
+    *,
+    include_panel_probe: bool = False,
+) -> dict[str, Any]:
+    discovery = build_skin_dir_report(roots)
+    candidates = discovery["candidates"]
+    if len(candidates) != 1:
+        raise ValueError(
+            "Discovered install requires exactly one recognized StadiumCar skin directory; "
+            f"found {len(candidates)}"
+        )
+    selected = candidates[0]
+    result = install_calibration_skin(
+        Path(selected["path"]),
+        include_panel_probe=include_panel_probe,
+    )
+    result["selection_mode"] = "single_discovered_candidate"
+    result["selected_candidate"] = selected
+    result["discovery"] = discovery
+    return result
+
+
 def write_install_receipt(install_result: dict[str, Any], out_dir: Path = DEFAULT_KIT_DIR) -> Path:
     out_dir = Path(out_dir)
     receipt_path = out_dir / "proof" / "calibration_install_receipt.json"
     data = {
         "schema": "tmuf_premium_skin_lab.calibration_install_receipt.v1",
         "status": install_result["status"],
+        "selection_mode": install_result.get("selection_mode", "explicit_install_target"),
         "route": install_result["route"],
         "installed_skin": install_result["installed_skin"],
         "source_skin": install_result["source_skin"],
@@ -345,6 +378,10 @@ def write_install_receipt(install_result: dict[str, Any], out_dir: Path = DEFAUL
             "evaluate_then_apply_tmuf_smoke_gate",
         ],
     }
+    if "selected_candidate" in install_result:
+        data["selected_candidate"] = install_result["selected_candidate"]
+    if "discovery" in install_result:
+        data["discovery"] = install_result["discovery"]
     receipt_path.parent.mkdir(parents=True, exist_ok=True)
     receipt_path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
     return receipt_path

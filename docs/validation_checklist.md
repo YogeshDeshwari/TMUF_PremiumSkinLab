@@ -63,7 +63,9 @@ Use this before calling any skin complete.
 
 - [ ] Confirm the validator reports `tmuf_smoke_status=pending` before manual
       TMUF evidence exists.
-- [ ] Put zip into the StadiumCar skin folder.
+- [ ] Put zip into the StadiumCar skin folder using either an explicit
+      `--install-skins-dir` target or guarded `--install-discovered` with one
+      candidate.
 - [ ] Load the skin in TMUF.
 - [ ] Capture role-labeled `front`, `side`, `rear`, and `top` views.
 - [ ] Record evidence with `python3 recipes/record_tmuf_smoke.py ... --install-receipt ... --screenshot-role front=... --screenshot-role side=... --screenshot-role rear=... --screenshot-role top=...`.
