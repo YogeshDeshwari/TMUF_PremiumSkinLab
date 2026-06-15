@@ -8,6 +8,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+EXPECTED_ZIP_TIMESTAMP = (2000, 1, 1, 0, 0, 0)
 
 
 def dds_info(data: bytes):
@@ -65,6 +66,10 @@ class CalibrationArtifactTests(unittest.TestCase):
 
         with zipfile.ZipFile(zip_path) as zf:
             self.assertEqual(set(zf.namelist()), {"Diffuse.dds", "Icon.dds"})
+            self.assertEqual(
+                {info.filename: info.date_time for info in zf.infolist()},
+                {"Diffuse.dds": EXPECTED_ZIP_TIMESTAMP, "Icon.dds": EXPECTED_ZIP_TIMESTAMP},
+            )
             diffuse = dds_info(zf.read("Diffuse.dds"))
             icon = dds_info(zf.read("Icon.dds"))
 
@@ -102,6 +107,10 @@ class PremiumStockBatchTests(unittest.TestCase):
 
             with zipfile.ZipFile(zip_path) as zf:
                 self.assertEqual(set(zf.namelist()), {"Diffuse.dds", "Icon.dds"})
+                self.assertEqual(
+                    {info.filename: info.date_time for info in zf.infolist()},
+                    {"Diffuse.dds": EXPECTED_ZIP_TIMESTAMP, "Icon.dds": EXPECTED_ZIP_TIMESTAMP},
+                )
                 diffuse = dds_info(zf.read("Diffuse.dds"))
                 icon = dds_info(zf.read("Icon.dds"))
 

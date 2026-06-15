@@ -30,7 +30,7 @@ python3 -m src.evidence.build_manifest
 
 ## Current Milestone
 
-The first artifact is the stock Diffuse calibration skin:
+The first proof artifact is the stock Diffuse calibration skin:
 
 ```text
 out/skins/calibration_stock_diffuse.zip
@@ -50,10 +50,26 @@ Its purpose is to prove whether the copied GBuffer and stock template align in
 TMUF. Until that smoke test is done, GBuffer-driven painting stays
 `experimental`.
 
+The first premium stock-safe batch is also generated:
+
+```text
+out/skins/black_magenta_cyan_blade.zip
+out/skins/black_cyan_spine.zip
+out/skins/violet_cyber_flow.zip
+out/skins/dark_neon_louver.zip
+out/skins/magenta_cyan_race_proto.zip
+```
+
+Those skins intentionally remain behind the same calibration proof gate.
+
 ## Run
 
 ```bash
 python3 recipes/stock_calibration.py
+python3 recipes/stock_premium_neon.py
+python3 recipes/tmuf_smoke_gate.py --write-template
 python3 -m unittest discover -s tests
 ```
 
+See `docs/tmuf_smoke_test.md` before promoting any report from
+`experimental_until_tmuf_smoke` to `proven_by_tmuf_smoke`.

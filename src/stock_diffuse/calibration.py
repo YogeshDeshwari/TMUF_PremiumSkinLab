@@ -14,6 +14,7 @@ from scipy.ndimage import binary_dilation, distance_transform_edt
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src" / "dds"))
 from tmnf_dds import build_dds_dxt5_bytes  # noqa: E402
+from src.stock_diffuse.package import write_stable_zip_entry  # noqa: E402
 
 
 SIZE = 2048
@@ -143,8 +144,8 @@ def save_outputs() -> Path:
     icon = image.convert("RGB").resize((64, 64), Image.Resampling.LANCZOS).convert("RGBA")
 
     with zipfile.ZipFile(out_skin, "w", zipfile.ZIP_DEFLATED) as zf:
-        zf.writestr("Diffuse.dds", build_dds_dxt5_bytes(image, mipmaps=True))
-        zf.writestr("Icon.dds", build_dds_dxt5_bytes(icon, mipmaps=True))
+        write_stable_zip_entry(zf, "Diffuse.dds", build_dds_dxt5_bytes(image, mipmaps=True))
+        write_stable_zip_entry(zf, "Icon.dds", build_dds_dxt5_bytes(icon, mipmaps=True))
 
     image.save(out_atlas)
     fields = load_fields()

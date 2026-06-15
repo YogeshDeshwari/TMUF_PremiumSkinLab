@@ -1,0 +1,28 @@
+{
+  "artifact": "out/skins/calibration_stock_diffuse.zip",
+  "notes": "",
+  "observations": {
+    "centerline_is_cyan": false,
+    "left_side_is_green": false,
+    "lower_floor_surfaces_are_dark": false,
+    "mudguards_are_magenta": false,
+    "nose_is_red": false,
+    "package_loads_without_custom_gbx": false,
+    "right_side_is_yellow": false,
+    "roof_high_surfaces_are_white": false,
+    "tail_is_blue": false
+  },
+  "pass_requires": [
+    "Set status to passed only after loading the calibration zip in TMUF/TMNF.",
+    "Every required observation must be true.",
+    "At least one referenced screenshot file must exist.",
+    "This gate proves GBuffer mapping for this stock Diffuse route only."
+  ],
+  "route": "stock_diffuse_only",
+  "schema_version": 1,
+  "screenshots": [],
+  "status": "not_run",
+  "test_date_local": "",
+  "tester": "",
+  "tmuf_build": ""
+}

@@ -12,6 +12,7 @@ from scipy.ndimage import binary_dilation, gaussian_filter
 
 from src.dds.tmnf_dds import build_dds_dxt5_bytes
 from src.stock_diffuse.calibration import SIZE, hx, load_fields, mudguard_ids, project_view
+from src.stock_diffuse.package import write_stable_zip_entry
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -279,8 +280,8 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
     icon = image.convert("RGB").resize((64, 64), Image.Resampling.LANCZOS).convert("RGBA")
 
     with zipfile.ZipFile(out_skin, "w", zipfile.ZIP_DEFLATED) as zf:
-        zf.writestr("Diffuse.dds", build_dds_dxt5_bytes(image, mipmaps=True))
-        zf.writestr("Icon.dds", build_dds_dxt5_bytes(icon, mipmaps=True))
+        write_stable_zip_entry(zf, "Diffuse.dds", build_dds_dxt5_bytes(image, mipmaps=True))
+        write_stable_zip_entry(zf, "Icon.dds", build_dds_dxt5_bytes(icon, mipmaps=True))
 
     image.save(out_atlas)
     fields = load_fields()
