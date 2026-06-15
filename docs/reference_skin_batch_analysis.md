@@ -12,13 +12,14 @@ Evidence source:
 This is reference-only evidence. These packages do not prove TMUF smoke status,
 stock UV mapping, GBuffer accuracy, or generated-skin correctness.
 
-The package gallery is a visual scanning aid for package identity and can choose
-`Icon.dds`. The livery atlas gallery is the correct overview for paint analysis
-because it prefers actual livery slots: `Diffuse.dds`, `Details.dds`, and dirty
-map variants. Per-package contact sheets are still the safest review surface
-because they show all detected DDS slots. Alpha diagnostics are the safest
-surface for the "looks blank" case because they show raw RGB, alpha mask, and
-alpha-over-dark views side by side for every DDS slot.
+The package gallery is a livery-focused visual scanning aid. It now prefers
+actual paint texture slots first: `Diffuse.dds` and `Details.dds`, dirty maps
+only as fallback, and non-livery DDS files only when no livery texture exists.
+The livery atlas gallery follows the same texture-selection rule. Per-package
+contact sheets are still the safest review surface because they show all
+detected DDS slots. Alpha diagnostics are the safest surface for the "looks
+blank" case because they show raw RGB, alpha mask, and alpha-over-dark views
+side by side for every DDS slot.
 
 ## Batch Result
 

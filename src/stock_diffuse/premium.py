@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw
 from scipy.ndimage import binary_dilation, gaussian_filter
 
 from src.dds.tmnf_dds import build_dds_dxt5_bytes
-from src.evidence.artifact_trace import stock_output_artifacts
+from src.evidence.artifact_trace import artifact_entry, stock_output_artifacts
 from src.evidence.input_trace import PREMIUM_DIFFUSE_INPUTS, input_evidence
 from src.evidence.panel_visual_coverage import build_panel_visual_coverage
 from src.evidence.reference_style_guidance import (
@@ -29,6 +29,7 @@ from src.stock_diffuse.panel_masks import PremiumMaskParams, build_stock_panel_m
 ROOT = Path(__file__).resolve().parents[2]
 REF_DIR = ROOT / "resources" / "authoritative" / "reference"
 BATCH_INDEX = ROOT / "out" / "reports" / "premium_batch_index.json"
+REVIEW_BOARD = ROOT / "out" / "previews" / "premium_candidate_review_board.png"
 CANDIDATE_NAMES = [
     "black_magenta_cyan_blade",
     "black_cyan_spine",
@@ -653,8 +654,76 @@ def _batch_candidate_entry(report: dict[str, Any]) -> dict[str, Any]:
     return entry
 
 
+def write_visual_review_board(reports: list[dict[str, Any]], path: Path = REVIEW_BOARD) -> Path:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    row_h = 278
+    header_h = 70
+    width = 1260
+    height = header_h + row_h * max(len(reports), 1) + 24
+    canvas = Image.new("RGB", (width, height), (9, 10, 12))
+    draw = ImageDraw.Draw(canvas)
+    draw.text((24, 18), "Premium Stock Diffuse Candidate Review Board", fill=(238, 240, 245))
+    draw.text(
+        (24, 42),
+        "Local visual comparison only; does not prove TMUF smoke, GBuffer mapping, or in-game acceptance.",
+        fill=(170, 176, 186),
+    )
+
+    for row, report in enumerate(reports):
+        y = header_h + row * row_h
+        lane = report["design_lane"]
+        metrics = report["style_metrics"]
+        alpha = report["alpha_metrics"]
+        atlas_path = ROOT / report["output_artifacts"]["atlas_preview"]["path"]
+        projection_path = ROOT / report["output_artifacts"]["projected_preview"]["path"]
+
+        draw.rectangle((16, y + 8, width - 16, y + row_h - 10), outline=(58, 64, 76), width=1)
+        draw.text((32, y + 22), report["skin_name"], fill=(240, 242, 247))
+        draw.text((32, y + 46), lane["lane_id"], fill=(93, 210, 255))
+        draw.text((32, y + 70), _shorten(lane["composition_focus"], 58), fill=(188, 194, 204))
+        draw.text(
+            (32, y + 104),
+            (
+                f"dark={metrics['dark_pixel_ratio']:.3f}  "
+                f"magenta={metrics['magenta_accent_ratio']:.3f}  "
+                f"cyan={metrics['cyan_accent_ratio']:.3f}  "
+                f"alpha_mean={alpha['mean_alpha']:.1f}"
+            ),
+            fill=(214, 218, 225),
+        )
+        draw.text(
+            (32, y + 132),
+            _shorten("targets=" + ", ".join(lane["primary_catalog_targets"][:5]), 64),
+            fill=(150, 156, 168),
+        )
+        draw.text((32, y + 158), "proof: TMUF smoke pending", fill=(255, 190, 92))
+
+        projection = Image.open(projection_path).convert("RGB")
+        projection.thumbnail((520, 214), Image.Resampling.LANCZOS)
+        projection_frame = Image.new("RGB", (540, 224), (16, 17, 20))
+        projection_frame.paste(projection, ((540 - projection.width) // 2, (224 - projection.height) // 2))
+        canvas.paste(projection_frame, (440, y + 28))
+
+        atlas = Image.open(atlas_path).convert("RGB")
+        atlas.thumbnail((190, 190), Image.Resampling.LANCZOS)
+        atlas_frame = Image.new("RGB", (210, 210), (16, 17, 20))
+        atlas_frame.paste(atlas, ((210 - atlas.width) // 2, (210 - atlas.height) // 2))
+        canvas.paste(atlas_frame, (1014, y + 35))
+
+    canvas.save(path)
+    return path
+
+
+def _shorten(text: str, limit: int) -> str:
+    if len(text) <= limit:
+        return text
+    return text[: max(limit - 3, 1)] + "..."
+
+
 def write_batch_index(outputs: list[dict[str, str]], reference_guidance: dict[str, Any] | None = None) -> Path:
     reports = [json.loads(Path(item["report"]).read_text()) for item in outputs]
+    review_board = write_visual_review_board(reports)
     index = {
         "schema": "tmuf_premium_skin_lab.premium_batch_index.v1",
         "route": "stock_diffuse_only",
@@ -668,6 +737,12 @@ def write_batch_index(outputs: list[dict[str, str]], reference_guidance: dict[st
             "record_tmuf_smoke_evidence",
             "evaluate_then_apply_tmuf_smoke_gate",
         ],
+        "visual_review_board": artifact_entry(review_board),
+        "visual_review_board_policy": {
+            "does_not_prove_tmuf_smoke": True,
+            "review_scope": "local_candidate_comparison_only",
+            "requires_manual_visual_acceptance": True,
+        },
         "candidates": [_batch_candidate_entry(report) for report in reports],
     }
     if reference_guidance is not None:

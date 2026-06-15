@@ -6,6 +6,8 @@ import zipfile
 from pathlib import Path
 from typing import Any
 
+from PIL import Image, UnidentifiedImageError
+
 from src.evidence.artifact_trace import sha256
 from src.evidence.input_trace import MANIFEST, STOCK_DIFFUSE_INPUTS
 from src.evidence.panel_visual_coverage import (
@@ -421,7 +423,11 @@ def validate_render_profile(report: dict[str, Any], premium: bool) -> list[str]:
     return errors
 
 
-def validate_premium_batch_index(index: dict[str, Any], premium_reports: list[dict[str, Any]]) -> list[str]:
+def validate_premium_batch_index(
+    index: dict[str, Any],
+    premium_reports: list[dict[str, Any]],
+    root: Path = ROOT,
+) -> list[str]:
     errors: list[str] = []
     if index.get("schema") != "tmuf_premium_skin_lab.premium_batch_index.v1":
         errors.append("premium batch index schema mismatch")
@@ -446,6 +452,39 @@ def validate_premium_batch_index(index: dict[str, Any], premium_reports: list[di
         errors.append("premium batch index candidate_count mismatch")
     if len(candidates) != len(premium_reports):
         errors.append("premium batch index report count mismatch")
+
+    review_board = index.get("visual_review_board")
+    review_policy = index.get("visual_review_board_policy")
+    if not isinstance(review_board, dict):
+        errors.append("premium batch index missing visual review board")
+    else:
+        expected_path = "out/previews/premium_candidate_review_board.png"
+        if review_board.get("path") != expected_path:
+            errors.append("premium batch index visual review board path mismatch")
+        board_path = root / expected_path
+        if not board_path.exists():
+            errors.append("premium visual review board file missing")
+        else:
+            if review_board.get("sha256") != sha256(board_path):
+                errors.append("premium visual review board sha256 mismatch")
+            if review_board.get("size_bytes") != board_path.stat().st_size:
+                errors.append("premium visual review board size mismatch")
+            try:
+                with Image.open(board_path) as image:
+                    rgb = image.convert("RGB")
+                    if not any(channel_min != channel_max for channel_min, channel_max in rgb.getextrema()):
+                        errors.append("premium visual review board appears blank")
+            except (OSError, UnidentifiedImageError):
+                errors.append("premium visual review board is not a readable image")
+    if not isinstance(review_policy, dict):
+        errors.append("premium batch index missing visual review board policy")
+    else:
+        if review_policy.get("does_not_prove_tmuf_smoke") is not True:
+            errors.append("premium visual review board must not claim TMUF proof")
+        if review_policy.get("review_scope") != "local_candidate_comparison_only":
+            errors.append("premium visual review board review scope mismatch")
+        if review_policy.get("requires_manual_visual_acceptance") is not True:
+            errors.append("premium visual review board must require manual visual acceptance")
 
     report_by_name = {report.get("skin_name"): report for report in premium_reports}
     lane_ids: list[str] = []
@@ -661,7 +700,7 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
         batch_index_errors.append("missing premium batch index")
     else:
         batch_index = _load_json(batch_index_path)
-        batch_index_errors.extend(validate_premium_batch_index(batch_index, premium_reports))
+        batch_index_errors.extend(validate_premium_batch_index(batch_index, premium_reports, root=root))
     errors.extend(batch_index_errors)
     all_smoke_passed = all(skin["checks"]["tmuf_smoke_passed"] for skin in skins)
     warnings = [] if all_smoke_passed else ["tmuf_smoke_pending"]

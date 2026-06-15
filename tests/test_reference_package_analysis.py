@@ -216,6 +216,31 @@ class ReferencePackageAnalysisTests(unittest.TestCase):
             self.assertTrue((output_dir / "reference_livery_atlas_gallery.png").exists())
             self.assertTrue((output_dir / "sample_alpha_diagnostic.png").exists())
 
+    def test_reference_gallery_prefers_livery_texture_over_icon_or_shadow(self):
+        from src.dds.tmnf_dds import build_dds_dxt1_bytes, build_dds_dxt5_bytes
+        from src.evidence.reference_package_analysis import _representative_preview
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            package_zip = root / "icon_heavy.zip"
+            icon = Image.new("RGBA", (64, 64), (0, 0, 0, 255))
+            icon_pixels = icon.load()
+            for y in range(icon.height):
+                for x in range(icon.width):
+                    if (x // 4 + y // 4) % 2:
+                        icon_pixels[x, y] = (255, 255, 255, 255)
+            with zipfile.ZipFile(package_zip, "w", zipfile.ZIP_DEFLATED) as zf:
+                zf.writestr(
+                    "Diffuse.dds",
+                    build_dds_dxt5_bytes(Image.new("RGBA", (64, 64), (30, 90, 220, 255))),
+                )
+                zf.writestr("Icon.dds", build_dds_dxt5_bytes(icon))
+                zf.writestr("ProjShad.dds", build_dds_dxt1_bytes(icon))
+
+            preview = _representative_preview(package_zip)
+
+            self.assertEqual(preview._tmuf_source_name, "Diffuse.dds")
+
 
 if __name__ == "__main__":
     unittest.main()

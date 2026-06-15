@@ -460,7 +460,8 @@ def _representative_preview(package_zip: Path) -> Image.Image:
         dds_names = [name for name in names if name.lower().endswith(".dds")]
         if not dds_names:
             return Image.new("RGB", (180, 180), (42, 18, 18))
-        preferred = max(dds_names, key=lambda name: _visual_score(name, zf.read(name)))
+        candidates = _livery_texture_candidates(dds_names)
+        preferred = max(candidates, key=lambda name: _livery_visual_score(name, zf.read(name)))
         try:
             image = Image.open(BytesIO(zf.read(preferred))).convert("RGBA")
             rgb = _enhanced_scan_preview(image)
@@ -478,12 +479,7 @@ def _livery_atlas_preview(package_zip: Path) -> Image.Image:
     with ZipFile(package_zip) as zf:
         names = zf.namelist()
         dds_names = [name for name in names if name.lower().endswith(".dds")]
-        livery_names = [
-            name
-            for name in dds_names
-            if Path(name).name.lower() in {"diffuse.dds", "details.dds", "diffusedirty.dds", "detailsdirty.dds"}
-        ]
-        candidates = livery_names or dds_names
+        candidates = _livery_texture_candidates(dds_names)
         if not candidates:
             return Image.new("RGB", (180, 180), (42, 18, 18))
         preferred = max(candidates, key=lambda name: _livery_visual_score(name, zf.read(name)))
@@ -497,6 +493,18 @@ def _livery_atlas_preview(package_zip: Path) -> Image.Image:
             return preview
         except Exception:
             return Image.new("RGB", (180, 180), (42, 18, 18))
+
+
+def _livery_texture_candidates(dds_names: list[str]) -> list[str]:
+    body_or_detail = [
+        name for name in dds_names if Path(name).name.lower() in {"diffuse.dds", "details.dds"}
+    ]
+    dirty_maps = [
+        name
+        for name in dds_names
+        if Path(name).name.lower() in {"diffusedirty.dds", "detailsdirty.dds"}
+    ]
+    return body_or_detail or dirty_maps or dds_names
 
 
 def _visual_score(name: str, data: bytes) -> float:

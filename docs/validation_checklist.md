@@ -49,6 +49,9 @@ Use this before calling any skin complete.
       explicit, and the block keeps `does_not_prove_tmuf_smoke=true`.
 - [ ] `out/reports/premium_batch_index.json` matches the individual premium
       reports and keeps `does_not_prove_tmuf_smoke=true`.
+- [ ] `out/previews/premium_candidate_review_board.png` exists, is cited by
+      `premium_batch_index.json`, and keeps
+      `visual_review_board_policy.does_not_prove_tmuf_smoke=true`.
 - [ ] Run `python3 recipes/validate_profile_gates.py` before touching CH_2026
       full-car or no-mudguard lanes.
 
@@ -58,6 +61,7 @@ Use this before calling any skin complete.
 - [ ] Premium candidates report `premium_style_quality_passed=True`.
 - [ ] Atlas preview exists.
 - [ ] Projected side/top/rear preview exists.
+- [ ] Premium candidate review board exists for side-by-side local comparison.
 - [ ] Broad graphics are readable.
 - [ ] Accent colors are not random scatter.
 - [ ] Mudguard and wheel treatment matches the route being tested.

@@ -596,133 +596,160 @@ class StockValidatorTests(unittest.TestCase):
         )
 
     def test_premium_batch_index_is_validated_against_reports(self):
+        from src.evidence.artifact_trace import sha256
         from src.evidence.stock_validator import validate_premium_batch_index
 
-        reports = [
-            {
-                "skin_name": "a",
-                "route": "stock_diffuse_only",
-                "package_files": ["Diffuse.dds", "Icon.dds"],
-                "tmuf_smoke_test": "not_run",
-                "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
-                "design_lane": {"lane_id": "lane_a"},
-                "render_profile": {"lane_specific_strengths": True},
-                "panel_catalog_targets": ["center_spine"],
-                "output_artifacts": {"skin_zip": {"path": "out/skins/a.zip"}},
-            },
-            {
-                "skin_name": "b",
-                "route": "stock_diffuse_only",
-                "package_files": ["Diffuse.dds", "Icon.dds"],
-                "tmuf_smoke_test": "not_run",
-                "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
-                "design_lane": {"lane_id": "lane_b"},
-                "render_profile": {"lane_specific_strengths": True},
-                "panel_catalog_targets": ["tailwing_bands"],
-                "output_artifacts": {"skin_zip": {"path": "out/skins/b.zip"}},
-            },
-        ]
-        valid_index = {
-            "schema": "tmuf_premium_skin_lab.premium_batch_index.v1",
-            "route": "stock_diffuse_only",
-            "does_not_prove_tmuf_smoke": True,
-            "candidate_count": 2,
-            "candidates": [
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            board = root / "out" / "previews" / "premium_candidate_review_board.png"
+            board.parent.mkdir(parents=True)
+            board_image = Image.new("RGB", (128, 96), (20, 30, 40))
+            ImageDraw.Draw(board_image).rectangle((16, 16, 112, 80), fill=(220, 20, 180))
+            board_image.save(board)
+            board_entry = {
+                "path": "out/previews/premium_candidate_review_board.png",
+                "sha256": sha256(board),
+                "size_bytes": board.stat().st_size,
+            }
+            board_policy = {
+                "does_not_prove_tmuf_smoke": True,
+                "review_scope": "local_candidate_comparison_only",
+                "requires_manual_visual_acceptance": True,
+            }
+            reports = [
                 {
                     "skin_name": "a",
+                    "route": "stock_diffuse_only",
+                    "package_files": ["Diffuse.dds", "Icon.dds"],
                     "tmuf_smoke_test": "not_run",
-                    "gbuffer_mapping": "experimental_until_tmuf_smoke",
+                    "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
                     "design_lane": {"lane_id": "lane_a"},
                     "render_profile": {"lane_specific_strengths": True},
                     "panel_catalog_targets": ["center_spine"],
-                    "package_files": ["Diffuse.dds", "Icon.dds"],
                     "output_artifacts": {"skin_zip": {"path": "out/skins/a.zip"}},
                 },
                 {
                     "skin_name": "b",
+                    "route": "stock_diffuse_only",
+                    "package_files": ["Diffuse.dds", "Icon.dds"],
                     "tmuf_smoke_test": "not_run",
-                    "gbuffer_mapping": "experimental_until_tmuf_smoke",
+                    "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
                     "design_lane": {"lane_id": "lane_b"},
                     "render_profile": {"lane_specific_strengths": True},
                     "panel_catalog_targets": ["tailwing_bands"],
-                    "package_files": ["Diffuse.dds", "Icon.dds"],
                     "output_artifacts": {"skin_zip": {"path": "out/skins/b.zip"}},
                 },
-            ],
-        }
-
-        self.assertEqual(validate_premium_batch_index(valid_index, reports), [])
-
-        passed_reports = [
-            {
-                **report,
-                "tmuf_smoke_test": "passed",
-                "evidence_status": {"gbuffer_mapping": "proven_by_tmuf_smoke"},
+            ]
+            valid_index = {
+                "schema": "tmuf_premium_skin_lab.premium_batch_index.v1",
+                "route": "stock_diffuse_only",
+                "does_not_prove_tmuf_smoke": True,
+                "visual_review_board": board_entry,
+                "visual_review_board_policy": board_policy,
+                "candidate_count": 2,
+                "candidates": [
+                    {
+                        "skin_name": "a",
+                        "tmuf_smoke_test": "not_run",
+                        "gbuffer_mapping": "experimental_until_tmuf_smoke",
+                        "design_lane": {"lane_id": "lane_a"},
+                        "render_profile": {"lane_specific_strengths": True},
+                        "panel_catalog_targets": ["center_spine"],
+                        "package_files": ["Diffuse.dds", "Icon.dds"],
+                        "output_artifacts": {"skin_zip": {"path": "out/skins/a.zip"}},
+                    },
+                    {
+                        "skin_name": "b",
+                        "tmuf_smoke_test": "not_run",
+                        "gbuffer_mapping": "experimental_until_tmuf_smoke",
+                        "design_lane": {"lane_id": "lane_b"},
+                        "render_profile": {"lane_specific_strengths": True},
+                        "panel_catalog_targets": ["tailwing_bands"],
+                        "package_files": ["Diffuse.dds", "Icon.dds"],
+                        "output_artifacts": {"skin_zip": {"path": "out/skins/b.zip"}},
+                    },
+                ],
             }
-            for report in reports
-        ]
-        passed_index = {
-            **valid_index,
-            "does_not_prove_tmuf_smoke": False,
-            "tmuf_smoke_status": "passed",
-            "gbuffer_mapping": "proven_by_tmuf_smoke",
-            "completion_status": "stock_calibration_smoke_passed",
-            "tmuf_smoke_evidence": {"report": "out/proof/calibration_tmuf_smoke.json"},
-            "candidates": [
+
+            self.assertEqual(validate_premium_batch_index(valid_index, reports, root=root), [])
+
+            missing_board = dict(valid_index)
+            missing_board.pop("visual_review_board")
+            self.assertIn(
+                "premium batch index missing visual review board",
+                validate_premium_batch_index(missing_board, reports, root=root),
+            )
+
+            passed_reports = [
                 {
-                    **candidate,
+                    **report,
                     "tmuf_smoke_test": "passed",
-                    "gbuffer_mapping": "proven_by_tmuf_smoke",
+                    "evidence_status": {"gbuffer_mapping": "proven_by_tmuf_smoke"},
                 }
-                for candidate in valid_index["candidates"]
-            ],
-        }
-        self.assertEqual(validate_premium_batch_index(passed_index, passed_reports), [])
+                for report in reports
+            ]
+            passed_index = {
+                **valid_index,
+                "does_not_prove_tmuf_smoke": False,
+                "tmuf_smoke_status": "passed",
+                "gbuffer_mapping": "proven_by_tmuf_smoke",
+                "completion_status": "stock_calibration_smoke_passed",
+                "tmuf_smoke_evidence": {"report": "out/proof/calibration_tmuf_smoke.json"},
+                "candidates": [
+                    {
+                        **candidate,
+                        "tmuf_smoke_test": "passed",
+                        "gbuffer_mapping": "proven_by_tmuf_smoke",
+                    }
+                    for candidate in valid_index["candidates"]
+                ],
+            }
+            self.assertEqual(validate_premium_batch_index(passed_index, passed_reports, root=root), [])
 
-        duplicate = {
-            **valid_index,
-            "candidates": [
-                valid_index["candidates"][0],
-                {**valid_index["candidates"][1], "design_lane": {"lane_id": "lane_a"}},
-            ],
-        }
-        self.assertIn(
-            "premium batch index lane IDs must be distinct",
-            validate_premium_batch_index(duplicate, reports),
-        )
+            duplicate = {
+                **valid_index,
+                "candidates": [
+                    valid_index["candidates"][0],
+                    {**valid_index["candidates"][1], "design_lane": {"lane_id": "lane_a"}},
+                ],
+            }
+            self.assertIn(
+                "premium batch index lane IDs must be distinct",
+                validate_premium_batch_index(duplicate, reports, root=root),
+            )
 
-        wrong_count = {**valid_index, "candidate_count": 3}
-        self.assertEqual(
-            validate_premium_batch_index(wrong_count, reports),
-            ["premium batch index candidate_count mismatch"],
-        )
+            wrong_count = {**valid_index, "candidate_count": 3}
+            self.assertEqual(
+                validate_premium_batch_index(wrong_count, reports, root=root),
+                ["premium batch index candidate_count mismatch"],
+            )
 
-        wrong_targets = {
-            **valid_index,
-            "candidates": [
-                {**valid_index["candidates"][0], "panel_catalog_targets": ["tailwing_bands"]},
-                valid_index["candidates"][1],
-            ],
-        }
-        self.assertIn(
-            "premium batch index panel catalog targets mismatch: a",
-            validate_premium_batch_index(wrong_targets, reports),
-        )
+            wrong_targets = {
+                **valid_index,
+                "candidates": [
+                    {**valid_index["candidates"][0], "panel_catalog_targets": ["tailwing_bands"]},
+                    valid_index["candidates"][1],
+                ],
+            }
+            self.assertIn(
+                "premium batch index panel catalog targets mismatch: a",
+                validate_premium_batch_index(wrong_targets, reports, root=root),
+            )
 
-        wrong_render_profile = {
-            **valid_index,
-            "candidates": [
-                {
-                    **valid_index["candidates"][0],
-                    "render_profile": {"lane_specific_strengths": False},
-                },
-                valid_index["candidates"][1],
-            ],
-        }
-        self.assertIn(
-            "premium batch index render profile mismatch: a",
-            validate_premium_batch_index(wrong_render_profile, reports),
-        )
+            wrong_render_profile = {
+                **valid_index,
+                "candidates": [
+                    {
+                        **valid_index["candidates"][0],
+                        "render_profile": {"lane_specific_strengths": False},
+                    },
+                    valid_index["candidates"][1],
+                ],
+            }
+            self.assertIn(
+                "premium batch index render profile mismatch: a",
+                validate_premium_batch_index(wrong_render_profile, reports, root=root),
+            )
 
     def test_cli_outputs_json_summary(self):
         from recipes.validate_stock_outputs import main

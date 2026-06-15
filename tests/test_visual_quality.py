@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 import tempfile
 import unittest
 
@@ -45,6 +46,24 @@ class VisualQualityTests(unittest.TestCase):
             self.assertIn("projection preview appears blank/too sparse: bad", errors)
             self.assertEqual(metrics["atlas_nonblank_ratio"], 0.0)
             self.assertEqual(metrics["projection_nonblank_ratio"], 0.0)
+
+    def test_premium_batch_index_carries_review_board_artifact(self):
+        root = Path(__file__).resolve().parents[1]
+        index = json.loads((root / "out" / "reports" / "premium_batch_index.json").read_text())
+
+        review_board = index["visual_review_board"]
+        self.assertEqual(review_board["path"], "out/previews/premium_candidate_review_board.png")
+        board_path = root / review_board["path"]
+        self.assertTrue(board_path.exists())
+        self.assertRegex(review_board["sha256"], r"^[0-9a-f]{64}$")
+        self.assertEqual(review_board["size_bytes"], board_path.stat().st_size)
+        with Image.open(board_path) as image:
+            rgb = image.convert("RGB")
+            self.assertGreaterEqual(rgb.width, 900)
+            self.assertGreaterEqual(rgb.height, 900)
+            self.assertTrue(any(channel_min != channel_max for channel_min, channel_max in rgb.getextrema()))
+        self.assertTrue(index["visual_review_board_policy"]["does_not_prove_tmuf_smoke"])
+        self.assertEqual(index["visual_review_board_policy"]["review_scope"], "local_candidate_comparison_only")
 
 
 if __name__ == "__main__":
