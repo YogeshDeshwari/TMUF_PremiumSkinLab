@@ -1,5 +1,7 @@
 import json
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -246,6 +248,149 @@ class TmufSmokeGateTests(unittest.TestCase):
             self.assertEqual(promoted_index["candidates"][0]["tmuf_smoke_test"], "passed")
             self.assertEqual(promoted_index["candidates"][0]["gbuffer_mapping"], "proven_by_tmuf_smoke")
             self.assertIn("tmuf_smoke_evidence", promoted_index)
+
+    def test_dry_run_plan_lists_updates_and_skips_without_writing(self):
+        from src.evidence.smoke_gate import (
+            REQUIRED_OBSERVATIONS,
+            fingerprint_screenshot_file,
+            plan_smoke_result,
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            role_paths = _write_role_screenshots(base)
+            screenshot_roles = {role: path.name for role, path in role_paths.items()}
+            smoke_report = base / "calibration_tmuf_smoke.json"
+            smoke_report.write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "artifact": "out/skins/calibration_stock_diffuse.zip",
+                        "status": "passed",
+                        "tester": "manual tester",
+                        "tmuf_build": "TMUF local install",
+                        "test_date_local": "2026-06-15",
+                        "screenshots": [screenshot_roles[role] for role in REQUIRED_SCREENSHOT_ROLES],
+                        "screenshot_roles": screenshot_roles,
+                        "screenshot_evidence": {
+                            path.name: fingerprint_screenshot_file(path) for path in role_paths.values()
+                        },
+                        "observations": {name: True for name in REQUIRED_OBSERVATIONS},
+                    }
+                )
+            )
+            skin_report = base / "black_cyan_spine.json"
+            skin_data = {
+                "skin_name": "black_cyan_spine",
+                "route": "stock_diffuse_only",
+                "package_files": ["Diffuse.dds", "Icon.dds"],
+                "tmuf_smoke_test": "not_run",
+                "proof_gate": {"calibration_stock_diffuse": "required_before_proven_use"},
+                "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
+            }
+            skin_report.write_text(json.dumps(skin_data))
+            batch_index = base / "premium_batch_index.json"
+            batch_data = {
+                "schema": "tmuf_premium_skin_lab.premium_batch_index.v1",
+                "route": "stock_diffuse_only",
+                "does_not_prove_tmuf_smoke": True,
+                "tmuf_smoke_status": "pending",
+                "gbuffer_mapping": "experimental_until_tmuf_smoke",
+                "candidates": [],
+            }
+            batch_index.write_text(json.dumps(batch_data))
+            inventory = base / "stock_part_inventory.json"
+            inventory_data = {"schema": "tmuf_premium_skin_lab.stock_part_inventory.v1"}
+            inventory.write_text(json.dumps(inventory_data))
+
+            plan = plan_smoke_result(
+                smoke_report,
+                report_paths=[skin_report, batch_index, inventory],
+                base_dir=base,
+            )
+
+            self.assertTrue(plan["passed"])
+            self.assertTrue(plan["dry_run"])
+            self.assertEqual(
+                [entry["path"] for entry in plan["would_update"]],
+                [str(skin_report), str(batch_index)],
+            )
+            self.assertEqual(plan["would_update"][0]["kind"], "stock_skin_report")
+            self.assertEqual(plan["would_update"][1]["kind"], "premium_batch_index")
+            self.assertEqual(
+                plan["would_skip"],
+                [{"path": str(inventory), "reason": "not_promotable_report"}],
+            )
+            self.assertEqual(json.loads(skin_report.read_text()), skin_data)
+            self.assertEqual(json.loads(batch_index.read_text()), batch_data)
+            self.assertEqual(json.loads(inventory.read_text()), inventory_data)
+
+    def test_apply_dry_run_cli_prints_plan_without_writing(self):
+        from src.evidence.smoke_gate import REQUIRED_OBSERVATIONS, fingerprint_screenshot_file
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            role_paths = _write_role_screenshots(base)
+            screenshot_roles = {role: path.name for role, path in role_paths.items()}
+            smoke_report = base / "calibration_tmuf_smoke.json"
+            smoke_report.write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "artifact": "out/skins/calibration_stock_diffuse.zip",
+                        "status": "passed",
+                        "tester": "manual tester",
+                        "tmuf_build": "TMUF local install",
+                        "test_date_local": "2026-06-15",
+                        "screenshots": [screenshot_roles[role] for role in REQUIRED_SCREENSHOT_ROLES],
+                        "screenshot_roles": screenshot_roles,
+                        "screenshot_evidence": {
+                            path.name: fingerprint_screenshot_file(path) for path in role_paths.values()
+                        },
+                        "observations": {name: True for name in REQUIRED_OBSERVATIONS},
+                    }
+                )
+            )
+            skin_report = base / "black_cyan_spine.json"
+            skin_report.write_text(
+                json.dumps(
+                    {
+                        "skin_name": "black_cyan_spine",
+                        "route": "stock_diffuse_only",
+                        "package_files": ["Diffuse.dds", "Icon.dds"],
+                        "tmuf_smoke_test": "not_run",
+                        "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
+                    }
+                )
+            )
+            inventory = base / "stock_part_inventory.json"
+            inventory.write_text(json.dumps({"schema": "tmuf_premium_skin_lab.stock_part_inventory.v1"}))
+            recipe = Path(__file__).resolve().parents[1] / "recipes" / "tmuf_smoke_gate.py"
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(recipe),
+                    "--apply",
+                    str(smoke_report),
+                    "--dry-run",
+                    "--base-dir",
+                    str(base),
+                    "--report",
+                    str(skin_report),
+                    "--report",
+                    str(inventory),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+
+            plan = json.loads(result.stdout)
+            self.assertTrue(plan["dry_run"])
+            self.assertEqual(plan["would_update"][0]["path"], str(skin_report))
+            self.assertEqual(plan["would_skip"][0]["path"], str(inventory))
+            self.assertEqual(json.loads(skin_report.read_text())["tmuf_smoke_test"], "not_run")
 
     def test_missing_or_changed_screenshot_fingerprint_prevents_promotion(self):
         from src.evidence.smoke_gate import (

@@ -197,24 +197,9 @@ def apply_smoke_result(
 ) -> list[Path]:
     smoke_report_path = Path(smoke_report_path)
     result = evaluate_smoke_report(smoke_report_path, base_dir=base_dir)
-    if not result["passed"]:
-        raise ValueError(
-            "TMUF smoke evidence did not pass; reports remain experimental. "
-            f"Missing observations: {result['missing_observations']}; "
-            f"missing metadata: {result['missing_metadata']}; "
-            f"missing screenshot roles: {result['missing_screenshot_roles']}; "
-            f"missing screenshots: {result['missing_screenshots']}; "
-            f"invalid screenshots: {result['invalid_screenshots']}; "
-            f"blank screenshots: {result['blank_screenshots']}; "
-            f"missing screenshot fingerprints: {result['missing_screenshot_fingerprints']}; "
-            f"mismatched screenshot fingerprints: {result['mismatched_screenshot_fingerprints']}"
-        )
+    _raise_if_smoke_failed(result)
 
-    paths = (
-        [Path(path) for path in report_paths]
-        if report_paths is not None
-        else sorted(DEFAULT_REPORTS_DIR.glob("*.json"))
-    )
+    paths = _apply_report_paths(report_paths)
     updated: list[Path] = []
     for path in paths:
         data = json.loads(path.read_text())
@@ -227,6 +212,60 @@ def apply_smoke_result(
         path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
         updated.append(path)
     return updated
+
+
+def plan_smoke_result(
+    smoke_report_path: Path,
+    report_paths: list[Path] | None = None,
+    base_dir: Path | None = None,
+) -> dict[str, Any]:
+    smoke_report_path = Path(smoke_report_path)
+    result = evaluate_smoke_report(smoke_report_path, base_dir=base_dir)
+    _raise_if_smoke_failed(result)
+
+    would_update: list[dict[str, str]] = []
+    would_skip: list[dict[str, str]] = []
+    for path in _apply_report_paths(report_paths):
+        data = json.loads(path.read_text())
+        if _is_stock_skin_report(data):
+            would_update.append({"path": str(path), "kind": "stock_skin_report"})
+        elif _is_premium_batch_index(data):
+            would_update.append({"path": str(path), "kind": "premium_batch_index"})
+        else:
+            would_skip.append({"path": str(path), "reason": "not_promotable_report"})
+
+    return {
+        "passed": True,
+        "dry_run": True,
+        "gbuffer_mapping_status": result["gbuffer_mapping_status"],
+        "smoke_report": smoke_report_path.as_posix(),
+        "would_update": would_update,
+        "would_skip": would_skip,
+    }
+
+
+def _raise_if_smoke_failed(result: dict[str, Any]) -> None:
+    if result["passed"]:
+        return
+    raise ValueError(
+        "TMUF smoke evidence did not pass; reports remain experimental. "
+        f"Missing observations: {result['missing_observations']}; "
+        f"missing metadata: {result['missing_metadata']}; "
+        f"missing screenshot roles: {result['missing_screenshot_roles']}; "
+        f"missing screenshots: {result['missing_screenshots']}; "
+        f"invalid screenshots: {result['invalid_screenshots']}; "
+        f"blank screenshots: {result['blank_screenshots']}; "
+        f"missing screenshot fingerprints: {result['missing_screenshot_fingerprints']}; "
+        f"mismatched screenshot fingerprints: {result['mismatched_screenshot_fingerprints']}"
+    )
+
+
+def _apply_report_paths(report_paths: list[Path] | None = None) -> list[Path]:
+    return (
+        [Path(path) for path in report_paths]
+        if report_paths is not None
+        else sorted(DEFAULT_REPORTS_DIR.glob("*.json"))
+    )
 
 
 def _is_stock_skin_report(data: dict[str, Any]) -> bool:

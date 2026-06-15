@@ -146,6 +146,15 @@ Evaluate it without changing generated reports:
 python3 recipes/tmuf_smoke_gate.py --evaluate out/proof/calibration_tmuf_smoke.json
 ```
 
+Preview exactly which reports would be promoted:
+
+```bash
+python3 recipes/tmuf_smoke_gate.py --apply out/proof/calibration_tmuf_smoke.json --dry-run
+```
+
+The dry run prints JSON with `would_update` and `would_skip` lists. It does
+not write any report files.
+
 Only after it evaluates as passed, promote generated reports:
 
 ```bash
