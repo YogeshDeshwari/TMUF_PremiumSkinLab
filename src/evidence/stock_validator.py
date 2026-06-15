@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[2]
 REQUIRED_STOCK_SKINS = ["calibration_stock_diffuse", *CANDIDATE_NAMES]
 STOCK_PACKAGE_FILES = {"Diffuse.dds", "Icon.dds"}
 FORBIDDEN_STOCK_FILES = {"Details.dds", "ProjShad.dds"}
+LOCAL_PSD_MASK_STATUS = "proven_local_psd_parts_label_map"
+GBUFFER_PENDING_STATUS = "experimental_until_tmuf_smoke"
+GBUFFER_PROVEN_STATUS = "proven_by_tmuf_smoke"
 
 
 def dds_info(data: bytes) -> dict[str, Any]:
@@ -109,7 +112,7 @@ def validate_mask_evidence(report: dict[str, Any], premium: bool) -> list[str]:
         report.get("tmuf_smoke_test") == "passed"
         and report.get("evidence_status", {}).get("gbuffer_mapping") == "proven_by_tmuf_smoke"
     )
-    expected_gbuffer_status = "proven_by_tmuf_smoke" if gbuffer_proven else "experimental_until_tmuf_smoke"
+    expected_gbuffer_status = GBUFFER_PROVEN_STATUS if gbuffer_proven else GBUFFER_PENDING_STATUS
 
     for name in masks_used:
         entry = mask_evidence.get(name)
@@ -122,7 +125,7 @@ def validate_mask_evidence(report: dict[str, Any], premium: bool) -> list[str]:
             errors.append(f"mask evidence source files missing: {name}")
 
     mudguards = mask_evidence.get("mudguards", {})
-    if mudguards.get("evidence_status") != "proven_local_psd_parts_label_map":
+    if mudguards.get("evidence_status") != LOCAL_PSD_MASK_STATUS:
         errors.append("mudguards must use proven local PSD label evidence")
     elif "resources/authoritative/parts/psd_parts_labels.npy" not in mudguards.get("source_files", []):
         errors.append("mudguards must cite psd_parts_labels.npy")
@@ -131,6 +134,10 @@ def validate_mask_evidence(report: dict[str, Any], premium: bool) -> list[str]:
         if name == "mudguards":
             continue
         entry = mask_evidence.get(name, {})
+        if entry.get("evidence_status") == LOCAL_PSD_MASK_STATUS:
+            if "resources/authoritative/parts/psd_parts_labels.npy" not in entry.get("source_files", []):
+                errors.append(f"{name} local PSD mask must cite psd_parts_labels.npy")
+            continue
         if entry.get("evidence_status") != expected_gbuffer_status:
             if gbuffer_proven:
                 errors.append(f"{name} must be proven by TMUF smoke after promotion")

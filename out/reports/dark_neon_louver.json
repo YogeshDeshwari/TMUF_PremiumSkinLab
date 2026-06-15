@@ -4,6 +4,7 @@
     "magenta_cyan_accents",
     "broad_gbuffer_aligned_shapes",
     "symmetric_rear_engine_panels",
+    "proven_local_panel_accents",
     "no_vignette",
     "no_random_scatter",
     "no_stadiumcar_v2_uvs",
@@ -69,6 +70,36 @@
         "resources/authoritative/gbuffer/extents_2048.json"
       ],
       "source_zones": []
+    },
+    "main_body_under": {
+      "design_use": "Named underside body surfaces for dark material continuation.",
+      "evidence_status": "proven_local_psd_parts_label_map",
+      "pixel_count": 353313,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy"
+      ],
+      "source_zones": [
+        "MainBodyUNDER_TL",
+        "MainBodyUNDER_TR",
+        "MainBodyUNDER_BL",
+        "MainBodyUNDER_BR"
+      ]
+    },
+    "mirrors": {
+      "design_use": "Named mirror surfaces for small color verification marks.",
+      "evidence_status": "proven_local_psd_parts_label_map",
+      "pixel_count": 47755,
+      "risk_class": "medium_accent_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy"
+      ],
+      "source_zones": [
+        "SideMirrors",
+        "MirrorHolders"
+      ]
     },
     "mudguard_edge": {
       "design_use": "Mudguard edge accent combining PSD mudguards and GBuffer position.",
@@ -199,6 +230,20 @@
       ],
       "source_zones": []
     },
+    "side_wings": {
+      "design_use": "Named side wing surfaces for small aero accents.",
+      "evidence_status": "proven_local_psd_parts_label_map",
+      "pixel_count": 125401,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy"
+      ],
+      "source_zones": [
+        "SIdeWings",
+        "SideWingsUNDER"
+      ]
+    },
     "tail_bar": {
       "design_use": "Rear transverse accent selected by low LEN and HGT.",
       "evidence_status": "experimental_until_tmuf_smoke",
@@ -212,6 +257,36 @@
         "resources/authoritative/gbuffer/extents_2048.json"
       ],
       "source_zones": []
+    },
+    "tailwing": {
+      "design_use": "Named rear wing surfaces for rear identity bands.",
+      "evidence_status": "proven_local_psd_parts_label_map",
+      "pixel_count": 177929,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy"
+      ],
+      "source_zones": [
+        "Tailwing_L",
+        "Tailwing_R",
+        "TailWingUnderBorderColor"
+      ]
+    },
+    "underplate": {
+      "design_use": "Named underplate surfaces for shadow and low detail.",
+      "evidence_status": "proven_local_psd_parts_label_map",
+      "pixel_count": 136321,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy"
+      ],
+      "source_zones": [
+        "UnderPlate_L",
+        "UnderPlate_R",
+        "UnderPlate.insidecolor :)"
+      ]
     }
   },
   "masks_used": [
@@ -224,28 +299,39 @@
     "shoulder_line",
     "tail_bar",
     "mudguards",
-    "mudguard_edge"
+    "mudguard_edge",
+    "tailwing",
+    "side_wings",
+    "mirrors",
+    "underplate",
+    "main_body_under"
   ],
   "output_artifacts": {
     "atlas_preview": {
       "path": "out/previews/dark_neon_louver_atlas.png",
-      "sha256": "a1481152dc71e2801fca2a657f85a7d7cb94d86d2a1ae317fb74c491005e7edc",
-      "size_bytes": 833290
+      "sha256": "4e21aa70ef601063724bd70b7cbc7676889005a413629dee3986938da1df9677",
+      "size_bytes": 862483
     },
     "projected_preview": {
       "path": "out/previews/dark_neon_louver_projected_side_top_rear.png",
-      "sha256": "d8457b8ee1c77cd7e686a09be34a0375390ec846377051b846a68f0ccabda0e9",
-      "size_bytes": 285405
+      "sha256": "275af94d5eebae0497cbd455b8424fce2172082f03db76318b2c0c9229e8ce20",
+      "size_bytes": 289665
     },
     "skin_zip": {
       "path": "out/skins/dark_neon_louver.zip",
-      "sha256": "0e49bb2cd34c8fe639d44687b4ce5c3edf974eb6d98ee90584e00c325d60007a",
-      "size_bytes": 490578
+      "sha256": "0e85c4c498f967be4f9fbc63903ef69842e0441f645935fc9fc68896471f6b13",
+      "size_bytes": 510805
     }
   },
   "package_files": [
     "Diffuse.dds",
     "Icon.dds"
+  ],
+  "panel_catalog_targets": [
+    "tailwing_bands",
+    "side_wings",
+    "mirrors_and_holders",
+    "underbody_dark"
   ],
   "proof_gate": {
     "calibration_stock_diffuse": "required_before_proven_use",
@@ -254,9 +340,9 @@
   "route": "stock_diffuse_only",
   "skin_name": "dark_neon_louver",
   "style_metrics": {
-    "cyan_accent_ratio": 0.112401,
-    "dark_pixel_ratio": 0.870386,
-    "magenta_accent_ratio": 0.157825
+    "cyan_accent_ratio": 0.10903,
+    "dark_pixel_ratio": 0.852232,
+    "magenta_accent_ratio": 0.143308
   },
   "tmuf_smoke_test": "not_run"
 }

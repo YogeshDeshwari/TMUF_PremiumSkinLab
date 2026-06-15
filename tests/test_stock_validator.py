@@ -79,11 +79,16 @@ class StockValidatorTests(unittest.TestCase):
             "skin_name": "example",
             "tmuf_smoke_test": "not_run",
             "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
-            "masks_used": ["mudguards", "center_spine"],
+            "masks_used": ["mudguards", "tailwing", "center_spine"],
             "mask_evidence": {
                 "mudguards": {
                     "evidence_status": "proven_local_psd_parts_label_map",
                     "pixel_count": 425340,
+                    "source_files": ["resources/authoritative/parts/psd_parts_labels.npy"],
+                },
+                "tailwing": {
+                    "evidence_status": "proven_local_psd_parts_label_map",
+                    "pixel_count": 177929,
                     "source_files": ["resources/authoritative/parts/psd_parts_labels.npy"],
                 },
                 "center_spine": {
@@ -123,6 +128,21 @@ class StockValidatorTests(unittest.TestCase):
         self.assertIn(
             "center_spine must stay experimental until TMUF smoke",
             validate_mask_evidence(premature_report, premium=True),
+        )
+
+        bad_local_source_report = {
+            **valid_report,
+            "mask_evidence": {
+                **valid_report["mask_evidence"],
+                "tailwing": {
+                    **valid_report["mask_evidence"]["tailwing"],
+                    "source_files": ["resources/authoritative/gbuffer/position_2048.npy"],
+                },
+            },
+        }
+        self.assertIn(
+            "tailwing local PSD mask must cite psd_parts_labels.npy",
+            validate_mask_evidence(bad_local_source_report, premium=True),
         )
 
         broken_report = {

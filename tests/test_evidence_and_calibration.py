@@ -177,6 +177,17 @@ class PremiumStockBatchTests(unittest.TestCase):
             self.assertGreater(report["style_metrics"]["cyan_accent_ratio"], 0.005)
             self.assertIn("no_vignette", report["design_rules"])
             self.assertIn("no_random_scatter", report["design_rules"])
+            self.assertIn("proven_local_panel_accents", report["design_rules"])
+            self.assertIn("tailwing_bands", report["panel_catalog_targets"])
+            self.assertIn("side_wings", report["panel_catalog_targets"])
+            self.assertIn("mirrors_and_holders", report["panel_catalog_targets"])
+            self.assertIn("underbody_dark", report["panel_catalog_targets"])
+            for local_mask in ("tailwing", "side_wings", "mirrors", "underplate", "main_body_under"):
+                self.assertIn(local_mask, report["masks_used"])
+                self.assertEqual(
+                    report["mask_evidence"][local_mask]["evidence_status"],
+                    "proven_local_psd_parts_label_map",
+                )
             self.assertEqual(
                 report["mask_evidence"]["mudguards"]["evidence_status"],
                 "proven_local_psd_parts_label_map",

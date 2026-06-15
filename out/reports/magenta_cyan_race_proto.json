@@ -4,6 +4,7 @@
     "magenta_cyan_accents",
     "broad_gbuffer_aligned_shapes",
     "symmetric_rear_engine_panels",
+    "proven_local_panel_accents",
     "no_vignette",
     "no_random_scatter",
     "no_stadiumcar_v2_uvs",
@@ -69,6 +70,36 @@
         "resources/authoritative/gbuffer/extents_2048.json"
       ],
       "source_zones": []
+    },
+    "main_body_under": {
+      "design_use": "Named underside body surfaces for dark material continuation.",
+      "evidence_status": "proven_local_psd_parts_label_map",
+      "pixel_count": 353313,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy"
+      ],
+      "source_zones": [
+        "MainBodyUNDER_TL",
+        "MainBodyUNDER_TR",
+        "MainBodyUNDER_BL",
+        "MainBodyUNDER_BR"
+      ]
+    },
+    "mirrors": {
+      "design_use": "Named mirror surfaces for small color verification marks.",
+      "evidence_status": "proven_local_psd_parts_label_map",
+      "pixel_count": 47755,
+      "risk_class": "medium_accent_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy"
+      ],
+      "source_zones": [
+        "SideMirrors",
+        "MirrorHolders"
+      ]
     },
     "mudguard_edge": {
       "design_use": "Mudguard edge accent combining PSD mudguards and GBuffer position.",
@@ -199,6 +230,20 @@
       ],
       "source_zones": []
     },
+    "side_wings": {
+      "design_use": "Named side wing surfaces for small aero accents.",
+      "evidence_status": "proven_local_psd_parts_label_map",
+      "pixel_count": 125401,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy"
+      ],
+      "source_zones": [
+        "SIdeWings",
+        "SideWingsUNDER"
+      ]
+    },
     "tail_bar": {
       "design_use": "Rear transverse accent selected by low LEN and HGT.",
       "evidence_status": "experimental_until_tmuf_smoke",
@@ -212,6 +257,36 @@
         "resources/authoritative/gbuffer/extents_2048.json"
       ],
       "source_zones": []
+    },
+    "tailwing": {
+      "design_use": "Named rear wing surfaces for rear identity bands.",
+      "evidence_status": "proven_local_psd_parts_label_map",
+      "pixel_count": 177929,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy"
+      ],
+      "source_zones": [
+        "Tailwing_L",
+        "Tailwing_R",
+        "TailWingUnderBorderColor"
+      ]
+    },
+    "underplate": {
+      "design_use": "Named underplate surfaces for shadow and low detail.",
+      "evidence_status": "proven_local_psd_parts_label_map",
+      "pixel_count": 136321,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy"
+      ],
+      "source_zones": [
+        "UnderPlate_L",
+        "UnderPlate_R",
+        "UnderPlate.insidecolor :)"
+      ]
     }
   },
   "masks_used": [
@@ -224,28 +299,39 @@
     "shoulder_line",
     "tail_bar",
     "mudguards",
-    "mudguard_edge"
+    "mudguard_edge",
+    "tailwing",
+    "side_wings",
+    "mirrors",
+    "underplate",
+    "main_body_under"
   ],
   "output_artifacts": {
     "atlas_preview": {
       "path": "out/previews/magenta_cyan_race_proto_atlas.png",
-      "sha256": "53c753e1e3c221a05ee5acd09f92c0c9ac8aa58cc9671ab51e7da601f36bdb48",
-      "size_bytes": 876804
+      "sha256": "6e46cf061cb1bcc4e7f55e7c10b4810c1c832d3a828c473c1cc8a053d9735409",
+      "size_bytes": 907787
     },
     "projected_preview": {
       "path": "out/previews/magenta_cyan_race_proto_projected_side_top_rear.png",
-      "sha256": "10448b4f2053d4f922d346e5045d91b1883d0cf90814501ab88df4129167d574",
-      "size_bytes": 281666
+      "sha256": "3fa5b24cb0f9df77262d40c71269af29d7a9b33d1f2b3128450e3aae5de3f19f",
+      "size_bytes": 287192
     },
     "skin_zip": {
       "path": "out/skins/magenta_cyan_race_proto.zip",
-      "sha256": "47892dd64c55914aca3261d6942bc4033e2e76d77eee67dec07134e1e6639b72",
-      "size_bytes": 511238
+      "sha256": "ea1dc162b27b77129b346b21959bb52050675f20e2b5389cf542b137cf761d73",
+      "size_bytes": 524437
     }
   },
   "package_files": [
     "Diffuse.dds",
     "Icon.dds"
+  ],
+  "panel_catalog_targets": [
+    "tailwing_bands",
+    "side_wings",
+    "mirrors_and_holders",
+    "underbody_dark"
   ],
   "proof_gate": {
     "calibration_stock_diffuse": "required_before_proven_use",
@@ -254,9 +340,9 @@
   "route": "stock_diffuse_only",
   "skin_name": "magenta_cyan_race_proto",
   "style_metrics": {
-    "cyan_accent_ratio": 0.122928,
-    "dark_pixel_ratio": 0.864738,
-    "magenta_accent_ratio": 0.217411
+    "cyan_accent_ratio": 0.121439,
+    "dark_pixel_ratio": 0.822216,
+    "magenta_accent_ratio": 0.191734
   },
   "tmuf_smoke_test": "not_run"
 }

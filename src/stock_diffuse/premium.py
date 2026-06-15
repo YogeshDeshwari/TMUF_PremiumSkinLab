@@ -38,6 +38,17 @@ PREMIUM_MASK_NAMES = [
     "tail_bar",
     "mudguards",
     "mudguard_edge",
+    "tailwing",
+    "side_wings",
+    "mirrors",
+    "underplate",
+    "main_body_under",
+]
+PANEL_CATALOG_TARGETS = [
+    "tailwing_bands",
+    "side_wings",
+    "mirrors_and_holders",
+    "underbody_dark",
 ]
 
 
@@ -183,6 +194,13 @@ def build_premium_rgba(candidate: Candidate) -> tuple[Image.Image, dict[str, flo
     _blend(rgb, masks["shoulder_line"], candidate.highlight, 0.62)
     _blend(rgb, masks["tail_bar"], candidate.secondary, 0.95)
 
+    underbody = masks["main_body_under"] | masks["underplate"]
+    _blend(rgb, underbody, "#020204", 0.42)
+    _blend(rgb, masks["tailwing"], candidate.primary, 0.34)
+    _blend(rgb, masks["tailwing"] & (height > 0.52), candidate.secondary, 0.28)
+    _blend(rgb, masks["side_wings"], candidate.secondary, 0.46)
+    _blend(rgb, masks["mirrors"], candidate.highlight, 0.54)
+
     if candidate.mudguard_mode == "split":
         _blend(rgb, masks["mudguards"] & (length > 0.5), candidate.primary, 0.72)
         _blend(rgb, masks["mudguards"] & (length <= 0.5), candidate.secondary, 0.72)
@@ -215,9 +233,13 @@ def build_premium_rgba(candidate: Candidate) -> tuple[Image.Image, dict[str, flo
         | masks["rear_center_glow"]
         | masks["tail_bar"]
         | masks["mudguard_edge"]
+        | masks["tailwing"]
+        | masks["side_wings"]
+        | masks["mirrors"]
     )
     alpha[accent] = 148
     alpha[masks["shoulder_line"]] = 136
+    alpha[underbody] = 118
 
     out = np.zeros((SIZE, SIZE, 4), dtype=np.uint8)
     out[..., :3] = np.clip(rgb, 0, 255).astype(np.uint8)
@@ -297,11 +319,13 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
             "magenta_cyan_accents",
             "broad_gbuffer_aligned_shapes",
             "symmetric_rear_engine_panels",
+            "proven_local_panel_accents",
             "no_vignette",
             "no_random_scatter",
             "no_stadiumcar_v2_uvs",
             "no_ch2026_donor_assumptions",
         ],
+        "panel_catalog_targets": PANEL_CATALOG_TARGETS,
         "masks_used": PREMIUM_MASK_NAMES,
         "mask_evidence": mask_report_entries(
             build_stock_panel_masks(load_fields(), _mask_params(candidate)),
