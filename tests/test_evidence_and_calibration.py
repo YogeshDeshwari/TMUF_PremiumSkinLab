@@ -9,6 +9,14 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 EXPECTED_ZIP_TIMESTAMP = (2000, 1, 1, 0, 0, 0)
+EXPECTED_STOCK_INPUTS = {
+    "authoritative/gbuffer/position_2048.npy": "experimental",
+    "authoritative/gbuffer/coverage_2048.npy": "experimental",
+    "authoritative/gbuffer/extents_2048.json": "experimental",
+    "authoritative/parts/psd_parts_labels.npy": "proven",
+    "authoritative/parts/psd_parts.json": "proven",
+    "authoritative/reference/official_prelight_AO.png": "proven",
+}
 
 
 def dds_info(data: bytes):
@@ -85,6 +93,18 @@ class CalibrationArtifactTests(unittest.TestCase):
         self.assertEqual(report["route"], "stock_diffuse_only")
         self.assertEqual(report["tmuf_smoke_test"], "not_run")
         self.assertEqual(report["evidence_status"]["gbuffer_mapping"], "experimental_until_tmuf_smoke")
+        self.assert_report_records_stock_input_evidence(report)
+
+    def assert_report_records_stock_input_evidence(self, report):
+        manifest = json.loads((ROOT / "resources" / "evidence_manifest.json").read_text())
+        manifest_by_path = {entry["path"]: entry for entry in manifest["resources"]}
+
+        input_evidence = report["input_evidence"]
+        self.assertEqual(set(input_evidence), set(EXPECTED_STOCK_INPUTS))
+        for path, expected_label in EXPECTED_STOCK_INPUTS.items():
+            self.assertEqual(input_evidence[path]["evidence_label"], expected_label)
+            self.assertEqual(input_evidence[path]["sha256"], manifest_by_path[path]["sha256"])
+            self.assertEqual(input_evidence[path]["size_bytes"], manifest_by_path[path]["size_bytes"])
 
 
 class PremiumStockBatchTests(unittest.TestCase):
@@ -133,6 +153,7 @@ class PremiumStockBatchTests(unittest.TestCase):
             self.assertGreater(report["style_metrics"]["cyan_accent_ratio"], 0.005)
             self.assertIn("no_vignette", report["design_rules"])
             self.assertIn("no_random_scatter", report["design_rules"])
+            CalibrationArtifactTests.assert_report_records_stock_input_evidence(self, report)
 
 
 if __name__ == "__main__":

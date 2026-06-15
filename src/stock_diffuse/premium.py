@@ -11,6 +11,7 @@ from PIL import Image, ImageDraw
 from scipy.ndimage import binary_dilation, gaussian_filter
 
 from src.dds.tmnf_dds import build_dds_dxt5_bytes
+from src.evidence.input_trace import input_evidence
 from src.stock_diffuse.calibration import SIZE, hx, load_fields, mudguard_ids, project_view
 from src.stock_diffuse.package import write_stable_zip_entry
 
@@ -318,6 +319,7 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
             "details_dds": "not_used",
             "projshad_dds": "not_used",
         },
+        "input_evidence": input_evidence(),
         "design_rules": [
             "black_charcoal_base",
             "magenta_cyan_accents",
