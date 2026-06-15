@@ -278,7 +278,7 @@
     "status": "ready_to_run_tmuf_smoke"
   },
   "stock": {
-    "candidate_count": 10,
+    "candidate_count": 20,
     "completion_status": "not_complete_tmuf_smoke_pending",
     "errors": [],
     "local_checks_passed": true,

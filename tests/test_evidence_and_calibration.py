@@ -152,6 +152,32 @@ class CalibrationArtifactTests(unittest.TestCase):
 
 
 class PremiumStockBatchTests(unittest.TestCase):
+    def test_premium_candidate_config_covers_twenty_mixed_archetypes(self):
+        from src.stock_diffuse.premium import CANDIDATES, CANDIDATE_NAMES
+
+        self.assertEqual(len(CANDIDATE_NAMES), 20)
+        self.assertEqual(len(CANDIDATES), 20)
+        self.assertEqual([candidate.name for candidate in CANDIDATES], CANDIDATE_NAMES)
+
+        archetypes = [candidate.graphic_archetype for candidate in CANDIDATES]
+        self.assertGreaterEqual(len(set(archetypes)), 12)
+        self.assertIn("minimal_pinstripe", archetypes)
+        self.assertIn("full_panel_dense", archetypes)
+        self.assertIn("checker_tail", archetypes)
+        self.assertIn("diagonal_sash", archetypes)
+        self.assertIn("guard_halo", archetypes)
+
+        minimal = next(candidate for candidate in CANDIDATES if candidate.graphic_archetype == "minimal_pinstripe")
+        dense = next(candidate for candidate in CANDIDATES if candidate.graphic_archetype == "full_panel_dense")
+        minimal_strengths = dict(minimal.mask_strengths)
+        dense_strengths = dict(dense.mask_strengths)
+
+        self.assertLess(minimal_strengths["side_blade"], 0.30)
+        self.assertLess(minimal_strengths["rear_louvers"], 0.30)
+        self.assertGreater(dense_strengths["side_blade"], 1.0)
+        self.assertGreater(dense_strengths["rear_louvers"], 1.0)
+        self.assertNotEqual(set(minimal.panel_catalog_targets), set(dense.panel_catalog_targets))
+
     def test_premium_batch_generates_stock_safe_experimental_candidates(self):
         from src.stock_diffuse.premium import CANDIDATE_NAMES, save_batch
 

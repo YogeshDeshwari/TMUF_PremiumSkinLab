@@ -41,6 +41,16 @@ CANDIDATE_NAMES = [
     "teal_magenta_vector",
     "shadow_magenta_split",
     "white_cyan_nightcore",
+    "monochrome_magenta_pinstripe",
+    "cyan_white_gt_block",
+    "neon_checker_tail",
+    "asym_diagonal_sash",
+    "guard_halo_cyan",
+    "full_panel_cyber_flood",
+    "mint_purple_split",
+    "orange_teal_circuit",
+    "white_magenta_rally_blocks",
+    "crimson_cyan_arrow",
 ]
 PREMIUM_MASK_NAMES = [
     "center_spine",
@@ -98,6 +108,14 @@ class Candidate:
     mudguard_mode: str
     panel_catalog_targets: tuple[str, ...]
     mask_strengths: tuple[tuple[str, float], ...]
+
+    @property
+    def graphic_archetype(self) -> str:
+        return LANE_GRAPHIC_ARCHETYPES.get(self.lane_id, "balanced_neon")
+
+    @property
+    def base_mask_strength(self) -> float:
+        return LANE_BASE_MASK_STRENGTHS.get(self.lane_id, 0.18)
 
 
 CANDIDATES = [
@@ -304,9 +322,9 @@ CANDIDATES = [
             ("shoulder_line", 1.32),
             ("tail_bar", 1.18),
             ("mudguard_edge", 1.10),
-            ("side_blade", 0.32),
+            ("side_blade", 0.22),
             ("secondary_blade", 0.92),
-            ("rear_louvers", 0.38),
+            ("rear_louvers", 0.20),
         ),
     ),
     Candidate(
@@ -447,12 +465,406 @@ CANDIDATES = [
             ("nose_spear", 1.20),
             ("mirrors", 1.54),
             ("tail_bar", 1.24),
-            ("side_blade", 0.70),
-            ("secondary_blade", 0.76),
-            ("mudguards", 0.62),
+            ("side_blade", 0.30),
+            ("secondary_blade", 0.32),
+            ("mudguards", 0.30),
+        ),
+    ),
+    Candidate(
+        "monochrome_magenta_pinstripe",
+        "mono_pinstripe_cut",
+        "near-black minimalist pinstripe using only nose, shoulder, tail, and mirror punctuation",
+        ("shoulder_line", "nose_spear", "tail_bar", "mirrors"),
+        "#030304",
+        "#111114",
+        "#ff008c",
+        "#00d6ff",
+        "#f5f5f7",
+        0.026,
+        0.22,
+        0.34,
+        10.0,
+        "primary_front",
+        (
+            "nose_identity_panel",
+            "mid_side_generated_panel",
+            "rear_side_generated_panels",
+            "mirrors_and_holders",
+            "tailwing_bands",
+            *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
+        (
+            ("shoulder_line", 1.48),
+            ("nose_spear", 1.22),
+            ("tail_bar", 1.28),
+            ("mirrors", 1.40),
+            ("side_blade", 0.16),
+            ("secondary_blade", 0.18),
+            ("rear_louvers", 0.14),
+            ("mudguards", 0.20),
+        ),
+    ),
+    Candidate(
+        "cyan_white_gt_block",
+        "heritage_center_block",
+        "GT-style white/cyan deck block with black flanks and magenta micro accents",
+        ("center_spine", "nose_spear", "mid_deck_generated_panels", "tailwing"),
+        "#040506",
+        "#12161a",
+        "#00dfff",
+        "#ff0aa8",
+        "#f4f8ff",
+        0.075,
+        0.24,
+        0.28,
+        12.0,
+        "secondary_front",
+        (
+            "center_spine",
+            "nose_identity_panel",
+            "nose_deck_generated_panels",
+            "mid_deck_generated_panels",
+            "rear_floor_generated_panels",
+            "tailwing_bands",
+            "side_wings",
+            *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
+        (
+            ("center_spine", 1.50),
+            ("nose_spear", 1.28),
+            ("mid_deck_generated_panels", 1.16),
+            ("tailwing", 1.24),
+            ("side_blade", 0.28),
+            ("rear_louvers", 0.24),
+            ("mudguards", 0.36),
+        ),
+    ),
+    Candidate(
+        "neon_checker_tail",
+        "checker_tail",
+        "black forward body with a checker-pattern tail deck and bright guard punctuation",
+        ("rear_louvers", "tailwing", "tail_bar", "mudguard_edge"),
+        "#030405",
+        "#12151a",
+        "#ff00a8",
+        "#00eaff",
+        "#ffffff",
+        0.038,
+        0.32,
+        0.22,
+        26.0,
+        "split",
+        (
+            "engine_rear_deck",
+            "rear_deck_fine_louver_rows",
+            "rear_side_generated_panels",
+            "rear_floor_generated_panels",
+            "rear_mudguard_caps",
+            "rear_mudguard_edge_details",
+            "tailwing_bands",
+            *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
+        (
+            ("rear_louvers", 1.46),
+            ("tailwing", 1.42),
+            ("tail_bar", 1.32),
+            ("mudguard_edge", 1.24),
+            ("center_spine", 0.24),
+            ("side_blade", 0.20),
+            ("secondary_blade", 0.18),
+        ),
+    ),
+    Candidate(
+        "asym_diagonal_sash",
+        "diagonal_sash",
+        "large diagonal sash across side surfaces with small counter-stripes on deck and tail",
+        ("side_blade", "secondary_blade", "shoulder_line", "nose_spear"),
+        "#050507",
+        "#151821",
+        "#ff009d",
+        "#00f0ff",
+        "#fafcff",
+        0.040,
+        0.70,
+        0.06,
+        14.0,
+        "primary_front",
+        (
+            "sidepod_blades",
+            "nose_side_generated_panels",
+            "mid_side_generated_panel",
+            "rear_side_generated_panels",
+            "nose_deck_generated_panels",
+            "side_wings",
+            "tailwing_bands",
+            *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
+        (
+            ("side_blade", 1.52),
+            ("secondary_blade", 1.36),
+            ("shoulder_line", 1.20),
+            ("nose_spear", 1.10),
+            ("rear_louvers", 0.30),
+            ("mudguards", 0.42),
+        ),
+    ),
+    Candidate(
+        "guard_halo_cyan",
+        "guard_halo",
+        "mudguard halo design with dark body, cyan guard caps, and magenta edge lighting",
+        ("mudguards", "mudguard_edge", "side_wings", "mirrors"),
+        "#030507",
+        "#0d151c",
+        "#ff00b8",
+        "#00e5ff",
+        "#eaffff",
+        0.032,
+        0.36,
+        0.24,
+        16.0,
+        "secondary_front",
+        (
+            "front_mudguard_caps",
+            "rear_mudguard_caps",
+            "front_mudguard_edge_details",
+            "rear_mudguard_edge_details",
+            "side_wings",
+            "mirrors_and_holders",
+            "rear_floor_generated_panels",
+            "tailwing_bands",
+            *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
+        (
+            ("mudguards", 1.48),
+            ("mudguard_edge", 1.56),
+            ("side_wings", 1.18),
+            ("mirrors", 1.24),
+            ("center_spine", 0.24),
+            ("side_blade", 0.22),
+            ("rear_louvers", 0.26),
+        ),
+    ),
+    Candidate(
+        "full_panel_cyber_flood",
+        "full_panel_dense",
+        "dense full-panel cyber layout using side blades, rear louvers, deck panels, and guard edges",
+        ("side_blade", "rear_louvers", "center_spine", "mudguard_edge"),
+        "#030408",
+        "#111827",
+        "#ff00c8",
+        "#00e0ff",
+        "#f8fbff",
+        0.068,
+        0.55,
+        0.12,
+        28.0,
+        "split",
+        (
+            "center_spine",
+            "sidepod_blades",
+            "nose_identity_panel",
+            "nose_deck_generated_panels",
+            "nose_side_generated_panels",
+            "mid_deck_generated_panels",
+            "mid_side_generated_panel",
+            "mid_floor_generated_panels",
+            "engine_rear_deck",
+            "rear_deck_fine_louver_rows",
+            "rear_side_generated_panels",
+            "rear_floor_generated_panels",
+            "front_mudguard_caps",
+            "rear_mudguard_caps",
+            "front_mudguard_edge_details",
+            "rear_mudguard_edge_details",
+            *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
+        (
+            ("side_blade", 1.58),
+            ("secondary_blade", 1.44),
+            ("rear_louvers", 1.62),
+            ("center_spine", 1.38),
+            ("mudguard_edge", 1.38),
+            ("tailwing", 1.28),
+            ("rear_center_glow", 1.22),
+        ),
+    ),
+    Candidate(
+        "mint_purple_split",
+        "split_tone_panels",
+        "left/right split-tone panels with mint side flow and purple-magenta deck accents",
+        ("center_spine", "side_blade", "mid_side_generated_panel", "tailwing"),
+        "#030606",
+        "#10201e",
+        "#d900ff",
+        "#00ffd0",
+        "#f7f3ff",
+        0.048,
+        0.48,
+        0.18,
+        18.0,
+        "split",
+        (
+            "center_spine",
+            "sidepod_blades",
+            "mid_side_generated_panel",
+            "mid_deck_generated_panels",
+            "rear_side_generated_panels",
+            "front_mudguard_caps",
+            "tailwing_bands",
+            *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
+        (
+            ("center_spine", 1.18),
+            ("side_blade", 1.42),
+            ("mid_side_generated_panel", 1.18),
+            ("tailwing", 1.12),
+            ("mudguard_edge", 0.78),
+            ("rear_louvers", 0.58),
+        ),
+    ),
+    Candidate(
+        "orange_teal_circuit",
+        "carbon_circuit",
+        "carbon circuit-board layout with orange highlight traces plus teal and magenta anchors",
+        ("shoulder_line", "rear_louvers", "mirrors", "tail_bar"),
+        "#040503",
+        "#171911",
+        "#ff00a0",
+        "#00e8d8",
+        "#ff9d2e",
+        0.042,
+        0.44,
+        0.16,
+        24.0,
+        "primary_front",
+        (
+            "center_spine",
+            "mid_deck_generated_panels",
+            "mid_floor_generated_panels",
+            "rear_deck_fine_louver_rows",
+            "rear_floor_generated_panels",
+            "mirrors_and_holders",
+            "tailwing_bands",
+            *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
+        (
+            ("shoulder_line", 1.44),
+            ("rear_louvers", 1.36),
+            ("mirrors", 1.34),
+            ("tail_bar", 1.22),
+            ("center_spine", 0.82),
+            ("side_blade", 0.42),
+            ("mudguards", 0.34),
+        ),
+    ),
+    Candidate(
+        "white_magenta_rally_blocks",
+        "white_race_blocks",
+        "high-contrast rally block composition with white deck slabs and magenta/cyan edges",
+        ("nose_spear", "center_spine", "tail_bar", "mirrors"),
+        "#060607",
+        "#202126",
+        "#ff008d",
+        "#00dfff",
+        "#ffffff",
+        0.072,
+        0.26,
+        0.30,
+        12.0,
+        "secondary_front",
+        (
+            "center_spine",
+            "nose_identity_panel",
+            "nose_deck_generated_panels",
+            "mid_deck_generated_panels",
+            "rear_floor_generated_panels",
+            "side_wings",
+            "tailwing_bands",
+            "front_mudguard_caps",
+            *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
+        (
+            ("nose_spear", 1.34),
+            ("center_spine", 1.46),
+            ("tailwing", 0.48),
+            ("side_wings", 0.48),
+            ("tail_bar", 1.18),
+            ("mirrors", 1.20),
+            ("side_blade", 0.34),
+            ("rear_louvers", 0.32),
+            ("mudguard_edge", 0.32),
+        ),
+    ),
+    Candidate(
+        "crimson_cyan_arrow",
+        "arrowhead_proto",
+        "front arrowhead prototype with broad cyan shoulders and crimson-magenta rear echoes",
+        ("nose_spear", "side_blade", "shoulder_line", "rear_center_glow"),
+        "#040405",
+        "#18151a",
+        "#ff008c",
+        "#00d8ff",
+        "#fff4f8",
+        0.060,
+        0.38,
+        0.20,
+        16.0,
+        "primary_front",
+        (
+            "center_spine",
+            "nose_identity_panel",
+            "nose_side_generated_panels",
+            "nose_floor_generated_panels",
+            "sidepod_blades",
+            "mid_floor_generated_panels",
+            "rear_side_generated_panels",
+            "tailwing_bands",
+            *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
+        (
+            ("nose_spear", 1.48),
+            ("side_blade", 1.22),
+            ("shoulder_line", 1.30),
+            ("rear_center_glow", 1.24),
+            ("secondary_blade", 0.88),
+            ("rear_louvers", 0.72),
+            ("mudguards", 0.48),
         ),
     ),
 ]
+
+
+LANE_GRAPHIC_ARCHETYPES = {
+    "side_blade_sweep": "wide_side_blade",
+    "center_spine_focus": "center_spine",
+    "split_guard_flow": "split_tone_panels",
+    "rear_louver_focus": "rear_louver_stack",
+    "race_proto_balance": "arrowhead_proto",
+    "minimal_red_speedmark": "minimal_pinstripe",
+    "gold_circuit_trace": "carbon_circuit",
+    "teal_vector_sweep": "vector_wedge",
+    "shadow_split_engine": "rear_louver_stack",
+    "white_contrast_nightcore": "white_race_blocks",
+    "mono_pinstripe_cut": "minimal_pinstripe",
+    "heritage_center_block": "heritage_center_block",
+    "checker_tail": "checker_tail",
+    "diagonal_sash": "diagonal_sash",
+    "guard_halo": "guard_halo",
+    "full_panel_dense": "full_panel_dense",
+    "split_tone_panels": "split_tone_panels",
+    "carbon_circuit": "carbon_circuit",
+    "white_race_blocks": "white_race_blocks",
+    "arrowhead_proto": "arrowhead_proto",
+}
+LANE_BASE_MASK_STRENGTHS = {
+    "minimal_red_speedmark": 0.06,
+    "mono_pinstripe_cut": 0.04,
+    "heritage_center_block": 0.10,
+    "checker_tail": 0.10,
+    "guard_halo": 0.08,
+    "full_panel_dense": 0.20,
+    "white_race_blocks": 0.10,
+}
 
 
 def _candidate_catalog_targets(candidate: Candidate) -> list[str]:
@@ -460,7 +872,7 @@ def _candidate_catalog_targets(candidate: Candidate) -> list[str]:
 
 
 def _candidate_mask_strengths(candidate: Candidate) -> dict[str, float]:
-    strengths = {name: 1.0 for name in PREMIUM_MASK_NAMES}
+    strengths = {name: candidate.base_mask_strength for name in PREMIUM_MASK_NAMES}
     strengths.update({name: float(value) for name, value in candidate.mask_strengths})
     return strengths
 
@@ -505,6 +917,185 @@ def _blend(rgb: np.ndarray, mask: np.ndarray, color: str, strength: float = 1.0)
     if amount.max() <= 0:
         return
     rgb[:] = rgb * (1.0 - amount[..., None]) + hx(color) * amount[..., None]
+
+
+def _line_mask(field: np.ndarray, center: float | np.ndarray, width: float) -> np.ndarray:
+    return np.abs(field - center) <= width
+
+
+def _phase_mask(
+    mask: np.ndarray,
+    length: np.ndarray,
+    symmetry: np.ndarray,
+    *,
+    length_steps: float,
+    side_steps: float,
+    duty: float,
+) -> np.ndarray:
+    phase = (np.floor(length * length_steps) + np.floor(symmetry * side_steps)).astype(np.int32)
+    return mask & ((phase % 2) == 0) & (((length * length_steps + symmetry * side_steps) % 1.0) < duty)
+
+
+def _panel_union(masks: dict[str, np.ndarray], names: tuple[str, ...]) -> np.ndarray:
+    union = np.zeros_like(next(iter(masks.values())), dtype=bool)
+    for name in names:
+        union |= masks[name]
+    return union
+
+
+def _apply_graphic_archetype(
+    rgb: np.ndarray,
+    masks: dict[str, np.ndarray],
+    fields: dict[str, Any],
+    candidate: Candidate,
+) -> np.ndarray:
+    coverage = fields["coverage"]
+    labels = fields["labels"]
+    length, lateral, height, symmetry = _axis_fields(fields)
+    body = coverage & (labels > 0)
+    upper = body & (height > 0.46)
+    lower = body & (height <= 0.46)
+    rear = body & (length < 0.36)
+    nose = body & (length > 0.70)
+    extra_accent = np.zeros_like(coverage, dtype=bool)
+    archetype = candidate.graphic_archetype
+
+    if archetype == "minimal_pinstripe":
+        pin = (
+            masks["shoulder_line"]
+            | (masks["nose_spear"] & (length > 0.78))
+            | (masks["tail_bar"] & (height > 0.32))
+        )
+        counter = masks["mirrors"] | (masks["mudguard_edge"] & ((length > 0.78) | (length < 0.18)))
+        highlight_mark = masks["side_wings"] | (masks["tailwing"] & (length < 0.16))
+        _blend(rgb, pin, candidate.primary, 1.22)
+        _blend(rgb, counter, candidate.secondary, 0.88)
+        _blend(rgb, highlight_mark, candidate.highlight, 0.58)
+        extra_accent |= pin | counter | highlight_mark
+    elif archetype == "heritage_center_block":
+        deck_block = _panel_union(
+            masks,
+            ("nose_deck_generated_panels", "mid_deck_generated_panels", "center_spine"),
+        ) & upper
+        side_cut = masks["side_wings"] | (masks["tailwing"] & (symmetry > 0.18))
+        _blend(rgb, deck_block, candidate.highlight, 0.58)
+        _blend(rgb, deck_block & _line_mask(symmetry, 0.0, 0.070), candidate.secondary, 0.62)
+        _blend(rgb, side_cut, candidate.primary, 0.74)
+        extra_accent |= (deck_block & _line_mask(symmetry, 0.0, 0.070)) | side_cut
+    elif archetype == "checker_tail":
+        tail_zone = _panel_union(
+            masks,
+            ("tailwing", "rear_louvers", "rear_deck_fine_louver_rows", "rear_floor_generated_panels"),
+        ) & rear
+        checker = _phase_mask(tail_zone, length, symmetry, length_steps=34.0, side_steps=42.0, duty=0.72)
+        _blend(rgb, checker, candidate.highlight, 0.94)
+        _blend(rgb, tail_zone & ~checker, candidate.primary, 0.58)
+        _blend(rgb, masks["mudguard_edge"] & rear, candidate.secondary, 0.88)
+        extra_accent |= tail_zone | (masks["mudguard_edge"] & rear)
+    elif archetype == "diagonal_sash":
+        center = np.clip(0.09 + 0.48 * (1.0 - length), 0.10, 0.42)
+        sash = body & (height > 0.22) & (height < 0.70) & _line_mask(symmetry, center, 0.048)
+        counter = body & (height > 0.30) & _line_mask(symmetry, np.clip(center + 0.075, 0.14, 0.48), 0.018)
+        _blend(rgb, sash, candidate.secondary, 0.98)
+        _blend(rgb, counter, candidate.primary, 0.86)
+        _blend(rgb, masks["nose_spear"] & nose, candidate.primary, 0.82)
+        extra_accent |= sash | counter | (masks["nose_spear"] & nose)
+    elif archetype == "guard_halo":
+        caps = masks["mudguards"]
+        edge = masks["mudguard_edge"]
+        _blend(rgb, caps, candidate.secondary, 1.00)
+        _blend(rgb, edge, candidate.primary, 1.18)
+        _blend(rgb, masks["side_wings"] | masks["mirrors"], candidate.highlight, 0.76)
+        cap_highlight = caps & ((height > 0.58) | (symmetry > 0.36))
+        spine_marker = masks["center_spine"] | (masks["tailwing"] & (symmetry > 0.16))
+        _blend(rgb, cap_highlight, candidate.highlight, 0.50)
+        _blend(rgb, spine_marker, candidate.highlight, 0.70)
+        extra_accent |= caps | edge | masks["side_wings"] | masks["mirrors"] | cap_highlight | spine_marker
+    elif archetype == "full_panel_dense":
+        panel_field = _panel_union(
+            masks,
+            (
+                "nose_deck_generated_panels",
+                "nose_side_generated_panels",
+                "mid_deck_generated_panels",
+                "mid_side_generated_panel",
+                "rear_side_generated_panels",
+                "rear_deck_fine_louver_rows",
+            ),
+        )
+        bright = masks["center_spine"] | masks["side_blade"] | masks["rear_louvers"] | masks["mudguard_edge"]
+        _blend(rgb, panel_field & upper, candidate.primary, 0.36)
+        _blend(rgb, panel_field & lower, candidate.secondary, 0.34)
+        _blend(rgb, bright, candidate.secondary, 0.92)
+        _blend(rgb, masks["secondary_blade"] | masks["rear_center_glow"], candidate.primary, 0.84)
+        extra_accent |= bright | masks["secondary_blade"] | masks["rear_center_glow"]
+    elif archetype == "split_tone_panels":
+        panel_field = _panel_union(
+            masks,
+            ("mid_side_generated_panel", "mid_deck_generated_panels", "rear_side_generated_panels", "side_blade"),
+        )
+        left = panel_field & (lateral < 0.5)
+        right = panel_field & (lateral >= 0.5)
+        _blend(rgb, left, candidate.primary, 0.58)
+        _blend(rgb, right, candidate.secondary, 0.58)
+        _blend(rgb, masks["center_spine"], candidate.highlight, 0.56)
+        extra_accent |= masks["side_blade"] | masks["center_spine"]
+    elif archetype == "carbon_circuit":
+        deck = upper & (length > 0.22) & (length < 0.74)
+        traces = deck & (
+            _line_mask(symmetry, 0.18, 0.012)
+            | _line_mask(symmetry, 0.31, 0.010)
+            | (((np.floor(length * 18.0) % 4) == 0) & (symmetry > 0.08) & (symmetry < 0.36))
+        )
+        _blend(rgb, traces, candidate.highlight, 0.92)
+        _blend(rgb, masks["rear_louvers"], candidate.secondary, 0.72)
+        _blend(rgb, masks["tail_bar"] | masks["mirrors"], candidate.primary, 0.70)
+        extra_accent |= traces | masks["rear_louvers"] | masks["tail_bar"] | masks["mirrors"]
+    elif archetype == "white_race_blocks":
+        slabs = _panel_union(masks, ("nose_deck_generated_panels", "mid_deck_generated_panels", "center_spine")) & upper
+        lower_blocks = _panel_union(masks, ("rear_floor_generated_panels", "side_wings", "tailwing"))
+        _blend(rgb, slabs, candidate.highlight, 0.72)
+        _blend(rgb, slabs & _line_mask(symmetry, 0.0, 0.065), candidate.secondary, 0.54)
+        _blend(rgb, lower_blocks, candidate.primary, 0.56)
+        extra_accent |= slabs & _line_mask(symmetry, 0.0, 0.065)
+    elif archetype == "arrowhead_proto":
+        arrow_center = np.clip(0.040 + 0.28 * (1.0 - length), 0.05, 0.30)
+        arrow = nose & _line_mask(symmetry, arrow_center, 0.070)
+        shoulders = lower & (length > 0.45) & (length < 0.76) & _line_mask(symmetry, 0.31, 0.045)
+        _blend(rgb, arrow, candidate.primary, 1.15)
+        _blend(rgb, shoulders, candidate.secondary, 0.84)
+        _blend(rgb, shoulders & (length > 0.56), candidate.highlight, 0.42)
+        _blend(rgb, masks["rear_center_glow"], candidate.primary, 0.82)
+        extra_accent |= arrow | shoulders | masks["rear_center_glow"]
+    elif archetype == "vector_wedge":
+        wedge = lower & (length > 0.30) & (length < 0.82) & (symmetry > 0.14) & (
+            symmetry < np.clip(0.21 + 0.34 * (length - 0.30), 0.21, 0.42)
+        )
+        _blend(rgb, wedge, candidate.secondary, 0.58)
+        _blend(rgb, masks["side_blade"] | masks["side_wings"], candidate.primary, 0.70)
+        extra_accent |= wedge | masks["side_blade"] | masks["side_wings"]
+    elif archetype == "rear_louver_stack":
+        stack = masks["rear_louvers"] | masks["rear_deck_fine_louver_rows"] | masks["rear_center_glow"]
+        counter = masks["tailwing"] | masks["mudguard_edge"] | masks["secondary_blade"]
+        _blend(rgb, stack, candidate.primary, 0.80)
+        _blend(rgb, counter, candidate.secondary, 0.70)
+        extra_accent |= stack | counter
+    elif archetype == "wide_side_blade":
+        blade_field = masks["side_blade"] | masks["secondary_blade"] | masks["nose_side_generated_panels"]
+        _blend(rgb, blade_field, candidate.secondary, 0.58)
+        _blend(rgb, masks["nose_spear"], candidate.primary, 0.76)
+        extra_accent |= blade_field | masks["nose_spear"]
+    elif archetype == "center_spine":
+        spine = masks["center_spine"] | masks["nose_spear"]
+        _blend(rgb, spine, candidate.secondary, 0.72)
+        _blend(rgb, masks["tailwing"] | masks["mudguard_edge"], candidate.primary, 0.56)
+        extra_accent |= spine | masks["tailwing"] | masks["mudguard_edge"]
+    else:
+        balanced = masks["center_spine"] | masks["side_blade"] | masks["tailwing"]
+        _blend(rgb, balanced, candidate.primary, 0.46)
+        extra_accent |= balanced
+
+    return extra_accent
 
 
 def _mask_params(candidate: Candidate) -> PremiumMaskParams:
@@ -559,6 +1150,8 @@ def build_premium_rgba(candidate: Candidate) -> tuple[Image.Image, dict[str, flo
         panel_family_accent |= masks[mask_name]
         _blend(rgb, masks[mask_name], _panel_family_color(candidate, mask_name), 0.18 * strength)
 
+    archetype_accent = _apply_graphic_archetype(rgb, masks, fields, candidate)
+
     if candidate.mudguard_mode == "split":
         _blend(rgb, masks["mudguards"] & (length > 0.5), candidate.primary, _blend_strength(strengths, "mudguards", 0.72))
         _blend(rgb, masks["mudguards"] & (length <= 0.5), candidate.secondary, _blend_strength(strengths, "mudguards", 0.72))
@@ -582,19 +1175,13 @@ def build_premium_rgba(candidate: Candidate) -> tuple[Image.Image, dict[str, flo
         ao = np.asarray(Image.open(ao_path).convert("L").resize((SIZE, SIZE)), dtype=np.float32)
         rgb *= (0.76 + 0.24 * ao / 255.0)[..., None]
 
-    accent = (
-        masks["center_spine"]
-        | masks["nose_spear"]
-        | masks["side_blade"]
-        | masks["secondary_blade"]
-        | masks["rear_louvers"]
-        | masks["rear_center_glow"]
-        | masks["tail_bar"]
-        | masks["mudguard_edge"]
-        | masks["tailwing"]
-        | masks["side_wings"]
-        | masks["mirrors"]
-    )
+    active_accent = np.zeros_like(coverage, dtype=bool)
+    for mask_name, strength in strengths.items():
+        if strength >= 0.35 and mask_name not in {"main_body_under", "underplate"}:
+            active_accent |= masks[mask_name]
+    for mask_name in candidate.distinctive_masks:
+        active_accent |= masks[mask_name]
+    accent = active_accent | archetype_accent
     alpha[accent] = 148
     alpha[panel_family_accent & ~accent] = np.maximum(alpha[panel_family_accent & ~accent], 124)
     alpha[masks["shoulder_line"]] = 136
@@ -741,6 +1328,7 @@ def _write_candidate(candidate: Candidate, reference_guidance: dict[str, Any] | 
         "output_artifacts": stock_output_artifacts(out_skin, out_atlas, out_preview),
         "design_lane": {
             "lane_id": candidate.lane_id,
+            "graphic_archetype": candidate.graphic_archetype,
             "composition_focus": candidate.composition_focus,
             "distinctive_masks": list(candidate.distinctive_masks),
             "primary_catalog_targets": _candidate_catalog_targets(candidate),
@@ -752,10 +1340,12 @@ def _write_candidate(candidate: Candidate, reference_guidance: dict[str, Any] | 
                 "blade_offset": candidate.blade_offset,
                 "rear_louver_count": candidate.rear_louver_count,
                 "mudguard_mode": candidate.mudguard_mode,
+                "base_mask_strength": candidate.base_mask_strength,
             },
         },
         "render_profile": {
             "lane_specific_strengths": True,
+            "graphic_archetype": candidate.graphic_archetype,
             "evidence_status": "recipe_metadata_not_tmuf_proof",
             "mask_strengths": mask_strengths,
             "panel_family_strengths": panel_family_strengths,

@@ -1,8 +1,8 @@
 {
   "alpha_metrics": {
-    "high_alpha_pixel_ratio": 0.373311,
+    "high_alpha_pixel_ratio": 0.36799,
     "max_alpha": 148,
-    "mean_alpha": 127.944799,
+    "mean_alpha": 127.681066,
     "min_alpha": 112,
     "unique_alpha_values": [
       112,
@@ -31,8 +31,10 @@
       "rear_louvers"
     ],
     "evidence_status": "recipe_metadata_not_tmuf_proof",
+    "graphic_archetype": "carbon_circuit",
     "lane_id": "gold_circuit_trace",
     "parameter_signature": {
+      "base_mask_strength": 0.18,
       "blade_offset": 0.11,
       "blade_slope": 0.58,
       "mudguard_mode": "secondary_front",
@@ -531,169 +533,169 @@
     "center_spine": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 148.0,
-      "mean_chroma": 180.000549,
-      "mean_luminance": 92.158867,
+      "mean_chroma": 175.803619,
+      "mean_luminance": 87.291252,
       "pixel_count": 483332
     },
     "main_body_under": {
       "high_alpha_pixel_ratio": 0.0,
       "mean_alpha": 118.000008,
-      "mean_chroma": 16.451883,
-      "mean_luminance": 15.04465,
+      "mean_chroma": 10.646294,
+      "mean_luminance": 16.915823,
       "pixel_count": 353313
     },
     "mid_deck_generated_panels": {
-      "high_alpha_pixel_ratio": 0.456,
-      "mean_alpha": 134.944,
-      "mean_chroma": 103.672943,
-      "mean_luminance": 56.10503,
+      "high_alpha_pixel_ratio": 0.464654,
+      "mean_alpha": 135.151718,
+      "mean_chroma": 103.77459,
+      "mean_luminance": 57.599552,
       "pixel_count": 723443
     },
     "mid_floor_generated_panels": {
-      "high_alpha_pixel_ratio": 0.006562,
-      "mean_alpha": 124.157494,
-      "mean_chroma": 7.70726,
-      "mean_luminance": 15.584985,
+      "high_alpha_pixel_ratio": 0.007128,
+      "mean_alpha": 124.171074,
+      "mean_chroma": 7.086405,
+      "mean_luminance": 15.343042,
       "pixel_count": 196123
     },
     "mid_side_generated_panel": {
-      "high_alpha_pixel_ratio": 0.142806,
-      "mean_alpha": 117.214035,
-      "mean_chroma": 32.074642,
-      "mean_luminance": 30.060768,
+      "high_alpha_pixel_ratio": 0.184958,
+      "mean_alpha": 118.731506,
+      "mean_chroma": 31.260429,
+      "mean_luminance": 35.335209,
       "pixel_count": 623575
     },
     "mirrors": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 145.132111,
-      "mean_chroma": 102.736488,
-      "mean_luminance": 155.8815,
+      "mean_chroma": 136.860229,
+      "mean_luminance": 103.79158,
       "pixel_count": 47755
     },
     "mudguard_edge": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 148.0,
-      "mean_chroma": 166.67308,
-      "mean_luminance": 107.958176,
+      "mean_chroma": 50.499256,
+      "mean_luminance": 46.661831,
       "pixel_count": 414363
     },
     "mudguards": {
-      "high_alpha_pixel_ratio": 0.974192,
-      "mean_alpha": 147.074051,
-      "mean_chroma": 163.197968,
-      "mean_luminance": 105.880417,
+      "high_alpha_pixel_ratio": 1.0,
+      "mean_alpha": 148.0,
+      "mean_chroma": 49.946499,
+      "mean_luminance": 46.107788,
       "pixel_count": 425340
     },
     "nose_deck_generated_panels": {
-      "high_alpha_pixel_ratio": 0.81238,
-      "mean_alpha": 141.255173,
-      "mean_chroma": 162.267517,
-      "mean_luminance": 118.425629,
+      "high_alpha_pixel_ratio": 0.775429,
+      "mean_alpha": 139.924911,
+      "mean_chroma": 27.727451,
+      "mean_luminance": 49.180019,
       "pixel_count": 220398
     },
     "nose_floor_generated_panels": {
-      "high_alpha_pixel_ratio": 0.051811,
-      "mean_alpha": 116.887192,
-      "mean_chroma": 20.59726,
-      "mean_luminance": 20.261717,
+      "high_alpha_pixel_ratio": 0.068199,
+      "mean_alpha": 117.477158,
+      "mean_chroma": 16.711527,
+      "mean_luminance": 22.777086,
       "pixel_count": 788929
     },
     "nose_side_generated_panels": {
-      "high_alpha_pixel_ratio": 0.276275,
-      "mean_alpha": 123.787178,
-      "mean_chroma": 49.139252,
-      "mean_luminance": 39.188656,
+      "high_alpha_pixel_ratio": 0.202931,
+      "mean_alpha": 121.146812,
+      "mean_chroma": 34.09499,
+      "mean_luminance": 38.688969,
       "pixel_count": 1078213
     },
     "nose_spear": {
-      "high_alpha_pixel_ratio": 0.669762,
-      "mean_alpha": 138.09285,
-      "mean_chroma": 145.743378,
-      "mean_luminance": 78.103371,
+      "high_alpha_pixel_ratio": 0.179332,
+      "mean_alpha": 120.664307,
+      "mean_chroma": 60.277534,
+      "mean_luminance": 40.89426,
       "pixel_count": 191165
     },
     "rear_center_glow": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 148.0,
-      "mean_chroma": 174.331131,
-      "mean_luminance": 98.663376,
+      "mean_chroma": 164.992859,
+      "mean_luminance": 86.968246,
       "pixel_count": 148477
     },
     "rear_deck_fine_louver_rows": {
-      "high_alpha_pixel_ratio": 0.744972,
-      "mean_alpha": 141.830444,
-      "mean_chroma": 101.067314,
-      "mean_luminance": 95.834793,
+      "high_alpha_pixel_ratio": 0.812158,
+      "mean_alpha": 143.442917,
+      "mean_chroma": 101.826805,
+      "mean_luminance": 100.644196,
       "pixel_count": 272437
     },
     "rear_floor_generated_panels": {
-      "high_alpha_pixel_ratio": 0.109996,
-      "mean_alpha": 124.263626,
-      "mean_chroma": 17.601942,
-      "mean_luminance": 29.094143,
+      "high_alpha_pixel_ratio": 0.110429,
+      "mean_alpha": 124.274017,
+      "mean_chroma": 20.168425,
+      "mean_luminance": 23.570375,
       "pixel_count": 256274
     },
     "rear_louvers": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 147.619171,
-      "mean_chroma": 197.186295,
-      "mean_luminance": 156.067154,
+      "mean_chroma": 196.409393,
+      "mean_luminance": 160.109314,
       "pixel_count": 99824
     },
     "rear_side_generated_panels": {
-      "high_alpha_pixel_ratio": 0.45978,
-      "mean_alpha": 128.50058,
-      "mean_chroma": 75.004189,
-      "mean_luminance": 50.66988,
+      "high_alpha_pixel_ratio": 0.465176,
+      "mean_alpha": 128.694824,
+      "mean_chroma": 40.664661,
+      "mean_luminance": 31.755581,
       "pixel_count": 383268
     },
     "secondary_blade": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 148.0,
-      "mean_chroma": 130.925827,
-      "mean_luminance": 113.592552,
+      "mean_chroma": 146.756393,
+      "mean_luminance": 99.547684,
       "pixel_count": 35528
     },
     "shoulder_line": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 136.0,
-      "mean_chroma": 101.989273,
-      "mean_luminance": 145.232254,
+      "mean_chroma": 87.066429,
+      "mean_luminance": 91.348518,
       "pixel_count": 44664
     },
     "side_blade": {
       "high_alpha_pixel_ratio": 0.931906,
       "mean_alpha": 145.957184,
-      "mean_chroma": 219.859985,
-      "mean_luminance": 158.20192,
+      "mean_chroma": 215.985916,
+      "mean_luminance": 163.636063,
       "pixel_count": 34291
     },
     "side_wings": {
-      "high_alpha_pixel_ratio": 1.0,
-      "mean_alpha": 148.0,
-      "mean_chroma": 93.012833,
-      "mean_luminance": 87.204102,
+      "high_alpha_pixel_ratio": 0.0,
+      "mean_alpha": 112.0,
+      "mean_chroma": 15.252207,
+      "mean_luminance": 30.210442,
       "pixel_count": 125401
     },
     "tail_bar": {
       "high_alpha_pixel_ratio": 0.999979,
       "mean_alpha": 147.833206,
-      "mean_chroma": 178.190018,
-      "mean_luminance": 137.370255,
+      "mean_chroma": 128.125809,
+      "mean_luminance": 78.397057,
       "pixel_count": 194475
     },
     "tailwing": {
       "high_alpha_pixel_ratio": 1.0,
       "mean_alpha": 147.999664,
-      "mean_chroma": 99.624413,
-      "mean_luminance": 103.396774,
+      "mean_chroma": 108.73381,
+      "mean_luminance": 105.692955,
       "pixel_count": 177929
     },
     "underplate": {
       "high_alpha_pixel_ratio": 0.0,
       "mean_alpha": 118.0,
-      "mean_chroma": 16.816624,
-      "mean_luminance": 14.778111,
+      "mean_chroma": 9.576646,
+      "mean_luminance": 15.932061,
       "pixel_count": 136321
     }
   },
@@ -726,18 +728,18 @@
   "output_artifacts": {
     "atlas_preview": {
       "path": "out/previews/carbon_gold_circuit_atlas.png",
-      "sha256": "5ec328404ef09bb63d0ac20a59652d8d965dcf7477b1d4625ab057cca26cfabb",
-      "size_bytes": 948541
+      "sha256": "09dd43ac8949fe207268a2041552b35cfcf30dd40d5c750e28c4fe13dba64bcd",
+      "size_bytes": 946903
     },
     "projected_preview": {
       "path": "out/previews/carbon_gold_circuit_projected_side_top_rear.png",
-      "sha256": "e6e0ca761783fa1caef3e2ee9aaca3281a897e4815d0f15b9818fd481b3f075a",
-      "size_bytes": 286744
+      "sha256": "0f4f7bf4287638c8b30bffe235558752f1b1f17b93f7810359b127dc49407dbf",
+      "size_bytes": 303317
     },
     "skin_zip": {
       "path": "out/skins/carbon_gold_circuit.zip",
-      "sha256": "c859fc37b82fc978f45f76c2103fdbf931d2fe42e4b2d89cc9101615ba2020b4",
-      "size_bytes": 566808
+      "sha256": "e57d3af51471e5b4b3bd4cfefef25afc92b4706ec38faf9d89d1a643e5d59622",
+      "size_bytes": 576584
     }
   },
   "package_files": [
@@ -772,8 +774,8 @@
         ],
         "max_high_alpha_pixel_ratio": 1.0,
         "max_mean_alpha": 148.0,
-        "max_mean_chroma": 180.000549,
-        "min_mean_luminance": 92.158867,
+        "max_mean_chroma": 175.803619,
+        "min_mean_luminance": 87.291252,
         "pixel_count": 483332,
         "target": "center_spine",
         "visual_active": true
@@ -788,8 +790,8 @@
         ],
         "max_high_alpha_pixel_ratio": 1.0,
         "max_mean_alpha": 148.0,
-        "max_mean_chroma": 197.186295,
-        "min_mean_luminance": 98.663376,
+        "max_mean_chroma": 196.409393,
+        "min_mean_luminance": 78.397057,
         "pixel_count": 442776,
         "target": "engine_rear_deck",
         "visual_active": true
@@ -800,10 +802,10 @@
         "mask_names": [
           "mid_deck_generated_panels"
         ],
-        "max_high_alpha_pixel_ratio": 0.456,
-        "max_mean_alpha": 134.944,
-        "max_mean_chroma": 103.672943,
-        "min_mean_luminance": 56.10503,
+        "max_high_alpha_pixel_ratio": 0.464654,
+        "max_mean_alpha": 135.151718,
+        "max_mean_chroma": 103.77459,
+        "min_mean_luminance": 57.599552,
         "pixel_count": 723443,
         "target": "mid_deck_generated_panels",
         "visual_active": true
@@ -814,10 +816,10 @@
         "mask_names": [
           "mid_floor_generated_panels"
         ],
-        "max_high_alpha_pixel_ratio": 0.006562,
-        "max_mean_alpha": 124.157494,
-        "max_mean_chroma": 7.70726,
-        "min_mean_luminance": 15.584985,
+        "max_high_alpha_pixel_ratio": 0.007128,
+        "max_mean_alpha": 124.171074,
+        "max_mean_chroma": 7.086405,
+        "min_mean_luminance": 15.343042,
         "pixel_count": 196123,
         "target": "mid_floor_generated_panels",
         "visual_active": true
@@ -830,8 +832,8 @@
         ],
         "max_high_alpha_pixel_ratio": 1.0,
         "max_mean_alpha": 145.132111,
-        "max_mean_chroma": 102.736488,
-        "min_mean_luminance": 155.8815,
+        "max_mean_chroma": 136.860229,
+        "min_mean_luminance": 103.79158,
         "pixel_count": 47755,
         "target": "mirrors_and_holders",
         "visual_active": true
@@ -845,8 +847,8 @@
         ],
         "max_high_alpha_pixel_ratio": 1.0,
         "max_mean_alpha": 147.619171,
-        "max_mean_chroma": 197.186295,
-        "min_mean_luminance": 95.834793,
+        "max_mean_chroma": 196.409393,
+        "min_mean_luminance": 100.644196,
         "pixel_count": 372261,
         "target": "rear_deck_fine_louver_rows",
         "visual_active": true
@@ -857,10 +859,10 @@
         "mask_names": [
           "side_wings"
         ],
-        "max_high_alpha_pixel_ratio": 1.0,
-        "max_mean_alpha": 148.0,
-        "max_mean_chroma": 93.012833,
-        "min_mean_luminance": 87.204102,
+        "max_high_alpha_pixel_ratio": 0.0,
+        "max_mean_alpha": 112.0,
+        "max_mean_chroma": 15.252207,
+        "min_mean_luminance": 30.210442,
         "pixel_count": 125401,
         "target": "side_wings",
         "visual_active": true
@@ -874,8 +876,8 @@
         ],
         "max_high_alpha_pixel_ratio": 1.0,
         "max_mean_alpha": 148.0,
-        "max_mean_chroma": 219.859985,
-        "min_mean_luminance": 113.592552,
+        "max_mean_chroma": 215.985916,
+        "min_mean_luminance": 99.547684,
         "pixel_count": 69819,
         "target": "sidepod_blades",
         "visual_active": true
@@ -889,8 +891,8 @@
         ],
         "max_high_alpha_pixel_ratio": 1.0,
         "max_mean_alpha": 147.999664,
-        "max_mean_chroma": 178.190018,
-        "min_mean_luminance": 103.396774,
+        "max_mean_chroma": 128.125809,
+        "min_mean_luminance": 78.397057,
         "pixel_count": 372404,
         "target": "tailwing_bands",
         "visual_active": true
@@ -904,8 +906,8 @@
         ],
         "max_high_alpha_pixel_ratio": 0.0,
         "max_mean_alpha": 118.000008,
-        "max_mean_chroma": 16.816624,
-        "min_mean_luminance": 14.778111,
+        "max_mean_chroma": 10.646294,
+        "min_mean_luminance": 15.932061,
         "pixel_count": 489634,
         "target": "underbody_dark",
         "visual_active": true
@@ -945,8 +947,25 @@
   },
   "render_profile": {
     "damped_masks": [
+      "nose_spear",
+      "rear_center_glow",
+      "shoulder_line",
+      "tail_bar",
       "mudguards",
-      "tailwing"
+      "mudguard_edge",
+      "tailwing",
+      "side_wings",
+      "underplate",
+      "main_body_under",
+      "nose_deck_generated_panels",
+      "nose_floor_generated_panels",
+      "nose_side_generated_panels",
+      "mid_deck_generated_panels",
+      "mid_side_generated_panel",
+      "mid_floor_generated_panels",
+      "rear_side_generated_panels",
+      "rear_floor_generated_panels",
+      "rear_deck_fine_louver_rows"
     ],
     "distinctive_mask_strengths": {
       "center_spine": 1.02,
@@ -955,32 +974,33 @@
       "side_blade": 1.24
     },
     "evidence_status": "recipe_metadata_not_tmuf_proof",
+    "graphic_archetype": "carbon_circuit",
     "lane_specific_strengths": true,
     "mask_strengths": {
       "center_spine": 1.02,
-      "main_body_under": 1.0,
-      "mid_deck_generated_panels": 1.0,
-      "mid_floor_generated_panels": 1.0,
-      "mid_side_generated_panel": 1.0,
+      "main_body_under": 0.18,
+      "mid_deck_generated_panels": 0.18,
+      "mid_floor_generated_panels": 0.18,
+      "mid_side_generated_panel": 0.18,
       "mirrors": 1.42,
-      "mudguard_edge": 1.0,
+      "mudguard_edge": 0.18,
       "mudguards": 0.44,
-      "nose_deck_generated_panels": 1.0,
-      "nose_floor_generated_panels": 1.0,
-      "nose_side_generated_panels": 1.0,
-      "nose_spear": 1.0,
-      "rear_center_glow": 1.0,
-      "rear_deck_fine_louver_rows": 1.0,
-      "rear_floor_generated_panels": 1.0,
+      "nose_deck_generated_panels": 0.18,
+      "nose_floor_generated_panels": 0.18,
+      "nose_side_generated_panels": 0.18,
+      "nose_spear": 0.18,
+      "rear_center_glow": 0.18,
+      "rear_deck_fine_louver_rows": 0.18,
+      "rear_floor_generated_panels": 0.18,
       "rear_louvers": 1.18,
-      "rear_side_generated_panels": 1.0,
+      "rear_side_generated_panels": 0.18,
       "secondary_blade": 1.18,
-      "shoulder_line": 1.0,
+      "shoulder_line": 0.18,
       "side_blade": 1.24,
-      "side_wings": 1.0,
-      "tail_bar": 1.0,
+      "side_wings": 0.18,
+      "tail_bar": 0.18,
       "tailwing": 0.84,
-      "underplate": 1.0
+      "underplate": 0.18
     },
     "panel_family_strengths": {
       "mid_deck_generated_panels": 1.0,
@@ -991,9 +1011,9 @@
   "route": "stock_diffuse_only",
   "skin_name": "carbon_gold_circuit",
   "style_metrics": {
-    "cyan_accent_ratio": 0.106766,
-    "dark_pixel_ratio": 0.702769,
-    "magenta_accent_ratio": 0.180277
+    "cyan_accent_ratio": 0.031679,
+    "dark_pixel_ratio": 0.781818,
+    "magenta_accent_ratio": 0.162979
   },
   "tmuf_smoke_test": "not_run"
 }
