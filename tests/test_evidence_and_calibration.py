@@ -178,6 +178,19 @@ class PremiumStockBatchTests(unittest.TestCase):
             self.assertIn("composition_focus", report["design_lane"])
             self.assertGreaterEqual(len(report["design_lane"]["distinctive_masks"]), 2)
             self.assertLessEqual(set(report["design_lane"]["distinctive_masks"]), set(report["masks_used"]))
+            self.assertTrue(report["render_profile"]["lane_specific_strengths"])
+            self.assertEqual(report["render_profile"]["evidence_status"], "recipe_metadata_not_tmuf_proof")
+            self.assertEqual(
+                set(report["render_profile"]["distinctive_mask_strengths"]),
+                set(report["design_lane"]["distinctive_masks"]),
+            )
+            self.assertEqual(set(report["mask_style_metrics"]), set(report["masks_used"]))
+            for mask_name in report["design_lane"]["distinctive_masks"]:
+                self.assertGreaterEqual(
+                    report["render_profile"]["distinctive_mask_strengths"][mask_name],
+                    1.0,
+                )
+                self.assertGreater(report["mask_style_metrics"][mask_name]["mean_alpha"], 112)
             lane_ids.add(report["design_lane"]["lane_id"])
             self.assertGreaterEqual(report["style_metrics"]["dark_pixel_ratio"], 0.45)
             self.assertGreater(report["style_metrics"]["magenta_accent_ratio"], 0.005)
@@ -248,6 +261,11 @@ class PremiumStockBatchTests(unittest.TestCase):
                 candidate["design_lane"]["catalog_target_count"],
                 len(candidate["panel_catalog_targets"]),
             )
+            self.assertTrue(candidate["render_profile"]["lane_specific_strengths"])
+            self.assertEqual(
+                set(candidate["render_profile"]["distinctive_mask_strengths"]),
+                set(candidate["design_lane"]["distinctive_masks"]),
+            )
             self.assertIn("skin_zip", candidate["output_artifacts"])
             self.assertIn("projected_preview", candidate["output_artifacts"])
 
@@ -263,6 +281,18 @@ class PremiumStockBatchTests(unittest.TestCase):
         self.assertIn("engine_rear_deck", reports_by_name["dark_neon_louver"]["panel_catalog_targets"])
         self.assertIn("front_mudguard_caps", reports_by_name["violet_cyber_flow"]["panel_catalog_targets"])
         self.assertIn("rear_mudguard_caps", reports_by_name["violet_cyber_flow"]["panel_catalog_targets"])
+        self.assertGreater(
+            reports_by_name["dark_neon_louver"]["render_profile"]["mask_strengths"]["rear_louvers"],
+            reports_by_name["dark_neon_louver"]["render_profile"]["mask_strengths"]["side_blade"],
+        )
+        self.assertGreater(
+            reports_by_name["black_magenta_cyan_blade"]["render_profile"]["mask_strengths"]["side_blade"],
+            reports_by_name["black_magenta_cyan_blade"]["render_profile"]["mask_strengths"]["rear_louvers"],
+        )
+        self.assertGreater(
+            reports_by_name["black_cyan_spine"]["render_profile"]["mask_strengths"]["center_spine"],
+            reports_by_name["black_cyan_spine"]["render_profile"]["mask_strengths"]["side_blade"],
+        )
 
 
 if __name__ == "__main__":

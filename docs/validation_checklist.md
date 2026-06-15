@@ -42,6 +42,8 @@ Use this before calling any skin complete.
       in `out/reports/stock_part_inventory.json`.
 - [ ] `design_lane.primary_catalog_targets` and `catalog_target_count` match
       each report's `panel_catalog_targets`.
+- [ ] Premium reports include `render_profile` and `mask_style_metrics`, and
+      distinctive masks have recorded lane-specific strengths.
 - [ ] `out/reports/premium_batch_index.json` matches the individual premium
       reports and keeps `does_not_prove_tmuf_smoke=true`.
 - [ ] Run `python3 recipes/validate_profile_gates.py` before touching CH_2026

@@ -29,6 +29,7 @@ class StockValidatorTests(unittest.TestCase):
             self.assertTrue(checks["report_mask_evidence_valid"])
             self.assertTrue(checks["report_design_lane_valid"])
             self.assertTrue(checks["report_panel_catalog_targets_valid"])
+            self.assertTrue(checks["report_render_profile_valid"])
             self.assertTrue(checks["atlas_preview_exists"])
             self.assertTrue(checks["projection_preview_exists"])
             self.assertTrue(checks["preview_visual_quality_passed"])
@@ -320,6 +321,67 @@ class StockValidatorTests(unittest.TestCase):
         self.assertIn("design lane primary_catalog_targets must match panel_catalog_targets", errors)
         self.assertIn("design lane catalog_target_count must match panel_catalog_targets", errors)
 
+    def test_premium_render_profile_is_validated(self):
+        from src.evidence.stock_validator import validate_render_profile
+
+        valid_report = {
+            "skin_name": "example",
+            "masks_used": ["center_spine", "side_blade", "tailwing"],
+            "design_lane": {
+                "distinctive_masks": ["center_spine", "tailwing"],
+            },
+            "render_profile": {
+                "lane_specific_strengths": True,
+                "evidence_status": "recipe_metadata_not_tmuf_proof",
+                "mask_strengths": {
+                    "center_spine": 1.2,
+                    "side_blade": 0.7,
+                    "tailwing": 1.1,
+                },
+                "distinctive_mask_strengths": {
+                    "center_spine": 1.2,
+                    "tailwing": 1.1,
+                },
+                "damped_masks": ["side_blade"],
+            },
+            "mask_style_metrics": {
+                "center_spine": {"pixel_count": 100, "mean_alpha": 148.0},
+                "side_blade": {"pixel_count": 100, "mean_alpha": 112.0},
+                "tailwing": {"pixel_count": 100, "mean_alpha": 136.0},
+            },
+        }
+        self.assertEqual(validate_render_profile(valid_report, premium=True), [])
+        self.assertEqual(validate_render_profile(valid_report, premium=False), [])
+
+        missing_profile = {"skin_name": "missing", "masks_used": ["center_spine"]}
+        self.assertEqual(
+            validate_render_profile(missing_profile, premium=True),
+            ["premium report has no render_profile object"],
+        )
+
+        bad_status = {
+            **valid_report,
+            "render_profile": {
+                **valid_report["render_profile"],
+                "evidence_status": "proven_by_tmuf_smoke",
+            },
+        }
+        self.assertIn(
+            "render profile metadata must not claim TMUF proof",
+            validate_render_profile(bad_status, premium=True),
+        )
+
+        missing_metric = {
+            **valid_report,
+            "mask_style_metrics": {
+                "center_spine": {"pixel_count": 100, "mean_alpha": 148.0},
+            },
+        }
+        self.assertIn(
+            "missing mask style metrics: tailwing",
+            validate_render_profile(missing_metric, premium=True),
+        )
+
     def test_premium_batch_index_is_validated_against_reports(self):
         from src.evidence.stock_validator import validate_premium_batch_index
 
@@ -331,6 +393,7 @@ class StockValidatorTests(unittest.TestCase):
                 "tmuf_smoke_test": "not_run",
                 "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
                 "design_lane": {"lane_id": "lane_a"},
+                "render_profile": {"lane_specific_strengths": True},
                 "panel_catalog_targets": ["center_spine"],
                 "output_artifacts": {"skin_zip": {"path": "out/skins/a.zip"}},
             },
@@ -341,6 +404,7 @@ class StockValidatorTests(unittest.TestCase):
                 "tmuf_smoke_test": "not_run",
                 "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
                 "design_lane": {"lane_id": "lane_b"},
+                "render_profile": {"lane_specific_strengths": True},
                 "panel_catalog_targets": ["tailwing_bands"],
                 "output_artifacts": {"skin_zip": {"path": "out/skins/b.zip"}},
             },
@@ -356,6 +420,7 @@ class StockValidatorTests(unittest.TestCase):
                     "tmuf_smoke_test": "not_run",
                     "gbuffer_mapping": "experimental_until_tmuf_smoke",
                     "design_lane": {"lane_id": "lane_a"},
+                    "render_profile": {"lane_specific_strengths": True},
                     "panel_catalog_targets": ["center_spine"],
                     "package_files": ["Diffuse.dds", "Icon.dds"],
                     "output_artifacts": {"skin_zip": {"path": "out/skins/a.zip"}},
@@ -365,6 +430,7 @@ class StockValidatorTests(unittest.TestCase):
                     "tmuf_smoke_test": "not_run",
                     "gbuffer_mapping": "experimental_until_tmuf_smoke",
                     "design_lane": {"lane_id": "lane_b"},
+                    "render_profile": {"lane_specific_strengths": True},
                     "panel_catalog_targets": ["tailwing_bands"],
                     "package_files": ["Diffuse.dds", "Icon.dds"],
                     "output_artifacts": {"skin_zip": {"path": "out/skins/b.zip"}},
@@ -402,6 +468,21 @@ class StockValidatorTests(unittest.TestCase):
         self.assertIn(
             "premium batch index panel catalog targets mismatch: a",
             validate_premium_batch_index(wrong_targets, reports),
+        )
+
+        wrong_render_profile = {
+            **valid_index,
+            "candidates": [
+                {
+                    **valid_index["candidates"][0],
+                    "render_profile": {"lane_specific_strengths": False},
+                },
+                valid_index["candidates"][1],
+            ],
+        }
+        self.assertIn(
+            "premium batch index render profile mismatch: a",
+            validate_premium_batch_index(wrong_render_profile, reports),
         )
 
     def test_cli_outputs_json_summary(self):

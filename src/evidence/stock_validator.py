@@ -265,6 +265,58 @@ def validate_panel_catalog_targets(
     return errors
 
 
+def validate_render_profile(report: dict[str, Any], premium: bool) -> list[str]:
+    if not premium:
+        return []
+
+    profile = report.get("render_profile")
+    if not isinstance(profile, dict):
+        return ["premium report has no render_profile object"]
+
+    errors: list[str] = []
+    if profile.get("lane_specific_strengths") is not True:
+        errors.append("render profile must declare lane_specific_strengths")
+    if profile.get("evidence_status") != "recipe_metadata_not_tmuf_proof":
+        errors.append("render profile metadata must not claim TMUF proof")
+
+    masks_used = report.get("masks_used", [])
+    mask_strengths = profile.get("mask_strengths")
+    if not isinstance(mask_strengths, dict):
+        errors.append("render profile has no mask_strengths object")
+    else:
+        for mask_name in masks_used:
+            if mask_name not in mask_strengths:
+                errors.append(f"missing render strength: {mask_name}")
+
+    distinctive_masks = report.get("design_lane", {}).get("distinctive_masks", [])
+    distinctive_strengths = profile.get("distinctive_mask_strengths")
+    if not isinstance(distinctive_strengths, dict):
+        errors.append("render profile has no distinctive_mask_strengths object")
+    else:
+        for mask_name in distinctive_masks:
+            strength = distinctive_strengths.get(mask_name)
+            if not isinstance(strength, (int, float)):
+                errors.append(f"missing distinctive render strength: {mask_name}")
+            elif strength < 1.0:
+                errors.append(f"distinctive render strength must be >= 1.0: {mask_name}")
+
+    mask_style_metrics = report.get("mask_style_metrics")
+    if not isinstance(mask_style_metrics, dict):
+        errors.append("premium report has no mask_style_metrics object")
+    else:
+        for mask_name in distinctive_masks:
+            entry = mask_style_metrics.get(mask_name)
+            if not isinstance(entry, dict):
+                errors.append(f"missing mask style metrics: {mask_name}")
+                continue
+            if entry.get("pixel_count", 0) <= 0:
+                errors.append(f"mask style metrics pixel count is empty: {mask_name}")
+            if entry.get("mean_alpha", 0) <= 112:
+                errors.append(f"distinctive mask mean alpha must exceed base alpha: {mask_name}")
+
+    return errors
+
+
 def validate_premium_batch_index(index: dict[str, Any], premium_reports: list[dict[str, Any]]) -> list[str]:
     errors: list[str] = []
     if index.get("schema") != "tmuf_premium_skin_lab.premium_batch_index.v1":
@@ -301,6 +353,8 @@ def validate_premium_batch_index(index: dict[str, Any], premium_reports: list[di
             errors.append(f"premium batch index package files mismatch: {name}")
         if candidate.get("design_lane", {}).get("lane_id") != report.get("design_lane", {}).get("lane_id"):
             errors.append(f"premium batch index design lane mismatch: {name}")
+        if candidate.get("render_profile") != report.get("render_profile"):
+            errors.append(f"premium batch index render profile mismatch: {name}")
         if candidate.get("panel_catalog_targets") != report.get("panel_catalog_targets"):
             errors.append(f"premium batch index panel catalog targets mismatch: {name}")
         if candidate.get("output_artifacts", {}).get("skin_zip", {}).get("path") != report.get("output_artifacts", {}).get("skin_zip", {}).get("path"):
@@ -366,6 +420,7 @@ def _report_checks(report_path: Path, manifest: dict[str, Any]) -> tuple[dict[st
         "report_alpha_policy_valid": False,
         "report_design_lane_valid": False,
         "report_panel_catalog_targets_valid": False,
+        "report_render_profile_valid": False,
         "tmuf_smoke_passed": False,
     }
     errors: list[str] = []
@@ -433,12 +488,14 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
         alpha_errors = validate_alpha_policy(report, premium=premium)
         lane_errors = validate_design_lane_evidence(report, premium=premium)
         panel_catalog_errors = validate_panel_catalog_targets(report, premium=premium, root=root)
+        render_profile_errors = validate_render_profile(report, premium=premium)
         if premium:
             premium_reports.append(report)
         report_checks["report_mask_evidence_valid"] = not mask_errors
         report_checks["report_alpha_policy_valid"] = not alpha_errors
         report_checks["report_design_lane_valid"] = not lane_errors
         report_checks["report_panel_catalog_targets_valid"] = not panel_catalog_errors
+        report_checks["report_render_profile_valid"] = not render_profile_errors
         preview_checks, preview_errors = _preview_checks(root, skin_name)
         visual_checks, visual_metrics, visual_errors = validate_visual_quality(
             root,
@@ -453,6 +510,7 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
             *alpha_errors,
             *lane_errors,
             *panel_catalog_errors,
+            *render_profile_errors,
             *preview_errors,
             *visual_errors,
         ]

@@ -71,6 +71,7 @@ class Candidate:
     rear_louver_count: float
     mudguard_mode: str
     panel_catalog_targets: tuple[str, ...]
+    mask_strengths: tuple[tuple[str, float], ...]
 
 
 CANDIDATES = [
@@ -98,6 +99,14 @@ CANDIDATES = [
             "front_mudguard_edge_details",
             *DEFAULT_PANEL_CATALOG_TARGETS,
         ),
+        (
+            ("side_blade", 1.32),
+            ("secondary_blade", 1.18),
+            ("nose_spear", 1.16),
+            ("mudguard_edge", 1.20),
+            ("rear_louvers", 0.62),
+            ("rear_center_glow", 0.76),
+        ),
     ),
     Candidate(
         "black_cyan_spine",
@@ -122,6 +131,14 @@ CANDIDATES = [
             "rear_mudguard_caps",
             "rear_mudguard_edge_details",
             *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
+        (
+            ("center_spine", 1.34),
+            ("nose_spear", 1.14),
+            ("tailwing", 1.18),
+            ("mudguard_edge", 1.12),
+            ("side_blade", 0.58),
+            ("secondary_blade", 0.62),
         ),
     ),
     Candidate(
@@ -148,6 +165,13 @@ CANDIDATES = [
             "rear_side_generated_panels",
             *DEFAULT_PANEL_CATALOG_TARGETS,
         ),
+        (
+            ("mudguards", 1.28),
+            ("side_blade", 1.16),
+            ("rear_center_glow", 1.22),
+            ("tailwing", 1.16),
+            ("center_spine", 0.78),
+        ),
     ),
     Candidate(
         "dark_neon_louver",
@@ -173,6 +197,15 @@ CANDIDATES = [
             "rear_mudguard_caps",
             "rear_mudguard_edge_details",
             *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
+        (
+            ("rear_louvers", 1.40),
+            ("rear_center_glow", 1.26),
+            ("tail_bar", 1.22),
+            ("tailwing", 1.18),
+            ("side_blade", 0.46),
+            ("secondary_blade", 0.55),
+            ("nose_spear", 0.70),
         ),
     ),
     Candidate(
@@ -201,12 +234,30 @@ CANDIDATES = [
             "tailwing_bands",
             "underbody_dark",
         ),
+        (
+            ("nose_spear", 1.22),
+            ("center_spine", 1.16),
+            ("side_wings", 1.25),
+            ("mirrors", 1.28),
+            ("rear_louvers", 0.72),
+            ("rear_center_glow", 0.82),
+        ),
     ),
 ]
 
 
 def _candidate_catalog_targets(candidate: Candidate) -> list[str]:
     return list(dict.fromkeys(candidate.panel_catalog_targets))
+
+
+def _candidate_mask_strengths(candidate: Candidate) -> dict[str, float]:
+    strengths = {name: 1.0 for name in PREMIUM_MASK_NAMES}
+    strengths.update({name: float(value) for name, value in candidate.mask_strengths})
+    return strengths
+
+
+def _blend_strength(strengths: dict[str, float], name: str, base: float) -> float:
+    return base * strengths.get(name, 1.0)
 
 
 def _axis_fields(fields: dict[str, Any]) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
@@ -224,7 +275,7 @@ def _soft(mask: np.ndarray, sigma: float = 1.2) -> np.ndarray:
 
 
 def _blend(rgb: np.ndarray, mask: np.ndarray, color: str, strength: float = 1.0) -> None:
-    amount = _soft(mask) * strength
+    amount = np.clip(_soft(mask) * strength, 0.0, 1.0)
     if amount.max() <= 0:
         return
     rgb[:] = rgb * (1.0 - amount[..., None]) + hx(color) * amount[..., None]
@@ -244,12 +295,13 @@ def _build_masks(fields: dict[str, Any], candidate: Candidate) -> dict[str, np.n
     return {name: panel.mask for name, panel in panel_masks.items()}
 
 
-def build_premium_rgba(candidate: Candidate) -> tuple[Image.Image, dict[str, float]]:
+def build_premium_rgba(candidate: Candidate) -> tuple[Image.Image, dict[str, float], dict[str, dict[str, float | int]]]:
     fields = load_fields()
     coverage = fields["coverage"]
     labels = fields["labels"]
     length, _lateral, height, symmetry = _axis_fields(fields)
     masks = _build_masks(fields, candidate)
+    strengths = _candidate_mask_strengths(candidate)
 
     rgb = np.zeros((SIZE, SIZE, 3), dtype=np.float32)
     alpha = np.full((SIZE, SIZE), 112, dtype=np.float32)
@@ -258,33 +310,34 @@ def build_premium_rgba(candidate: Candidate) -> tuple[Image.Image, dict[str, flo
     rgb[coverage] = hx(candidate.base)
     rgb[coverage] = rgb[coverage] * (1.0 - depth[coverage, None]) + hx(candidate.base2) * depth[coverage, None]
 
-    _blend(rgb, masks["center_spine"], candidate.primary, 0.95)
-    _blend(rgb, masks["nose_spear"], candidate.primary, 1.00)
-    _blend(rgb, masks["side_blade"], candidate.secondary, 0.92)
-    _blend(rgb, masks["secondary_blade"], candidate.primary, 0.72)
-    _blend(rgb, masks["rear_louvers"], candidate.secondary, 0.86)
-    _blend(rgb, masks["rear_center_glow"], candidate.primary, 0.82)
-    _blend(rgb, masks["shoulder_line"], candidate.highlight, 0.62)
-    _blend(rgb, masks["tail_bar"], candidate.secondary, 0.95)
+    _blend(rgb, masks["center_spine"], candidate.primary, _blend_strength(strengths, "center_spine", 0.95))
+    _blend(rgb, masks["nose_spear"], candidate.primary, _blend_strength(strengths, "nose_spear", 1.00))
+    _blend(rgb, masks["side_blade"], candidate.secondary, _blend_strength(strengths, "side_blade", 0.92))
+    _blend(rgb, masks["secondary_blade"], candidate.primary, _blend_strength(strengths, "secondary_blade", 0.72))
+    _blend(rgb, masks["rear_louvers"], candidate.secondary, _blend_strength(strengths, "rear_louvers", 0.86))
+    _blend(rgb, masks["rear_center_glow"], candidate.primary, _blend_strength(strengths, "rear_center_glow", 0.82))
+    _blend(rgb, masks["shoulder_line"], candidate.highlight, _blend_strength(strengths, "shoulder_line", 0.62))
+    _blend(rgb, masks["tail_bar"], candidate.secondary, _blend_strength(strengths, "tail_bar", 0.95))
 
     underbody = masks["main_body_under"] | masks["underplate"]
-    _blend(rgb, underbody, "#020204", 0.42)
-    _blend(rgb, masks["tailwing"], candidate.primary, 0.34)
-    _blend(rgb, masks["tailwing"] & (height > 0.52), candidate.secondary, 0.28)
-    _blend(rgb, masks["side_wings"], candidate.secondary, 0.46)
-    _blend(rgb, masks["mirrors"], candidate.highlight, 0.54)
+    underbody_strength = max(strengths["main_body_under"], strengths["underplate"])
+    _blend(rgb, underbody, "#020204", 0.42 * underbody_strength)
+    _blend(rgb, masks["tailwing"], candidate.primary, _blend_strength(strengths, "tailwing", 0.34))
+    _blend(rgb, masks["tailwing"] & (height > 0.52), candidate.secondary, _blend_strength(strengths, "tailwing", 0.28))
+    _blend(rgb, masks["side_wings"], candidate.secondary, _blend_strength(strengths, "side_wings", 0.46))
+    _blend(rgb, masks["mirrors"], candidate.highlight, _blend_strength(strengths, "mirrors", 0.54))
 
     if candidate.mudguard_mode == "split":
-        _blend(rgb, masks["mudguards"] & (length > 0.5), candidate.primary, 0.72)
-        _blend(rgb, masks["mudguards"] & (length <= 0.5), candidate.secondary, 0.72)
+        _blend(rgb, masks["mudguards"] & (length > 0.5), candidate.primary, _blend_strength(strengths, "mudguards", 0.72))
+        _blend(rgb, masks["mudguards"] & (length <= 0.5), candidate.secondary, _blend_strength(strengths, "mudguards", 0.72))
     elif candidate.mudguard_mode == "secondary_front":
-        _blend(rgb, masks["mudguards"], candidate.primary, 0.38)
-        _blend(rgb, masks["mudguard_edge"] & (length > 0.5), candidate.secondary, 0.88)
-        _blend(rgb, masks["mudguard_edge"] & (length <= 0.5), candidate.primary, 0.78)
+        _blend(rgb, masks["mudguards"], candidate.primary, _blend_strength(strengths, "mudguards", 0.38))
+        _blend(rgb, masks["mudguard_edge"] & (length > 0.5), candidate.secondary, _blend_strength(strengths, "mudguard_edge", 0.88))
+        _blend(rgb, masks["mudguard_edge"] & (length <= 0.5), candidate.primary, _blend_strength(strengths, "mudguard_edge", 0.78))
     else:
-        _blend(rgb, masks["mudguards"], candidate.secondary, 0.38)
-        _blend(rgb, masks["mudguard_edge"] & (length > 0.5), candidate.primary, 0.88)
-        _blend(rgb, masks["mudguard_edge"] & (length <= 0.5), candidate.secondary, 0.78)
+        _blend(rgb, masks["mudguards"], candidate.secondary, _blend_strength(strengths, "mudguards", 0.38))
+        _blend(rgb, masks["mudguard_edge"] & (length > 0.5), candidate.primary, _blend_strength(strengths, "mudguard_edge", 0.88))
+        _blend(rgb, masks["mudguard_edge"] & (length <= 0.5), candidate.secondary, _blend_strength(strengths, "mudguard_edge", 0.78))
 
     seams = binary_dilation(
         ((labels != np.roll(labels, 1, 0)) | (labels != np.roll(labels, 1, 1))) & (labels > 0),
@@ -313,12 +366,16 @@ def build_premium_rgba(candidate: Candidate) -> tuple[Image.Image, dict[str, flo
     alpha[accent] = 148
     alpha[masks["shoulder_line"]] = 136
     alpha[underbody] = 118
+    for mask_name in candidate.distinctive_masks:
+        subtle_distinctive = masks[mask_name] & ~accent
+        alpha[subtle_distinctive] = np.maximum(alpha[subtle_distinctive], 128)
 
     out = np.zeros((SIZE, SIZE, 4), dtype=np.uint8)
     out[..., :3] = np.clip(rgb, 0, 255).astype(np.uint8)
     out[..., 3] = np.clip(alpha, 0, 255).astype(np.uint8)
     metrics = _style_metrics(out, coverage)
-    return Image.fromarray(out, "RGBA"), metrics
+    mask_metrics = _mask_style_metrics(out, masks, PREMIUM_MASK_NAMES)
+    return Image.fromarray(out, "RGBA"), metrics, mask_metrics
 
 
 def _style_metrics(rgba: np.ndarray, coverage: np.ndarray) -> dict[str, float]:
@@ -333,6 +390,39 @@ def _style_metrics(rgba: np.ndarray, coverage: np.ndarray) -> dict[str, float]:
         "magenta_accent_ratio": round(float(magenta.sum() / denom), 6),
         "cyan_accent_ratio": round(float(cyan.sum() / denom), 6),
     }
+
+
+def _mask_style_metrics(
+    rgba: np.ndarray,
+    masks: dict[str, np.ndarray],
+    names: list[str],
+) -> dict[str, dict[str, float | int]]:
+    rgb = rgba[..., :3].astype(np.float32)
+    alpha = rgba[..., 3].astype(np.float32)
+    lum = rgb[..., 0] * 0.2126 + rgb[..., 1] * 0.7152 + rgb[..., 2] * 0.0722
+    chroma = rgb.max(axis=2) - rgb.min(axis=2)
+    metrics: dict[str, dict[str, float | int]] = {}
+    for name in names:
+        mask = masks[name]
+        pixel_count = int(mask.sum())
+        if pixel_count == 0:
+            metrics[name] = {
+                "pixel_count": 0,
+                "mean_alpha": 0.0,
+                "mean_luminance": 0.0,
+                "mean_chroma": 0.0,
+                "high_alpha_pixel_ratio": 0.0,
+            }
+            continue
+        mask_alpha = alpha[mask]
+        metrics[name] = {
+            "pixel_count": pixel_count,
+            "mean_alpha": round(float(mask_alpha.mean()), 6),
+            "mean_luminance": round(float(lum[mask].mean()), 6),
+            "mean_chroma": round(float(chroma[mask].mean()), 6),
+            "high_alpha_pixel_ratio": round(float((mask_alpha >= 136).sum() / pixel_count), 6),
+        }
+    return metrics
 
 
 def _alpha_metrics(rgba: np.ndarray, coverage: np.ndarray) -> dict[str, float | int | list[int]]:
@@ -362,7 +452,7 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
     for path in (out_skin.parent, out_preview.parent, out_report.parent):
         path.mkdir(parents=True, exist_ok=True)
 
-    image, metrics = build_premium_rgba(candidate)
+    image, metrics, mask_style_metrics = build_premium_rgba(candidate)
     fields = load_fields()
     alpha_metrics = _alpha_metrics(np.asarray(image), fields["coverage"])
     icon = image.convert("RGB").resize((64, 64), Image.Resampling.LANCZOS).convert("RGBA")
@@ -386,6 +476,7 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
     draw.text((pad, pad + side.height + 2), "top", fill=(230, 230, 240))
     draw.text((pad * 2 + side.width, 2), "rear", fill=(230, 230, 240))
     canvas.save(out_preview)
+    mask_strengths = _candidate_mask_strengths(candidate)
 
     report = {
         "skin_name": candidate.name,
@@ -422,6 +513,17 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
                 "mudguard_mode": candidate.mudguard_mode,
             },
         },
+        "render_profile": {
+            "lane_specific_strengths": True,
+            "evidence_status": "recipe_metadata_not_tmuf_proof",
+            "mask_strengths": mask_strengths,
+            "distinctive_mask_strengths": {
+                name: mask_strengths[name] for name in candidate.distinctive_masks
+            },
+            "damped_masks": [
+                name for name, strength in mask_strengths.items() if strength < 1.0
+            ],
+        },
         "alpha_policy": {
             "route": "conservative_dxt5_alpha",
             "material_effect_status": "not_proven_until_tmuf_smoke",
@@ -449,6 +551,7 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
             build_stock_panel_masks(load_fields(), _mask_params(candidate)),
             PREMIUM_MASK_NAMES,
         ),
+        "mask_style_metrics": mask_style_metrics,
         "style_metrics": metrics,
         "known_risks": [
             "GBuffer placement remains experimental until the calibration skin is smoke-tested in TMUF.",
@@ -475,6 +578,7 @@ def _batch_candidate_entry(report: dict[str, Any]) -> dict[str, Any]:
         "tmuf_smoke_test": report["tmuf_smoke_test"],
         "gbuffer_mapping": report["evidence_status"]["gbuffer_mapping"],
         "design_lane": report["design_lane"],
+        "render_profile": report["render_profile"],
         "style_metrics": report["style_metrics"],
         "alpha_metrics": report["alpha_metrics"],
         "panel_catalog_targets": report["panel_catalog_targets"],

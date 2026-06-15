@@ -49,18 +49,18 @@
       "output_artifacts": {
         "atlas_preview": {
           "path": "out/previews/black_magenta_cyan_blade_atlas.png",
-          "sha256": "5ebf336c3d5fe0ed1bcba92dfb9ad1df8c46900a9bc76411d5d2d600a123c491",
-          "size_bytes": 922518
+          "sha256": "0b26233a3b57b4df4ff530659984d936323897ada154b3380d42ad443d4fd64c",
+          "size_bytes": 895132
         },
         "projected_preview": {
           "path": "out/previews/black_magenta_cyan_blade_projected_side_top_rear.png",
-          "sha256": "610a994916d1b95ee33679c8fe9023af0bca8103e2702396b5af95823357f308",
-          "size_bytes": 287284
+          "sha256": "5a912cf58f0025e87a02e1c2024c2664184f0d030070b2c344a0e4d8b9c145a8",
+          "size_bytes": 280207
         },
         "skin_zip": {
           "path": "out/skins/black_magenta_cyan_blade.zip",
-          "sha256": "03415695d8c2203aa6b713f9a737d88df104404339002a3a65131e15ae6c2f0a",
-          "size_bytes": 553822
+          "sha256": "54c2130acf1c56c208fe784c9f57eac002be6e677849a644c871f34c8df19ca9",
+          "size_bytes": 542745
         }
       },
       "package_files": [
@@ -79,12 +79,43 @@
         "mirrors_and_holders",
         "underbody_dark"
       ],
+      "render_profile": {
+        "damped_masks": [
+          "rear_louvers",
+          "rear_center_glow"
+        ],
+        "distinctive_mask_strengths": {
+          "mudguard_edge": 1.2,
+          "nose_spear": 1.16,
+          "secondary_blade": 1.18,
+          "side_blade": 1.32
+        },
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_specific_strengths": true,
+        "mask_strengths": {
+          "center_spine": 1.0,
+          "main_body_under": 1.0,
+          "mirrors": 1.0,
+          "mudguard_edge": 1.2,
+          "mudguards": 1.0,
+          "nose_spear": 1.16,
+          "rear_center_glow": 0.76,
+          "rear_louvers": 0.62,
+          "secondary_blade": 1.18,
+          "shoulder_line": 1.0,
+          "side_blade": 1.32,
+          "side_wings": 1.0,
+          "tail_bar": 1.0,
+          "tailwing": 1.0,
+          "underplate": 1.0
+        }
+      },
       "route": "stock_diffuse_only",
       "skin_name": "black_magenta_cyan_blade",
       "style_metrics": {
-        "cyan_accent_ratio": 0.122051,
-        "dark_pixel_ratio": 0.839206,
-        "magenta_accent_ratio": 0.180442
+        "cyan_accent_ratio": 0.108273,
+        "dark_pixel_ratio": 0.841388,
+        "magenta_accent_ratio": 0.182
       },
       "tmuf_smoke_test": "not_run"
     },
@@ -135,18 +166,18 @@
       "output_artifacts": {
         "atlas_preview": {
           "path": "out/previews/black_cyan_spine_atlas.png",
-          "sha256": "8c7640236895538e839b9924fe8b0f09fd757e689123a0f5caa6701ad2f4e8bd",
-          "size_bytes": 935798
+          "sha256": "20c37ef321a99cc9dc9a4817050dbf3e5090c57af1faa2716f409ad6223c211e",
+          "size_bytes": 906881
         },
         "projected_preview": {
           "path": "out/previews/black_cyan_spine_projected_side_top_rear.png",
-          "sha256": "8b976a9a2fcc0cfaf2f244e72ce846ffb71f1e65f08954fa8fa6644622f92542",
-          "size_bytes": 295590
+          "sha256": "f38277a9316c1cc996c145d332e0847572002768eba45f666fa23df00cef1989",
+          "size_bytes": 291631
         },
         "skin_zip": {
           "path": "out/skins/black_cyan_spine.zip",
-          "sha256": "68844fa4c779f283b275ef80616a080954ec590dc498128b5fb66ca7775f4479",
-          "size_bytes": 557069
+          "sha256": "43caa40ebb14d906b23bec5e621f18032a76c9cec90b276de3ce9032b279b80a",
+          "size_bytes": 544236
         }
       },
       "package_files": [
@@ -164,12 +195,43 @@
         "mirrors_and_holders",
         "underbody_dark"
       ],
+      "render_profile": {
+        "damped_masks": [
+          "side_blade",
+          "secondary_blade"
+        ],
+        "distinctive_mask_strengths": {
+          "center_spine": 1.34,
+          "mudguard_edge": 1.12,
+          "nose_spear": 1.14,
+          "tailwing": 1.18
+        },
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_specific_strengths": true,
+        "mask_strengths": {
+          "center_spine": 1.34,
+          "main_body_under": 1.0,
+          "mirrors": 1.0,
+          "mudguard_edge": 1.12,
+          "mudguards": 1.0,
+          "nose_spear": 1.14,
+          "rear_center_glow": 1.0,
+          "rear_louvers": 1.0,
+          "secondary_blade": 0.62,
+          "shoulder_line": 1.0,
+          "side_blade": 0.58,
+          "side_wings": 1.0,
+          "tail_bar": 1.0,
+          "tailwing": 1.18,
+          "underplate": 1.0
+        }
+      },
       "route": "stock_diffuse_only",
       "skin_name": "black_cyan_spine",
       "style_metrics": {
-        "cyan_accent_ratio": 0.250155,
-        "dark_pixel_ratio": 0.635672,
-        "magenta_accent_ratio": 0.108466
+        "cyan_accent_ratio": 0.243715,
+        "dark_pixel_ratio": 0.630679,
+        "magenta_accent_ratio": 0.105295
       },
       "tmuf_smoke_test": "not_run"
     },
@@ -177,11 +239,12 @@
       "alpha_metrics": {
         "high_alpha_pixel_ratio": 0.368407,
         "max_alpha": 148,
-        "mean_alpha": 125.84797,
+        "mean_alpha": 125.890771,
         "min_alpha": 112,
         "unique_alpha_values": [
           112,
           118,
+          128,
           136,
           148
         ]
@@ -221,18 +284,18 @@
       "output_artifacts": {
         "atlas_preview": {
           "path": "out/previews/violet_cyber_flow_atlas.png",
-          "sha256": "f74d6f88a8faa22c4fd0372ef2b4c67ff7ee39539e645c1cfce8e90572aba294",
-          "size_bytes": 873546
+          "sha256": "7a21a70b6e7235eab5440ebf8eafce17ff160dfde20244491246dfc2b494d341",
+          "size_bytes": 873963
         },
         "projected_preview": {
           "path": "out/previews/violet_cyber_flow_projected_side_top_rear.png",
-          "sha256": "fc0903a73f13253a81b6c641c4830c316d4100457fa88487f9cea70706ce4588",
-          "size_bytes": 274818
+          "sha256": "06bc5c40dca81101fbea7cd284e81d8cc64e4cd6b72cdb358ff836eaa9243bca",
+          "size_bytes": 275821
         },
         "skin_zip": {
           "path": "out/skins/violet_cyber_flow.zip",
-          "sha256": "37f279cf6f77511a7257d3cdfc152696239a164768e3ce7a9e535335bc40326a",
-          "size_bytes": 531747
+          "sha256": "48d7aaadb50c1f419792d2f89437470d93cc016c5f5e83f0fe39498a47e282cf",
+          "size_bytes": 540107
         }
       },
       "package_files": [
@@ -251,12 +314,42 @@
         "mirrors_and_holders",
         "underbody_dark"
       ],
+      "render_profile": {
+        "damped_masks": [
+          "center_spine"
+        ],
+        "distinctive_mask_strengths": {
+          "mudguards": 1.28,
+          "rear_center_glow": 1.22,
+          "side_blade": 1.16,
+          "tailwing": 1.16
+        },
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_specific_strengths": true,
+        "mask_strengths": {
+          "center_spine": 0.78,
+          "main_body_under": 1.0,
+          "mirrors": 1.0,
+          "mudguard_edge": 1.0,
+          "mudguards": 1.28,
+          "nose_spear": 1.0,
+          "rear_center_glow": 1.22,
+          "rear_louvers": 1.0,
+          "secondary_blade": 1.0,
+          "shoulder_line": 1.0,
+          "side_blade": 1.16,
+          "side_wings": 1.0,
+          "tail_bar": 1.0,
+          "tailwing": 1.16,
+          "underplate": 1.0
+        }
+      },
       "route": "stock_diffuse_only",
       "skin_name": "violet_cyber_flow",
       "style_metrics": {
-        "cyan_accent_ratio": 0.12117,
-        "dark_pixel_ratio": 0.84259,
-        "magenta_accent_ratio": 0.141098
+        "cyan_accent_ratio": 0.122623,
+        "dark_pixel_ratio": 0.827285,
+        "magenta_accent_ratio": 0.136849
       },
       "tmuf_smoke_test": "not_run"
     },
@@ -308,18 +401,18 @@
       "output_artifacts": {
         "atlas_preview": {
           "path": "out/previews/dark_neon_louver_atlas.png",
-          "sha256": "4e21aa70ef601063724bd70b7cbc7676889005a413629dee3986938da1df9677",
-          "size_bytes": 862483
+          "sha256": "2864896fa88f79df161b63b1ca17b3ec795e45511db21875b49a0a68d7452456",
+          "size_bytes": 831632
         },
         "projected_preview": {
           "path": "out/previews/dark_neon_louver_projected_side_top_rear.png",
-          "sha256": "275af94d5eebae0497cbd455b8424fce2172082f03db76318b2c0c9229e8ce20",
-          "size_bytes": 289665
+          "sha256": "449b0c9f8ba3b2584183ada6752ff372bc308c521c5f232f6a263f7b26d5008a",
+          "size_bytes": 280954
         },
         "skin_zip": {
           "path": "out/skins/dark_neon_louver.zip",
-          "sha256": "0e85c4c498f967be4f9fbc63903ef69842e0441f645935fc9fc68896471f6b13",
-          "size_bytes": 510805
+          "sha256": "ffed375d253909f52d0e35e76482d67384407273343db5184753cc209918d39f",
+          "size_bytes": 497861
         }
       },
       "package_files": [
@@ -338,12 +431,44 @@
         "mirrors_and_holders",
         "underbody_dark"
       ],
+      "render_profile": {
+        "damped_masks": [
+          "nose_spear",
+          "side_blade",
+          "secondary_blade"
+        ],
+        "distinctive_mask_strengths": {
+          "rear_center_glow": 1.26,
+          "rear_louvers": 1.4,
+          "tail_bar": 1.22,
+          "tailwing": 1.18
+        },
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_specific_strengths": true,
+        "mask_strengths": {
+          "center_spine": 1.0,
+          "main_body_under": 1.0,
+          "mirrors": 1.0,
+          "mudguard_edge": 1.0,
+          "mudguards": 1.0,
+          "nose_spear": 0.7,
+          "rear_center_glow": 1.26,
+          "rear_louvers": 1.4,
+          "secondary_blade": 0.55,
+          "shoulder_line": 1.0,
+          "side_blade": 0.46,
+          "side_wings": 1.0,
+          "tail_bar": 1.22,
+          "tailwing": 1.18,
+          "underplate": 1.0
+        }
+      },
       "route": "stock_diffuse_only",
       "skin_name": "dark_neon_louver",
       "style_metrics": {
-        "cyan_accent_ratio": 0.10903,
-        "dark_pixel_ratio": 0.852232,
-        "magenta_accent_ratio": 0.143308
+        "cyan_accent_ratio": 0.102505,
+        "dark_pixel_ratio": 0.84229,
+        "magenta_accent_ratio": 0.13335
       },
       "tmuf_smoke_test": "not_run"
     },
@@ -394,18 +519,18 @@
       "output_artifacts": {
         "atlas_preview": {
           "path": "out/previews/magenta_cyan_race_proto_atlas.png",
-          "sha256": "6e46cf061cb1bcc4e7f55e7c10b4810c1c832d3a828c473c1cc8a053d9735409",
-          "size_bytes": 907787
+          "sha256": "4ecc02f933f94802676ff8fa7edf388eee5a3e6723f00750580d9faca066eb85",
+          "size_bytes": 879583
         },
         "projected_preview": {
           "path": "out/previews/magenta_cyan_race_proto_projected_side_top_rear.png",
-          "sha256": "3fa5b24cb0f9df77262d40c71269af29d7a9b33d1f2b3128450e3aae5de3f19f",
-          "size_bytes": 287192
+          "sha256": "504963aad4e0dbac3818f63ed87dd84fb570df5a755d70853a2e4d46ecdc03eb",
+          "size_bytes": 281620
         },
         "skin_zip": {
           "path": "out/skins/magenta_cyan_race_proto.zip",
-          "sha256": "ea1dc162b27b77129b346b21959bb52050675f20e2b5389cf542b137cf761d73",
-          "size_bytes": 524437
+          "sha256": "242a18a540f810d28be9161ebd6740f0b433dd899ed9966c2a683c11e6eade0a",
+          "size_bytes": 515283
         }
       },
       "package_files": [
@@ -423,12 +548,43 @@
         "tailwing_bands",
         "underbody_dark"
       ],
+      "render_profile": {
+        "damped_masks": [
+          "rear_louvers",
+          "rear_center_glow"
+        ],
+        "distinctive_mask_strengths": {
+          "center_spine": 1.16,
+          "mirrors": 1.28,
+          "nose_spear": 1.22,
+          "side_wings": 1.25
+        },
+        "evidence_status": "recipe_metadata_not_tmuf_proof",
+        "lane_specific_strengths": true,
+        "mask_strengths": {
+          "center_spine": 1.16,
+          "main_body_under": 1.0,
+          "mirrors": 1.28,
+          "mudguard_edge": 1.0,
+          "mudguards": 1.0,
+          "nose_spear": 1.22,
+          "rear_center_glow": 0.82,
+          "rear_louvers": 0.72,
+          "secondary_blade": 1.0,
+          "shoulder_line": 1.0,
+          "side_blade": 1.0,
+          "side_wings": 1.25,
+          "tail_bar": 1.0,
+          "tailwing": 1.0,
+          "underplate": 1.0
+        }
+      },
       "route": "stock_diffuse_only",
       "skin_name": "magenta_cyan_race_proto",
       "style_metrics": {
-        "cyan_accent_ratio": 0.121439,
-        "dark_pixel_ratio": 0.822216,
-        "magenta_accent_ratio": 0.191734
+        "cyan_accent_ratio": 0.136732,
+        "dark_pixel_ratio": 0.822058,
+        "magenta_accent_ratio": 0.193394
       },
       "tmuf_smoke_test": "not_run"
     }
