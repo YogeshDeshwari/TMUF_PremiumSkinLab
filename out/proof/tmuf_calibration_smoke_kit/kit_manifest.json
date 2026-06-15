@@ -1,0 +1,21 @@
+{
+  "calibration_skin": "skins/calibration_stock_diffuse.zip",
+  "does_not_prove_tmuf_smoke": true,
+  "files": [
+    "README_tmuf_smoke_test.md",
+    "previews/calibration_stock_diffuse_atlas.png",
+    "previews/calibration_stock_diffuse_projected_side_top_rear.png",
+    "proof/calibration_tmuf_smoke_template.json",
+    "skins/calibration_stock_diffuse.zip"
+  ],
+  "instructions": "README_tmuf_smoke_test.md",
+  "next_steps": [
+    "Copy skins/calibration_stock_diffuse.zip into the TMUF/TMNF StadiumCar skin folder.",
+    "Load the skin in TMUF/TMNF.",
+    "Record required observations and screenshot paths in a filled smoke report.",
+    "Run recipes/tmuf_smoke_gate.py --evaluate before applying any promotion."
+  ],
+  "schema_version": 1,
+  "smoke_report_template": "proof/calibration_tmuf_smoke_template.json",
+  "status": "not_run"
+}

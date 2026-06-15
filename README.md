@@ -68,6 +68,7 @@ Those skins intentionally remain behind the same calibration proof gate.
 python3 recipes/stock_calibration.py
 python3 recipes/stock_premium_neon.py
 python3 recipes/tmuf_smoke_gate.py --write-template
+python3 recipes/prepare_tmuf_smoke_kit.py
 python3 recipes/validate_stock_outputs.py
 python3 recipes/validate_profile_gates.py
 python3 -m unittest discover -s tests
