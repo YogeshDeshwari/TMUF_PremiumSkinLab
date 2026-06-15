@@ -21,6 +21,7 @@
     "underbody_alpha": 118
   },
   "design_lane": {
+    "catalog_target_count": 10,
     "composition_focus": "dense rear louver rhythm with restrained spine and alternating guard caps",
     "distinctive_masks": [
       "rear_louvers",
@@ -36,7 +37,19 @@
       "mudguard_mode": "secondary_front",
       "rear_louver_count": 22.0,
       "spine_width": 0.038
-    }
+    },
+    "primary_catalog_targets": [
+      "engine_rear_deck",
+      "rear_deck_fine_louver_rows",
+      "rear_side_generated_panels",
+      "rear_floor_generated_panels",
+      "tailwing_bands",
+      "rear_mudguard_caps",
+      "rear_mudguard_edge_details",
+      "side_wings",
+      "mirrors_and_holders",
+      "underbody_dark"
+    ]
   },
   "design_rules": [
     "black_charcoal_base",
@@ -367,7 +380,13 @@
     "Icon.dds"
   ],
   "panel_catalog_targets": [
+    "engine_rear_deck",
+    "rear_deck_fine_louver_rows",
+    "rear_side_generated_panels",
+    "rear_floor_generated_panels",
     "tailwing_bands",
+    "rear_mudguard_caps",
+    "rear_mudguard_edge_details",
     "side_wings",
     "mirrors_and_holders",
     "underbody_dark"

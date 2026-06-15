@@ -223,6 +223,48 @@ def validate_premium_lane_distinctness(skins: list[dict[str, Any]]) -> list[str]
     return []
 
 
+def _known_panel_catalog_targets(root: Path = ROOT) -> set[str]:
+    inventory_path = root / "out" / "reports" / "stock_part_inventory.json"
+    if not inventory_path.exists():
+        return set()
+    inventory = _load_json(inventory_path)
+    panels = inventory.get("paintable_panel_catalog", {}).get("panels", {})
+    if not isinstance(panels, dict):
+        return set()
+    return set(panels)
+
+
+def validate_panel_catalog_targets(
+    report: dict[str, Any],
+    premium: bool,
+    root: Path = ROOT,
+) -> list[str]:
+    if not premium:
+        return []
+
+    targets = report.get("panel_catalog_targets")
+    if not isinstance(targets, list) or not targets:
+        return ["premium report has no panel_catalog_targets list"]
+
+    errors: list[str] = []
+    if len(set(targets)) != len(targets):
+        errors.append("panel_catalog_targets must not contain duplicates")
+
+    known_targets = _known_panel_catalog_targets(root)
+    for target in targets:
+        if target not in known_targets:
+            errors.append(f"unknown panel catalog target: {target}")
+
+    lane = report.get("design_lane", {})
+    lane_targets = lane.get("primary_catalog_targets") if isinstance(lane, dict) else None
+    if not isinstance(lane_targets, list) or sorted(lane_targets) != sorted(targets):
+        errors.append("design lane primary_catalog_targets must match panel_catalog_targets")
+    if not isinstance(lane, dict) or lane.get("catalog_target_count") != len(targets):
+        errors.append("design lane catalog_target_count must match panel_catalog_targets")
+
+    return errors
+
+
 def validate_premium_batch_index(index: dict[str, Any], premium_reports: list[dict[str, Any]]) -> list[str]:
     errors: list[str] = []
     if index.get("schema") != "tmuf_premium_skin_lab.premium_batch_index.v1":
@@ -259,6 +301,8 @@ def validate_premium_batch_index(index: dict[str, Any], premium_reports: list[di
             errors.append(f"premium batch index package files mismatch: {name}")
         if candidate.get("design_lane", {}).get("lane_id") != report.get("design_lane", {}).get("lane_id"):
             errors.append(f"premium batch index design lane mismatch: {name}")
+        if candidate.get("panel_catalog_targets") != report.get("panel_catalog_targets"):
+            errors.append(f"premium batch index panel catalog targets mismatch: {name}")
         if candidate.get("output_artifacts", {}).get("skin_zip", {}).get("path") != report.get("output_artifacts", {}).get("skin_zip", {}).get("path"):
             errors.append(f"premium batch index artifact mismatch: {name}")
 
@@ -321,6 +365,7 @@ def _report_checks(report_path: Path, manifest: dict[str, Any]) -> tuple[dict[st
         "report_mask_evidence_valid": False,
         "report_alpha_policy_valid": False,
         "report_design_lane_valid": False,
+        "report_panel_catalog_targets_valid": False,
         "tmuf_smoke_passed": False,
     }
     errors: list[str] = []
@@ -387,11 +432,13 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
         mask_errors = validate_mask_evidence(report, premium=premium)
         alpha_errors = validate_alpha_policy(report, premium=premium)
         lane_errors = validate_design_lane_evidence(report, premium=premium)
+        panel_catalog_errors = validate_panel_catalog_targets(report, premium=premium, root=root)
         if premium:
             premium_reports.append(report)
         report_checks["report_mask_evidence_valid"] = not mask_errors
         report_checks["report_alpha_policy_valid"] = not alpha_errors
         report_checks["report_design_lane_valid"] = not lane_errors
+        report_checks["report_panel_catalog_targets_valid"] = not panel_catalog_errors
         preview_checks, preview_errors = _preview_checks(root, skin_name)
         visual_checks, visual_metrics, visual_errors = validate_visual_quality(
             root,
@@ -405,6 +452,7 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
             *mask_errors,
             *alpha_errors,
             *lane_errors,
+            *panel_catalog_errors,
             *preview_errors,
             *visual_errors,
         ]

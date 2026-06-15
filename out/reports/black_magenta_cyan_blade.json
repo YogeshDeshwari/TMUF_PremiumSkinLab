@@ -21,6 +21,7 @@
     "underbody_alpha": 118
   },
   "design_lane": {
+    "catalog_target_count": 10,
     "composition_focus": "wide lower side blades with a magenta nose spear and cyan side energy",
     "distinctive_masks": [
       "side_blade",
@@ -36,7 +37,19 @@
       "mudguard_mode": "primary_front",
       "rear_louver_count": 16.0,
       "spine_width": 0.05
-    }
+    },
+    "primary_catalog_targets": [
+      "sidepod_blades",
+      "nose_identity_panel",
+      "nose_side_generated_panels",
+      "nose_deck_generated_panels",
+      "front_mudguard_caps",
+      "front_mudguard_edge_details",
+      "tailwing_bands",
+      "side_wings",
+      "mirrors_and_holders",
+      "underbody_dark"
+    ]
   },
   "design_rules": [
     "black_charcoal_base",
@@ -367,6 +380,12 @@
     "Icon.dds"
   ],
   "panel_catalog_targets": [
+    "sidepod_blades",
+    "nose_identity_panel",
+    "nose_side_generated_panels",
+    "nose_deck_generated_panels",
+    "front_mudguard_caps",
+    "front_mudguard_edge_details",
     "tailwing_bands",
     "side_wings",
     "mirrors_and_holders",

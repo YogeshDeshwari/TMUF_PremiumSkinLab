@@ -21,6 +21,7 @@
     "underbody_alpha": 118
   },
   "design_lane": {
+    "catalog_target_count": 9,
     "composition_focus": "balanced race prototype layout using nose, spine, side blades, and local aero accents",
     "distinctive_masks": [
       "nose_spear",
@@ -36,7 +37,18 @@
       "mudguard_mode": "primary_front",
       "rear_louver_count": 17.0,
       "spine_width": 0.056
-    }
+    },
+    "primary_catalog_targets": [
+      "center_spine",
+      "nose_identity_panel",
+      "nose_deck_generated_panels",
+      "sidepod_blades",
+      "side_wings",
+      "mirrors_and_holders",
+      "licence_plate_blocks",
+      "tailwing_bands",
+      "underbody_dark"
+    ]
   },
   "design_rules": [
     "black_charcoal_base",
@@ -367,9 +379,14 @@
     "Icon.dds"
   ],
   "panel_catalog_targets": [
-    "tailwing_bands",
+    "center_spine",
+    "nose_identity_panel",
+    "nose_deck_generated_panels",
+    "sidepod_blades",
     "side_wings",
     "mirrors_and_holders",
+    "licence_plate_blocks",
+    "tailwing_bands",
     "underbody_dark"
   ],
   "proof_gate": {

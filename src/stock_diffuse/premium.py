@@ -51,6 +51,7 @@ PANEL_CATALOG_TARGETS = [
     "mirrors_and_holders",
     "underbody_dark",
 ]
+DEFAULT_PANEL_CATALOG_TARGETS = tuple(PANEL_CATALOG_TARGETS)
 
 
 @dataclass(frozen=True)
@@ -69,6 +70,7 @@ class Candidate:
     blade_offset: float
     rear_louver_count: float
     mudguard_mode: str
+    panel_catalog_targets: tuple[str, ...]
 
 
 CANDIDATES = [
@@ -87,6 +89,15 @@ CANDIDATES = [
         0.16,
         16.0,
         "primary_front",
+        (
+            "sidepod_blades",
+            "nose_identity_panel",
+            "nose_side_generated_panels",
+            "nose_deck_generated_panels",
+            "front_mudguard_caps",
+            "front_mudguard_edge_details",
+            *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
     ),
     Candidate(
         "black_cyan_spine",
@@ -103,6 +114,15 @@ CANDIDATES = [
         0.21,
         18.0,
         "secondary_front",
+        (
+            "center_spine",
+            "nose_identity_panel",
+            "tailwing_bands",
+            "front_mudguard_caps",
+            "rear_mudguard_caps",
+            "rear_mudguard_edge_details",
+            *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
     ),
     Candidate(
         "violet_cyber_flow",
@@ -119,6 +139,15 @@ CANDIDATES = [
         0.13,
         14.0,
         "split",
+        (
+            "sidepod_blades",
+            "front_mudguard_caps",
+            "rear_mudguard_caps",
+            "front_mudguard_edge_details",
+            "rear_mudguard_edge_details",
+            "rear_side_generated_panels",
+            *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
     ),
     Candidate(
         "dark_neon_louver",
@@ -135,6 +164,16 @@ CANDIDATES = [
         0.24,
         22.0,
         "secondary_front",
+        (
+            "engine_rear_deck",
+            "rear_deck_fine_louver_rows",
+            "rear_side_generated_panels",
+            "rear_floor_generated_panels",
+            "tailwing_bands",
+            "rear_mudguard_caps",
+            "rear_mudguard_edge_details",
+            *DEFAULT_PANEL_CATALOG_TARGETS,
+        ),
     ),
     Candidate(
         "magenta_cyan_race_proto",
@@ -151,8 +190,23 @@ CANDIDATES = [
         0.18,
         17.0,
         "primary_front",
+        (
+            "center_spine",
+            "nose_identity_panel",
+            "nose_deck_generated_panels",
+            "sidepod_blades",
+            "side_wings",
+            "mirrors_and_holders",
+            "licence_plate_blocks",
+            "tailwing_bands",
+            "underbody_dark",
+        ),
     ),
 ]
+
+
+def _candidate_catalog_targets(candidate: Candidate) -> list[str]:
+    return list(dict.fromkeys(candidate.panel_catalog_targets))
 
 
 def _axis_fields(fields: dict[str, Any]) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
@@ -357,6 +411,8 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
             "lane_id": candidate.lane_id,
             "composition_focus": candidate.composition_focus,
             "distinctive_masks": list(candidate.distinctive_masks),
+            "primary_catalog_targets": _candidate_catalog_targets(candidate),
+            "catalog_target_count": len(_candidate_catalog_targets(candidate)),
             "evidence_status": "recipe_metadata_not_tmuf_proof",
             "parameter_signature": {
                 "spine_width": candidate.spine_width,
@@ -387,7 +443,7 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
             "no_stadiumcar_v2_uvs",
             "no_ch2026_donor_assumptions",
         ],
-        "panel_catalog_targets": PANEL_CATALOG_TARGETS,
+        "panel_catalog_targets": _candidate_catalog_targets(candidate),
         "masks_used": PREMIUM_MASK_NAMES,
         "mask_evidence": mask_report_entries(
             build_stock_panel_masks(load_fields(), _mask_params(candidate)),

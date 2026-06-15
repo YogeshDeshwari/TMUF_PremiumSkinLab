@@ -28,6 +28,7 @@ class StockValidatorTests(unittest.TestCase):
             self.assertTrue(checks["report_output_artifacts_match_files"])
             self.assertTrue(checks["report_mask_evidence_valid"])
             self.assertTrue(checks["report_design_lane_valid"])
+            self.assertTrue(checks["report_panel_catalog_targets_valid"])
             self.assertTrue(checks["atlas_preview_exists"])
             self.assertTrue(checks["projection_preview_exists"])
             self.assertTrue(checks["preview_visual_quality_passed"])
@@ -274,6 +275,51 @@ class StockValidatorTests(unittest.TestCase):
             ["premium design lanes must be distinct across candidates"],
         )
 
+    def test_premium_panel_catalog_targets_are_validated(self):
+        from src.evidence.stock_validator import validate_panel_catalog_targets
+
+        valid_report = {
+            "skin_name": "example",
+            "panel_catalog_targets": ["center_spine", "tailwing_bands", "underbody_dark"],
+            "design_lane": {
+                "primary_catalog_targets": ["center_spine", "tailwing_bands", "underbody_dark"],
+                "catalog_target_count": 3,
+            },
+        }
+        self.assertEqual(validate_panel_catalog_targets(valid_report, premium=True), [])
+        self.assertEqual(validate_panel_catalog_targets(valid_report, premium=False), [])
+
+        missing_targets = {"skin_name": "missing", "design_lane": {}}
+        self.assertEqual(
+            validate_panel_catalog_targets(missing_targets, premium=True),
+            ["premium report has no panel_catalog_targets list"],
+        )
+
+        unknown_target = {
+            **valid_report,
+            "panel_catalog_targets": ["center_spine", "not_in_catalog"],
+            "design_lane": {
+                **valid_report["design_lane"],
+                "primary_catalog_targets": ["center_spine", "not_in_catalog"],
+                "catalog_target_count": 2,
+            },
+        }
+        self.assertIn(
+            "unknown panel catalog target: not_in_catalog",
+            validate_panel_catalog_targets(unknown_target, premium=True),
+        )
+
+        mismatched_lane = {
+            **valid_report,
+            "design_lane": {
+                "primary_catalog_targets": ["center_spine"],
+                "catalog_target_count": 1,
+            },
+        }
+        errors = validate_panel_catalog_targets(mismatched_lane, premium=True)
+        self.assertIn("design lane primary_catalog_targets must match panel_catalog_targets", errors)
+        self.assertIn("design lane catalog_target_count must match panel_catalog_targets", errors)
+
     def test_premium_batch_index_is_validated_against_reports(self):
         from src.evidence.stock_validator import validate_premium_batch_index
 
@@ -285,6 +331,7 @@ class StockValidatorTests(unittest.TestCase):
                 "tmuf_smoke_test": "not_run",
                 "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
                 "design_lane": {"lane_id": "lane_a"},
+                "panel_catalog_targets": ["center_spine"],
                 "output_artifacts": {"skin_zip": {"path": "out/skins/a.zip"}},
             },
             {
@@ -294,6 +341,7 @@ class StockValidatorTests(unittest.TestCase):
                 "tmuf_smoke_test": "not_run",
                 "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
                 "design_lane": {"lane_id": "lane_b"},
+                "panel_catalog_targets": ["tailwing_bands"],
                 "output_artifacts": {"skin_zip": {"path": "out/skins/b.zip"}},
             },
         ]
@@ -308,6 +356,7 @@ class StockValidatorTests(unittest.TestCase):
                     "tmuf_smoke_test": "not_run",
                     "gbuffer_mapping": "experimental_until_tmuf_smoke",
                     "design_lane": {"lane_id": "lane_a"},
+                    "panel_catalog_targets": ["center_spine"],
                     "package_files": ["Diffuse.dds", "Icon.dds"],
                     "output_artifacts": {"skin_zip": {"path": "out/skins/a.zip"}},
                 },
@@ -316,6 +365,7 @@ class StockValidatorTests(unittest.TestCase):
                     "tmuf_smoke_test": "not_run",
                     "gbuffer_mapping": "experimental_until_tmuf_smoke",
                     "design_lane": {"lane_id": "lane_b"},
+                    "panel_catalog_targets": ["tailwing_bands"],
                     "package_files": ["Diffuse.dds", "Icon.dds"],
                     "output_artifacts": {"skin_zip": {"path": "out/skins/b.zip"}},
                 },
@@ -340,6 +390,18 @@ class StockValidatorTests(unittest.TestCase):
         self.assertEqual(
             validate_premium_batch_index(wrong_count, reports),
             ["premium batch index candidate_count mismatch"],
+        )
+
+        wrong_targets = {
+            **valid_index,
+            "candidates": [
+                {**valid_index["candidates"][0], "panel_catalog_targets": ["tailwing_bands"]},
+                valid_index["candidates"][1],
+            ],
+        }
+        self.assertIn(
+            "premium batch index panel catalog targets mismatch: a",
+            validate_premium_batch_index(wrong_targets, reports),
         )
 
     def test_cli_outputs_json_summary(self):

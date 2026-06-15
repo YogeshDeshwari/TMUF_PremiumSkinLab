@@ -197,6 +197,14 @@ class PremiumStockBatchTests(unittest.TestCase):
             self.assertIn("side_wings", report["panel_catalog_targets"])
             self.assertIn("mirrors_and_holders", report["panel_catalog_targets"])
             self.assertIn("underbody_dark", report["panel_catalog_targets"])
+            self.assertEqual(
+                report["design_lane"]["catalog_target_count"],
+                len(report["panel_catalog_targets"]),
+            )
+            self.assertEqual(
+                sorted(report["design_lane"]["primary_catalog_targets"]),
+                sorted(report["panel_catalog_targets"]),
+            )
             for local_mask in ("tailwing", "side_wings", "mirrors", "underplate", "main_body_under"):
                 self.assertIn(local_mask, report["masks_used"])
                 self.assertEqual(
@@ -236,8 +244,25 @@ class PremiumStockBatchTests(unittest.TestCase):
             self.assertEqual(candidate["tmuf_smoke_test"], "not_run")
             self.assertEqual(candidate["gbuffer_mapping"], "experimental_until_tmuf_smoke")
             self.assertEqual(candidate["package_files"], ["Diffuse.dds", "Icon.dds"])
+            self.assertEqual(
+                candidate["design_lane"]["catalog_target_count"],
+                len(candidate["panel_catalog_targets"]),
+            )
             self.assertIn("skin_zip", candidate["output_artifacts"])
             self.assertIn("projected_preview", candidate["output_artifacts"])
+
+        reports_by_name = {
+            item["name"]: json.loads(Path(item["report"]).read_text())
+            for item in outputs
+        }
+        self.assertIn("sidepod_blades", reports_by_name["black_magenta_cyan_blade"]["panel_catalog_targets"])
+        self.assertIn("nose_side_generated_panels", reports_by_name["black_magenta_cyan_blade"]["panel_catalog_targets"])
+        self.assertIn("nose_deck_generated_panels", reports_by_name["black_magenta_cyan_blade"]["panel_catalog_targets"])
+        self.assertIn("center_spine", reports_by_name["black_cyan_spine"]["panel_catalog_targets"])
+        self.assertIn("rear_deck_fine_louver_rows", reports_by_name["dark_neon_louver"]["panel_catalog_targets"])
+        self.assertIn("engine_rear_deck", reports_by_name["dark_neon_louver"]["panel_catalog_targets"])
+        self.assertIn("front_mudguard_caps", reports_by_name["violet_cyber_flow"]["panel_catalog_targets"])
+        self.assertIn("rear_mudguard_caps", reports_by_name["violet_cyber_flow"]["panel_catalog_targets"])
 
 
 if __name__ == "__main__":

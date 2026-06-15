@@ -21,6 +21,7 @@
     "underbody_alpha": 118
   },
   "design_lane": {
+    "catalog_target_count": 10,
     "composition_focus": "violet/magenta flow with split guard color and cyan side structure",
     "distinctive_masks": [
       "mudguards",
@@ -36,7 +37,19 @@
       "mudguard_mode": "split",
       "rear_louver_count": 14.0,
       "spine_width": 0.044
-    }
+    },
+    "primary_catalog_targets": [
+      "sidepod_blades",
+      "front_mudguard_caps",
+      "rear_mudguard_caps",
+      "front_mudguard_edge_details",
+      "rear_mudguard_edge_details",
+      "rear_side_generated_panels",
+      "tailwing_bands",
+      "side_wings",
+      "mirrors_and_holders",
+      "underbody_dark"
+    ]
   },
   "design_rules": [
     "black_charcoal_base",
@@ -367,6 +380,12 @@
     "Icon.dds"
   ],
   "panel_catalog_targets": [
+    "sidepod_blades",
+    "front_mudguard_caps",
+    "rear_mudguard_caps",
+    "front_mudguard_edge_details",
+    "rear_mudguard_edge_details",
+    "rear_side_generated_panels",
     "tailwing_bands",
     "side_wings",
     "mirrors_and_holders",

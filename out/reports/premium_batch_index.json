@@ -15,6 +15,7 @@
         ]
       },
       "design_lane": {
+        "catalog_target_count": 10,
         "composition_focus": "wide lower side blades with a magenta nose spear and cyan side energy",
         "distinctive_masks": [
           "side_blade",
@@ -30,7 +31,19 @@
           "mudguard_mode": "primary_front",
           "rear_louver_count": 16.0,
           "spine_width": 0.05
-        }
+        },
+        "primary_catalog_targets": [
+          "sidepod_blades",
+          "nose_identity_panel",
+          "nose_side_generated_panels",
+          "nose_deck_generated_panels",
+          "front_mudguard_caps",
+          "front_mudguard_edge_details",
+          "tailwing_bands",
+          "side_wings",
+          "mirrors_and_holders",
+          "underbody_dark"
+        ]
       },
       "gbuffer_mapping": "experimental_until_tmuf_smoke",
       "output_artifacts": {
@@ -55,6 +68,12 @@
         "Icon.dds"
       ],
       "panel_catalog_targets": [
+        "sidepod_blades",
+        "nose_identity_panel",
+        "nose_side_generated_panels",
+        "nose_deck_generated_panels",
+        "front_mudguard_caps",
+        "front_mudguard_edge_details",
         "tailwing_bands",
         "side_wings",
         "mirrors_and_holders",
@@ -83,6 +102,7 @@
         ]
       },
       "design_lane": {
+        "catalog_target_count": 9,
         "composition_focus": "dominant cyan center spine with magenta guard and tail echoes",
         "distinctive_masks": [
           "center_spine",
@@ -98,7 +118,18 @@
           "mudguard_mode": "secondary_front",
           "rear_louver_count": 18.0,
           "spine_width": 0.064
-        }
+        },
+        "primary_catalog_targets": [
+          "center_spine",
+          "nose_identity_panel",
+          "tailwing_bands",
+          "front_mudguard_caps",
+          "rear_mudguard_caps",
+          "rear_mudguard_edge_details",
+          "side_wings",
+          "mirrors_and_holders",
+          "underbody_dark"
+        ]
       },
       "gbuffer_mapping": "experimental_until_tmuf_smoke",
       "output_artifacts": {
@@ -123,7 +154,12 @@
         "Icon.dds"
       ],
       "panel_catalog_targets": [
+        "center_spine",
+        "nose_identity_panel",
         "tailwing_bands",
+        "front_mudguard_caps",
+        "rear_mudguard_caps",
+        "rear_mudguard_edge_details",
         "side_wings",
         "mirrors_and_holders",
         "underbody_dark"
@@ -151,6 +187,7 @@
         ]
       },
       "design_lane": {
+        "catalog_target_count": 10,
         "composition_focus": "violet/magenta flow with split guard color and cyan side structure",
         "distinctive_masks": [
           "mudguards",
@@ -166,7 +203,19 @@
           "mudguard_mode": "split",
           "rear_louver_count": 14.0,
           "spine_width": 0.044
-        }
+        },
+        "primary_catalog_targets": [
+          "sidepod_blades",
+          "front_mudguard_caps",
+          "rear_mudguard_caps",
+          "front_mudguard_edge_details",
+          "rear_mudguard_edge_details",
+          "rear_side_generated_panels",
+          "tailwing_bands",
+          "side_wings",
+          "mirrors_and_holders",
+          "underbody_dark"
+        ]
       },
       "gbuffer_mapping": "experimental_until_tmuf_smoke",
       "output_artifacts": {
@@ -191,6 +240,12 @@
         "Icon.dds"
       ],
       "panel_catalog_targets": [
+        "sidepod_blades",
+        "front_mudguard_caps",
+        "rear_mudguard_caps",
+        "front_mudguard_edge_details",
+        "rear_mudguard_edge_details",
+        "rear_side_generated_panels",
         "tailwing_bands",
         "side_wings",
         "mirrors_and_holders",
@@ -219,6 +274,7 @@
         ]
       },
       "design_lane": {
+        "catalog_target_count": 10,
         "composition_focus": "dense rear louver rhythm with restrained spine and alternating guard caps",
         "distinctive_masks": [
           "rear_louvers",
@@ -234,7 +290,19 @@
           "mudguard_mode": "secondary_front",
           "rear_louver_count": 22.0,
           "spine_width": 0.038
-        }
+        },
+        "primary_catalog_targets": [
+          "engine_rear_deck",
+          "rear_deck_fine_louver_rows",
+          "rear_side_generated_panels",
+          "rear_floor_generated_panels",
+          "tailwing_bands",
+          "rear_mudguard_caps",
+          "rear_mudguard_edge_details",
+          "side_wings",
+          "mirrors_and_holders",
+          "underbody_dark"
+        ]
       },
       "gbuffer_mapping": "experimental_until_tmuf_smoke",
       "output_artifacts": {
@@ -259,7 +327,13 @@
         "Icon.dds"
       ],
       "panel_catalog_targets": [
+        "engine_rear_deck",
+        "rear_deck_fine_louver_rows",
+        "rear_side_generated_panels",
+        "rear_floor_generated_panels",
         "tailwing_bands",
+        "rear_mudguard_caps",
+        "rear_mudguard_edge_details",
         "side_wings",
         "mirrors_and_holders",
         "underbody_dark"
@@ -287,6 +361,7 @@
         ]
       },
       "design_lane": {
+        "catalog_target_count": 9,
         "composition_focus": "balanced race prototype layout using nose, spine, side blades, and local aero accents",
         "distinctive_masks": [
           "nose_spear",
@@ -302,7 +377,18 @@
           "mudguard_mode": "primary_front",
           "rear_louver_count": 17.0,
           "spine_width": 0.056
-        }
+        },
+        "primary_catalog_targets": [
+          "center_spine",
+          "nose_identity_panel",
+          "nose_deck_generated_panels",
+          "sidepod_blades",
+          "side_wings",
+          "mirrors_and_holders",
+          "licence_plate_blocks",
+          "tailwing_bands",
+          "underbody_dark"
+        ]
       },
       "gbuffer_mapping": "experimental_until_tmuf_smoke",
       "output_artifacts": {
@@ -327,9 +413,14 @@
         "Icon.dds"
       ],
       "panel_catalog_targets": [
-        "tailwing_bands",
+        "center_spine",
+        "nose_identity_panel",
+        "nose_deck_generated_panels",
+        "sidepod_blades",
         "side_wings",
         "mirrors_and_holders",
+        "licence_plate_blocks",
+        "tailwing_bands",
         "underbody_dark"
       ],
       "route": "stock_diffuse_only",
