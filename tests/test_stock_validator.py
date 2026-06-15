@@ -27,11 +27,19 @@ class StockValidatorTests(unittest.TestCase):
             self.assertTrue(checks["report_input_evidence_matches_manifest"])
             self.assertTrue(checks["report_output_artifacts_match_files"])
             self.assertTrue(checks["report_mask_evidence_valid"])
+            self.assertTrue(checks["report_design_lane_valid"])
             self.assertTrue(checks["atlas_preview_exists"])
             self.assertTrue(checks["projection_preview_exists"])
             self.assertTrue(checks["preview_visual_quality_passed"])
             self.assertFalse(checks["tmuf_smoke_passed"])
             self.assertIn("visual_metrics", skin)
+
+        premium_lanes = [
+            skin["design_lane"]["lane_id"]
+            for skin in result["skins"]
+            if skin["skin_name"] != "calibration_stock_diffuse"
+        ]
+        self.assertEqual(len(set(premium_lanes)), len(premium_lanes))
 
     def test_report_input_evidence_must_match_manifest(self):
         from src.evidence.input_trace import STOCK_DIFFUSE_INPUTS
@@ -207,6 +215,61 @@ class StockValidatorTests(unittest.TestCase):
         errors = validate_alpha_policy(too_extreme, premium=True)
         self.assertIn("alpha min below conservative range", errors)
         self.assertIn("alpha max above conservative range", errors)
+
+    def test_premium_design_lane_evidence_is_validated(self):
+        from src.evidence.stock_validator import validate_design_lane_evidence, validate_premium_lane_distinctness
+
+        valid_report = {
+            "skin_name": "example",
+            "masks_used": ["center_spine", "tailwing", "mudguard_edge"],
+            "design_lane": {
+                "lane_id": "center_spine_focus",
+                "composition_focus": "dominant center spine with restrained local panel echoes",
+                "distinctive_masks": ["center_spine", "tailwing"],
+                "evidence_status": "recipe_metadata_not_tmuf_proof",
+            },
+        }
+        self.assertEqual(validate_design_lane_evidence(valid_report, premium=True), [])
+        self.assertEqual(validate_design_lane_evidence(valid_report, premium=False), [])
+
+        missing_lane = {"skin_name": "missing", "masks_used": ["center_spine"]}
+        self.assertEqual(
+            validate_design_lane_evidence(missing_lane, premium=True),
+            ["premium report has no design_lane object"],
+        )
+
+        bad_status = {
+            **valid_report,
+            "design_lane": {
+                **valid_report["design_lane"],
+                "evidence_status": "proven_by_tmuf_smoke",
+            },
+        }
+        self.assertIn(
+            "design lane metadata must not claim TMUF proof",
+            validate_design_lane_evidence(bad_status, premium=True),
+        )
+
+        bad_mask = {
+            **valid_report,
+            "design_lane": {
+                **valid_report["design_lane"],
+                "distinctive_masks": ["center_spine", "not_a_used_mask"],
+            },
+        }
+        self.assertIn(
+            "design lane distinctive masks must be listed in masks_used",
+            validate_design_lane_evidence(bad_mask, premium=True),
+        )
+
+        duplicate_lanes = [
+            {"skin_name": "a", "design_lane": {"lane_id": "same"}},
+            {"skin_name": "b", "design_lane": {"lane_id": "same"}},
+        ]
+        self.assertEqual(
+            validate_premium_lane_distinctness(duplicate_lanes),
+            ["premium design lanes must be distinct across candidates"],
+        )
 
     def test_cli_outputs_json_summary(self):
         from recipes.validate_stock_outputs import main

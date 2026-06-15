@@ -20,6 +20,24 @@
     "tmuf_gloss_claim": "none",
     "underbody_alpha": 118
   },
+  "design_lane": {
+    "composition_focus": "balanced race prototype layout using nose, spine, side blades, and local aero accents",
+    "distinctive_masks": [
+      "nose_spear",
+      "center_spine",
+      "side_wings",
+      "mirrors"
+    ],
+    "evidence_status": "recipe_metadata_not_tmuf_proof",
+    "lane_id": "race_proto_balance",
+    "parameter_signature": {
+      "blade_offset": 0.18,
+      "blade_slope": 0.46,
+      "mudguard_mode": "primary_front",
+      "rear_louver_count": 17.0,
+      "spine_width": 0.056
+    }
+  },
   "design_rules": [
     "black_charcoal_base",
     "magenta_cyan_accents",

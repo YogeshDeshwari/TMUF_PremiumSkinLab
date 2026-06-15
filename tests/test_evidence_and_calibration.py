@@ -137,6 +137,7 @@ class PremiumStockBatchTests(unittest.TestCase):
 
         outputs = save_batch()
         self.assertEqual([item["name"] for item in outputs], CANDIDATE_NAMES)
+        lane_ids = set()
 
         for item in outputs:
             zip_path = Path(item["zip"])
@@ -172,6 +173,12 @@ class PremiumStockBatchTests(unittest.TestCase):
             self.assertEqual(report["evidence_status"]["donor_gbx"], "not_used")
             self.assertNotIn("Details.dds", report["package_files"])
             self.assertNotIn("ProjShad.dds", report["package_files"])
+            self.assertEqual(report["design_lane"]["evidence_status"], "recipe_metadata_not_tmuf_proof")
+            self.assertIn("lane_id", report["design_lane"])
+            self.assertIn("composition_focus", report["design_lane"])
+            self.assertGreaterEqual(len(report["design_lane"]["distinctive_masks"]), 2)
+            self.assertLessEqual(set(report["design_lane"]["distinctive_masks"]), set(report["masks_used"]))
+            lane_ids.add(report["design_lane"]["lane_id"])
             self.assertGreaterEqual(report["style_metrics"]["dark_pixel_ratio"], 0.45)
             self.assertGreater(report["style_metrics"]["magenta_accent_ratio"], 0.005)
             self.assertGreater(report["style_metrics"]["cyan_accent_ratio"], 0.005)
@@ -210,6 +217,8 @@ class PremiumStockBatchTests(unittest.TestCase):
             )
             CalibrationArtifactTests.assert_report_records_stock_input_evidence(self, report)
             CalibrationArtifactTests.assert_report_records_output_artifacts(self, report)
+
+        self.assertEqual(len(lane_ids), len(CANDIDATE_NAMES))
 
 
 if __name__ == "__main__":

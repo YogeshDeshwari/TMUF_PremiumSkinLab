@@ -20,6 +20,24 @@
     "tmuf_gloss_claim": "none",
     "underbody_alpha": 118
   },
+  "design_lane": {
+    "composition_focus": "dominant cyan center spine with magenta guard and tail echoes",
+    "distinctive_masks": [
+      "center_spine",
+      "nose_spear",
+      "tailwing",
+      "mudguard_edge"
+    ],
+    "evidence_status": "recipe_metadata_not_tmuf_proof",
+    "lane_id": "center_spine_focus",
+    "parameter_signature": {
+      "blade_offset": 0.21,
+      "blade_slope": 0.35,
+      "mudguard_mode": "secondary_front",
+      "rear_louver_count": 18.0,
+      "spine_width": 0.064
+    }
+  },
   "design_rules": [
     "black_charcoal_base",
     "magenta_cyan_accents",

@@ -20,6 +20,24 @@
     "tmuf_gloss_claim": "none",
     "underbody_alpha": 118
   },
+  "design_lane": {
+    "composition_focus": "violet/magenta flow with split guard color and cyan side structure",
+    "distinctive_masks": [
+      "mudguards",
+      "side_blade",
+      "rear_center_glow",
+      "tailwing"
+    ],
+    "evidence_status": "recipe_metadata_not_tmuf_proof",
+    "lane_id": "split_guard_flow",
+    "parameter_signature": {
+      "blade_offset": 0.13,
+      "blade_slope": 0.5,
+      "mudguard_mode": "split",
+      "rear_louver_count": 14.0,
+      "spine_width": 0.044
+    }
+  },
   "design_rules": [
     "black_charcoal_base",
     "magenta_cyan_accents",

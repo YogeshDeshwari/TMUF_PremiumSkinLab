@@ -36,6 +36,8 @@ Use this before calling any skin complete.
       passed TMUF evidence.
 - [ ] Premium reports include `alpha_policy` and `alpha_metrics`, with
       `tmuf_gloss_claim=none` until TMUF material behavior is smoke-tested.
+- [ ] Premium reports include distinct `design_lane` metadata, and the lane
+      `evidence_status` remains `recipe_metadata_not_tmuf_proof`.
 - [ ] Run `python3 recipes/validate_profile_gates.py` before touching CH_2026
       full-car or no-mudguard lanes.
 

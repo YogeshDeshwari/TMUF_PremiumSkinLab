@@ -55,6 +55,9 @@ PANEL_CATALOG_TARGETS = [
 @dataclass(frozen=True)
 class Candidate:
     name: str
+    lane_id: str
+    composition_focus: str
+    distinctive_masks: tuple[str, ...]
     base: str
     base2: str
     primary: str
@@ -70,6 +73,9 @@ class Candidate:
 CANDIDATES = [
     Candidate(
         "black_magenta_cyan_blade",
+        "side_blade_sweep",
+        "wide lower side blades with a magenta nose spear and cyan side energy",
+        ("side_blade", "secondary_blade", "nose_spear", "mudguard_edge"),
         "#050507",
         "#161820",
         "#ff00b8",
@@ -83,6 +89,9 @@ CANDIDATES = [
     ),
     Candidate(
         "black_cyan_spine",
+        "center_spine_focus",
+        "dominant cyan center spine with magenta guard and tail echoes",
+        ("center_spine", "nose_spear", "tailwing", "mudguard_edge"),
         "#040608",
         "#111a1f",
         "#00d8ff",
@@ -96,6 +105,9 @@ CANDIDATES = [
     ),
     Candidate(
         "violet_cyber_flow",
+        "split_guard_flow",
+        "violet/magenta flow with split guard color and cyan side structure",
+        ("mudguards", "side_blade", "rear_center_glow", "tailwing"),
         "#07050b",
         "#17101d",
         "#d600ff",
@@ -109,6 +121,9 @@ CANDIDATES = [
     ),
     Candidate(
         "dark_neon_louver",
+        "rear_louver_focus",
+        "dense rear louver rhythm with restrained spine and alternating guard caps",
+        ("rear_louvers", "rear_center_glow", "tail_bar", "tailwing"),
         "#050607",
         "#17191d",
         "#ff149a",
@@ -122,6 +137,9 @@ CANDIDATES = [
     ),
     Candidate(
         "magenta_cyan_race_proto",
+        "race_proto_balance",
+        "balanced race prototype layout using nose, spine, side blades, and local aero accents",
+        ("nose_spear", "center_spine", "side_wings", "mirrors"),
         "#060506",
         "#1b151d",
         "#ff0090",
@@ -334,6 +352,19 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
         },
         "input_evidence": input_evidence(),
         "output_artifacts": stock_output_artifacts(out_skin, out_atlas, out_preview),
+        "design_lane": {
+            "lane_id": candidate.lane_id,
+            "composition_focus": candidate.composition_focus,
+            "distinctive_masks": list(candidate.distinctive_masks),
+            "evidence_status": "recipe_metadata_not_tmuf_proof",
+            "parameter_signature": {
+                "spine_width": candidate.spine_width,
+                "blade_slope": candidate.blade_slope,
+                "blade_offset": candidate.blade_offset,
+                "rear_louver_count": candidate.rear_louver_count,
+                "mudguard_mode": candidate.mudguard_mode,
+            },
+        },
         "alpha_policy": {
             "route": "conservative_dxt5_alpha",
             "material_effect_status": "not_proven_until_tmuf_smoke",

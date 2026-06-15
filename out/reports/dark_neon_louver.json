@@ -20,6 +20,24 @@
     "tmuf_gloss_claim": "none",
     "underbody_alpha": 118
   },
+  "design_lane": {
+    "composition_focus": "dense rear louver rhythm with restrained spine and alternating guard caps",
+    "distinctive_masks": [
+      "rear_louvers",
+      "rear_center_glow",
+      "tail_bar",
+      "tailwing"
+    ],
+    "evidence_status": "recipe_metadata_not_tmuf_proof",
+    "lane_id": "rear_louver_focus",
+    "parameter_signature": {
+      "blade_offset": 0.24,
+      "blade_slope": 0.3,
+      "mudguard_mode": "secondary_front",
+      "rear_louver_count": 22.0,
+      "spine_width": 0.038
+    }
+  },
   "design_rules": [
     "black_charcoal_base",
     "magenta_cyan_accents",

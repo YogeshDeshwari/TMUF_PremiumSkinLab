@@ -100,6 +100,10 @@ Premium reports include `alpha_policy` and `alpha_metrics` for the Diffuse alpha
 channel. This is package evidence only; reports must keep
 `tmuf_gloss_claim=none` until a TMUF smoke test proves material behavior.
 
+Premium reports also include `design_lane`, which records each candidate's
+intended composition focus and distinctive masks. Lane metadata is recipe
+evidence only and must not be treated as TMUF visual proof.
+
 The smoke kit includes `previews/tmuf_smoke_contact_sheet.png` as a visual
 review aid only. It is not smoke evidence.
 
