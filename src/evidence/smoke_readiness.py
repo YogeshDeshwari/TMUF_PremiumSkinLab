@@ -6,7 +6,11 @@ import shlex
 from pathlib import Path
 from typing import Any
 
-from src.evidence.skin_dirs import DEFAULT_REPORT as DEFAULT_SKIN_DIR_REPORT, route_for_stadiumcar_skin_dir
+from src.evidence.skin_dirs import (
+    DEFAULT_REPORT as DEFAULT_SKIN_DIR_REPORT,
+    KNOWN_SUFFIXES,
+    route_for_stadiumcar_skin_dir,
+)
 from src.evidence.smoke_gate import validate_install_receipt_file
 from src.evidence.smoke_kit import CALIBRATION_SKIN, DEFAULT_KIT_DIR, validate_smoke_kit
 
@@ -72,6 +76,14 @@ def _base_commands(root: Path) -> dict[str, str]:
     return {
         "build_smoke_kit": "python3 recipes/prepare_tmuf_smoke_kit.py",
         "scan_skin_dirs": "python3 recipes/find_tmuf_skin_dirs.py --write",
+        "scan_custom_root": (
+            "python3 recipes/find_tmuf_skin_dirs.py "
+            "--root /absolute/path/to/TrackMania-or-Wine-prefix --write --json"
+        ),
+        "preflight_explicit": (
+            "python3 recipes/smoke_readiness.py "
+            "--install-target /absolute/path/to/StadiumCar --write --write-command-packet"
+        ),
         "install_explicit": "python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /absolute/path/to/StadiumCar",
         "record_smoke": (
             "python3 recipes/record_tmuf_smoke.py "
@@ -160,6 +172,11 @@ def build_smoke_readiness(root: Path = ROOT, *, install_target: Path | None = No
             "python3 recipes/prepare_tmuf_smoke_kit.py "
             f"--install-skins-dir {shlex.quote(target_preflight['path'])}"
         )
+        commands["preflight_explicit"] = (
+            "python3 recipes/smoke_readiness.py "
+            f"--install-target {shlex.quote(target_preflight['path'])} "
+            "--write --write-command-packet"
+        )
     commands["install_discovered"] = _install_discovered_command(selected_candidate)
 
     if not kit["fresh"]:
@@ -206,6 +223,10 @@ def build_smoke_readiness(root: Path = ROOT, *, install_target: Path | None = No
         "selected_candidate": selected_candidate,
         "install_target_preflight": target_preflight,
         "install_receipt": receipt,
+        "recognized_install_routes": [
+            {"suffix": "/".join(suffix), "route": route}
+            for suffix, route in sorted(KNOWN_SUFFIXES.items(), key=lambda item: item[1])
+        ],
         "next_actions": next_actions,
         "commands": commands,
         "proof_boundary": "This readiness report guides manual smoke setup only; it does not prove TMUF/TMNF load or GBuffer mapping.",
@@ -253,6 +274,8 @@ def format_smoke_command_packet(readiness: dict[str, Any]) -> str:
     for name in [
         "build_smoke_kit",
         "scan_skin_dirs",
+        "scan_custom_root",
+        "preflight_explicit",
         "install_explicit",
         "install_discovered",
         "record_smoke",
@@ -262,6 +285,9 @@ def format_smoke_command_packet(readiness: dict[str, Any]) -> str:
         command = readiness["commands"].get(name)
         if command:
             lines.extend([f"{name}:", f"  {command}"])
+    lines.extend(["", "Recognized StadiumCar folder suffixes:"])
+    for item in readiness.get("recognized_install_routes", []):
+        lines.append(f"- {item['suffix']} ({item['route']})")
     lines.extend(
         [
             "",

@@ -91,6 +91,23 @@ out/proof/tmuf_skin_dirs.json
 Finding a directory does not prove TMUF smoke status. It only identifies an
 explicit candidate target for the install helper.
 
+To scan a specific TMUF/TMNF, Steam, CrossOver, or Wine prefix manually:
+
+```bash
+python3 recipes/find_tmuf_skin_dirs.py \
+  --root /absolute/path/to/TrackMania-or-Wine-prefix \
+  --write \
+  --json
+```
+
+Recognized install targets must end in one of these suffixes:
+
+```text
+GameData/Skins/Vehicles/StadiumCar
+Skins/Models/StadiumCar
+Skins/Vehicles/StadiumCar
+```
+
 To summarize the current setup state and get the next exact command, write the
 readiness report:
 

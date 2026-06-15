@@ -165,6 +165,13 @@ class SmokeReadinessTests(unittest.TestCase):
             self.assertIn("does_not_prove_tmuf_smoke=true", text)
             self.assertIn("choose_or_create_tmuf_stadiumcar_skin_dir", text)
             self.assertIn("python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir", text)
+            self.assertIn("preflight_explicit:", text)
+            self.assertIn("python3 recipes/smoke_readiness.py --install-target /absolute/path/to/StadiumCar", text)
+            self.assertIn("scan_custom_root:", text)
+            self.assertIn("python3 recipes/find_tmuf_skin_dirs.py --root /absolute/path/to/TrackMania-or-Wine-prefix", text)
+            self.assertIn("Skins/Vehicles/StadiumCar", text)
+            self.assertIn("GameData/Skins/Vehicles/StadiumCar", text)
+            self.assertIn("Skins/Models/StadiumCar", text)
             self.assertIn("python3 recipes/record_tmuf_smoke.py", text)
             self.assertIn("Do not run apply until evaluate passes", text)
 
