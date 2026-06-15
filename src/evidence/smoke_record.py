@@ -7,6 +7,7 @@ from pathlib import Path
 from src.evidence.smoke_gate import (
     CALIBRATION_ARTIFACT,
     REQUIRED_OBSERVATIONS,
+    REQUIRED_SCREENSHOT_ROLES,
     evaluate_smoke_report,
     fingerprint_screenshot_file,
     validate_screenshot_file,
@@ -60,7 +61,7 @@ def record_calibration_smoke_report(
     tester: str,
     tmuf_build: str,
     test_date_local: str,
-    screenshot_paths: list[Path],
+    screenshot_roles: dict[str, Path],
     all_required_observations_passed: bool,
     confirmed_observations: list[str] | None = None,
     notes: str = "",
@@ -70,16 +71,23 @@ def record_calibration_smoke_report(
         all_required_observations_passed=all_required_observations_passed,
         confirmed_observations=confirmed_observations,
     )
-    if not screenshot_paths:
-        raise ValueError("At least one screenshot is required")
+    screenshot_roles = dict(screenshot_roles or {})
+    unknown_roles = sorted(set(screenshot_roles) - set(REQUIRED_SCREENSHOT_ROLES))
+    if unknown_roles:
+        raise ValueError(f"Unknown screenshot roles: {unknown_roles}")
+    missing_roles = [role for role in REQUIRED_SCREENSHOT_ROLES if role not in screenshot_roles]
+    if missing_roles:
+        raise ValueError(f"Missing required screenshot roles: {missing_roles}")
 
     base = Path(base_dir)
     output = Path(output_path)
     screenshot_dir = base / "out" / "proof" / "tmuf_smoke_screenshots"
 
     copied_screenshots: list[str] = []
+    copied_roles: dict[str, str] = {}
     screenshot_evidence: dict[str, dict[str, object]] = {}
-    for source_path in screenshot_paths:
+    for role in REQUIRED_SCREENSHOT_ROLES:
+        source_path = screenshot_roles[role]
         source = Path(source_path)
         if not source.is_file():
             raise FileNotFoundError(source)
@@ -93,6 +101,7 @@ def record_calibration_smoke_report(
         shutil.copy2(source, destination)
         report_path = _report_path(destination, base)
         copied_screenshots.append(report_path)
+        copied_roles[role] = report_path
         screenshot_evidence[report_path] = fingerprint_screenshot_file(destination)
 
     data = {
@@ -104,6 +113,7 @@ def record_calibration_smoke_report(
         "tmuf_build": _require_nonempty("tmuf_build", tmuf_build),
         "test_date_local": _require_nonempty("test_date_local", test_date_local),
         "screenshots": copied_screenshots,
+        "screenshot_roles": copied_roles,
         "screenshot_evidence": screenshot_evidence,
         "observations": observations,
         "observation_confirmation_mode": observation_confirmation_mode,

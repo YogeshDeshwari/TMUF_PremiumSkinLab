@@ -118,6 +118,6 @@ After the calibration skin is loaded in TMUF/TMNF, record the real screenshots
 and explicit observation confirmation with:
 
 ```bash
-python3 recipes/record_tmuf_smoke.py --tester "manual tester" --tmuf-build "TMUF local install" --test-date-local 2026-06-15 --screenshot /path/to/tmuf_calibration.png --confirm-observation nose_is_red --confirm-observation tail_is_blue --confirm-observation left_side_is_green --confirm-observation right_side_is_yellow --confirm-observation roof_high_surfaces_are_white --confirm-observation lower_floor_surfaces_are_dark --confirm-observation mudguards_are_magenta --confirm-observation centerline_is_cyan --confirm-observation package_loads_without_custom_gbx
+python3 recipes/record_tmuf_smoke.py --tester "manual tester" --tmuf-build "TMUF local install" --test-date-local 2026-06-15 --screenshot-role front=/path/to/tmuf_front.png --screenshot-role side=/path/to/tmuf_side.png --screenshot-role rear=/path/to/tmuf_rear.png --screenshot-role top=/path/to/tmuf_top.png --confirm-observation nose_is_red --confirm-observation tail_is_blue --confirm-observation left_side_is_green --confirm-observation right_side_is_yellow --confirm-observation roof_high_surfaces_are_white --confirm-observation lower_floor_surfaces_are_dark --confirm-observation mudguards_are_magenta --confirm-observation centerline_is_cyan --confirm-observation package_loads_without_custom_gbx
 python3 recipes/tmuf_smoke_gate.py --evaluate out/proof/calibration_tmuf_smoke.json
 ```

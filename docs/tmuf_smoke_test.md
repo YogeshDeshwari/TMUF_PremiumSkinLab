@@ -33,9 +33,10 @@ All observations must be true before the gate can pass:
 - centerline is cyan
 - package loads without custom GBX files
 
-At least one screenshot path must be recorded. Each referenced screenshot must
-exist locally, open as an image, contain nonblank visual content, and match the
-fingerprint recorded in the smoke evidence file.
+Four role-labeled screenshot paths must be recorded: `front`, `side`, `rear`,
+and `top`. Each referenced screenshot must exist locally, open as an image,
+contain nonblank visual content, and match the fingerprint recorded in the smoke
+evidence file.
 
 ## Workflow
 
@@ -98,8 +99,10 @@ python3 recipes/record_tmuf_smoke.py \
   --tester "manual tester" \
   --tmuf-build "TMUF local install" \
   --test-date-local 2026-06-15 \
-  --screenshot /path/to/tmuf_calibration_front.png \
-  --screenshot /path/to/tmuf_calibration_side.png \
+  --screenshot-role front=/path/to/tmuf_calibration_front.png \
+  --screenshot-role side=/path/to/tmuf_calibration_side.png \
+  --screenshot-role rear=/path/to/tmuf_calibration_rear.png \
+  --screenshot-role top=/path/to/tmuf_calibration_top.png \
   --confirm-observation nose_is_red \
   --confirm-observation tail_is_blue \
   --confirm-observation left_side_is_green \

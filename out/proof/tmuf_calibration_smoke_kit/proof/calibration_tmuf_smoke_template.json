@@ -15,12 +15,18 @@
   "pass_requires": [
     "Set status to passed only after loading the calibration zip in TMUF/TMNF.",
     "Every required observation must be true.",
-    "At least one referenced screenshot file must exist and be a readable, nonblank image.",
+    "The front, side, rear, and top screenshot roles must each reference a readable, nonblank image.",
     "Recorded screenshot fingerprints must match the current screenshot files.",
     "This gate proves GBuffer mapping for this stock Diffuse route only."
   ],
   "route": "stock_diffuse_only",
   "schema_version": 1,
+  "screenshot_roles": {
+    "front": "",
+    "rear": "",
+    "side": "",
+    "top": ""
+  },
   "screenshots": [],
   "status": "not_run",
   "test_date_local": "",

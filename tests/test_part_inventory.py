@@ -63,7 +63,9 @@ class StockPartInventoryTests(unittest.TestCase):
         self.assertIn("no panel entry proves TMUF runtime visibility before calibration smoke", catalog["boundary"])
 
         panels = catalog["panels"]
-        self.assertGreaterEqual(len(panels), 12)
+        self.assertGreaterEqual(len(panels), 24)
+        for panel in panels.values():
+            self.assertIn("symmetry_policy", panel)
 
         tailwing = panels["tailwing_bands"]
         self.assertEqual(tailwing["source_status"], "proven_local_label_map")
@@ -86,6 +88,28 @@ class StockPartInventoryTests(unittest.TestCase):
         self.assertEqual(center_spine["source_status"], "experimental_until_tmuf_smoke")
         self.assertIn("LAT/X symmetry", center_spine["geometry_constraints"])
         self.assertEqual(center_spine["safe_design_scale"], "medium_to_broad_accent")
+
+        licence = panels["licence_plate_blocks"]
+        self.assertEqual(licence["source_status"], "proven_local_label_map")
+        self.assertIn("LicencePlateBlock", licence["source_zones"])
+        self.assertIn("no real sponsor text", " ".join(licence["proof_notes"]))
+
+        rear_wheel_blocks = panels["rear_wheel_diffuse_blocks"]
+        self.assertEqual(rear_wheel_blocks["source_status"], "proven_local_label_map")
+        self.assertIn("RearWheelsSideBlock", rear_wheel_blocks["source_zones"])
+        self.assertIn("not Details.dds", " ".join(rear_wheel_blocks["proof_notes"]))
+
+        nose_deck = panels["nose_deck_generated_panels"]
+        self.assertEqual(nose_deck["source_status"], "mixed_generated_labels_and_experimental_gbuffer")
+        self.assertIn("nose_deck_C_84", nose_deck["source_zones"])
+        self.assertIn("resources/authoritative/parts/panels_high.json", nose_deck["source_files"])
+        self.assertIn("resources/authoritative/gbuffer/position_2048.npy", nose_deck["source_files"])
+
+        rear_louver_rows = panels["rear_deck_fine_louver_rows"]
+        self.assertEqual(rear_louver_rows["source_maps"], ["panels_fine"])
+        self.assertIn("rear_deck_C_140", rear_louver_rows["source_zones"])
+        self.assertIn("LAT/X mirrored offset bands", rear_louver_rows["geometry_constraints"])
+        self.assertIn("generated panel tokens", " ".join(rear_louver_rows["proof_notes"]))
 
     def test_cli_writes_inventory_report(self):
         with tempfile.TemporaryDirectory() as tmp:

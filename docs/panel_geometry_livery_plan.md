@@ -202,15 +202,23 @@ Important status:
 - It does not prove TMUF runtime visibility, DDS orientation, seam quality, or
   exact in-game panel interpretation until smoke testing.
 
-## More Target Panels
+## Paintable Panel Catalog
 
-These are the next panel masks to add after calibration. The geometry masks are
-experimental until the calibration smoke gate passes.
+`out/reports/stock_part_inventory.json` currently exposes 26 paintable panel
+targets. Every entry has a `symmetry_policy`, `source_status`,
+`safe_design_scale`, source files, source zones, and
+`tmuf_runtime_status=not_proven_until_smoke`.
+
+Named PSD-only entries are strongest atlas evidence because they use
+`psd_parts` labels without GBuffer placement. Mixed/generated entries are useful
+for deeper panel control, but generated names support only local token evidence
+such as `nose`, `mid`, `rear`, `deck`, `side`, and `floor`; they remain
+experimental for runtime interpretation.
 
 | Target | Evidence source | Design role |
 | --- | --- | --- |
 | `main_body_top_quadrants` | `psd_parts` zones 1-4 | Large base color separation, hard-edge blocks, black/red/white wedges. |
-| `nose_spear` | `NosePart` plus high LEN/Z GBuffer | Front identity slash, minimal red spear, MP4/4-style wedge grammar without branding. |
+| `nose_identity_panel` | `NosePart` | Front identity wedge, spear tip, and number-free badge field. |
 | `center_spine` | GBuffer `LAT` symmetry and `LEN` | Long top stripe, Gulf/Martini-style center system, black/red minimalist blade. |
 | `engine_rear_deck` | low LEN/Z + high HGT/Y, `rear_deck_*` probes | Louvers, rear glow blocks, technical vents, symmetrical panel highlights. |
 | `sidepod_blades` | `SideUnderColor_L/R`, `mid_side_*`, LAT sign | Large side sweeps, sponsor-like blank blocks, lower contrast fields. |
@@ -221,6 +229,27 @@ experimental until the calibration smoke gate passes.
 | `mirrors_and_holders` | `SideMirrors`, `MirrorHolders` | Small color verification and polished micro-detail. |
 | `helmet_and_visor` | `Helmet_*`, `HelmetGlass_*` | Optional driver color harmony; should not control main livery. |
 | `underbody_dark` | `MainBodyUNDER_*`, `UnderPlate_*`, low HGT/Y | Dark material and shadow continuity, not hero graphics. |
+| `licence_plate_blocks` | `LicencePlate`, `LicencePlateBlock` | Abstract plaque blocks and no-text graphic anchors. |
+| `side_vent_inside` | `BigSideVentOneInSideColor` | Small vent interior accent and dark technical inset. |
+| `rear_wheel_diffuse_blocks` | `RearWheelsSideBlock`, `KNob.Gouing.inside.Rear.wheel` | Rear wheel-adjacent Diffuse-only probe blocks; not `Details.dds`. |
+| `front_mudguard_edge_details` | front mudguard edge/under/inside PSD zones | Front guard pinstripe edge, underside fill, and inner accent detail. |
+| `rear_mudguard_edge_details` | rear mudguard edge/tip/under/inside PSD zones | Rear guard pinstripe edge, tip highlight, and underside fill. |
+| `nose_deck_generated_panels` | generated `nose_deck_*` high panels | Front deck blocks, wedge clipping, and nose-adjacent color surfaces. |
+| `nose_floor_generated_panels` | generated `nose_floor_*` fine panels | Front floor returns and lower wedge continuation probes. |
+| `nose_side_generated_panels` | generated `nose_side_*` high panels | Front side sweeps and lower-side color returns. |
+| `mid_deck_generated_panels` | generated `mid_deck_*` high panels | Cockpit-adjacent deck panels and mid-body geometric blocks. |
+| `mid_side_generated_panel` | generated `mid_side_C_02` | Large mid-side speed blade field. |
+| `mid_floor_generated_panels` | generated `mid_floor_*` fine panels | Mid-floor support blocks and lower shadow fields. |
+| `rear_side_generated_panels` | generated `rear_side_*` fine panels | Symmetric rear side sweeps and side-to-tail transitions. |
+| `rear_floor_generated_panels` | generated `rear_floor_*` high panels | Rear floor shadows and low rear accent returns. |
+| `rear_deck_fine_louver_rows` | generated `rear_deck_*` fine panels | Fine rear deck louver rows, paired glow blocks, and technical vent rhythm. |
+
+Important boundary: `nose_spear`, `side_blade`, `secondary_blade`,
+`rear_louvers`, `rear_center_glow`, `shoulder_line`, `tail_bar`, and
+`mudguard_edge` are generator masks in `src/stock_diffuse/panel_masks.py`.
+They are not catalog entries unless represented by a higher-level target above,
+and every one remains `experimental_until_tmuf_smoke` because it uses GBuffer
+`LEN/LAT/HGT` predicates.
 
 ## Lessons From Old TM_CARS Generators
 
@@ -448,7 +477,8 @@ Calibration smoke proof:
   `right_side_is_yellow`, `roof_high_surfaces_are_white`,
   `lower_floor_surfaces_are_dark`, `mudguards_are_magenta`,
   `centerline_is_cyan`, `package_loads_without_custom_gbx`.
-- Record real screenshots with `recipes/record_tmuf_smoke.py`.
+- Record real screenshots with `recipes/record_tmuf_smoke.py`, using the
+  required `front`, `side`, `rear`, and `top` screenshot roles.
 - Evaluate and apply with `recipes/tmuf_smoke_gate.py`.
 
 After calibration smoke:

@@ -8,11 +8,23 @@ import unittest
 from PIL import Image, ImageDraw
 
 
+REQUIRED_SCREENSHOT_ROLES = ("front", "side", "rear", "top")
+
+
 def _write_nonblank_png(path: Path) -> None:
     image = Image.new("RGB", (64, 48), (9, 10, 12))
     draw = ImageDraw.Draw(image)
     draw.rectangle((6, 6, 58, 42), fill=(0, 210, 240))
     image.save(path)
+
+
+def _write_role_screenshots(base: Path) -> dict[str, Path]:
+    paths: dict[str, Path] = {}
+    for role in REQUIRED_SCREENSHOT_ROLES:
+        path = base / f"tmuf_{role}.png"
+        _write_nonblank_png(path)
+        paths[role] = path
+    return paths
 
 
 class SmokeRecordTests(unittest.TestCase):
@@ -22,8 +34,7 @@ class SmokeRecordTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
-            screenshot = base / "tmuf_front_left.png"
-            _write_nonblank_png(screenshot)
+            role_paths = _write_role_screenshots(base)
             output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
 
             written = record_calibration_smoke_report(
@@ -31,7 +42,7 @@ class SmokeRecordTests(unittest.TestCase):
                 tester="manual tester",
                 tmuf_build="TMUF local install",
                 test_date_local="2026-06-15",
-                screenshot_paths=[screenshot],
+                screenshot_roles=role_paths,
                 all_required_observations_passed=True,
                 notes="Calibration colors matched in car selection preview.",
                 base_dir=base,
@@ -42,17 +53,20 @@ class SmokeRecordTests(unittest.TestCase):
             self.assertEqual(data["status"], "passed")
             self.assertEqual(data["route"], "stock_diffuse_only")
             self.assertTrue(all(data["observations"].values()))
-            self.assertEqual(data["screenshots"], ["out/proof/tmuf_smoke_screenshots/tmuf_front_left.png"])
-            self.assertTrue((base / data["screenshots"][0]).exists())
-            fingerprint = data["screenshot_evidence"][data["screenshots"][0]]
+            self.assertEqual(set(data["screenshot_roles"]), set(REQUIRED_SCREENSHOT_ROLES))
+            self.assertEqual(len(data["screenshots"]), 4)
+            front_path = data["screenshot_roles"]["front"]
+            self.assertTrue((base / front_path).exists())
+            fingerprint = data["screenshot_evidence"][front_path]
             self.assertEqual(fingerprint["width"], 64)
             self.assertEqual(fingerprint["height"], 48)
-            self.assertEqual(fingerprint["size_bytes"], (base / data["screenshots"][0]).stat().st_size)
+            self.assertEqual(fingerprint["size_bytes"], (base / front_path).stat().st_size)
             self.assertRegex(fingerprint["sha256"], r"^[0-9a-f]{64}$")
 
             result = evaluate_smoke_report(output, base_dir=base)
             self.assertTrue(result["passed"])
             self.assertEqual(result["gbuffer_mapping_status"], "proven_by_tmuf_smoke")
+            self.assertEqual(result["missing_screenshot_roles"], [])
 
     def test_recorded_report_fails_if_copied_screenshot_changes(self):
         from src.evidence.smoke_gate import evaluate_smoke_report
@@ -60,8 +74,7 @@ class SmokeRecordTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
-            screenshot = base / "tmuf_front_left.png"
-            _write_nonblank_png(screenshot)
+            role_paths = _write_role_screenshots(base)
             output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
 
             record_calibration_smoke_report(
@@ -69,12 +82,12 @@ class SmokeRecordTests(unittest.TestCase):
                 tester="manual tester",
                 tmuf_build="TMUF local install",
                 test_date_local="2026-06-15",
-                screenshot_paths=[screenshot],
+                screenshot_roles=role_paths,
                 all_required_observations_passed=True,
                 base_dir=base,
             )
             data = json.loads(output.read_text())
-            copied = base / data["screenshots"][0]
+            copied = base / data["screenshot_roles"]["front"]
             with Image.open(copied) as image:
                 changed_image = image.convert("RGB")
             ImageDraw.Draw(changed_image).point((0, 0), fill=(255, 255, 255))
@@ -82,7 +95,7 @@ class SmokeRecordTests(unittest.TestCase):
 
             result = evaluate_smoke_report(output, base_dir=base)
             self.assertFalse(result["passed"])
-            self.assertEqual(result["mismatched_screenshot_fingerprints"], [data["screenshots"][0]])
+            self.assertEqual(result["mismatched_screenshot_fingerprints"], [data["screenshot_roles"]["front"]])
 
     def test_passed_report_requires_explicit_required_observation_confirmation(self):
         from src.evidence.smoke_gate import REQUIRED_OBSERVATIONS
@@ -90,8 +103,7 @@ class SmokeRecordTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
-            screenshot = base / "tmuf_front_left.png"
-            _write_nonblank_png(screenshot)
+            role_paths = _write_role_screenshots(base)
             output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
 
             with self.assertRaises(ValueError) as context:
@@ -100,7 +112,7 @@ class SmokeRecordTests(unittest.TestCase):
                     tester="manual tester",
                     tmuf_build="TMUF local install",
                     test_date_local="2026-06-15",
-                    screenshot_paths=[screenshot],
+                    screenshot_roles=role_paths,
                     all_required_observations_passed=False,
                     base_dir=base,
                 )
@@ -114,7 +126,7 @@ class SmokeRecordTests(unittest.TestCase):
                     tester="manual tester",
                     tmuf_build="TMUF local install",
                     test_date_local="2026-06-15",
-                    screenshot_paths=[screenshot],
+                    screenshot_roles=role_paths,
                     all_required_observations_passed=False,
                     confirmed_observations=REQUIRED_OBSERVATIONS[:-1],
                     base_dir=base,
@@ -127,8 +139,7 @@ class SmokeRecordTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
-            screenshot = base / "tmuf_front_left.png"
-            _write_nonblank_png(screenshot)
+            role_paths = _write_role_screenshots(base)
             output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
 
             record_calibration_smoke_report(
@@ -136,7 +147,7 @@ class SmokeRecordTests(unittest.TestCase):
                 tester="manual tester",
                 tmuf_build="TMUF local install",
                 test_date_local="2026-06-15",
-                screenshot_paths=[screenshot],
+                screenshot_roles=role_paths,
                 all_required_observations_passed=False,
                 confirmed_observations=REQUIRED_OBSERVATIONS,
                 base_dir=base,
@@ -153,8 +164,7 @@ class SmokeRecordTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
-            screenshot = base / "tmuf_front_left.png"
-            _write_nonblank_png(screenshot)
+            role_paths = _write_role_screenshots(base)
             output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
 
             with self.assertRaises(ValueError) as context:
@@ -163,7 +173,7 @@ class SmokeRecordTests(unittest.TestCase):
                     tester="manual tester",
                     tmuf_build="TMUF local install",
                     test_date_local="2026-06-15",
-                    screenshot_paths=[screenshot],
+                    screenshot_roles=role_paths,
                     all_required_observations_passed=False,
                     confirmed_observations=[*REQUIRED_OBSERVATIONS, "not_real"],
                     base_dir=base,
@@ -185,7 +195,10 @@ class SmokeRecordTests(unittest.TestCase):
                     tester="manual tester",
                     tmuf_build="TMUF local install",
                     test_date_local="2026-06-15",
-                    screenshot_paths=[base / "missing.png"],
+                    screenshot_roles={
+                        "front": base / "missing.png",
+                        **{role: path for role, path in _write_role_screenshots(base).items() if role != "front"},
+                    },
                     all_required_observations_passed=True,
                     base_dir=base,
                 )
@@ -209,7 +222,10 @@ class SmokeRecordTests(unittest.TestCase):
                     tester="manual tester",
                     tmuf_build="TMUF local install",
                     test_date_local="2026-06-15",
-                    screenshot_paths=[invalid],
+                    screenshot_roles={
+                        "front": invalid,
+                        **{role: path for role, path in _write_role_screenshots(base).items() if role != "front"},
+                    },
                     all_required_observations_passed=True,
                     base_dir=base,
                 )
@@ -221,18 +237,42 @@ class SmokeRecordTests(unittest.TestCase):
                     tester="manual tester",
                     tmuf_build="TMUF local install",
                     test_date_local="2026-06-15",
-                    screenshot_paths=[blank],
+                    screenshot_roles={
+                        "front": blank,
+                        **{role: path for role, path in _write_role_screenshots(base).items() if role != "front"},
+                    },
                     all_required_observations_passed=True,
                     base_dir=base,
                 )
             self.assertIn("nonblank", str(blank_context.exception))
             self.assertFalse(output.exists())
 
+    def test_record_requires_all_screenshot_roles(self):
+        from src.evidence.smoke_record import record_calibration_smoke_report
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            role_paths = _write_role_screenshots(base)
+            output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
+
+            with self.assertRaises(ValueError) as context:
+                record_calibration_smoke_report(
+                    output_path=output,
+                    tester="manual tester",
+                    tmuf_build="TMUF local install",
+                    test_date_local="2026-06-15",
+                    screenshot_roles={role: path for role, path in role_paths.items() if role != "top"},
+                    all_required_observations_passed=True,
+                    base_dir=base,
+                )
+
+            self.assertIn("Missing required screenshot roles", str(context.exception))
+            self.assertFalse(output.exists())
+
     def test_record_recipe_creates_evaluable_report(self):
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
-            screenshot = base / "tmuf_front_left.png"
-            _write_nonblank_png(screenshot)
+            role_paths = _write_role_screenshots(base)
             output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
             recipe = Path(__file__).resolve().parents[1] / "recipes" / "record_tmuf_smoke.py"
 
@@ -250,8 +290,11 @@ class SmokeRecordTests(unittest.TestCase):
                     "TMUF local install",
                     "--test-date-local",
                     "2026-06-15",
-                    "--screenshot",
-                    str(screenshot),
+                    *[
+                        flag
+                        for role, path in role_paths.items()
+                        for flag in ("--screenshot-role", f"{role}={path}")
+                    ],
                     *[
                         flag
                         for observation in [
@@ -276,7 +319,7 @@ class SmokeRecordTests(unittest.TestCase):
             self.assertIn(str(output), result.stdout)
             data = json.loads(output.read_text())
             self.assertEqual(data["status"], "passed")
-            self.assertEqual(data["screenshots"], ["out/proof/tmuf_smoke_screenshots/tmuf_front_left.png"])
+            self.assertEqual(set(data["screenshot_roles"]), set(REQUIRED_SCREENSHOT_ROLES))
 
 
 if __name__ == "__main__":

@@ -24,6 +24,7 @@ REQUIRED_OBSERVATIONS = [
     "package_loads_without_custom_gbx",
 ]
 REQUIRED_METADATA = ["tester", "tmuf_build", "test_date_local"]
+REQUIRED_SCREENSHOT_ROLES = ["front", "side", "rear", "top"]
 
 
 def validate_screenshot_file(path: Path) -> dict[str, Any]:
@@ -68,12 +69,13 @@ def write_template(path: Path = DEFAULT_TEMPLATE) -> Path:
         "tmuf_build": "",
         "test_date_local": "",
         "screenshots": [],
+        "screenshot_roles": {role: "" for role in REQUIRED_SCREENSHOT_ROLES},
         "observations": {name: False for name in REQUIRED_OBSERVATIONS},
         "notes": "",
         "pass_requires": [
             "Set status to passed only after loading the calibration zip in TMUF/TMNF.",
             "Every required observation must be true.",
-            "At least one referenced screenshot file must exist and be a readable, nonblank image.",
+            "The front, side, rear, and top screenshot roles must each reference a readable, nonblank image.",
             "Recorded screenshot fingerprints must match the current screenshot files.",
             "This gate proves GBuffer mapping for this stock Diffuse route only.",
         ],
@@ -98,7 +100,18 @@ def evaluate_smoke_report(path: Path, base_dir: Path | None = None) -> dict[str,
     missing_observations = [name for name in REQUIRED_OBSERVATIONS if observations.get(name) is not True]
     missing_metadata = [name for name in REQUIRED_METADATA if not str(data.get(name, "")).strip()]
 
-    screenshots = [str(item) for item in data.get("screenshots", [])]
+    raw_screenshot_roles = data.get("screenshot_roles", {})
+    if not isinstance(raw_screenshot_roles, dict):
+        raw_screenshot_roles = {}
+    screenshot_roles = {
+        str(role): str(path)
+        for role, path in raw_screenshot_roles.items()
+        if str(path).strip()
+    }
+    missing_screenshot_roles = [
+        role for role in REQUIRED_SCREENSHOT_ROLES if role not in screenshot_roles
+    ]
+    screenshots = [screenshot_roles[role] for role in REQUIRED_SCREENSHOT_ROLES if role in screenshot_roles]
     missing_screenshots = [
         item for item in screenshots if not _resolve_evidence_path(item, base).exists()
     ]
@@ -132,7 +145,7 @@ def evaluate_smoke_report(path: Path, base_dir: Path | None = None) -> dict[str,
         if item in screenshot_evidence and screenshot_evidence[item] != fingerprint
     ]
     has_valid_screenshot = (
-        bool(screenshots)
+        not missing_screenshot_roles
         and not missing_screenshots
         and not invalid_screenshots
         and not blank_screenshots
@@ -155,6 +168,8 @@ def evaluate_smoke_report(path: Path, base_dir: Path | None = None) -> dict[str,
         "missing_observations": missing_observations,
         "missing_metadata": missing_metadata,
         "screenshots": screenshots,
+        "screenshot_roles": screenshot_roles,
+        "missing_screenshot_roles": missing_screenshot_roles,
         "missing_screenshots": missing_screenshots,
         "invalid_screenshots": invalid_screenshots,
         "blank_screenshots": blank_screenshots,
@@ -182,6 +197,7 @@ def apply_smoke_result(
             "TMUF smoke evidence did not pass; reports remain experimental. "
             f"Missing observations: {result['missing_observations']}; "
             f"missing metadata: {result['missing_metadata']}; "
+            f"missing screenshot roles: {result['missing_screenshot_roles']}; "
             f"missing screenshots: {result['missing_screenshots']}; "
             f"invalid screenshots: {result['invalid_screenshots']}; "
             f"blank screenshots: {result['blank_screenshots']}; "
@@ -206,6 +222,7 @@ def apply_smoke_result(
         data["tmuf_smoke_evidence"] = {
             "report": smoke_report_path.as_posix(),
             "screenshots": result["screenshots"],
+            "screenshot_roles": result["screenshot_roles"],
             "screenshot_evidence": result["screenshot_evidence"],
             "tester": result["tester"],
             "tmuf_build": result["tmuf_build"],

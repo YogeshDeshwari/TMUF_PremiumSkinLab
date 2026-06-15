@@ -4479,6 +4479,7 @@
           "MainBodyTOP_BL",
           "MainBodyTOP_BR"
         ],
+        "symmetry_policy": "GBuffer LAT/X center symmetry; experimental until calibration smoke",
         "tmuf_runtime_status": "not_proven_until_smoke",
         "total_label_area": 1622702,
         "zone_evidence": [
@@ -4567,6 +4568,7 @@
           "rear_deck_C_21",
           "rear_deck_C_140"
         ],
+        "symmetry_policy": "generated rear/deck token zones plus LAT/X mirrored offset bands; runtime symmetry unproven",
         "tmuf_runtime_status": "not_proven_until_smoke",
         "total_label_area": 480151,
         "zone_evidence": [
@@ -4651,6 +4653,7 @@
           "FrontMudguardUnderColor",
           "FrontMudguardEdgeColor"
         ],
+        "symmetry_policy": "named front guard group; front split by LEN/Z remains experimental",
         "tmuf_runtime_status": "not_proven_until_smoke",
         "total_label_area": 192838,
         "zone_evidence": [
@@ -4704,6 +4707,74 @@
           }
         ]
       },
+      "front_mudguard_edge_details": {
+        "design_role": "front guard pinstripe edge, underside fill, and inner accent details",
+        "geometry_constraints": [
+          "named PSD front mudguard detail zones only"
+        ],
+        "proof_notes": [
+          "front detail labels are proven atlas evidence; in-game seam quality remains unproven"
+        ],
+        "risk_classes": [
+          "medium_accent_surface",
+          "small_detail_surface"
+        ],
+        "safe_design_scale": "medium_accent_surface",
+        "source_files": [
+          "resources/authoritative/parts/psd_parts.json",
+          "resources/authoritative/parts/psd_parts_labels.npy"
+        ],
+        "source_maps": [
+          "psd_parts"
+        ],
+        "source_status": "proven_local_label_map",
+        "source_zones": [
+          "FrontMudguardEdgeColor",
+          "FrontMudguardUnderColor",
+          "FrontMudguards.Inside"
+        ],
+        "symmetry_policy": "front guard named detail zones; keep paired with cap colors until visual review",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "total_label_area": 111436,
+        "zone_evidence": [
+          {
+            "area": 24005,
+            "bbox": [
+              0,
+              477,
+              317,
+              613
+            ],
+            "map": "psd_parts",
+            "name": "FrontMudguardEdgeColor",
+            "risk_class": "small_detail_surface"
+          },
+          {
+            "area": 31896,
+            "bbox": [
+              671,
+              602,
+              1108,
+              898
+            ],
+            "map": "psd_parts",
+            "name": "FrontMudguardUnderColor",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 55535,
+            "bbox": [
+              490,
+              580,
+              980,
+              921
+            ],
+            "map": "psd_parts",
+            "name": "FrontMudguards.Inside",
+            "risk_class": "medium_accent_surface"
+          }
+        ]
+      },
       "helmet_and_visor": {
         "design_role": "driver color harmony and restrained glass/visor shading",
         "geometry_constraints": [
@@ -4733,6 +4804,7 @@
           "HelmetGlass_L",
           "HelmetGlass_R"
         ],
+        "symmetry_policy": "paired helmet/glass quadrants; keep subordinate to car-body symmetry",
         "tmuf_runtime_status": "not_proven_until_smoke",
         "total_label_area": 622098,
         "zone_evidence": [
@@ -4810,6 +4882,60 @@
           }
         ]
       },
+      "licence_plate_blocks": {
+        "design_role": "abstract plaque blocks, small color balance fields, and no-text graphic anchors",
+        "geometry_constraints": [
+          "named PSD licence plate zones only"
+        ],
+        "proof_notes": [
+          "no real sponsor text or copied trade dress; texture readability still requires TMUF review"
+        ],
+        "risk_classes": [
+          "medium_accent_surface"
+        ],
+        "safe_design_scale": "medium_accent_surface",
+        "source_files": [
+          "resources/authoritative/parts/psd_parts.json",
+          "resources/authoritative/parts/psd_parts_labels.npy"
+        ],
+        "source_maps": [
+          "psd_parts"
+        ],
+        "source_status": "proven_local_label_map",
+        "source_zones": [
+          "LicencePlate",
+          "LicencePlateBlock"
+        ],
+        "symmetry_policy": "named plaque zones only; no runtime placement claim before smoke",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "total_label_area": 143240,
+        "zone_evidence": [
+          {
+            "area": 62751,
+            "bbox": [
+              1689,
+              396,
+              1877,
+              852
+            ],
+            "map": "psd_parts",
+            "name": "LicencePlate",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 80489,
+            "bbox": [
+              790,
+              0,
+              1039,
+              418
+            ],
+            "map": "psd_parts",
+            "name": "LicencePlateBlock",
+            "risk_class": "medium_accent_surface"
+          }
+        ]
+      },
       "main_body_top_quadrants": {
         "design_role": "large base fields, hard-edge blocks, long stripe clipping, and broad abstract panels",
         "geometry_constraints": [
@@ -4836,6 +4962,7 @@
           "MainBodyTOP_BL",
           "MainBodyTOP_BR"
         ],
+        "symmetry_policy": "paired TL/TR/BL/BR named atlas zones; runtime left/right interpretation pending smoke",
         "tmuf_runtime_status": "not_proven_until_smoke",
         "total_label_area": 1622702,
         "zone_evidence": [
@@ -4889,6 +5016,209 @@
           }
         ]
       },
+      "mid_deck_generated_panels": {
+        "design_role": "cockpit-adjacent deck panels, roof flow breaks, and mid-body geometric blocks",
+        "geometry_constraints": [
+          "generated mid/deck tokens",
+          "HGT/Y upper placement remains experimental"
+        ],
+        "proof_notes": [
+          "large local segmentation evidence; no exact cockpit seam claim until visual review"
+        ],
+        "risk_classes": [
+          "broad_design_surface",
+          "medium_accent_surface"
+        ],
+        "safe_design_scale": "broad_identity_surface",
+        "source_files": [
+          "resources/authoritative/parts/panels_high.json",
+          "resources/authoritative/parts/panels_high_labels.npy",
+          "resources/authoritative/gbuffer/position_2048.npy",
+          "resources/authoritative/gbuffer/coverage_2048.npy",
+          "resources/authoritative/gbuffer/extents_2048.json"
+        ],
+        "source_maps": [
+          "panels_high"
+        ],
+        "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+        "source_zones": [
+          "mid_deck_C_79",
+          "mid_deck_C_48",
+          "mid_deck_C_82",
+          "mid_deck_C_78"
+        ],
+        "symmetry_policy": "generated mid/deck token zones; cockpit/deck reading pending TMUF smoke",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "total_label_area": 723443,
+        "zone_evidence": [
+          {
+            "area": 489506,
+            "bbox": [
+              1019,
+              0,
+              2047,
+              884
+            ],
+            "map": "panels_high",
+            "name": "mid_deck_C_79",
+            "risk_class": "broad_design_surface"
+          },
+          {
+            "area": 117026,
+            "bbox": [
+              1557,
+              1238,
+              2047,
+              1655
+            ],
+            "map": "panels_high",
+            "name": "mid_deck_C_48",
+            "risk_class": "broad_design_surface"
+          },
+          {
+            "area": 74137,
+            "bbox": [
+              1856,
+              366,
+              2047,
+              877
+            ],
+            "map": "panels_high",
+            "name": "mid_deck_C_82",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 42774,
+            "bbox": [
+              1351,
+              82,
+              1727,
+              237
+            ],
+            "map": "panels_high",
+            "name": "mid_deck_C_78",
+            "risk_class": "medium_accent_surface"
+          }
+        ]
+      },
+      "mid_floor_generated_panels": {
+        "design_role": "mid-floor support blocks, lower shadow fields, and underside accent probes",
+        "geometry_constraints": [
+          "generated mid/floor tokens",
+          "HGT/Y lower placement remains experimental"
+        ],
+        "proof_notes": [
+          "support material only before TMUF screenshot acceptance"
+        ],
+        "risk_classes": [
+          "broad_design_surface",
+          "medium_accent_surface",
+          "small_detail_surface"
+        ],
+        "safe_design_scale": "medium_to_broad_support_surface",
+        "source_files": [
+          "resources/authoritative/parts/panels_fine.json",
+          "resources/authoritative/parts/panels_fine_labels.npy",
+          "resources/authoritative/gbuffer/position_2048.npy",
+          "resources/authoritative/gbuffer/coverage_2048.npy",
+          "resources/authoritative/gbuffer/extents_2048.json"
+        ],
+        "source_maps": [
+          "panels_fine"
+        ],
+        "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+        "source_zones": [
+          "mid_floor_C_35",
+          "mid_floor_C_38",
+          "mid_floor_C_36"
+        ],
+        "symmetry_policy": "generated mid/floor token zones; floor visibility remains unproven",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "total_label_area": 196123,
+        "zone_evidence": [
+          {
+            "area": 151665,
+            "bbox": [
+              0,
+              846,
+              1666,
+              2041
+            ],
+            "map": "panels_fine",
+            "name": "mid_floor_C_35",
+            "risk_class": "broad_design_surface"
+          },
+          {
+            "area": 27106,
+            "bbox": [
+              234,
+              919,
+              315,
+              1963
+            ],
+            "map": "panels_fine",
+            "name": "mid_floor_C_38",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 17352,
+            "bbox": [
+              0,
+              888,
+              107,
+              1998
+            ],
+            "map": "panels_fine",
+            "name": "mid_floor_C_36",
+            "risk_class": "small_detail_surface"
+          }
+        ]
+      },
+      "mid_side_generated_panel": {
+        "design_role": "large mid-side field for readable speed blades and blank sponsor-like geometry without text",
+        "geometry_constraints": [
+          "generated mid/side token",
+          "LAT/X side split remains experimental"
+        ],
+        "proof_notes": [
+          "broad area is useful for preview composition; TMUF side wrap remains smoke-pending"
+        ],
+        "risk_classes": [
+          "broad_design_surface"
+        ],
+        "safe_design_scale": "broad_identity_surface",
+        "source_files": [
+          "resources/authoritative/parts/panels_high.json",
+          "resources/authoritative/parts/panels_high_labels.npy",
+          "resources/authoritative/gbuffer/position_2048.npy",
+          "resources/authoritative/gbuffer/coverage_2048.npy",
+          "resources/authoritative/gbuffer/extents_2048.json"
+        ],
+        "source_maps": [
+          "panels_high"
+        ],
+        "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+        "source_zones": [
+          "mid_side_C_02"
+        ],
+        "symmetry_policy": "single broad generated mid/side token zone; side split remains GBuffer-dependent",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "total_label_area": 623575,
+        "zone_evidence": [
+          {
+            "area": 623575,
+            "bbox": [
+              0,
+              699,
+              1717,
+              2047
+            ],
+            "map": "panels_high",
+            "name": "mid_side_C_02",
+            "risk_class": "broad_design_surface"
+          }
+        ]
+      },
       "mirrors_and_holders": {
         "design_role": "small contrast checks and polished micro-detail",
         "geometry_constraints": [
@@ -4914,6 +5244,7 @@
           "SideMirrors",
           "MirrorHolders"
         ],
+        "symmetry_policy": "named mirror/holder atlas zones; tiny visibility must be visually accepted",
         "tmuf_runtime_status": "not_proven_until_smoke",
         "total_label_area": 47755,
         "zone_evidence": [
@@ -4943,6 +5274,175 @@
           }
         ]
       },
+      "nose_deck_generated_panels": {
+        "design_role": "front deck blocks, wedge clipping, and large nose-adjacent color surfaces",
+        "geometry_constraints": [
+          "generated nose/deck tokens",
+          "high LEN/Z front placement remains experimental"
+        ],
+        "proof_notes": [
+          "generated panel tokens are local segmentation evidence, not stock semantic truth"
+        ],
+        "risk_classes": [
+          "medium_accent_surface"
+        ],
+        "safe_design_scale": "medium_to_broad_accent",
+        "source_files": [
+          "resources/authoritative/parts/panels_high.json",
+          "resources/authoritative/parts/panels_high_labels.npy",
+          "resources/authoritative/gbuffer/position_2048.npy",
+          "resources/authoritative/gbuffer/coverage_2048.npy",
+          "resources/authoritative/gbuffer/extents_2048.json"
+        ],
+        "source_maps": [
+          "panels_high"
+        ],
+        "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+        "source_zones": [
+          "nose_deck_C_84",
+          "nose_deck_C_85",
+          "nose_deck_C_09",
+          "nose_deck_C_92"
+        ],
+        "symmetry_policy": "generated nose/deck token zones; use mirrored/centered graphics until TMUF smoke",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "total_label_area": 220398,
+        "zone_evidence": [
+          {
+            "area": 77334,
+            "bbox": [
+              0,
+              410,
+              969,
+              855
+            ],
+            "map": "panels_high",
+            "name": "nose_deck_C_84",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 49931,
+            "bbox": [
+              14,
+              490,
+              1108,
+              920
+            ],
+            "map": "panels_high",
+            "name": "nose_deck_C_85",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 55643,
+            "bbox": [
+              1022,
+              1235,
+              1760,
+              1654
+            ],
+            "map": "panels_high",
+            "name": "nose_deck_C_09",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 37490,
+            "bbox": [
+              504,
+              594,
+              971,
+              899
+            ],
+            "map": "panels_high",
+            "name": "nose_deck_C_92",
+            "risk_class": "medium_accent_surface"
+          }
+        ]
+      },
+      "nose_floor_generated_panels": {
+        "design_role": "front floor returns, lower wedge continuation, and dark/bright underside split probes",
+        "geometry_constraints": [
+          "generated nose/floor tokens",
+          "HGT/Y lower placement remains experimental"
+        ],
+        "proof_notes": [
+          "use for probe and support fields; exact TMUF visibility remains smoke-pending"
+        ],
+        "risk_classes": [
+          "broad_design_surface",
+          "medium_accent_surface"
+        ],
+        "safe_design_scale": "broad_support_surface",
+        "source_files": [
+          "resources/authoritative/parts/panels_fine.json",
+          "resources/authoritative/parts/panels_fine_labels.npy",
+          "resources/authoritative/gbuffer/position_2048.npy",
+          "resources/authoritative/gbuffer/coverage_2048.npy",
+          "resources/authoritative/gbuffer/extents_2048.json"
+        ],
+        "source_maps": [
+          "panels_fine"
+        ],
+        "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+        "source_zones": [
+          "nose_floor_C_09",
+          "nose_floor_C_33",
+          "nose_floor_C_34",
+          "nose_floor_C_149"
+        ],
+        "symmetry_policy": "generated nose/floor token zones; not a runtime underside visibility claim",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "total_label_area": 788929,
+        "zone_evidence": [
+          {
+            "area": 533460,
+            "bbox": [
+              0,
+              0,
+              1690,
+              2047
+            ],
+            "map": "panels_fine",
+            "name": "nose_floor_C_09",
+            "risk_class": "broad_design_surface"
+          },
+          {
+            "area": 110740,
+            "bbox": [
+              3,
+              703,
+              1530,
+              2047
+            ],
+            "map": "panels_fine",
+            "name": "nose_floor_C_33",
+            "risk_class": "broad_design_surface"
+          },
+          {
+            "area": 89347,
+            "bbox": [
+              0,
+              742,
+              1717,
+              2047
+            ],
+            "map": "panels_fine",
+            "name": "nose_floor_C_34",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 55382,
+            "bbox": [
+              1734,
+              1750,
+              1971,
+              2047
+            ],
+            "map": "panels_fine",
+            "name": "nose_floor_C_149",
+            "risk_class": "medium_accent_surface"
+          }
+        ]
+      },
       "nose_identity_panel": {
         "design_role": "front identity wedge, spear tip, and number-free badge field",
         "geometry_constraints": [
@@ -4966,6 +5466,7 @@
         "source_zones": [
           "NosePart"
         ],
+        "symmetry_policy": "single named nose zone; use centered graphics unless TMUF review accepts asymmetry",
         "tmuf_runtime_status": "not_proven_until_smoke",
         "total_label_area": 101934,
         "zone_evidence": [
@@ -4980,6 +5481,239 @@
             "map": "psd_parts",
             "name": "NosePart",
             "risk_class": "broad_design_surface"
+          }
+        ]
+      },
+      "nose_side_generated_panels": {
+        "design_role": "front side sweeps and large lower-side color returns",
+        "geometry_constraints": [
+          "generated nose/side tokens",
+          "LAT/X side split remains experimental"
+        ],
+        "proof_notes": [
+          "broad atlas areas support large graphics; exact side wrapping remains unproven"
+        ],
+        "risk_classes": [
+          "broad_design_surface",
+          "medium_accent_surface"
+        ],
+        "safe_design_scale": "broad_identity_surface",
+        "source_files": [
+          "resources/authoritative/parts/panels_high.json",
+          "resources/authoritative/parts/panels_high_labels.npy",
+          "resources/authoritative/gbuffer/position_2048.npy",
+          "resources/authoritative/gbuffer/coverage_2048.npy",
+          "resources/authoritative/gbuffer/extents_2048.json"
+        ],
+        "source_maps": [
+          "panels_high"
+        ],
+        "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+        "source_zones": [
+          "nose_side_C_04",
+          "nose_side_C_83"
+        ],
+        "symmetry_policy": "generated nose/side token zones; side interpretation pending smoke",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "total_label_area": 1078213,
+        "zone_evidence": [
+          {
+            "area": 1020619,
+            "bbox": [
+              0,
+              0,
+              2047,
+              2047
+            ],
+            "map": "panels_high",
+            "name": "nose_side_C_04",
+            "risk_class": "broad_design_surface"
+          },
+          {
+            "area": 57594,
+            "bbox": [
+              0,
+              497,
+              1085,
+              862
+            ],
+            "map": "panels_high",
+            "name": "nose_side_C_83",
+            "risk_class": "medium_accent_surface"
+          }
+        ]
+      },
+      "rear_deck_fine_louver_rows": {
+        "design_role": "fine rear deck louver rows, paired glow blocks, and technical vent rhythm",
+        "geometry_constraints": [
+          "generated rear/deck tokens",
+          "low LEN/Z",
+          "high HGT/Y",
+          "LAT/X mirrored offset bands"
+        ],
+        "proof_notes": [
+          "generated panel tokens support louver-like probes only; exact in-game rows need TMUF screenshots"
+        ],
+        "risk_classes": [
+          "broad_design_surface",
+          "medium_accent_surface",
+          "small_detail_surface"
+        ],
+        "safe_design_scale": "medium_accent_surface",
+        "source_files": [
+          "resources/authoritative/parts/panels_fine.json",
+          "resources/authoritative/parts/panels_fine_labels.npy",
+          "resources/authoritative/gbuffer/position_2048.npy",
+          "resources/authoritative/gbuffer/coverage_2048.npy",
+          "resources/authoritative/gbuffer/extents_2048.json"
+        ],
+        "source_maps": [
+          "panels_fine"
+        ],
+        "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+        "source_zones": [
+          "rear_deck_C_140",
+          "rear_deck_C_118",
+          "rear_deck_C_122",
+          "rear_deck_C_146",
+          "rear_deck_C_133"
+        ],
+        "symmetry_policy": "generated rear/deck fine tokens with LAT/X mirrored offset bands; runtime rows unproven",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "total_label_area": 272437,
+        "zone_evidence": [
+          {
+            "area": 133444,
+            "bbox": [
+              783,
+              418,
+              1424,
+              803
+            ],
+            "map": "panels_fine",
+            "name": "rear_deck_C_140",
+            "risk_class": "broad_design_surface"
+          },
+          {
+            "area": 69476,
+            "bbox": [
+              816,
+              1302,
+              1193,
+              1596
+            ],
+            "map": "panels_fine",
+            "name": "rear_deck_C_118",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 27255,
+            "bbox": [
+              876,
+              1283,
+              1195,
+              1613
+            ],
+            "map": "panels_fine",
+            "name": "rear_deck_C_122",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 24364,
+            "bbox": [
+              915,
+              378,
+              1319,
+              513
+            ],
+            "map": "panels_fine",
+            "name": "rear_deck_C_146",
+            "risk_class": "small_detail_surface"
+          },
+          {
+            "area": 17898,
+            "bbox": [
+              814,
+              443,
+              1407,
+              604
+            ],
+            "map": "panels_fine",
+            "name": "rear_deck_C_133",
+            "risk_class": "small_detail_surface"
+          }
+        ]
+      },
+      "rear_floor_generated_panels": {
+        "design_role": "rear floor shadows, dark support fields, and low rear accent returns",
+        "geometry_constraints": [
+          "generated rear/floor tokens",
+          "low LEN/Z and low HGT/Y placement remain experimental"
+        ],
+        "proof_notes": [
+          "support-only until real rear/lower screenshots prove readability"
+        ],
+        "risk_classes": [
+          "broad_design_surface",
+          "medium_accent_surface",
+          "small_detail_surface"
+        ],
+        "safe_design_scale": "medium_to_broad_support_surface",
+        "source_files": [
+          "resources/authoritative/parts/panels_high.json",
+          "resources/authoritative/parts/panels_high_labels.npy",
+          "resources/authoritative/gbuffer/position_2048.npy",
+          "resources/authoritative/gbuffer/coverage_2048.npy",
+          "resources/authoritative/gbuffer/extents_2048.json"
+        ],
+        "source_maps": [
+          "panels_high"
+        ],
+        "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+        "source_zones": [
+          "rear_floor_C_15",
+          "rear_floor_C_17",
+          "rear_floor_C_36"
+        ],
+        "symmetry_policy": "generated rear/floor token zones; lower visibility pending TMUF smoke",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "total_label_area": 256274,
+        "zone_evidence": [
+          {
+            "area": 188329,
+            "bbox": [
+              0,
+              846,
+              1666,
+              2041
+            ],
+            "map": "panels_high",
+            "name": "rear_floor_C_15",
+            "risk_class": "broad_design_surface"
+          },
+          {
+            "area": 43130,
+            "bbox": [
+              182,
+              919,
+              506,
+              1963
+            ],
+            "map": "panels_high",
+            "name": "rear_floor_C_17",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 24815,
+            "bbox": [
+              0,
+              1255,
+              96,
+              1612
+            ],
+            "map": "panels_high",
+            "name": "rear_floor_C_36",
+            "risk_class": "small_detail_surface"
           }
         ]
       },
@@ -5015,6 +5749,7 @@
           "RearMudguardsTip",
           "RearMudguardsedgeColor"
         ],
+        "symmetry_policy": "named rear guard group; rear split by LEN/Z remains experimental",
         "tmuf_runtime_status": "not_proven_until_smoke",
         "total_label_area": 232502,
         "zone_evidence": [
@@ -5080,6 +5815,268 @@
           }
         ]
       },
+      "rear_mudguard_edge_details": {
+        "design_role": "rear guard pinstripe edge, tip highlight, and underside fill",
+        "geometry_constraints": [
+          "named PSD rear mudguard detail zones only"
+        ],
+        "proof_notes": [
+          "rear detail labels are proven atlas evidence; in-game seam quality remains unproven"
+        ],
+        "risk_classes": [
+          "medium_accent_surface",
+          "small_detail_surface"
+        ],
+        "safe_design_scale": "medium_accent_surface",
+        "source_files": [
+          "resources/authoritative/parts/psd_parts.json",
+          "resources/authoritative/parts/psd_parts_labels.npy"
+        ],
+        "source_maps": [
+          "psd_parts"
+        ],
+        "source_status": "proven_local_label_map",
+        "source_zones": [
+          "RearMudguardsedgeColor",
+          "RearMudguardsTip",
+          "RearMudguardUnderColor",
+          "RearMudGuardsInside"
+        ],
+        "symmetry_policy": "rear guard named detail zones; mirror with front/rear rhythm until review",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "total_label_area": 159801,
+        "zone_evidence": [
+          {
+            "area": 37580,
+            "bbox": [
+              203,
+              1893,
+              548,
+              2047
+            ],
+            "map": "psd_parts",
+            "name": "RearMudguardsedgeColor",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 31005,
+            "bbox": [
+              549,
+              739,
+              765,
+              922
+            ],
+            "map": "psd_parts",
+            "name": "RearMudguardsTip",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 24194,
+            "bbox": [
+              44,
+              601,
+              492,
+              879
+            ],
+            "map": "psd_parts",
+            "name": "RearMudguardUnderColor",
+            "risk_class": "small_detail_surface"
+          },
+          {
+            "area": 67022,
+            "bbox": [
+              0,
+              618,
+              598,
+              861
+            ],
+            "map": "psd_parts",
+            "name": "RearMudGuardsInside",
+            "risk_class": "medium_accent_surface"
+          }
+        ]
+      },
+      "rear_side_generated_panels": {
+        "design_role": "rear side sweeps, color echoes, and side-to-tail transitions",
+        "geometry_constraints": [
+          "generated rear/side tokens",
+          "low LEN/Z rear placement remains experimental"
+        ],
+        "proof_notes": [
+          "good candidate for symmetric rear side panels, but exact TMUF interpretation is pending"
+        ],
+        "risk_classes": [
+          "broad_design_surface",
+          "medium_accent_surface"
+        ],
+        "safe_design_scale": "medium_to_broad_accent",
+        "source_files": [
+          "resources/authoritative/parts/panels_fine.json",
+          "resources/authoritative/parts/panels_fine_labels.npy",
+          "resources/authoritative/gbuffer/position_2048.npy",
+          "resources/authoritative/gbuffer/coverage_2048.npy",
+          "resources/authoritative/gbuffer/extents_2048.json"
+        ],
+        "source_maps": [
+          "panels_fine"
+        ],
+        "source_status": "mixed_generated_labels_and_experimental_gbuffer",
+        "source_zones": [
+          "rear_side_C_30",
+          "rear_side_C_152",
+          "rear_side_C_154",
+          "rear_side_C_153"
+        ],
+        "symmetry_policy": "generated rear/side token zones; mirror by LAT/X until smoke proves wrap",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "total_label_area": 383268,
+        "zone_evidence": [
+          {
+            "area": 202330,
+            "bbox": [
+              291,
+              907,
+              1245,
+              2047
+            ],
+            "map": "panels_fine",
+            "name": "rear_side_C_30",
+            "risk_class": "broad_design_surface"
+          },
+          {
+            "area": 100162,
+            "bbox": [
+              182,
+              615,
+              762,
+              947
+            ],
+            "map": "panels_fine",
+            "name": "rear_side_C_152",
+            "risk_class": "broad_design_surface"
+          },
+          {
+            "area": 42607,
+            "bbox": [
+              118,
+              601,
+              599,
+              2047
+            ],
+            "map": "panels_fine",
+            "name": "rear_side_C_154",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 38169,
+            "bbox": [
+              724,
+              345,
+              1174,
+              573
+            ],
+            "map": "panels_fine",
+            "name": "rear_side_C_153",
+            "risk_class": "medium_accent_surface"
+          }
+        ]
+      },
+      "rear_wheel_diffuse_blocks": {
+        "design_role": "stock Diffuse rear wheel-adjacent blocks and tiny mechanical color echoes",
+        "geometry_constraints": [
+          "named PSD wheel-adjacent zones only"
+        ],
+        "proof_notes": [
+          "not Details.dds, tyre sidewall, tread, hub material, or custom wheel proof"
+        ],
+        "risk_classes": [
+          "medium_accent_surface",
+          "small_detail_surface"
+        ],
+        "safe_design_scale": "small_to_medium_probe_surface",
+        "source_files": [
+          "resources/authoritative/parts/psd_parts.json",
+          "resources/authoritative/parts/psd_parts_labels.npy"
+        ],
+        "source_maps": [
+          "psd_parts"
+        ],
+        "source_status": "proven_local_label_map",
+        "source_zones": [
+          "RearWheelsSideBlock",
+          "KNob.Gouing.inside.Rear.wheel"
+        ],
+        "symmetry_policy": "named wheel-adjacent atlas zones only; not a wheel/tyre route claim",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "total_label_area": 64829,
+        "zone_evidence": [
+          {
+            "area": 46094,
+            "bbox": [
+              900,
+              448,
+              1331,
+              567
+            ],
+            "map": "psd_parts",
+            "name": "RearWheelsSideBlock",
+            "risk_class": "medium_accent_surface"
+          },
+          {
+            "area": 18735,
+            "bbox": [
+              646,
+              340,
+              869,
+              471
+            ],
+            "map": "psd_parts",
+            "name": "KNob.Gouing.inside.Rear.wheel",
+            "risk_class": "small_detail_surface"
+          }
+        ]
+      },
+      "side_vent_inside": {
+        "design_role": "small vent interior accent and dark technical inset",
+        "geometry_constraints": [
+          "named PSD side vent zone only"
+        ],
+        "proof_notes": [
+          "small area atlas evidence only; not a proof of visible vent depth in TMUF"
+        ],
+        "risk_classes": [
+          "small_detail_surface"
+        ],
+        "safe_design_scale": "small_detail_surface",
+        "source_files": [
+          "resources/authoritative/parts/psd_parts.json",
+          "resources/authoritative/parts/psd_parts_labels.npy"
+        ],
+        "source_maps": [
+          "psd_parts"
+        ],
+        "source_status": "proven_local_label_map",
+        "source_zones": [
+          "BigSideVentOneInSideColor"
+        ],
+        "symmetry_policy": "single named vent zone; use as restrained accent until visibility is accepted",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "total_label_area": 19322,
+        "zone_evidence": [
+          {
+            "area": 19322,
+            "bbox": [
+              1110,
+              786,
+              1337,
+              883
+            ],
+            "map": "psd_parts",
+            "name": "BigSideVentOneInSideColor",
+            "risk_class": "small_detail_surface"
+          }
+        ]
+      },
       "side_wings": {
         "design_role": "small aero flicks and secondary color hits",
         "geometry_constraints": [
@@ -5104,6 +6101,7 @@
           "SIdeWings",
           "SideWingsUNDER"
         ],
+        "symmetry_policy": "named side wing and underside labels; use balanced accent colors until TMUF review",
         "tmuf_runtime_status": "not_proven_until_smoke",
         "total_label_area": 125401,
         "zone_evidence": [
@@ -5162,6 +6160,7 @@
           "SideUnderColor_L",
           "SideUnderColor_R"
         ],
+        "symmetry_policy": "paired L/R named zones with GBuffer side-band clipping experimental until smoke",
         "tmuf_runtime_status": "not_proven_until_smoke",
         "total_label_area": 263234,
         "zone_evidence": [
@@ -5216,6 +6215,7 @@
           "Tailwing_R",
           "TailWingUnderBorderColor"
         ],
+        "symmetry_policy": "paired L/R tailwing labels plus under-border zone; keep bands mirrored until review",
         "tmuf_runtime_status": "not_proven_until_smoke",
         "total_label_area": 177929,
         "zone_evidence": [
@@ -5287,6 +6287,7 @@
           "UnderPlate_R",
           "UnderPlate.insidecolor :)"
         ],
+        "symmetry_policy": "named underside quadrants and underplate zones; support material with no hero asymmetry",
         "tmuf_runtime_status": "not_proven_until_smoke",
         "total_label_area": 489634,
         "zone_evidence": [

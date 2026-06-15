@@ -51,7 +51,7 @@ def _kit_manifest(files: list[str]) -> dict[str, Any]:
         "next_steps": [
             "Copy skins/calibration_stock_diffuse.zip into the TMUF/TMNF StadiumCar skin folder.",
             "Load the skin in TMUF/TMNF.",
-            "Record required observations and screenshot paths with recipes/record_tmuf_smoke.py.",
+            "Record required observations and front/side/rear/top screenshot roles with recipes/record_tmuf_smoke.py.",
             "Run recipes/tmuf_smoke_gate.py --evaluate before applying any promotion.",
         ],
     }
