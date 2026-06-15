@@ -1,4 +1,25 @@
 {
+  "alpha_metrics": {
+    "high_alpha_pixel_ratio": 0.368407,
+    "max_alpha": 148,
+    "mean_alpha": 125.84797,
+    "min_alpha": 112,
+    "unique_alpha_values": [
+      112,
+      118,
+      136,
+      148
+    ]
+  },
+  "alpha_policy": {
+    "accent_alpha": 148,
+    "base_alpha": 112,
+    "material_effect_status": "not_proven_until_tmuf_smoke",
+    "route": "conservative_dxt5_alpha",
+    "shoulder_alpha": 136,
+    "tmuf_gloss_claim": "none",
+    "underbody_alpha": 118
+  },
   "design_rules": [
     "black_charcoal_base",
     "magenta_cyan_accents",

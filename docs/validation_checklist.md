@@ -34,6 +34,8 @@ Use this before calling any skin complete.
 - [ ] GBuffer-derived masks stay `experimental_until_tmuf_smoke` before smoke
       proof and become `proven_by_tmuf_smoke` only after the smoke gate applies
       passed TMUF evidence.
+- [ ] Premium reports include `alpha_policy` and `alpha_metrics`, with
+      `tmuf_gloss_claim=none` until TMUF material behavior is smoke-tested.
 - [ ] Run `python3 recipes/validate_profile_gates.py` before touching CH_2026
       full-car or no-mudguard lanes.
 

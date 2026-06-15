@@ -262,6 +262,25 @@ def _style_metrics(rgba: np.ndarray, coverage: np.ndarray) -> dict[str, float]:
     }
 
 
+def _alpha_metrics(rgba: np.ndarray, coverage: np.ndarray) -> dict[str, float | int | list[int]]:
+    alpha = rgba[..., 3][coverage].astype(np.uint8)
+    if alpha.size == 0:
+        return {
+            "min_alpha": 0,
+            "max_alpha": 0,
+            "mean_alpha": 0.0,
+            "unique_alpha_values": [],
+            "high_alpha_pixel_ratio": 0.0,
+        }
+    return {
+        "min_alpha": int(alpha.min()),
+        "max_alpha": int(alpha.max()),
+        "mean_alpha": round(float(alpha.mean()), 6),
+        "unique_alpha_values": [int(value) for value in np.unique(alpha)],
+        "high_alpha_pixel_ratio": round(float((alpha >= 136).sum() / alpha.size), 6),
+    }
+
+
 def _write_candidate(candidate: Candidate) -> dict[str, str]:
     out_skin = ROOT / "out" / "skins" / f"{candidate.name}.zip"
     out_preview = ROOT / "out" / "previews" / f"{candidate.name}_projected_side_top_rear.png"
@@ -271,6 +290,8 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
         path.mkdir(parents=True, exist_ok=True)
 
     image, metrics = build_premium_rgba(candidate)
+    fields = load_fields()
+    alpha_metrics = _alpha_metrics(np.asarray(image), fields["coverage"])
     icon = image.convert("RGB").resize((64, 64), Image.Resampling.LANCZOS).convert("RGBA")
 
     with zipfile.ZipFile(out_skin, "w", zipfile.ZIP_DEFLATED) as zf:
@@ -278,7 +299,6 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
         write_stable_zip_entry(zf, "Icon.dds", build_dds_dxt5_bytes(icon, mipmaps=True))
 
     image.save(out_atlas)
-    fields = load_fields()
     rgba = np.asarray(image)
     side = project_view(rgba, "side", fields)
     top = project_view(rgba, "top", fields)
@@ -314,6 +334,16 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
         },
         "input_evidence": input_evidence(),
         "output_artifacts": stock_output_artifacts(out_skin, out_atlas, out_preview),
+        "alpha_policy": {
+            "route": "conservative_dxt5_alpha",
+            "material_effect_status": "not_proven_until_tmuf_smoke",
+            "tmuf_gloss_claim": "none",
+            "base_alpha": 112,
+            "underbody_alpha": 118,
+            "shoulder_alpha": 136,
+            "accent_alpha": 148,
+        },
+        "alpha_metrics": alpha_metrics,
         "design_rules": [
             "black_charcoal_base",
             "magenta_cyan_accents",

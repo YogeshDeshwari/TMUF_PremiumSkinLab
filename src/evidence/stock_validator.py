@@ -20,6 +20,8 @@ FORBIDDEN_STOCK_FILES = {"Details.dds", "ProjShad.dds"}
 LOCAL_PSD_MASK_STATUS = "proven_local_psd_parts_label_map"
 GBUFFER_PENDING_STATUS = "experimental_until_tmuf_smoke"
 GBUFFER_PROVEN_STATUS = "proven_by_tmuf_smoke"
+ALPHA_MIN_CONSERVATIVE = 100
+ALPHA_MAX_CONSERVATIVE = 155
 
 
 def dds_info(data: bytes) -> dict[str, Any]:
@@ -147,6 +149,41 @@ def validate_mask_evidence(report: dict[str, Any], premium: bool) -> list[str]:
     return errors
 
 
+def validate_alpha_policy(report: dict[str, Any], premium: bool) -> list[str]:
+    if not premium:
+        return []
+
+    errors: list[str] = []
+    policy = report.get("alpha_policy")
+    metrics = report.get("alpha_metrics")
+    if not isinstance(policy, dict):
+        return ["premium report has no alpha_policy object"]
+    if not isinstance(metrics, dict):
+        return ["premium report has no alpha_metrics object"]
+
+    if policy.get("route") != "conservative_dxt5_alpha":
+        errors.append("alpha policy route must be conservative_dxt5_alpha")
+    if policy.get("material_effect_status") != "not_proven_until_tmuf_smoke":
+        errors.append("alpha material effect must remain unproven until TMUF smoke")
+    if policy.get("tmuf_gloss_claim") != "none":
+        errors.append("alpha policy must not claim TMUF gloss behavior")
+
+    min_alpha = metrics.get("min_alpha")
+    max_alpha = metrics.get("max_alpha")
+    if not isinstance(min_alpha, int) or min_alpha < ALPHA_MIN_CONSERVATIVE:
+        errors.append("alpha min below conservative range")
+    if not isinstance(max_alpha, int) or max_alpha > ALPHA_MAX_CONSERVATIVE:
+        errors.append("alpha max above conservative range")
+    unique_values = metrics.get("unique_alpha_values", [])
+    if not isinstance(unique_values, list) or not unique_values:
+        errors.append("alpha metrics must include unique_alpha_values")
+    high_ratio = metrics.get("high_alpha_pixel_ratio")
+    if not isinstance(high_ratio, (int, float)) or high_ratio <= 0 or high_ratio >= 0.45:
+        errors.append("alpha high-alpha pixel ratio outside conservative range")
+
+    return errors
+
+
 def _zip_checks(zip_path: Path) -> tuple[dict[str, bool], list[str]]:
     checks = {
         "zip_exists": zip_path.exists(),
@@ -199,6 +236,7 @@ def _report_checks(report_path: Path, manifest: dict[str, Any]) -> tuple[dict[st
         "report_input_evidence_matches_manifest": False,
         "report_output_artifacts_match_files": False,
         "report_mask_evidence_valid": False,
+        "report_alpha_policy_valid": False,
         "tmuf_smoke_passed": False,
     }
     errors: list[str] = []
@@ -262,7 +300,9 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
             manifest,
         )
         mask_errors = validate_mask_evidence(report, premium=premium)
+        alpha_errors = validate_alpha_policy(report, premium=premium)
         report_checks["report_mask_evidence_valid"] = not mask_errors
+        report_checks["report_alpha_policy_valid"] = not alpha_errors
         preview_checks, preview_errors = _preview_checks(root, skin_name)
         visual_checks, visual_metrics, visual_errors = validate_visual_quality(
             root,
@@ -270,7 +310,7 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
             premium=premium,
         )
         checks = {**zip_checks, **report_checks, **preview_checks, **visual_checks}
-        skin_errors = [*zip_errors, *report_errors, *mask_errors, *preview_errors, *visual_errors]
+        skin_errors = [*zip_errors, *report_errors, *mask_errors, *alpha_errors, *preview_errors, *visual_errors]
         errors.extend(skin_errors)
         skins.append(
             {

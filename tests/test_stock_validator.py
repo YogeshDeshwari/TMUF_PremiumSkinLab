@@ -162,6 +162,52 @@ class StockValidatorTests(unittest.TestCase):
         self.assertIn("missing mask evidence: center_spine", errors)
         self.assertIn("mudguards must use proven local PSD label evidence", errors)
 
+    def test_premium_report_alpha_policy_is_validated_without_gloss_claims(self):
+        from src.evidence.stock_validator import validate_alpha_policy
+
+        valid_report = {
+            "skin_name": "example",
+            "alpha_policy": {
+                "route": "conservative_dxt5_alpha",
+                "material_effect_status": "not_proven_until_tmuf_smoke",
+                "tmuf_gloss_claim": "none",
+            },
+            "alpha_metrics": {
+                "min_alpha": 112,
+                "max_alpha": 148,
+                "mean_alpha": 121.5,
+                "unique_alpha_values": [112, 118, 136, 148],
+                "high_alpha_pixel_ratio": 0.19,
+            },
+        }
+
+        self.assertEqual(validate_alpha_policy(valid_report, premium=True), [])
+        self.assertEqual(validate_alpha_policy(valid_report, premium=False), [])
+
+        gloss_claim = {
+            **valid_report,
+            "alpha_policy": {
+                **valid_report["alpha_policy"],
+                "material_effect_status": "proven_gloss",
+                "tmuf_gloss_claim": "gloss",
+            },
+        }
+        errors = validate_alpha_policy(gloss_claim, premium=True)
+        self.assertIn("alpha material effect must remain unproven until TMUF smoke", errors)
+        self.assertIn("alpha policy must not claim TMUF gloss behavior", errors)
+
+        too_extreme = {
+            **valid_report,
+            "alpha_metrics": {
+                **valid_report["alpha_metrics"],
+                "min_alpha": 0,
+                "max_alpha": 255,
+            },
+        }
+        errors = validate_alpha_policy(too_extreme, premium=True)
+        self.assertIn("alpha min below conservative range", errors)
+        self.assertIn("alpha max above conservative range", errors)
+
     def test_cli_outputs_json_summary(self):
         from recipes.validate_stock_outputs import main
 

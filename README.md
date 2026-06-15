@@ -96,6 +96,10 @@ Panel targeting evidence lives in
 Those entries are atlas evidence only; each still carries
 `tmuf_runtime_status=not_proven_until_smoke` until calibration passes in TMUF.
 
+Premium reports include `alpha_policy` and `alpha_metrics` for the Diffuse alpha
+channel. This is package evidence only; reports must keep
+`tmuf_gloss_claim=none` until a TMUF smoke test proves material behavior.
+
 The smoke kit includes `previews/tmuf_smoke_contact_sheet.png` as a visual
 review aid only. It is not smoke evidence.
 
