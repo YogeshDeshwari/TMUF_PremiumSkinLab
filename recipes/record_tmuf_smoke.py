@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from src.evidence.smoke_record import DEFAULT_OUTPUT, record_calibration_smoke_report  # noqa: E402
+from src.evidence.smoke_gate import REQUIRED_OBSERVATIONS  # noqa: E402
 
 
 def main() -> int:
@@ -19,6 +20,12 @@ def main() -> int:
     parser.add_argument("--tmuf-build", required=True, help="TMUF/TMNF build or install used for the smoke test")
     parser.add_argument("--test-date-local", required=True, help="local test date, for example 2026-06-15")
     parser.add_argument("--screenshot", action="append", type=Path, required=True, help="screenshot proving calibration observations")
+    parser.add_argument(
+        "--confirm-observation",
+        action="append",
+        choices=REQUIRED_OBSERVATIONS,
+        help="confirm one required calibration observation; pass once for each required observation",
+    )
     parser.add_argument("--notes", default="", help="optional smoke-test notes")
     parser.add_argument(
         "--all-required-observations-passed",
@@ -34,6 +41,7 @@ def main() -> int:
         test_date_local=args.test_date_local,
         screenshot_paths=args.screenshot,
         all_required_observations_passed=args.all_required_observations_passed,
+        confirmed_observations=args.confirm_observation,
         notes=args.notes,
         base_dir=args.base_dir,
     )

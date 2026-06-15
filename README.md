@@ -5,9 +5,10 @@ Clean, isolated workspace for evidence-backed TMUF/TMNF StadiumCar skin generati
 ## Goal
 
 Generate polished premium StadiumCar skins, starting with stock-safe
-`Diffuse.dds` + `Icon.dds` packages. The first target style is a dark
-black/charcoal car with magenta and cyan accents, broad readable graphics, and
-no donor or StadiumCar V2 UV assumptions.
+`Diffuse.dds` + `Icon.dds` packages. The target is a lane-based generator:
+minimal black/red, black/gold precision, two-tone prototype, flow stripes,
+technical panel maps, abstract art-car designs, op-art speed fields, and dark
+neon prototypes. No lane may rely on donor or StadiumCar V2 UV assumptions.
 
 ## Core Rule
 
@@ -27,6 +28,19 @@ Regenerate it with:
 ```bash
 python3 -m src.evidence.build_manifest
 ```
+
+The generated stock panel inventory is:
+
+`out/reports/stock_part_inventory.json`
+
+Regenerate it with:
+
+```bash
+python3 recipes/explore_stock_parts.py
+```
+
+See `docs/panel_geometry_livery_plan.md` for the current panel map, livery
+research lanes, and proof gates.
 
 ## Current Milestone
 
@@ -67,6 +81,7 @@ Those skins intentionally remain behind the same calibration proof gate.
 ```bash
 python3 recipes/stock_calibration.py
 python3 recipes/stock_premium_neon.py
+python3 recipes/explore_stock_parts.py
 python3 recipes/tmuf_smoke_gate.py --write-template
 python3 recipes/prepare_tmuf_smoke_kit.py
 python3 recipes/find_tmuf_skin_dirs.py --write
@@ -83,6 +98,6 @@ After the calibration skin is loaded in TMUF/TMNF, record the real screenshots
 and explicit observation confirmation with:
 
 ```bash
-python3 recipes/record_tmuf_smoke.py --tester "manual tester" --tmuf-build "TMUF local install" --test-date-local 2026-06-15 --screenshot /path/to/tmuf_calibration.png --all-required-observations-passed
+python3 recipes/record_tmuf_smoke.py --tester "manual tester" --tmuf-build "TMUF local install" --test-date-local 2026-06-15 --screenshot /path/to/tmuf_calibration.png --confirm-observation nose_is_red --confirm-observation tail_is_blue --confirm-observation left_side_is_green --confirm-observation right_side_is_yellow --confirm-observation roof_high_surfaces_are_white --confirm-observation lower_floor_surfaces_are_dark --confirm-observation mudguards_are_magenta --confirm-observation centerline_is_cyan --confirm-observation package_loads_without_custom_gbx
 python3 recipes/tmuf_smoke_gate.py --evaluate out/proof/calibration_tmuf_smoke.json
 ```

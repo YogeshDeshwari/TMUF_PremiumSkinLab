@@ -63,11 +63,12 @@ Pass condition:
 
 ## Phase 3: Premium Stock Diffuse Generator
 
-After calibration passes, build the first real generator:
+After calibration passes, build the first real generator suite:
 
 ```text
 src/stock_diffuse/
 recipes/stock_premium_neon.py
+recipes/stock_premium_suite.py
 ```
 
 Output per skin:
@@ -82,20 +83,37 @@ out/reports/<name>.json
 Rules:
 
 - Use GBuffer for 3D placement.
-- Use `psd_parts` for footprint and mudguard masks.
+- Use `psd_parts` for named footprint, mudguard, side, underbody, tailwing,
+  and helmet masks.
+- Use `panels_high` and `panels_fine` only as generated panel segmentation;
+  probe them before using small fragments as visible design elements.
 - Use AO/prelight for depth.
 - Rewrite old motif ideas cleanly.
 - Do not use StadiumCar V2 UVs.
 - Do not use donor GBX.
 - Do not ship `Details.dds` or `ProjShad.dds` in this lane.
 
-First candidate names:
+Current first candidate names:
 
 - `black_magenta_cyan_blade`
 - `black_cyan_spine`
 - `violet_cyber_flow`
 - `dark_neon_louver`
 - `magenta_cyan_race_proto`
+
+Expanded evidence-backed design lanes:
+
+- `minimal_black_red_wedge`
+- `black_gold_precision`
+- `gulf_two_tone_proto`
+- `martini_flow_dark`
+- `technical_panel_map`
+- `bmw_artcar_geometric`
+- `opart_speed_field`
+- `dark_neon_prototype`
+
+Use `docs/panel_geometry_livery_plan.md` and
+`out/reports/stock_part_inventory.json` as the part and design evidence map.
 
 ## Phase 4: CH_2026 Full-Car Lane
 
@@ -149,4 +167,3 @@ Known current evidence:
 
 Therefore no-mudguard remains experimental until packaged and smoke-tested in
 TMUF.
-

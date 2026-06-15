@@ -22,6 +22,9 @@ Use this before calling any skin complete.
 ## Evidence Checks
 
 - [ ] Every input exists in `resources/evidence_manifest.json`.
+- [ ] Run `python3 recipes/explore_stock_parts.py`.
+- [ ] Confirm `out/reports/stock_part_inventory.json` reports 41 `psd_parts`
+      zones, 60 `panels_high` zones, and 107 `panels_fine` zones.
 - [ ] No `reference_only` input is treated as stock truth.
 - [ ] No `experimental` feature is enabled without a proof report.
 - [ ] Any TMUF/game behavior claim has a smoke-test note.

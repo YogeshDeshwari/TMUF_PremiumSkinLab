@@ -1,0 +1,4473 @@
+{
+  "evidence_status": {
+    "gbuffer": "experimental_until_tmuf_smoke",
+    "mesh_objs": "proven_local_mesh_exports",
+    "panels_fine": "proven_local_label_map_generated_names",
+    "panels_high": "proven_local_label_map_generated_names",
+    "psd_parts": "proven_local_label_map",
+    "tmuf_runtime_visibility": "not_proven_until_smoke"
+  },
+  "gbuffer": {
+    "axis_roles": {
+      "HGT": 1,
+      "LAT": 0,
+      "LEN": 2
+    },
+    "background_pixels": 1443680,
+    "coverage_shape": [
+      2048,
+      2048
+    ],
+    "coverage_values": [
+      0,
+      255
+    ],
+    "covered_pixels": 2750624,
+    "mesh_space_extents": {
+      "max": [
+        0.917999387,
+        1.055527687,
+        2.135099888
+      ],
+      "min": [
+        -0.918999016,
+        0.147187531,
+        -1.769556165
+      ],
+      "span": [
+        1.836998463,
+        0.908340156,
+        3.904655933
+      ]
+    },
+    "normalized_axis_quantiles": {
+      "HGT": {
+        "max": 1.0,
+        "min": 0.0,
+        "q05": 0.03075,
+        "q25": 0.241755,
+        "q50": 0.521606,
+        "q75": 0.699452,
+        "q95": 0.884457
+      },
+      "LAT": {
+        "max": 1.0,
+        "min": 0.0,
+        "q05": 0.106386,
+        "q25": 0.347252,
+        "q50": 0.500126,
+        "q75": 0.653492,
+        "q95": 0.894192
+      },
+      "LEN": {
+        "max": 1.0,
+        "min": 0.0,
+        "q05": 0.058351,
+        "q25": 0.265081,
+        "q50": 0.414394,
+        "q75": 0.649404,
+        "q95": 0.923323
+      }
+    },
+    "source_coverage": "resources/authoritative/gbuffer/coverage_2048.npy",
+    "source_extents": "resources/authoritative/gbuffer/extents_2048.json",
+    "source_position": "resources/authoritative/gbuffer/position_2048.npy",
+    "status": "experimental_until_tmuf_smoke"
+  },
+  "label_maps": {
+    "panels_fine": {
+      "atlas_coverage_ratio": 0.975965,
+      "dtype": "int32",
+      "groups": {
+        "mid_deck": {
+          "total_area": 716703,
+          "zone_count": 10,
+          "zones": [
+            "mid_deck_C_10",
+            "mid_deck_C_110",
+            "mid_deck_C_111",
+            "mid_deck_C_115",
+            "mid_deck_C_159",
+            "mid_deck_C_160",
+            "mid_deck_C_162",
+            "mid_deck_C_163",
+            "mid_deck_C_48",
+            "mid_deck_C_92"
+          ]
+        },
+        "mid_floor": {
+          "total_area": 216072,
+          "zone_count": 5,
+          "zones": [
+            "mid_floor_C_01",
+            "mid_floor_C_02",
+            "mid_floor_C_35",
+            "mid_floor_C_36",
+            "mid_floor_C_38"
+          ]
+        },
+        "mid_side": {
+          "total_area": 178458,
+          "zone_count": 1,
+          "zones": [
+            "mid_side_C_27"
+          ]
+        },
+        "nose_deck": {
+          "total_area": 191242,
+          "zone_count": 11,
+          "zones": [
+            "nose_deck_C_109",
+            "nose_deck_C_114",
+            "nose_deck_C_164",
+            "nose_deck_C_166",
+            "nose_deck_C_170",
+            "nose_deck_C_188",
+            "nose_deck_C_189",
+            "nose_deck_C_190",
+            "nose_deck_C_191",
+            "nose_deck_C_192",
+            "nose_deck_C_195"
+          ]
+        },
+        "nose_floor": {
+          "total_area": 1006641,
+          "zone_count": 19,
+          "zones": [
+            "nose_floor_C_07",
+            "nose_floor_C_08",
+            "nose_floor_C_09",
+            "nose_floor_C_106",
+            "nose_floor_C_107",
+            "nose_floor_C_147",
+            "nose_floor_C_148",
+            "nose_floor_C_149",
+            "nose_floor_C_150",
+            "nose_floor_C_32",
+            "nose_floor_C_33",
+            "nose_floor_C_34",
+            "nose_floor_C_37",
+            "nose_floor_C_41",
+            "nose_floor_C_93",
+            "nose_floor_C_94",
+            "nose_floor_C_95",
+            "nose_floor_C_96",
+            "nose_floor_C_98"
+          ]
+        },
+        "nose_side": {
+          "total_area": 436528,
+          "zone_count": 4,
+          "zones": [
+            "nose_side_C_03",
+            "nose_side_C_165",
+            "nose_side_C_193",
+            "nose_side_C_194"
+          ]
+        },
+        "rear_deck": {
+          "total_area": 650555,
+          "zone_count": 34,
+          "zones": [
+            "rear_deck_C_04",
+            "rear_deck_C_11",
+            "rear_deck_C_117",
+            "rear_deck_C_118",
+            "rear_deck_C_120",
+            "rear_deck_C_121",
+            "rear_deck_C_122",
+            "rear_deck_C_123",
+            "rear_deck_C_124",
+            "rear_deck_C_13",
+            "rear_deck_C_133",
+            "rear_deck_C_135",
+            "rear_deck_C_137",
+            "rear_deck_C_139",
+            "rear_deck_C_140",
+            "rear_deck_C_141",
+            "rear_deck_C_142",
+            "rear_deck_C_146",
+            "rear_deck_C_15",
+            "rear_deck_C_16",
+            "rear_deck_C_17",
+            "rear_deck_C_173",
+            "rear_deck_C_174",
+            "rear_deck_C_175",
+            "rear_deck_C_176",
+            "rear_deck_C_178",
+            "rear_deck_C_20",
+            "rear_deck_C_22",
+            "rear_deck_C_42",
+            "rear_deck_C_43",
+            "rear_deck_C_44",
+            "rear_deck_C_45",
+            "rear_deck_C_46",
+            "rear_deck_C_53"
+          ]
+        },
+        "rear_floor": {
+          "total_area": 83827,
+          "zone_count": 4,
+          "zones": [
+            "rear_floor_C_39",
+            "rear_floor_C_40",
+            "rear_floor_C_84",
+            "rear_floor_C_90"
+          ]
+        },
+        "rear_side": {
+          "total_area": 613469,
+          "zone_count": 19,
+          "zones": [
+            "rear_side_C_06",
+            "rear_side_C_108",
+            "rear_side_C_151",
+            "rear_side_C_152",
+            "rear_side_C_153",
+            "rear_side_C_154",
+            "rear_side_C_177",
+            "rear_side_C_179",
+            "rear_side_C_23",
+            "rear_side_C_25",
+            "rear_side_C_26",
+            "rear_side_C_30",
+            "rear_side_C_81",
+            "rear_side_C_82",
+            "rear_side_C_83",
+            "rear_side_C_85",
+            "rear_side_C_86",
+            "rear_side_C_87",
+            "rear_side_C_88"
+          ]
+        }
+      },
+      "json_ids_match_label_map_ids": true,
+      "json_ids_missing_from_labels": [],
+      "label_ids_missing_from_json": [],
+      "nonzero_pixels": 4093495,
+      "shape": [
+        2048,
+        2048
+      ],
+      "size": 2048,
+      "source_json": "resources/authoritative/parts/panels_fine.json",
+      "source_labels": "resources/authoritative/parts/panels_fine_labels.npy",
+      "zone_count": 107,
+      "zones": [
+        {
+          "area": 533460,
+          "bbox": [
+            0,
+            0,
+            1690,
+            2047
+          ],
+          "centroid": [
+            575.690292,
+            703.163864
+          ],
+          "group": "nose_floor",
+          "id": 9,
+          "name": "nose_floor_C_09",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 499815,
+          "bbox": [
+            1019,
+            0,
+            2047,
+            884
+          ],
+          "centroid": [
+            1538.166364,
+            326.030777
+          ],
+          "group": "mid_deck",
+          "id": 160,
+          "name": "mid_deck_C_160",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 343459,
+          "bbox": [
+            582,
+            18,
+            2047,
+            2047
+          ],
+          "centroid": [
+            1518.429015,
+            1352.965789
+          ],
+          "group": "nose_side",
+          "id": 3,
+          "name": "nose_side_C_03",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 202330,
+          "bbox": [
+            291,
+            907,
+            1245,
+            2047
+          ],
+          "centroid": [
+            835.793911,
+            1456.664691
+          ],
+          "group": "rear_side",
+          "id": 30,
+          "name": "rear_side_C_30",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 178458,
+          "bbox": [
+            298,
+            1019,
+            1253,
+            1878
+          ],
+          "centroid": [
+            863.964429,
+            1448.399937
+          ],
+          "group": "mid_side",
+          "id": 27,
+          "name": "mid_side_C_27",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 151665,
+          "bbox": [
+            0,
+            846,
+            1666,
+            2041
+          ],
+          "centroid": [
+            241.768252,
+            1444.157742
+          ],
+          "group": "mid_floor",
+          "id": 35,
+          "name": "mid_floor_C_35",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 133444,
+          "bbox": [
+            783,
+            418,
+            1424,
+            803
+          ],
+          "centroid": [
+            1128.068486,
+            650.231603
+          ],
+          "group": "rear_deck",
+          "id": 140,
+          "name": "rear_deck_C_140",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 110740,
+          "bbox": [
+            3,
+            703,
+            1530,
+            2047
+          ],
+          "centroid": [
+            1124.515731,
+            1384.814421
+          ],
+          "group": "nose_floor",
+          "id": 33,
+          "name": "nose_floor_C_33",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 100162,
+          "bbox": [
+            182,
+            615,
+            762,
+            947
+          ],
+          "centroid": [
+            465.192538,
+            794.522783
+          ],
+          "group": "rear_side",
+          "id": 152,
+          "name": "rear_side_C_152",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 89347,
+          "bbox": [
+            0,
+            742,
+            1717,
+            2047
+          ],
+          "centroid": [
+            1297.895945,
+            1396.173123
+          ],
+          "group": "nose_floor",
+          "id": 34,
+          "name": "nose_floor_C_34",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 72088,
+          "bbox": [
+            7,
+            410,
+            1087,
+            871
+          ],
+          "centroid": [
+            592.637138,
+            527.513567
+          ],
+          "group": "nose_deck",
+          "id": 164,
+          "name": "nose_deck_C_164",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 70800,
+          "bbox": [
+            324,
+            1212,
+            1031,
+            1685
+          ],
+          "centroid": [
+            718.101186,
+            1440.624209
+          ],
+          "group": "rear_deck",
+          "id": 11,
+          "name": "rear_deck_C_11",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 69476,
+          "bbox": [
+            816,
+            1302,
+            1193,
+            1596
+          ],
+          "centroid": [
+            972.550795,
+            1446.693045
+          ],
+          "group": "rear_deck",
+          "id": 118,
+          "name": "rear_deck_C_118",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 65427,
+          "bbox": [
+            1859,
+            366,
+            2047,
+            877
+          ],
+          "centroid": [
+            1976.225641,
+            610.088893
+          ],
+          "group": "mid_deck",
+          "id": 162,
+          "name": "mid_deck_C_162",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 57575,
+          "bbox": [
+            268,
+            1170,
+            1557,
+            1729
+          ],
+          "centroid": [
+            771.17591,
+            1450.048841
+          ],
+          "group": "rear_deck",
+          "id": 22,
+          "name": "rear_deck_C_22",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 55493,
+          "bbox": [
+            330,
+            1317,
+            773,
+            1579
+          ],
+          "centroid": [
+            577.067126,
+            1449.045069
+          ],
+          "group": "rear_deck",
+          "id": 174,
+          "name": "rear_deck_C_174",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 55382,
+          "bbox": [
+            1734,
+            1750,
+            1971,
+            2047
+          ],
+          "centroid": [
+            1852.865317,
+            1913.070998
+          ],
+          "group": "nose_floor",
+          "id": 149,
+          "name": "nose_floor_C_149",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 52197,
+          "bbox": [
+            1786,
+            1238,
+            2047,
+            1655
+          ],
+          "centroid": [
+            1935.830297,
+            1446.740234
+          ],
+          "group": "mid_deck",
+          "id": 110,
+          "name": "mid_deck_C_110",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 50849,
+          "bbox": [
+            1664,
+            860,
+            2047,
+            1169
+          ],
+          "centroid": [
+            1873.083168,
+            1008.136994
+          ],
+          "group": "nose_floor",
+          "id": 98,
+          "name": "nose_floor_C_98",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 50524,
+          "bbox": [
+            790,
+            18,
+            1029,
+            394
+          ],
+          "centroid": [
+            904.545285,
+            201.754849
+          ],
+          "group": "rear_side",
+          "id": 179,
+          "name": "rear_side_C_179",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 47945,
+          "bbox": [
+            244,
+            1220,
+            815,
+            1677
+          ],
+          "centroid": [
+            570.603817,
+            1466.106622
+          ],
+          "group": "rear_deck",
+          "id": 178,
+          "name": "rear_deck_C_178",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 47938,
+          "bbox": [
+            0,
+            501,
+            838,
+            865
+          ],
+          "centroid": [
+            217.536631,
+            628.406921
+          ],
+          "group": "nose_side",
+          "id": 193,
+          "name": "nose_side_C_193",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 43801,
+          "bbox": [
+            1685,
+            399,
+            1884,
+            851
+          ],
+          "centroid": [
+            1785.132919,
+            675.643204
+          ],
+          "group": "rear_side",
+          "id": 108,
+          "name": "rear_side_C_108",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 42774,
+          "bbox": [
+            1351,
+            82,
+            1727,
+            237
+          ],
+          "centroid": [
+            1539.488077,
+            165.533011
+          ],
+          "group": "mid_deck",
+          "id": 159,
+          "name": "mid_deck_C_159",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 42607,
+          "bbox": [
+            118,
+            601,
+            599,
+            2047
+          ],
+          "centroid": [
+            313.845659,
+            1184.788063
+          ],
+          "group": "rear_side",
+          "id": 154,
+          "name": "rear_side_C_154",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 40600,
+          "bbox": [
+            1445,
+            1759,
+            2047,
+            2047
+          ],
+          "centroid": [
+            1698.021847,
+            1961.17899
+          ],
+          "group": "nose_floor",
+          "id": 147,
+          "name": "nose_floor_C_147",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 38169,
+          "bbox": [
+            724,
+            345,
+            1174,
+            573
+          ],
+          "centroid": [
+            966.662553,
+            482.288795
+          ],
+          "group": "rear_side",
+          "id": 153,
+          "name": "rear_side_C_153",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 36853,
+          "bbox": [
+            355,
+            1367,
+            772,
+            1530
+          ],
+          "centroid": [
+            573.216427,
+            1448.540987
+          ],
+          "group": "rear_deck",
+          "id": 175,
+          "name": "rear_deck_C_175",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 36697,
+          "bbox": [
+            89,
+            1043,
+            520,
+            1855
+          ],
+          "centroid": [
+            219.147696,
+            1448.023299
+          ],
+          "group": "rear_floor",
+          "id": 39,
+          "name": "rear_floor_C_39",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 36085,
+          "bbox": [
+            1644,
+            1750,
+            2017,
+            2047
+          ],
+          "centroid": [
+            1834.112152,
+            1893.080006
+          ],
+          "group": "nose_floor",
+          "id": 148,
+          "name": "nose_floor_C_148",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 33985,
+          "bbox": [
+            1265,
+            400,
+            1870,
+            1508
+          ],
+          "centroid": [
+            1583.584111,
+            968.359982
+          ],
+          "group": "rear_side",
+          "id": 86,
+          "name": "rear_side_C_86",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 32784,
+          "bbox": [
+            306,
+            600,
+            544,
+            2047
+          ],
+          "centroid": [
+            424.016593,
+            1376.320034
+          ],
+          "group": "rear_side",
+          "id": 151,
+          "name": "rear_side_C_151",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 31141,
+          "bbox": [
+            1557,
+            1373,
+            1963,
+            1519
+          ],
+          "centroid": [
+            1767.869176,
+            1446.0
+          ],
+          "group": "nose_deck",
+          "id": 170,
+          "name": "nose_deck_C_170",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 30683,
+          "bbox": [
+            111,
+            754,
+            1478,
+            2047
+          ],
+          "centroid": [
+            662.781508,
+            1373.86618
+          ],
+          "group": "nose_floor",
+          "id": 32,
+          "name": "nose_floor_C_32",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 27255,
+          "bbox": [
+            876,
+            1283,
+            1195,
+            1613
+          ],
+          "centroid": [
+            1027.235737,
+            1449.334067
+          ],
+          "group": "rear_deck",
+          "id": 122,
+          "name": "rear_deck_C_122",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 27106,
+          "bbox": [
+            234,
+            919,
+            315,
+            1963
+          ],
+          "centroid": [
+            268.692319,
+            1420.151553
+          ],
+          "group": "mid_floor",
+          "id": 38,
+          "name": "mid_floor_C_38",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 26622,
+          "bbox": [
+            519,
+            606,
+            960,
+            887
+          ],
+          "centroid": [
+            742.181354,
+            747.842536
+          ],
+          "group": "nose_side",
+          "id": 194,
+          "name": "nose_side_C_194",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 26329,
+          "bbox": [
+            0,
+            0,
+            1227,
+            1538
+          ],
+          "centroid": [
+            900.884804,
+            440.202135
+          ],
+          "group": "rear_side",
+          "id": 83,
+          "name": "rear_side_C_83",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 24815,
+          "bbox": [
+            0,
+            1255,
+            96,
+            1612
+          ],
+          "centroid": [
+            39.048882,
+            1431.28378
+          ],
+          "group": "rear_floor",
+          "id": 90,
+          "name": "rear_floor_C_90",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 24364,
+          "bbox": [
+            915,
+            378,
+            1319,
+            513
+          ],
+          "centroid": [
+            1128.574824,
+            442.309966
+          ],
+          "group": "rear_deck",
+          "id": 146,
+          "name": "rear_deck_C_146",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 23482,
+          "bbox": [
+            69,
+            1283,
+            164,
+            1586
+          ],
+          "centroid": [
+            113.273571,
+            1435.839494
+          ],
+          "group": "mid_deck",
+          "id": 92,
+          "name": "mid_deck_C_92",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 19264,
+          "bbox": [
+            1558,
+            1347,
+            1783,
+            1547
+          ],
+          "centroid": [
+            1642.885849,
+            1447.610361
+          ],
+          "group": "nose_deck",
+          "id": 114,
+          "name": "nose_deck_C_114",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 18509,
+          "bbox": [
+            101,
+            497,
+            1099,
+            814
+          ],
+          "centroid": [
+            513.955535,
+            639.173375
+          ],
+          "group": "nose_side",
+          "id": 165,
+          "name": "nose_side_C_165",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 17898,
+          "bbox": [
+            814,
+            443,
+            1407,
+            604
+          ],
+          "centroid": [
+            1070.567158,
+            525.873282
+          ],
+          "group": "rear_deck",
+          "id": 133,
+          "name": "rear_deck_C_133",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 17352,
+          "bbox": [
+            0,
+            888,
+            107,
+            1998
+          ],
+          "centroid": [
+            45.804633,
+            1441.387794
+          ],
+          "group": "mid_floor",
+          "id": 36,
+          "name": "mid_floor_C_36",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 17089,
+          "bbox": [
+            1620,
+            852,
+            2047,
+            1121
+          ],
+          "centroid": [
+            1798.798994,
+            973.218854
+          ],
+          "group": "nose_floor",
+          "id": 93,
+          "name": "nose_floor_C_93",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 15954,
+          "bbox": [
+            253,
+            1331,
+            357,
+            1566
+          ],
+          "centroid": [
+            310.183277,
+            1448.457001
+          ],
+          "group": "rear_deck",
+          "id": 44,
+          "name": "rear_deck_C_44",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 15804,
+          "bbox": [
+            182,
+            1227,
+            261,
+            1659
+          ],
+          "centroid": [
+            223.459124,
+            1439.620666
+          ],
+          "group": "rear_floor",
+          "id": 40,
+          "name": "rear_floor_C_40",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 15569,
+          "bbox": [
+            324,
+            946,
+            1509,
+            1952
+          ],
+          "centroid": [
+            738.045154,
+            1450.087417
+          ],
+          "group": "rear_deck",
+          "id": 43,
+          "name": "rear_deck_C_43",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 15179,
+          "bbox": [
+            356,
+            1401,
+            766,
+            1496
+          ],
+          "centroid": [
+            502.717834,
+            1448.602872
+          ],
+          "group": "rear_deck",
+          "id": 20,
+          "name": "rear_deck_C_20",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 12639,
+          "bbox": [
+            1114,
+            785,
+            1332,
+            885
+          ],
+          "centroid": [
+            1223.256508,
+            837.845399
+          ],
+          "group": "mid_floor",
+          "id": 1,
+          "name": "mid_floor_C_01",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 12503,
+          "bbox": [
+            487,
+            580,
+            982,
+            920
+          ],
+          "centroid": [
+            733.993602,
+            762.034552
+          ],
+          "group": "nose_deck",
+          "id": 188,
+          "name": "nose_deck_C_188",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 11935,
+          "bbox": [
+            304,
+            1144,
+            715,
+            1754
+          ],
+          "centroid": [
+            561.0062,
+            1447.883536
+          ],
+          "group": "rear_side",
+          "id": 23,
+          "name": "rear_side_C_23",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 11837,
+          "bbox": [
+            235,
+            1284,
+            333,
+            1614
+          ],
+          "centroid": [
+            284.487032,
+            1465.738532
+          ],
+          "group": "rear_deck",
+          "id": 53,
+          "name": "rear_deck_C_53",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 11557,
+          "bbox": [
+            1687,
+            1326,
+            1842,
+            1568
+          ],
+          "centroid": [
+            1742.069395,
+            1443.580081
+          ],
+          "group": "nose_deck",
+          "id": 109,
+          "name": "nose_deck_C_109",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 11491,
+          "bbox": [
+            0,
+            477,
+            985,
+            862
+          ],
+          "centroid": [
+            425.082934,
+            610.81603
+          ],
+          "group": "nose_deck",
+          "id": 190,
+          "name": "nose_deck_C_190",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 10763,
+          "bbox": [
+            1184,
+            1320,
+            1284,
+            1551
+          ],
+          "centroid": [
+            1236.65465,
+            1428.063551
+          ],
+          "group": "rear_side",
+          "id": 85,
+          "name": "rear_side_C_85",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 10183,
+          "bbox": [
+            28,
+            490,
+            798,
+            616
+          ],
+          "centroid": [
+            533.112246,
+            582.232937
+          ],
+          "group": "nose_deck",
+          "id": 189,
+          "name": "nose_deck_C_189",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 9968,
+          "bbox": [
+            423,
+            948,
+            730,
+            1950
+          ],
+          "centroid": [
+            596.285514,
+            1448.726726
+          ],
+          "group": "mid_deck",
+          "id": 48,
+          "name": "mid_deck_C_48",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 9536,
+          "bbox": [
+            774,
+            1325,
+            827,
+            1572
+          ],
+          "centroid": [
+            797.930369,
+            1448.423343
+          ],
+          "group": "rear_deck",
+          "id": 17,
+          "name": "rear_deck_C_17",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 8710,
+          "bbox": [
+            1856,
+            418,
+            1926,
+            762
+          ],
+          "centroid": [
+            1884.02721,
+            604.020781
+          ],
+          "group": "mid_deck",
+          "id": 163,
+          "name": "mid_deck_C_163",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 8492,
+          "bbox": [
+            789,
+            616,
+            1424,
+            829
+          ],
+          "centroid": [
+            1200.315356,
+            735.311352
+          ],
+          "group": "rear_deck",
+          "id": 139,
+          "name": "rear_deck_C_139",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 8336,
+          "bbox": [
+            1787,
+            1313,
+            2047,
+            1579
+          ],
+          "centroid": [
+            1965.136756,
+            1450.287668
+          ],
+          "group": "mid_deck",
+          "id": 115,
+          "name": "mid_deck_C_115",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 8292,
+          "bbox": [
+            1917,
+            910,
+            2047,
+            1235
+          ],
+          "centroid": [
+            1991.951278,
+            1076.027135
+          ],
+          "group": "nose_floor",
+          "id": 95,
+          "name": "nose_floor_C_95",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 7871,
+          "bbox": [
+            682,
+            672,
+            1108,
+            888
+          ],
+          "centroid": [
+            862.473764,
+            782.296532
+          ],
+          "group": "nose_deck",
+          "id": 192,
+          "name": "nose_deck_C_192",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 7852,
+          "bbox": [
+            234,
+            1160,
+            305,
+            1736
+          ],
+          "centroid": [
+            271.032348,
+            1384.27216
+          ],
+          "group": "rear_side",
+          "id": 177,
+          "name": "rear_side_C_177",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 7644,
+          "bbox": [
+            108,
+            699,
+            269,
+            2045
+          ],
+          "centroid": [
+            152.479723,
+            1008.117739
+          ],
+          "group": "nose_floor",
+          "id": 37,
+          "name": "nose_floor_C_37",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 7487,
+          "bbox": [
+            804,
+            169,
+            1976,
+            1761
+          ],
+          "centroid": [
+            1855.783091,
+            1426.567116
+          ],
+          "group": "nose_floor",
+          "id": 7,
+          "name": "nose_floor_C_07",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 7310,
+          "bbox": [
+            1187,
+            785,
+            1259,
+            885
+          ],
+          "centroid": [
+            1223.31026,
+            835.163748
+          ],
+          "group": "mid_floor",
+          "id": 2,
+          "name": "mid_floor_C_02",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 6511,
+          "bbox": [
+            981,
+            85,
+            1035,
+            330
+          ],
+          "centroid": [
+            1007.53617,
+            178.673629
+          ],
+          "group": "rear_floor",
+          "id": 84,
+          "name": "rear_floor_C_84",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 5955,
+          "bbox": [
+            1720,
+            1301,
+            1861,
+            1594
+          ],
+          "centroid": [
+            1800.415785,
+            1454.872208
+          ],
+          "group": "mid_deck",
+          "id": 111,
+          "name": "mid_deck_C_111",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 5748,
+          "bbox": [
+            1742,
+            808,
+            1984,
+            1760
+          ],
+          "centroid": [
+            1926.606646,
+            1213.77714
+          ],
+          "group": "nose_floor",
+          "id": 8,
+          "name": "nose_floor_C_08",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 5616,
+          "bbox": [
+            504,
+            594,
+            971,
+            899
+          ],
+          "centroid": [
+            739.551282,
+            746.280805
+          ],
+          "group": "nose_deck",
+          "id": 195,
+          "name": "nose_deck_C_195",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 5165,
+          "bbox": [
+            712,
+            646,
+            1108,
+            834
+          ],
+          "centroid": [
+            912.400968,
+            746.331655
+          ],
+          "group": "nose_deck",
+          "id": 191,
+          "name": "nose_deck_C_191",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 5024,
+          "bbox": [
+            289,
+            1119,
+            336,
+            1779
+          ],
+          "centroid": [
+            314.165406,
+            1450.910629
+          ],
+          "group": "rear_side",
+          "id": 26,
+          "name": "rear_side_C_26",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 4423,
+          "bbox": [
+            1253,
+            1001,
+            1400,
+            1896
+          ],
+          "centroid": [
+            1298.16482,
+            1452.137011
+          ],
+          "group": "nose_floor",
+          "id": 41,
+          "name": "nose_floor_C_41",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 4363,
+          "bbox": [
+            737,
+            680,
+            1062,
+            875
+          ],
+          "centroid": [
+            900.561311,
+            777.73642
+          ],
+          "group": "nose_deck",
+          "id": 166,
+          "name": "nose_deck_C_166",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 4342,
+          "bbox": [
+            821,
+            581,
+            1401,
+            634
+          ],
+          "centroid": [
+            1113.684477,
+            607.756333
+          ],
+          "group": "rear_deck",
+          "id": 135,
+          "name": "rear_deck_C_135",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3988,
+          "bbox": [
+            1137,
+            1346,
+            1196,
+            1539
+          ],
+          "centroid": [
+            1168.58676,
+            1444.722166
+          ],
+          "group": "rear_deck",
+          "id": 123,
+          "name": "rear_deck_C_123",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3878,
+          "bbox": [
+            633,
+            1306,
+            807,
+            1592
+          ],
+          "centroid": [
+            757.66065,
+            1454.078649
+          ],
+          "group": "rear_deck",
+          "id": 16,
+          "name": "rear_deck_C_16",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3787,
+          "bbox": [
+            641,
+            1260,
+            1032,
+            1637
+          ],
+          "centroid": [
+            890.569052,
+            1415.939002
+          ],
+          "group": "rear_deck",
+          "id": 13,
+          "name": "rear_deck_C_13",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3326,
+          "bbox": [
+            917,
+            774,
+            1317,
+            803
+          ],
+          "centroid": [
+            1074.944979,
+            782.746242
+          ],
+          "group": "rear_deck",
+          "id": 141,
+          "name": "rear_deck_C_141",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3146,
+          "bbox": [
+            1599,
+            872,
+            1683,
+            964
+          ],
+          "centroid": [
+            1637.134774,
+            904.391926
+          ],
+          "group": "nose_floor",
+          "id": 96,
+          "name": "nose_floor_C_96",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3123,
+          "bbox": [
+            852,
+            0,
+            1023,
+            419
+          ],
+          "centroid": [
+            908.886647,
+            236.414986
+          ],
+          "group": "rear_side",
+          "id": 82,
+          "name": "rear_side_C_82",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3005,
+          "bbox": [
+            876,
+            1344,
+            1131,
+            1529
+          ],
+          "centroid": [
+            970.94975,
+            1495.005657
+          ],
+          "group": "rear_deck",
+          "id": 117,
+          "name": "rear_deck_C_117",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 2824,
+          "bbox": [
+            1129,
+            1396,
+            1191,
+            1594
+          ],
+          "centroid": [
+            1163.625708,
+            1472.049929
+          ],
+          "group": "rear_deck",
+          "id": 121,
+          "name": "rear_deck_C_121",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 2803,
+          "bbox": [
+            1126,
+            1300,
+            1193,
+            1498
+          ],
+          "centroid": [
+            1163.94827,
+            1426.490546
+          ],
+          "group": "rear_deck",
+          "id": 124,
+          "name": "rear_deck_C_124",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 2029,
+          "bbox": [
+            808,
+            172,
+            836,
+            321
+          ],
+          "centroid": [
+            824.684574,
+            246.771809
+          ],
+          "group": "nose_floor",
+          "id": 106,
+          "name": "nose_floor_C_106",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 1998,
+          "bbox": [
+            236,
+            1174,
+            306,
+            1723
+          ],
+          "centroid": [
+            255.088088,
+            1445.776276
+          ],
+          "group": "rear_side",
+          "id": 6,
+          "name": "rear_side_C_06",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 1926,
+          "bbox": [
+            1711,
+            814,
+            2008,
+            1133
+          ],
+          "centroid": [
+            1850.445483,
+            975.706127
+          ],
+          "group": "nose_floor",
+          "id": 94,
+          "name": "nose_floor_C_94",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 1521,
+          "bbox": [
+            344,
+            1325,
+            357,
+            1572
+          ],
+          "centroid": [
+            351.439842,
+            1449.26956
+          ],
+          "group": "rear_deck",
+          "id": 173,
+          "name": "rear_deck_C_173",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 913,
+          "bbox": [
+            940,
+            1342,
+            1135,
+            1403
+          ],
+          "centroid": [
+            989.346112,
+            1384.700986
+          ],
+          "group": "rear_deck",
+          "id": 120,
+          "name": "rear_deck_C_120",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 895,
+          "bbox": [
+            806,
+            217,
+            832,
+            279
+          ],
+          "centroid": [
+            817.729609,
+            248.077095
+          ],
+          "group": "nose_floor",
+          "id": 107,
+          "name": "nose_floor_C_107",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 858,
+          "bbox": [
+            1269,
+            1376,
+            1367,
+            1517
+          ],
+          "centroid": [
+            1311.962704,
+            1484.06993
+          ],
+          "group": "rear_side",
+          "id": 87,
+          "name": "rear_side_C_87",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 827,
+          "bbox": [
+            786,
+            602,
+            1417,
+            759
+          ],
+          "centroid": [
+            1021.047158,
+            702.632406
+          ],
+          "group": "rear_deck",
+          "id": 137,
+          "name": "rear_deck_C_137",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 816,
+          "bbox": [
+            1688,
+            2038,
+            2018,
+            2047
+          ],
+          "centroid": [
+            1854.758578,
+            2043.148284
+          ],
+          "group": "nose_floor",
+          "id": 150,
+          "name": "nose_floor_C_150",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 792,
+          "bbox": [
+            987,
+            159,
+            1030,
+            253
+          ],
+          "centroid": [
+            1006.316919,
+            206.337121
+          ],
+          "group": "rear_side",
+          "id": 81,
+          "name": "rear_side_C_81",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 722,
+          "bbox": [
+            356,
+            1322,
+            404,
+            1575
+          ],
+          "centroid": [
+            384.404432,
+            1450.301939
+          ],
+          "group": "rear_deck",
+          "id": 15,
+          "name": "rear_deck_C_15",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 430,
+          "bbox": [
+            1270,
+            1371,
+            1353,
+            1509
+          ],
+          "centroid": [
+            1321.809302,
+            1398.981395
+          ],
+          "group": "rear_side",
+          "id": 88,
+          "name": "rear_side_C_88",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 413,
+          "bbox": [
+            304,
+            1182,
+            324,
+            1715
+          ],
+          "centroid": [
+            311.058111,
+            1418.043584
+          ],
+          "group": "rear_deck",
+          "id": 4,
+          "name": "rear_deck_C_04",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 230,
+          "bbox": [
+            773,
+            1334,
+            773,
+            1563
+          ],
+          "centroid": [
+            773.0,
+            1448.5
+          ],
+          "group": "rear_deck",
+          "id": 176,
+          "name": "rear_deck_C_176",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 150,
+          "bbox": [
+            1511,
+            1359,
+            1543,
+            1538
+          ],
+          "centroid": [
+            1533.94,
+            1444.026667
+          ],
+          "group": "rear_deck",
+          "id": 42,
+          "name": "rear_deck_C_42",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 93,
+          "bbox": [
+            342,
+            1327,
+            351,
+            1570
+          ],
+          "centroid": [
+            346.774194,
+            1444.709677
+          ],
+          "group": "rear_deck",
+          "id": 45,
+          "name": "rear_deck_C_45",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 49,
+          "bbox": [
+            348,
+            1323,
+            354,
+            1575
+          ],
+          "centroid": [
+            351.265306,
+            1451.081633
+          ],
+          "group": "rear_deck",
+          "id": 46,
+          "name": "rear_deck_C_46",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 39,
+          "bbox": [
+            1021,
+            1267,
+            1030,
+            1276
+          ],
+          "centroid": [
+            1026.051282,
+            1270.179487
+          ],
+          "group": "mid_deck",
+          "id": 10,
+          "name": "mid_deck_C_10",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 14,
+          "bbox": [
+            1243,
+            774,
+            1244,
+            780
+          ],
+          "centroid": [
+            1243.5,
+            777.0
+          ],
+          "group": "rear_deck",
+          "id": 142,
+          "name": "rear_deck_C_142",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3,
+          "bbox": [
+            322,
+            1200,
+            323,
+            1201
+          ],
+          "centroid": [
+            322.333333,
+            1200.666667
+          ],
+          "group": "rear_side",
+          "id": 25,
+          "name": "rear_side_C_25",
+          "risk_class": "probe_only_tiny_fragment"
+        }
+      ]
+    },
+    "panels_high": {
+      "atlas_coverage_ratio": 0.975965,
+      "dtype": "int32",
+      "groups": {
+        "mid_deck": {
+          "total_area": 757234,
+          "zone_count": 6,
+          "zones": [
+            "mid_deck_C_38",
+            "mid_deck_C_48",
+            "mid_deck_C_78",
+            "mid_deck_C_79",
+            "mid_deck_C_80",
+            "mid_deck_C_82"
+          ]
+        },
+        "mid_floor": {
+          "total_area": 37301,
+          "zone_count": 2,
+          "zones": [
+            "mid_floor_C_01",
+            "mid_floor_C_16"
+          ]
+        },
+        "mid_side": {
+          "total_area": 623575,
+          "zone_count": 1,
+          "zones": [
+            "mid_side_C_02"
+          ]
+        },
+        "nose_deck": {
+          "total_area": 231822,
+          "zone_count": 5,
+          "zones": [
+            "nose_deck_C_09",
+            "nose_deck_C_47",
+            "nose_deck_C_84",
+            "nose_deck_C_85",
+            "nose_deck_C_92"
+          ]
+        },
+        "nose_floor": {
+          "total_area": 146526,
+          "zone_count": 5,
+          "zones": [
+            "nose_floor_C_39",
+            "nose_floor_C_40",
+            "nose_floor_C_41",
+            "nose_floor_C_66",
+            "nose_floor_C_67"
+          ]
+        },
+        "nose_side": {
+          "total_area": 1078213,
+          "zone_count": 2,
+          "zones": [
+            "nose_side_C_04",
+            "nose_side_C_83"
+          ]
+        },
+        "rear_deck": {
+          "total_area": 664321,
+          "zone_count": 23,
+          "zones": [
+            "rear_deck_C_06",
+            "rear_deck_C_08",
+            "rear_deck_C_10",
+            "rear_deck_C_12",
+            "rear_deck_C_13",
+            "rear_deck_C_14",
+            "rear_deck_C_18",
+            "rear_deck_C_19",
+            "rear_deck_C_20",
+            "rear_deck_C_21",
+            "rear_deck_C_50",
+            "rear_deck_C_51",
+            "rear_deck_C_52",
+            "rear_deck_C_53",
+            "rear_deck_C_54",
+            "rear_deck_C_61",
+            "rear_deck_C_62",
+            "rear_deck_C_63",
+            "rear_deck_C_64",
+            "rear_deck_C_65",
+            "rear_deck_C_70",
+            "rear_deck_C_71",
+            "rear_deck_C_72"
+          ]
+        },
+        "rear_floor": {
+          "total_area": 262785,
+          "zone_count": 4,
+          "zones": [
+            "rear_floor_C_15",
+            "rear_floor_C_17",
+            "rear_floor_C_33",
+            "rear_floor_C_36"
+          ]
+        },
+        "rear_side": {
+          "total_area": 291718,
+          "zone_count": 12,
+          "zones": [
+            "rear_side_C_03",
+            "rear_side_C_07",
+            "rear_side_C_30",
+            "rear_side_C_31",
+            "rear_side_C_32",
+            "rear_side_C_34",
+            "rear_side_C_35",
+            "rear_side_C_46",
+            "rear_side_C_68",
+            "rear_side_C_69",
+            "rear_side_C_89",
+            "rear_side_C_90"
+          ]
+        }
+      },
+      "json_ids_match_label_map_ids": true,
+      "json_ids_missing_from_labels": [],
+      "label_ids_missing_from_json": [],
+      "nonzero_pixels": 4093495,
+      "shape": [
+        2048,
+        2048
+      ],
+      "size": 2048,
+      "source_json": "resources/authoritative/parts/panels_high.json",
+      "source_labels": "resources/authoritative/parts/panels_high_labels.npy",
+      "zone_count": 60,
+      "zones": [
+        {
+          "area": 1020619,
+          "bbox": [
+            0,
+            0,
+            2047,
+            2047
+          ],
+          "centroid": [
+            961.542175,
+            992.79784
+          ],
+          "group": "nose_side",
+          "id": 4,
+          "name": "nose_side_C_04",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 623575,
+          "bbox": [
+            0,
+            699,
+            1717,
+            2047
+          ],
+          "centroid": [
+            947.707944,
+            1423.268104
+          ],
+          "group": "mid_side",
+          "id": 2,
+          "name": "mid_side_C_02",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 489506,
+          "bbox": [
+            1019,
+            0,
+            2047,
+            884
+          ],
+          "centroid": [
+            1538.142864,
+            330.361413
+          ],
+          "group": "mid_deck",
+          "id": 79,
+          "name": "mid_deck_C_79",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 188329,
+          "bbox": [
+            0,
+            846,
+            1666,
+            2041
+          ],
+          "centroid": [
+            237.330374,
+            1444.912111
+          ],
+          "group": "rear_floor",
+          "id": 15,
+          "name": "rear_floor_C_15",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 132067,
+          "bbox": [
+            1445,
+            1750,
+            2047,
+            2047
+          ],
+          "centroid": [
+            1800.139407,
+            1922.398154
+          ],
+          "group": "nose_floor",
+          "id": 66,
+          "name": "nose_floor_C_66",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 125470,
+          "bbox": [
+            783,
+            419,
+            1424,
+            803
+          ],
+          "centroid": [
+            1125.641707,
+            661.974655
+          ],
+          "group": "rear_deck",
+          "id": 63,
+          "name": "rear_deck_C_63",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 117867,
+          "bbox": [
+            244,
+            1144,
+            1557,
+            1754
+          ],
+          "centroid": [
+            666.698957,
+            1456.251419
+          ],
+          "group": "rear_deck",
+          "id": 8,
+          "name": "rear_deck_C_08",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 117026,
+          "bbox": [
+            1557,
+            1238,
+            2047,
+            1655
+          ],
+          "centroid": [
+            1848.769265,
+            1446.847419
+          ],
+          "group": "mid_deck",
+          "id": 48,
+          "name": "mid_deck_C_48",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 103370,
+          "bbox": [
+            255,
+            1317,
+            773,
+            1580
+          ],
+          "centroid": [
+            548.467921,
+            1448.511531
+          ],
+          "group": "rear_deck",
+          "id": 21,
+          "name": "rear_deck_C_21",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 91953,
+          "bbox": [
+            118,
+            600,
+            552,
+            2047
+          ],
+          "centroid": [
+            362.325655,
+            1158.028275
+          ],
+          "group": "rear_side",
+          "id": 68,
+          "name": "rear_side_C_68",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 77334,
+          "bbox": [
+            0,
+            410,
+            969,
+            855
+          ],
+          "centroid": [
+            545.514638,
+            520.756265
+          ],
+          "group": "nose_deck",
+          "id": 84,
+          "name": "nose_deck_C_84",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 74548,
+          "bbox": [
+            182,
+            746,
+            762,
+            947
+          ],
+          "centroid": [
+            489.144913,
+            830.434083
+          ],
+          "group": "rear_deck",
+          "id": 71,
+          "name": "rear_deck_C_71",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 74137,
+          "bbox": [
+            1856,
+            366,
+            2047,
+            877
+          ],
+          "centroid": [
+            1965.39369,
+            609.37598
+          ],
+          "group": "mid_deck",
+          "id": 82,
+          "name": "mid_deck_C_82",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 57594,
+          "bbox": [
+            0,
+            497,
+            1085,
+            862
+          ],
+          "centroid": [
+            260.863805,
+            627.335851
+          ],
+          "group": "nose_side",
+          "id": 83,
+          "name": "nose_side_C_83",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 55643,
+          "bbox": [
+            1022,
+            1235,
+            1760,
+            1654
+          ],
+          "centroid": [
+            1349.915227,
+            1449.356685
+          ],
+          "group": "nose_deck",
+          "id": 9,
+          "name": "nose_deck_C_09",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 50524,
+          "bbox": [
+            790,
+            18,
+            1029,
+            394
+          ],
+          "centroid": [
+            904.545285,
+            201.754849
+          ],
+          "group": "rear_side",
+          "id": 90,
+          "name": "rear_side_C_90",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 49931,
+          "bbox": [
+            14,
+            490,
+            1108,
+            920
+          ],
+          "centroid": [
+            729.062346,
+            708.752378
+          ],
+          "group": "nose_deck",
+          "id": 85,
+          "name": "nose_deck_C_85",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 49865,
+          "bbox": [
+            816,
+            1283,
+            1196,
+            1613
+          ],
+          "centroid": [
+            1002.710177,
+            1450.553214
+          ],
+          "group": "rear_deck",
+          "id": 54,
+          "name": "rear_deck_C_54",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 43877,
+          "bbox": [
+            1184,
+            400,
+            1870,
+            1535
+          ],
+          "centroid": [
+            1504.702213,
+            1072.305718
+          ],
+          "group": "rear_side",
+          "id": 34,
+          "name": "rear_side_C_34",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 43801,
+          "bbox": [
+            1685,
+            399,
+            1884,
+            851
+          ],
+          "centroid": [
+            1785.132919,
+            675.643204
+          ],
+          "group": "rear_side",
+          "id": 46,
+          "name": "rear_side_C_46",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 43130,
+          "bbox": [
+            182,
+            919,
+            506,
+            1963
+          ],
+          "centroid": [
+            253.281057,
+            1427.430165
+          ],
+          "group": "rear_floor",
+          "id": 17,
+          "name": "rear_floor_C_17",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 42774,
+          "bbox": [
+            1351,
+            82,
+            1727,
+            237
+          ],
+          "centroid": [
+            1539.488077,
+            165.533011
+          ],
+          "group": "mid_deck",
+          "id": 78,
+          "name": "mid_deck_C_78",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 37490,
+          "bbox": [
+            504,
+            594,
+            971,
+            899
+          ],
+          "centroid": [
+            743.707762,
+            751.452414
+          ],
+          "group": "nose_deck",
+          "id": 92,
+          "name": "nose_deck_C_92",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 37013,
+          "bbox": [
+            826,
+            1341,
+            1193,
+            1553
+          ],
+          "centroid": [
+            1006.280982,
+            1445.13117
+          ],
+          "group": "rear_deck",
+          "id": 51,
+          "name": "rear_deck_C_51",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 32338,
+          "bbox": [
+            886,
+            378,
+            1348,
+            513
+          ],
+          "centroid": [
+            1137.865762,
+            448.017379
+          ],
+          "group": "rear_deck",
+          "id": 65,
+          "name": "rear_deck_C_65",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 31559,
+          "bbox": [
+            786,
+            443,
+            1424,
+            829
+          ],
+          "centroid": [
+            1110.114801,
+            598.127285
+          ],
+          "group": "rear_deck",
+          "id": 61,
+          "name": "rear_deck_C_61",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 26155,
+          "bbox": [
+            0,
+            0,
+            1227,
+            1538
+          ],
+          "centroid": [
+            901.912942,
+            441.860753
+          ],
+          "group": "rear_side",
+          "id": 30,
+          "name": "rear_side_C_30",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 24815,
+          "bbox": [
+            0,
+            1255,
+            96,
+            1612
+          ],
+          "centroid": [
+            39.048882,
+            1431.28378
+          ],
+          "group": "rear_floor",
+          "id": 36,
+          "name": "rear_floor_C_36",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 23482,
+          "bbox": [
+            69,
+            1283,
+            164,
+            1586
+          ],
+          "centroid": [
+            113.273571,
+            1435.839494
+          ],
+          "group": "mid_deck",
+          "id": 38,
+          "name": "mid_deck_C_38",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 22723,
+          "bbox": [
+            724,
+            358,
+            1174,
+            573
+          ],
+          "centroid": [
+            974.786824,
+            484.938476
+          ],
+          "group": "rear_deck",
+          "id": 70,
+          "name": "rear_deck_C_70",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 19949,
+          "bbox": [
+            1114,
+            785,
+            1332,
+            885
+          ],
+          "centroid": [
+            1223.276204,
+            836.86275
+          ],
+          "group": "mid_floor",
+          "id": 1,
+          "name": "mid_floor_C_01",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 19468,
+          "bbox": [
+            831,
+            1300,
+            1171,
+            1487
+          ],
+          "centroid": [
+            1003.163037,
+            1443.838299
+          ],
+          "group": "rear_deck",
+          "id": 52,
+          "name": "rear_deck_C_52",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 17352,
+          "bbox": [
+            0,
+            888,
+            107,
+            1998
+          ],
+          "centroid": [
+            45.804633,
+            1441.387794
+          ],
+          "group": "mid_floor",
+          "id": 16,
+          "name": "mid_floor_C_16",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 15446,
+          "bbox": [
+            792,
+            345,
+            1136,
+            573
+          ],
+          "centroid": [
+            954.710734,
+            478.390781
+          ],
+          "group": "rear_side",
+          "id": 69,
+          "name": "rear_side_C_69",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 12862,
+          "bbox": [
+            324,
+            946,
+            1509,
+            1952
+          ],
+          "centroid": [
+            719.51244,
+            1450.578137
+          ],
+          "group": "rear_deck",
+          "id": 19,
+          "name": "rear_deck_C_19",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 11424,
+          "bbox": [
+            1558,
+            1347,
+            1695,
+            1547
+          ],
+          "centroid": [
+            1630.618085,
+            1448.722251
+          ],
+          "group": "nose_deck",
+          "id": 47,
+          "name": "nose_deck_C_47",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 10309,
+          "bbox": [
+            1175,
+            69,
+            1906,
+            217
+          ],
+          "centroid": [
+            1539.282181,
+            120.397614
+          ],
+          "group": "mid_deck",
+          "id": 80,
+          "name": "mid_deck_C_80",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 9052,
+          "bbox": [
+            281,
+            701,
+            599,
+            778
+          ],
+          "centroid": [
+            451.379916,
+            750.2384
+          ],
+          "group": "rear_deck",
+          "id": 72,
+          "name": "rear_deck_C_72",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 7894,
+          "bbox": [
+            1575,
+            808,
+            2010,
+            1152
+          ],
+          "centroid": [
+            1800.545731,
+            937.899417
+          ],
+          "group": "nose_floor",
+          "id": 39,
+          "name": "nose_floor_C_39",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 7852,
+          "bbox": [
+            234,
+            1160,
+            305,
+            1736
+          ],
+          "centroid": [
+            271.032348,
+            1384.27216
+          ],
+          "group": "rear_side",
+          "id": 89,
+          "name": "rear_side_C_89",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 7452,
+          "bbox": [
+            253,
+            1396,
+            357,
+            1501
+          ],
+          "centroid": [
+            307.388084,
+            1448.390768
+          ],
+          "group": "rear_deck",
+          "id": 20,
+          "name": "rear_deck_C_20",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 6511,
+          "bbox": [
+            981,
+            85,
+            1035,
+            330
+          ],
+          "centroid": [
+            1007.53617,
+            178.673629
+          ],
+          "group": "rear_floor",
+          "id": 33,
+          "name": "rear_floor_C_33",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 4682,
+          "bbox": [
+            774,
+            1400,
+            827,
+            1498
+          ],
+          "centroid": [
+            797.264844,
+            1449.020504
+          ],
+          "group": "rear_deck",
+          "id": 14,
+          "name": "rear_deck_C_14",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 4504,
+          "bbox": [
+            1599,
+            872,
+            2047,
+            1114
+          ],
+          "centroid": [
+            1750.278197,
+            962.34325
+          ],
+          "group": "nose_floor",
+          "id": 40,
+          "name": "nose_floor_C_40",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3864,
+          "bbox": [
+            289,
+            1111,
+            336,
+            1786
+          ],
+          "centroid": [
+            314.69824,
+            1451.505435
+          ],
+          "group": "rear_side",
+          "id": 3,
+          "name": "rear_side_C_03",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3787,
+          "bbox": [
+            641,
+            1260,
+            1032,
+            1637
+          ],
+          "centroid": [
+            890.569052,
+            1415.939002
+          ],
+          "group": "rear_deck",
+          "id": 10,
+          "name": "rear_deck_C_10",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3326,
+          "bbox": [
+            917,
+            774,
+            1317,
+            803
+          ],
+          "centroid": [
+            1074.944979,
+            782.746242
+          ],
+          "group": "rear_deck",
+          "id": 64,
+          "name": "rear_deck_C_64",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3325,
+          "bbox": [
+            774,
+            1378,
+            817,
+            1572
+          ],
+          "centroid": [
+            797.438195,
+            1490.991278
+          ],
+          "group": "rear_deck",
+          "id": 13,
+          "name": "rear_deck_C_13",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3166,
+          "bbox": [
+            852,
+            0,
+            1023,
+            419
+          ],
+          "centroid": [
+            910.014845,
+            237.666456
+          ],
+          "group": "rear_side",
+          "id": 31,
+          "name": "rear_side_C_31",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3002,
+          "bbox": [
+            878,
+            1376,
+            1135,
+            1529
+          ],
+          "centroid": [
+            976.670553,
+            1495.888075
+          ],
+          "group": "rear_deck",
+          "id": 50,
+          "name": "rear_deck_C_50",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 2159,
+          "bbox": [
+            1260,
+            1320,
+            1367,
+            1551
+          ],
+          "centroid": [
+            1297.101899,
+            1438.303844
+          ],
+          "group": "rear_side",
+          "id": 35,
+          "name": "rear_side_C_35",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 1998,
+          "bbox": [
+            236,
+            1174,
+            306,
+            1723
+          ],
+          "centroid": [
+            255.088088,
+            1445.776276
+          ],
+          "group": "rear_side",
+          "id": 7,
+          "name": "rear_side_C_07",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 1529,
+          "bbox": [
+            774,
+            1325,
+            818,
+            1377
+          ],
+          "centroid": [
+            801.038587,
+            1354.025507
+          ],
+          "group": "rear_deck",
+          "id": 12,
+          "name": "rear_deck_C_12",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 1245,
+          "bbox": [
+            1620,
+            874,
+            1799,
+            891
+          ],
+          "centroid": [
+            1693.224096,
+            883.541365
+          ],
+          "group": "nose_floor",
+          "id": 41,
+          "name": "nose_floor_C_41",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 923,
+          "bbox": [
+            822,
+            76,
+            1036,
+            338
+          ],
+          "centroid": [
+            957.976165,
+            197.730228
+          ],
+          "group": "rear_side",
+          "id": 32,
+          "name": "rear_side_C_32",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 916,
+          "bbox": [
+            876,
+            1342,
+            1134,
+            1403
+          ],
+          "centroid": [
+            970.537118,
+            1382.170306
+          ],
+          "group": "rear_deck",
+          "id": 53,
+          "name": "rear_deck_C_53",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 816,
+          "bbox": [
+            1688,
+            2038,
+            2018,
+            2047
+          ],
+          "centroid": [
+            1854.758578,
+            2043.148284
+          ],
+          "group": "nose_floor",
+          "id": 67,
+          "name": "nose_floor_C_67",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 150,
+          "bbox": [
+            1511,
+            1359,
+            1543,
+            1538
+          ],
+          "centroid": [
+            1533.94,
+            1444.026667
+          ],
+          "group": "rear_deck",
+          "id": 18,
+          "name": "rear_deck_C_18",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 14,
+          "bbox": [
+            1243,
+            774,
+            1244,
+            780
+          ],
+          "centroid": [
+            1243.5,
+            777.0
+          ],
+          "group": "rear_deck",
+          "id": 62,
+          "name": "rear_deck_C_62",
+          "risk_class": "probe_only_tiny_fragment"
+        },
+        {
+          "area": 3,
+          "bbox": [
+            322,
+            1200,
+            323,
+            1201
+          ],
+          "centroid": [
+            322.333333,
+            1200.666667
+          ],
+          "group": "rear_deck",
+          "id": 6,
+          "name": "rear_deck_C_06",
+          "risk_class": "probe_only_tiny_fragment"
+        }
+      ]
+    },
+    "psd_parts": {
+      "atlas_coverage_ratio": 0.978331,
+      "dtype": "int32",
+      "groups": {
+        "bigsideventoneinsidecolor": {
+          "total_area": 19322,
+          "zone_count": 1,
+          "zones": [
+            "BigSideVentOneInSideColor"
+          ]
+        },
+        "helmet": {
+          "total_area": 539541,
+          "zone_count": 4,
+          "zones": [
+            "Helmet_BL",
+            "Helmet_BR",
+            "Helmet_TL",
+            "Helmet_TR"
+          ]
+        },
+        "helmet_glass": {
+          "total_area": 82557,
+          "zone_count": 2,
+          "zones": [
+            "HelmetGlass_L",
+            "HelmetGlass_R"
+          ]
+        },
+        "licence_plate": {
+          "total_area": 143240,
+          "zone_count": 2,
+          "zones": [
+            "LicencePlate",
+            "LicencePlateBlock"
+          ]
+        },
+        "main_body_top": {
+          "total_area": 1622702,
+          "zone_count": 4,
+          "zones": [
+            "MainBodyTOP_BL",
+            "MainBodyTOP_BR",
+            "MainBodyTOP_TL",
+            "MainBodyTOP_TR"
+          ]
+        },
+        "main_body_under": {
+          "total_area": 353313,
+          "zone_count": 4,
+          "zones": [
+            "MainBodyUNDER_BL",
+            "MainBodyUNDER_BR",
+            "MainBodyUNDER_TL",
+            "MainBodyUNDER_TR"
+          ]
+        },
+        "mirrors": {
+          "total_area": 47755,
+          "zone_count": 2,
+          "zones": [
+            "MirrorHolders",
+            "SideMirrors"
+          ]
+        },
+        "mudguards": {
+          "total_area": 425340,
+          "zone_count": 9,
+          "zones": [
+            "FrontMudGuards",
+            "FrontMudguardEdgeColor",
+            "FrontMudguardUnderColor",
+            "FrontMudguards.Inside",
+            "RearMudGuards",
+            "RearMudGuardsInside",
+            "RearMudguardUnderColor",
+            "RearMudguardsTip",
+            "RearMudguardsedgeColor"
+          ]
+        },
+        "nose": {
+          "total_area": 101934,
+          "zone_count": 1,
+          "zones": [
+            "NosePart"
+          ]
+        },
+        "side_under_color": {
+          "total_area": 263234,
+          "zone_count": 2,
+          "zones": [
+            "SideUnderColor_L",
+            "SideUnderColor_R"
+          ]
+        },
+        "side_wings": {
+          "total_area": 125401,
+          "zone_count": 2,
+          "zones": [
+            "SIdeWings",
+            "SideWingsUNDER"
+          ]
+        },
+        "tailwing": {
+          "total_area": 177929,
+          "zone_count": 3,
+          "zones": [
+            "TailWingUnderBorderColor",
+            "Tailwing_L",
+            "Tailwing_R"
+          ]
+        },
+        "underplate": {
+          "total_area": 136321,
+          "zone_count": 3,
+          "zones": [
+            "UnderPlate.insidecolor :)",
+            "UnderPlate_L",
+            "UnderPlate_R"
+          ]
+        },
+        "wheel_blocks": {
+          "total_area": 64829,
+          "zone_count": 2,
+          "zones": [
+            "KNob.Gouing.inside.Rear.wheel",
+            "RearWheelsSideBlock"
+          ]
+        }
+      },
+      "json_ids_match_label_map_ids": true,
+      "json_ids_missing_from_labels": [],
+      "label_ids_missing_from_json": [],
+      "nonzero_pixels": 4103418,
+      "shape": [
+        2048,
+        2048
+      ],
+      "size": 2048,
+      "source_json": "resources/authoritative/parts/psd_parts.json",
+      "source_labels": "resources/authoritative/parts/psd_parts_labels.npy",
+      "zone_count": 41,
+      "zones": [
+        {
+          "area": 428023,
+          "bbox": [
+            993,
+            1448,
+            1976,
+            2047
+          ],
+          "centroid": [
+            1377.064181,
+            1721.164276
+          ],
+          "group": "main_body_top",
+          "id": 4,
+          "name": "MainBodyTOP_BR",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 420656,
+          "bbox": [
+            993,
+            844,
+            1961,
+            1447
+          ],
+          "centroid": [
+            1380.937479,
+            1176.469704
+          ],
+          "group": "main_body_top",
+          "id": 2,
+          "name": "MainBodyTOP_TR",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 395442,
+          "bbox": [
+            237,
+            1445,
+            992,
+            2047
+          ],
+          "centroid": [
+            651.128178,
+            1721.505925
+          ],
+          "group": "main_body_top",
+          "id": 3,
+          "name": "MainBodyTOP_BL",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 378581,
+          "bbox": [
+            236,
+            885,
+            992,
+            1449
+          ],
+          "centroid": [
+            638.459645,
+            1188.135456
+          ],
+          "group": "main_body_top",
+          "id": 1,
+          "name": "MainBodyTOP_TL",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 137781,
+          "bbox": [
+            1540,
+            271,
+            2047,
+            888
+          ],
+          "centroid": [
+            1696.715106,
+            492.985041
+          ],
+          "group": "helmet",
+          "id": 8,
+          "name": "Helmet_BR",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 136322,
+          "bbox": [
+            120,
+            864,
+            324,
+            2047
+          ],
+          "centroid": [
+            210.704479,
+            1429.692639
+          ],
+          "group": "side_under_color",
+          "id": 14,
+          "name": "SideUnderColor_R",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 134906,
+          "bbox": [
+            1016,
+            0,
+            1539,
+            274
+          ],
+          "centroid": [
+            1288.990593,
+            139.885016
+          ],
+          "group": "helmet",
+          "id": 5,
+          "name": "Helmet_TL",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 133650,
+          "bbox": [
+            1017,
+            271,
+            1539,
+            880
+          ],
+          "centroid": [
+            1371.093161,
+            480.165499
+          ],
+          "group": "helmet",
+          "id": 7,
+          "name": "Helmet_BL",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 133204,
+          "bbox": [
+            1540,
+            0,
+            2047,
+            270
+          ],
+          "centroid": [
+            1786.537994,
+            138.790757
+          ],
+          "group": "helmet",
+          "id": 6,
+          "name": "Helmet_TR",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 126912,
+          "bbox": [
+            0,
+            842,
+            174,
+            2047
+          ],
+          "centroid": [
+            76.17821,
+            1454.67888
+          ],
+          "group": "side_under_color",
+          "id": 13,
+          "name": "SideUnderColor_L",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 105320,
+          "bbox": [
+            332,
+            0,
+            834,
+            247
+          ],
+          "centroid": [
+            552.823471,
+            136.95207
+          ],
+          "group": "main_body_under",
+          "id": 10,
+          "name": "MainBodyUNDER_TR",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 101934,
+          "bbox": [
+            1575,
+            1238,
+            2047,
+            1655
+          ],
+          "centroid": [
+            1863.747611,
+            1445.916426
+          ],
+          "group": "nose",
+          "id": 21,
+          "name": "NosePart",
+          "risk_class": "broad_design_surface"
+        },
+        {
+          "area": 85858,
+          "bbox": [
+            332,
+            247,
+            834,
+            467
+          ],
+          "centroid": [
+            544.724009,
+            339.632859
+          ],
+          "group": "main_body_under",
+          "id": 12,
+          "name": "MainBodyUNDER_BR",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 82061,
+          "bbox": [
+            0,
+            0,
+            333,
+            247
+          ],
+          "centroid": [
+            165.989179,
+            123.90518
+          ],
+          "group": "main_body_under",
+          "id": 9,
+          "name": "MainBodyUNDER_TL",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 81402,
+          "bbox": [
+            0,
+            542,
+            570,
+            946
+          ],
+          "centroid": [
+            304.171175,
+            756.636029
+          ],
+          "group": "mudguards",
+          "id": 25,
+          "name": "FrontMudGuards",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 80489,
+          "bbox": [
+            790,
+            0,
+            1039,
+            418
+          ],
+          "centroid": [
+            916.335884,
+            192.934786
+          ],
+          "group": "licence_plate",
+          "id": 26,
+          "name": "LicencePlateBlock",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 80074,
+          "bbox": [
+            0,
+            248,
+            331,
+            507
+          ],
+          "centroid": [
+            161.95624,
+            368.297075
+          ],
+          "group": "main_body_under",
+          "id": 11,
+          "name": "MainBodyUNDER_BL",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 72701,
+          "bbox": [
+            305,
+            427,
+            823,
+            617
+          ],
+          "centroid": [
+            566.498906,
+            525.684406
+          ],
+          "group": "mudguards",
+          "id": 22,
+          "name": "RearMudGuards",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 67882,
+          "bbox": [
+            1606,
+            810,
+            1988,
+            1150
+          ],
+          "centroid": [
+            1766.197519,
+            960.018797
+          ],
+          "group": "side_wings",
+          "id": 28,
+          "name": "SIdeWings",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 67441,
+          "bbox": [
+            811,
+            377,
+            1414,
+            606
+          ],
+          "centroid": [
+            1116.097819,
+            505.517712
+          ],
+          "group": "tailwing",
+          "id": 30,
+          "name": "TailWingUnderBorderColor",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 67022,
+          "bbox": [
+            0,
+            618,
+            598,
+            861
+          ],
+          "centroid": [
+            265.071141,
+            729.79362
+          ],
+          "group": "mudguards",
+          "id": 23,
+          "name": "RearMudGuardsInside",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 62751,
+          "bbox": [
+            1689,
+            396,
+            1877,
+            852
+          ],
+          "centroid": [
+            1785.810091,
+            633.065162
+          ],
+          "group": "licence_plate",
+          "id": 24,
+          "name": "LicencePlate",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 57519,
+          "bbox": [
+            1790,
+            891,
+            2047,
+            1232
+          ],
+          "centroid": [
+            1944.575097,
+            1050.964377
+          ],
+          "group": "side_wings",
+          "id": 31,
+          "name": "SideWingsUNDER",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 55883,
+          "bbox": [
+            0,
+            0,
+            1116,
+            803
+          ],
+          "centroid": [
+            962.997316,
+            694.794571
+          ],
+          "group": "tailwing",
+          "id": 15,
+          "name": "Tailwing_L",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 55535,
+          "bbox": [
+            490,
+            580,
+            980,
+            921
+          ],
+          "centroid": [
+            737.320573,
+            751.257225
+          ],
+          "group": "mudguards",
+          "id": 29,
+          "name": "FrontMudguards.Inside",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 54605,
+          "bbox": [
+            1117,
+            602,
+            1418,
+            827
+          ],
+          "centroid": [
+            1267.502646,
+            697.622068
+          ],
+          "group": "tailwing",
+          "id": 16,
+          "name": "Tailwing_R",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 54587,
+          "bbox": [
+            1853,
+            1750,
+            2047,
+            2047
+          ],
+          "centroid": [
+            1949.696833,
+            1907.225493
+          ],
+          "group": "underplate",
+          "id": 18,
+          "name": "UnderPlate_R",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 50539,
+          "bbox": [
+            1626,
+            1774,
+            1852,
+            2047
+          ],
+          "centroid": [
+            1759.294723,
+            1904.148737
+          ],
+          "group": "underplate",
+          "id": 17,
+          "name": "UnderPlate_L",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 46094,
+          "bbox": [
+            900,
+            448,
+            1331,
+            567
+          ],
+          "centroid": [
+            1112.134334,
+            507.192281
+          ],
+          "group": "wheel_blocks",
+          "id": 27,
+          "name": "RearWheelsSideBlock",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 41545,
+          "bbox": [
+            1944,
+            347,
+            2047,
+            895
+          ],
+          "centroid": [
+            2007.142231,
+            619.087832
+          ],
+          "group": "helmet_glass",
+          "id": 20,
+          "name": "HelmetGlass_R",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 41012,
+          "bbox": [
+            1856,
+            395,
+            1965,
+            827
+          ],
+          "centroid": [
+            1912.073101,
+            604.11916
+          ],
+          "group": "helmet_glass",
+          "id": 19,
+          "name": "HelmetGlass_L",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 37580,
+          "bbox": [
+            203,
+            1893,
+            548,
+            2047
+          ],
+          "centroid": [
+            363.788159,
+            1982.868946
+          ],
+          "group": "mudguards",
+          "id": 39,
+          "name": "RearMudguardsedgeColor",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 31896,
+          "bbox": [
+            671,
+            602,
+            1108,
+            898
+          ],
+          "centroid": [
+            878.587378,
+            753.272511
+          ],
+          "group": "mudguards",
+          "id": 35,
+          "name": "FrontMudguardUnderColor",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 31195,
+          "bbox": [
+            1460,
+            1827,
+            1689,
+            2047
+          ],
+          "centroid": [
+            1583.616221,
+            1961.792948
+          ],
+          "group": "underplate",
+          "id": 32,
+          "name": "UnderPlate.insidecolor :)",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 31005,
+          "bbox": [
+            549,
+            739,
+            765,
+            922
+          ],
+          "centroid": [
+            646.471343,
+            825.514949
+          ],
+          "group": "mudguards",
+          "id": 37,
+          "name": "RearMudguardsTip",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 27825,
+          "bbox": [
+            51,
+            1286,
+            165,
+            1590
+          ],
+          "centroid": [
+            107.356514,
+            1438.754537
+          ],
+          "group": "mirrors",
+          "id": 40,
+          "name": "SideMirrors",
+          "risk_class": "medium_accent_surface"
+        },
+        {
+          "area": 24194,
+          "bbox": [
+            44,
+            601,
+            492,
+            879
+          ],
+          "centroid": [
+            269.782384,
+            746.802265
+          ],
+          "group": "mudguards",
+          "id": 34,
+          "name": "RearMudguardUnderColor",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 24005,
+          "bbox": [
+            0,
+            477,
+            317,
+            613
+          ],
+          "centroid": [
+            164.896647,
+            528.289106
+          ],
+          "group": "mudguards",
+          "id": 38,
+          "name": "FrontMudguardEdgeColor",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 19930,
+          "bbox": [
+            0,
+            1268,
+            76,
+            1601
+          ],
+          "centroid": [
+            29.99137,
+            1435.687005
+          ],
+          "group": "mirrors",
+          "id": 41,
+          "name": "MirrorHolders",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 19322,
+          "bbox": [
+            1110,
+            786,
+            1337,
+            883
+          ],
+          "centroid": [
+            1223.317772,
+            836.125039
+          ],
+          "group": "bigsideventoneinsidecolor",
+          "id": 33,
+          "name": "BigSideVentOneInSideColor",
+          "risk_class": "small_detail_surface"
+        },
+        {
+          "area": 18735,
+          "bbox": [
+            646,
+            340,
+            869,
+            471
+          ],
+          "centroid": [
+            763.893995,
+            406.622792
+          ],
+          "group": "wheel_blocks",
+          "id": 36,
+          "name": "KNob.Gouing.inside.Rear.wheel",
+          "risk_class": "small_detail_surface"
+        }
+      ]
+    }
+  },
+  "mesh": {
+    "aggregate_xyz_max": [
+      0.9190002,
+      1.056,
+      2.1355
+    ],
+    "aggregate_xyz_min": [
+      -0.91899973,
+      0.1470358,
+      -1.7699338
+    ],
+    "all_faces_have_uvs": true,
+    "component_count": 13,
+    "components": [
+      {
+        "face_count": 564,
+        "faces_with_missing_uv": 0,
+        "normal_count": 388,
+        "path": "resources/authoritative/mesh/004__1__1FLGuard__Unassigned_0__mudguard_skin.obj",
+        "role": "mudguard",
+        "uv_count": 388,
+        "uv_max": [
+          0.39963636,
+          0.7664068
+        ],
+        "uv_min": [
+          0.052884474,
+          0.6475316
+        ],
+        "vertex_count": 388,
+        "xyz_max": [
+          0.91716677,
+          0.7619482,
+          2.0426524
+        ],
+        "xyz_min": [
+          0.64516675,
+          0.51899743,
+          1.5513468
+        ]
+      },
+      {
+        "face_count": 564,
+        "faces_with_missing_uv": 0,
+        "normal_count": 387,
+        "path": "resources/authoritative/mesh/011__1__1FRGuard__Unassigned_0_1__mudguard_skin.obj",
+        "role": "mudguard",
+        "uv_count": 387,
+        "uv_max": [
+          0.5318364,
+          0.77590674
+        ],
+        "uv_min": [
+          0.001274836,
+          0.5597008
+        ],
+        "vertex_count": 387,
+        "xyz_max": [
+          -0.64516604,
+          0.7619482,
+          2.0426524
+        ],
+        "xyz_min": [
+          -0.91716605,
+          0.51899743,
+          1.5513468
+        ]
+      },
+      {
+        "face_count": 2190,
+        "faces_with_missing_uv": 0,
+        "normal_count": 1347,
+        "path": "resources/authoritative/mesh/014__1__1PilHead__pilot_head_skin.obj",
+        "role": "pilot_head",
+        "uv_count": 1347,
+        "uv_max": [
+          0.9951318,
+          1.0000807
+        ],
+        "uv_min": [
+          0.5088874,
+          0.5963148
+        ],
+        "vertex_count": 1347,
+        "xyz_max": [
+          0.148,
+          1.0223098,
+          -0.07449278
+        ],
+        "xyz_min": [
+          -0.148,
+          0.6812784,
+          -0.44034097
+        ]
+      },
+      {
+        "face_count": 1484,
+        "faces_with_missing_uv": 0,
+        "normal_count": 947,
+        "path": "resources/authoritative/mesh/020__1__1RLHub__Unassigned_0_2__hub_skin.obj",
+        "role": "hub",
+        "uv_count": 947,
+        "uv_max": [
+          0.54325527,
+          0.8183648
+        ],
+        "uv_min": [
+          0.12853628,
+          0.010942315
+        ],
+        "vertex_count": 947,
+        "xyz_max": [
+          0.9117503,
+          0.7900035,
+          -0.8224828
+        ],
+        "xyz_min": [
+          0.5891034,
+          0.4135,
+          -1.4839306
+        ]
+      },
+      {
+        "face_count": 1484,
+        "faces_with_missing_uv": 0,
+        "normal_count": 947,
+        "path": "resources/authoritative/mesh/026__1__1RRHub__Unassigned_0_3__hub_skin.obj",
+        "role": "hub",
+        "uv_count": 947,
+        "uv_max": [
+          0.6262553,
+          0.8134838
+        ],
+        "uv_min": [
+          -0.001956528,
+          0.002780472
+        ],
+        "vertex_count": 947,
+        "xyz_max": [
+          -0.5891028,
+          0.7900035,
+          -0.8224828
+        ],
+        "xyz_min": [
+          -0.9117497,
+          0.4135,
+          -1.4839306
+        ]
+      },
+      {
+        "face_count": 14782,
+        "faces_with_missing_uv": 0,
+        "normal_count": 8941,
+        "path": "resources/authoritative/mesh/028__1__1Body__Unassigned_0_4__body_skin.obj",
+        "role": "body",
+        "uv_count": 8941,
+        "uv_max": [
+          0.997396,
+          0.9994499
+        ],
+        "uv_min": [
+          0.000974735,
+          0.003508567
+        ],
+        "vertex_count": 8941,
+        "xyz_max": [
+          0.8229045,
+          1.0524168,
+          2.1340837
+        ],
+        "xyz_min": [
+          -0.8229045,
+          0.16155562,
+          -1.7683029
+        ]
+      },
+      {
+        "face_count": 136,
+        "faces_with_missing_uv": 0,
+        "normal_count": 122,
+        "path": "resources/authoritative/mesh/043__2__2FLGuard__Unassigned_0_9__mudguard_skin.obj",
+        "role": "mudguard",
+        "uv_count": 122,
+        "uv_max": [
+          0.39959997,
+          0.76702476
+        ],
+        "uv_min": [
+          0.05402769,
+          0.6470506
+        ],
+        "vertex_count": 122,
+        "xyz_max": [
+          0.9190002,
+          0.7685003,
+          2.0449996
+        ],
+        "xyz_min": [
+          0.6450001,
+          0.504372,
+          1.5482297
+        ]
+      },
+      {
+        "face_count": 136,
+        "faces_with_missing_uv": 0,
+        "normal_count": 121,
+        "path": "resources/authoritative/mesh/049__2__2FRGuard__Unassigned_0_10__mudguard_skin.obj",
+        "role": "mudguard",
+        "uv_count": 121,
+        "uv_max": [
+          0.5317999,
+          0.7765248
+        ],
+        "uv_min": [
+          0.000908267,
+          0.55840737
+        ],
+        "vertex_count": 121,
+        "xyz_max": [
+          -0.6449996,
+          0.7685003,
+          2.0449996
+        ],
+        "xyz_min": [
+          -0.91899973,
+          0.504372,
+          1.5482297
+        ]
+      },
+      {
+        "face_count": 1220,
+        "faces_with_missing_uv": 0,
+        "normal_count": 742,
+        "path": "resources/authoritative/mesh/052__2__2PilHead__pilot_head_skin.obj",
+        "role": "pilot_head",
+        "uv_count": 742,
+        "uv_max": [
+          0.992522,
+          1.0000807
+        ],
+        "uv_min": [
+          0.5114971,
+          0.5990671
+        ],
+        "vertex_count": 742,
+        "xyz_max": [
+          0.148,
+          1.0195854,
+          -0.07449278
+        ],
+        "xyz_min": [
+          -0.148,
+          0.6812784,
+          -0.4381156
+        ]
+      },
+      {
+        "face_count": 372,
+        "faces_with_missing_uv": 0,
+        "normal_count": 298,
+        "path": "resources/authoritative/mesh/055__2__2RLHub__Unassigned_0_11__hub_skin.obj",
+        "role": "hub",
+        "uv_count": 298,
+        "uv_max": [
+          0.5415365,
+          0.8191275
+        ],
+        "uv_min": [
+          0.12814909,
+          0.009796237
+        ],
+        "vertex_count": 298,
+        "xyz_max": [
+          0.9120001,
+          0.79049957,
+          -0.8195005
+        ],
+        "xyz_min": [
+          0.5885001,
+          0.39502952,
+          -1.4860004
+        ]
+      },
+      {
+        "face_count": 372,
+        "faces_with_missing_uv": 0,
+        "normal_count": 298,
+        "path": "resources/authoritative/mesh/060__2__2RRHub__Unassigned_0_12__hub_skin.obj",
+        "role": "hub",
+        "uv_count": 298,
+        "uv_max": [
+          0.6245365,
+          0.8134838
+        ],
+        "uv_min": [
+          -0.00234372,
+          0.001634394
+        ],
+        "vertex_count": 298,
+        "xyz_max": [
+          -0.58849996,
+          0.79049957,
+          -0.8195005
+        ],
+        "xyz_min": [
+          -0.912,
+          0.39502952,
+          -1.4860004
+        ]
+      },
+      {
+        "face_count": 3457,
+        "faces_with_missing_uv": 0,
+        "normal_count": 2530,
+        "path": "resources/authoritative/mesh/062__2__2Body__Unassigned_0_13__body_skin.obj",
+        "role": "body",
+        "uv_count": 2530,
+        "uv_max": [
+          0.9985815,
+          0.9996388
+        ],
+        "uv_min": [
+          0.000974735,
+          0.002375318
+        ],
+        "vertex_count": 2530,
+        "xyz_max": [
+          0.8275,
+          1.056,
+          2.1350005
+        ],
+        "xyz_min": [
+          -0.8275,
+          0.1470358,
+          -1.7699338
+        ]
+      },
+      {
+        "face_count": 1406,
+        "faces_with_missing_uv": 0,
+        "normal_count": 1321,
+        "path": "resources/authoritative/mesh/085__3__3Fixed_1__fixed_skin.obj",
+        "role": "fixed",
+        "uv_count": 1321,
+        "uv_max": [
+          0.9985815,
+          0.9996388
+        ],
+        "uv_min": [
+          0.000974735,
+          0.002593342
+        ],
+        "vertex_count": 1321,
+        "xyz_max": [
+          0.918,
+          1.056,
+          2.1355
+        ],
+        "xyz_min": [
+          -0.918,
+          0.16105872,
+          -1.7699338
+        ]
+      }
+    ],
+    "source_dir": "resources/authoritative/mesh"
+  },
+  "schema": "tmuf_premium_skin_lab.stock_part_inventory.v1",
+  "targetable_regions": {
+    "front_nose_len_positive": {
+      "evidence": "LEN/Z positive end is front; front guards span Z about 1.548..2.045 and body/fixed reaches about 2.135.",
+      "status": "experimental_until_tmuf_smoke_when_used_for_texture_projection"
+    },
+    "high_low_surfaces_hgt": {
+      "evidence": "GBuffer axis_roles maps HGT to axis 1/Y, with mesh HGT span about 0.147..1.056.",
+      "status": "experimental_until_tmuf_smoke_when_used_for_texture_projection"
+    },
+    "left_right_sides_lat_sign": {
+      "evidence": "Local L components have positive X/LAT and local R components have negative X/LAT in OBJ bounds.",
+      "status": "local_mesh_evidence"
+    },
+    "mudguards_by_name_and_label": {
+      "evidence": "Mudguard OBJs and psd_parts names separately identify guard surfaces.",
+      "status": "local_mesh_and_label_evidence"
+    },
+    "rear_deck_candidate_len_negative_high_hgt": {
+      "evidence": "Body/fixed reach LEN/Z about -1.770 and HGT/Y about 1.056; exact semantic rear deck is not named by mesh files.",
+      "status": "experimental_until_tmuf_smoke"
+    }
+  },
+  "unknowns": [
+    "no_tmuf_runtime_visibility_claim",
+    "no_dds_orientation_claim_until_smoke",
+    "no_uv_seam_quality_claim_until_smoke",
+    "no_fine_panel_semantics_beyond_local_name_tokens",
+    "no_material_gloss_claim_from_diffuse_alpha_until_smoke"
+  ]
+}

@@ -97,7 +97,15 @@ python3 recipes/record_tmuf_smoke.py \
   --test-date-local 2026-06-15 \
   --screenshot /path/to/tmuf_calibration_front.png \
   --screenshot /path/to/tmuf_calibration_side.png \
-  --all-required-observations-passed
+  --confirm-observation nose_is_red \
+  --confirm-observation tail_is_blue \
+  --confirm-observation left_side_is_green \
+  --confirm-observation right_side_is_yellow \
+  --confirm-observation roof_high_surfaces_are_white \
+  --confirm-observation lower_floor_surfaces_are_dark \
+  --confirm-observation mudguards_are_magenta \
+  --confirm-observation centerline_is_cyan \
+  --confirm-observation package_loads_without_custom_gbx
 ```
 
 The helper copies screenshots into:

@@ -85,6 +85,7 @@ class SmokeRecordTests(unittest.TestCase):
             self.assertEqual(result["mismatched_screenshot_fingerprints"], [data["screenshots"][0]])
 
     def test_passed_report_requires_explicit_required_observation_confirmation(self):
+        from src.evidence.smoke_gate import REQUIRED_OBSERVATIONS
         from src.evidence.smoke_record import record_calibration_smoke_report
 
         with tempfile.TemporaryDirectory() as tmp:
@@ -105,6 +106,70 @@ class SmokeRecordTests(unittest.TestCase):
                 )
 
             self.assertIn("all required observations", str(context.exception))
+            self.assertFalse(output.exists())
+
+            with self.assertRaises(ValueError) as missing_context:
+                record_calibration_smoke_report(
+                    output_path=output,
+                    tester="manual tester",
+                    tmuf_build="TMUF local install",
+                    test_date_local="2026-06-15",
+                    screenshot_paths=[screenshot],
+                    all_required_observations_passed=False,
+                    confirmed_observations=REQUIRED_OBSERVATIONS[:-1],
+                    base_dir=base,
+                )
+            self.assertIn(REQUIRED_OBSERVATIONS[-1], str(missing_context.exception))
+
+    def test_record_accepts_each_required_observation_explicitly(self):
+        from src.evidence.smoke_gate import REQUIRED_OBSERVATIONS, evaluate_smoke_report
+        from src.evidence.smoke_record import record_calibration_smoke_report
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            screenshot = base / "tmuf_front_left.png"
+            _write_nonblank_png(screenshot)
+            output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
+
+            record_calibration_smoke_report(
+                output_path=output,
+                tester="manual tester",
+                tmuf_build="TMUF local install",
+                test_date_local="2026-06-15",
+                screenshot_paths=[screenshot],
+                all_required_observations_passed=False,
+                confirmed_observations=REQUIRED_OBSERVATIONS,
+                base_dir=base,
+            )
+
+            data = json.loads(output.read_text())
+            self.assertEqual(data["observation_confirmation_mode"], "explicit")
+            self.assertTrue(all(data["observations"].values()))
+            self.assertTrue(evaluate_smoke_report(output, base_dir=base)["passed"])
+
+    def test_record_rejects_unknown_observation_names(self):
+        from src.evidence.smoke_gate import REQUIRED_OBSERVATIONS
+        from src.evidence.smoke_record import record_calibration_smoke_report
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            screenshot = base / "tmuf_front_left.png"
+            _write_nonblank_png(screenshot)
+            output = base / "out" / "proof" / "calibration_tmuf_smoke.json"
+
+            with self.assertRaises(ValueError) as context:
+                record_calibration_smoke_report(
+                    output_path=output,
+                    tester="manual tester",
+                    tmuf_build="TMUF local install",
+                    test_date_local="2026-06-15",
+                    screenshot_paths=[screenshot],
+                    all_required_observations_passed=False,
+                    confirmed_observations=[*REQUIRED_OBSERVATIONS, "not_real"],
+                    base_dir=base,
+                )
+
+            self.assertIn("not_real", str(context.exception))
             self.assertFalse(output.exists())
 
     def test_passed_report_requires_existing_screenshots(self):
@@ -187,7 +252,21 @@ class SmokeRecordTests(unittest.TestCase):
                     "2026-06-15",
                     "--screenshot",
                     str(screenshot),
-                    "--all-required-observations-passed",
+                    *[
+                        flag
+                        for observation in [
+                            "nose_is_red",
+                            "tail_is_blue",
+                            "left_side_is_green",
+                            "right_side_is_yellow",
+                            "roof_high_surfaces_are_white",
+                            "lower_floor_surfaces_are_dark",
+                            "mudguards_are_magenta",
+                            "centerline_is_cyan",
+                            "package_loads_without_custom_gbx",
+                        ]
+                        for flag in ("--confirm-observation", observation)
+                    ],
                 ],
                 check=True,
                 capture_output=True,
