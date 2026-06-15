@@ -52,7 +52,10 @@ out/proof/tmuf_calibration_smoke_kit/
 out/proof/tmuf_calibration_smoke_kit.zip
 ```
 
-The kit is only a handoff bundle. It does not prove TMUF smoke status.
+The kit includes the calibration skin, smoke report template, calibration
+previews, and `previews/tmuf_smoke_contact_sheet.png`, a visual review sheet
+for the calibration preview and current premium candidates. The kit is only a
+handoff bundle. It does not prove TMUF smoke status.
 
 Find existing StadiumCar skin directories before installing:
 

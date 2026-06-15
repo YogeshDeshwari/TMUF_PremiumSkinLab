@@ -7,8 +7,11 @@ from hashlib import sha256
 from pathlib import Path
 from typing import Any
 
+from PIL import Image, ImageDraw
+
 from src.evidence.skin_dirs import route_for_stadiumcar_skin_dir
 from src.stock_diffuse.package import write_stable_zip_entry
+from src.stock_diffuse.premium import CANDIDATE_NAMES
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -17,12 +20,14 @@ CALIBRATION_SKIN = ROOT / "out" / "skins" / "calibration_stock_diffuse.zip"
 SMOKE_TEMPLATE = ROOT / "out" / "proof" / "calibration_tmuf_smoke_template.json"
 CALIBRATION_ATLAS = ROOT / "out" / "previews" / "calibration_stock_diffuse_atlas.png"
 CALIBRATION_PROJECTION = ROOT / "out" / "previews" / "calibration_stock_diffuse_projected_side_top_rear.png"
+SMOKE_CONTACT_SHEET = ROOT / "out" / "proof" / "tmuf_smoke_contact_sheet.png"
 SMOKE_DOC = ROOT / "docs" / "tmuf_smoke_test.md"
 KIT_FILES = {
     "skins/calibration_stock_diffuse.zip": CALIBRATION_SKIN,
     "proof/calibration_tmuf_smoke_template.json": SMOKE_TEMPLATE,
     "previews/calibration_stock_diffuse_atlas.png": CALIBRATION_ATLAS,
     "previews/calibration_stock_diffuse_projected_side_top_rear.png": CALIBRATION_PROJECTION,
+    "previews/tmuf_smoke_contact_sheet.png": SMOKE_CONTACT_SHEET,
     "README_tmuf_smoke_test.md": SMOKE_DOC,
 }
 
@@ -54,6 +59,46 @@ def _kit_manifest(files: list[str]) -> dict[str, Any]:
 
 def _digest(path: Path) -> str:
     return sha256(path.read_bytes()).hexdigest()
+
+
+def build_smoke_contact_sheet(path: Path = SMOKE_CONTACT_SHEET) -> Path:
+    items = [
+        ("calibration_stock_diffuse", CALIBRATION_PROJECTION),
+        *[
+            (name, ROOT / "out" / "previews" / f"{name}_projected_side_top_rear.png")
+            for name in CANDIDATE_NAMES
+        ],
+    ]
+    thumb_w, thumb_h = 420, 246
+    label_h = 34
+    margin = 20
+    gap = 14
+    columns = 3
+    rows = (len(items) + columns - 1) // columns
+    width = margin * 2 + columns * thumb_w + (columns - 1) * gap
+    height = margin * 2 + rows * (thumb_h + label_h) + (rows - 1) * gap
+
+    sheet = Image.new("RGB", (width, height), (10, 10, 12))
+    draw = ImageDraw.Draw(sheet)
+    for index, (name, source) in enumerate(items):
+        if not source.exists():
+            raise FileNotFoundError(source)
+        row, column = divmod(index, columns)
+        x = margin + column * (thumb_w + gap)
+        y = margin + row * (thumb_h + label_h + gap)
+
+        image = Image.open(source).convert("RGB")
+        image.thumbnail((thumb_w, thumb_h), Image.Resampling.LANCZOS)
+        canvas = Image.new("RGB", (thumb_w, thumb_h), (18, 18, 22))
+        canvas.paste(image, ((thumb_w - image.width) // 2, (thumb_h - image.height) // 2))
+        sheet.paste(canvas, (x, y + label_h))
+        draw.text((x, y), name, fill=(235, 235, 240))
+        draw.rectangle((x, y + label_h, x + thumb_w - 1, y + label_h + thumb_h - 1), outline=(70, 70, 78))
+
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    sheet.save(path)
+    return path
 
 
 def validate_smoke_kit(out_dir: Path = DEFAULT_KIT_DIR) -> dict[str, Any]:
@@ -109,6 +154,7 @@ def validate_smoke_kit(out_dir: Path = DEFAULT_KIT_DIR) -> dict[str, Any]:
 def build_smoke_kit(out_dir: Path = DEFAULT_KIT_DIR) -> dict[str, str]:
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    build_smoke_contact_sheet()
 
     files = sorted(KIT_FILES)
     for rel, src in KIT_FILES.items():

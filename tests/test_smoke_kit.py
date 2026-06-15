@@ -4,6 +4,8 @@ import tempfile
 import unittest
 import zipfile
 
+from PIL import Image
+
 
 class SmokeKitTests(unittest.TestCase):
     def test_build_smoke_kit_collects_required_files_without_passing_gate(self):
@@ -23,7 +25,15 @@ class SmokeKitTests(unittest.TestCase):
             self.assertEqual(manifest["calibration_skin"], "skins/calibration_stock_diffuse.zip")
             self.assertIn("proof/calibration_tmuf_smoke_template.json", manifest["files"])
             self.assertIn("previews/calibration_stock_diffuse_projected_side_top_rear.png", manifest["files"])
+            self.assertIn("previews/tmuf_smoke_contact_sheet.png", manifest["files"])
             self.assertTrue(any("recipes/record_tmuf_smoke.py" in step for step in manifest["next_steps"]))
+
+            contact_sheet = manifest_path.parent / "previews" / "tmuf_smoke_contact_sheet.png"
+            self.assertTrue(contact_sheet.exists())
+            with Image.open(contact_sheet) as image:
+                self.assertGreaterEqual(image.width, 900)
+                self.assertGreaterEqual(image.height, 600)
+                self.assertTrue(any(channel_min != channel_max for channel_min, channel_max in image.convert("RGB").getextrema()))
 
             with zipfile.ZipFile(zip_path) as zf:
                 names = set(zf.namelist())
@@ -47,6 +57,12 @@ class SmokeKitTests(unittest.TestCase):
             stale = validate_smoke_kit(kit_dir)
             self.assertFalse(stale["fresh"])
             self.assertIn("README_tmuf_smoke_test.md", stale["stale_files"])
+
+            (kit_dir / "previews" / "tmuf_smoke_contact_sheet.png").write_bytes(b"stale contact sheet\n")
+
+            stale_contact = validate_smoke_kit(kit_dir)
+            self.assertFalse(stale_contact["fresh"])
+            self.assertIn("previews/tmuf_smoke_contact_sheet.png", stale_contact["stale_files"])
 
     def test_install_calibration_skin_requires_explicit_target_and_only_copies_skin(self):
         from src.evidence.smoke_kit import CALIBRATION_SKIN, install_calibration_skin

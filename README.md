@@ -91,6 +91,9 @@ python3 recipes/lab_status.py --write
 python3 -m unittest discover -s tests
 ```
 
+The smoke kit includes `previews/tmuf_smoke_contact_sheet.png` as a visual
+review aid only. It is not smoke evidence.
+
 See `docs/tmuf_smoke_test.md` before promoting any report from
 `experimental_until_tmuf_smoke` to `proven_by_tmuf_smoke`.
 
