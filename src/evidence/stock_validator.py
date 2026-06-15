@@ -94,6 +94,44 @@ def validate_output_artifacts(report: dict[str, Any], root: Path = ROOT) -> list
     return errors
 
 
+def validate_mask_evidence(report: dict[str, Any], premium: bool) -> list[str]:
+    if not premium:
+        return []
+
+    errors: list[str] = []
+    masks_used = report.get("masks_used", [])
+    mask_evidence = report.get("mask_evidence", {})
+    if not isinstance(masks_used, list) or not masks_used:
+        return ["premium report has no masks_used list"]
+    if not isinstance(mask_evidence, dict):
+        return ["premium report has no mask_evidence object"]
+
+    for name in masks_used:
+        entry = mask_evidence.get(name)
+        if not isinstance(entry, dict):
+            errors.append(f"missing mask evidence: {name}")
+            continue
+        if entry.get("pixel_count", 0) <= 0:
+            errors.append(f"mask evidence pixel count is empty: {name}")
+        if not entry.get("source_files"):
+            errors.append(f"mask evidence source files missing: {name}")
+
+    mudguards = mask_evidence.get("mudguards", {})
+    if mudguards.get("evidence_status") != "proven_local_psd_parts_label_map":
+        errors.append("mudguards must use proven local PSD label evidence")
+    elif "resources/authoritative/parts/psd_parts_labels.npy" not in mudguards.get("source_files", []):
+        errors.append("mudguards must cite psd_parts_labels.npy")
+
+    for name in masks_used:
+        if name == "mudguards":
+            continue
+        entry = mask_evidence.get(name, {})
+        if entry.get("evidence_status") != "experimental_until_tmuf_smoke":
+            errors.append(f"{name} must stay experimental until TMUF smoke")
+
+    return errors
+
+
 def _zip_checks(zip_path: Path) -> tuple[dict[str, bool], list[str]]:
     checks = {
         "zip_exists": zip_path.exists(),
@@ -145,6 +183,7 @@ def _report_checks(report_path: Path, manifest: dict[str, Any]) -> tuple[dict[st
         "report_declares_no_donor_or_details_route": False,
         "report_input_evidence_matches_manifest": False,
         "report_output_artifacts_match_files": False,
+        "report_mask_evidence_valid": False,
         "tmuf_smoke_passed": False,
     }
     errors: list[str] = []
@@ -201,19 +240,22 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
     skins: list[dict[str, Any]] = []
 
     for skin_name in REQUIRED_STOCK_SKINS:
+        premium = skin_name != "calibration_stock_diffuse"
         zip_checks, zip_errors = _zip_checks(root / "out" / "skins" / f"{skin_name}.zip")
         report_checks, report, report_errors = _report_checks(
             root / "out" / "reports" / f"{skin_name}.json",
             manifest,
         )
+        mask_errors = validate_mask_evidence(report, premium=premium)
+        report_checks["report_mask_evidence_valid"] = not mask_errors
         preview_checks, preview_errors = _preview_checks(root, skin_name)
         visual_checks, visual_metrics, visual_errors = validate_visual_quality(
             root,
             skin_name,
-            premium=skin_name != "calibration_stock_diffuse",
+            premium=premium,
         )
         checks = {**zip_checks, **report_checks, **preview_checks, **visual_checks}
-        skin_errors = [*zip_errors, *report_errors, *preview_errors, *visual_errors]
+        skin_errors = [*zip_errors, *report_errors, *mask_errors, *preview_errors, *visual_errors]
         errors.extend(skin_errors)
         skins.append(
             {

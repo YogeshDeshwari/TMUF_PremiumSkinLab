@@ -26,6 +26,7 @@ class StockValidatorTests(unittest.TestCase):
             self.assertTrue(checks["report_declares_no_donor_or_details_route"])
             self.assertTrue(checks["report_input_evidence_matches_manifest"])
             self.assertTrue(checks["report_output_artifacts_match_files"])
+            self.assertTrue(checks["report_mask_evidence_valid"])
             self.assertTrue(checks["atlas_preview_exists"])
             self.assertTrue(checks["projection_preview_exists"])
             self.assertTrue(checks["preview_visual_quality_passed"])
@@ -70,6 +71,45 @@ class StockValidatorTests(unittest.TestCase):
             validate_input_evidence(report, manifest),
             [f"input evidence sha256 mismatch: {first}"],
         )
+
+    def test_premium_report_mask_evidence_is_validated(self):
+        from src.evidence.stock_validator import validate_mask_evidence
+
+        valid_report = {
+            "skin_name": "example",
+            "masks_used": ["mudguards", "center_spine"],
+            "mask_evidence": {
+                "mudguards": {
+                    "evidence_status": "proven_local_psd_parts_label_map",
+                    "pixel_count": 425340,
+                    "source_files": ["resources/authoritative/parts/psd_parts_labels.npy"],
+                },
+                "center_spine": {
+                    "evidence_status": "experimental_until_tmuf_smoke",
+                    "pixel_count": 531368,
+                    "source_files": ["resources/authoritative/gbuffer/position_2048.npy"],
+                },
+            },
+        }
+        self.assertEqual(validate_mask_evidence(valid_report, premium=True), [])
+        self.assertEqual(validate_mask_evidence(valid_report, premium=False), [])
+
+        broken_report = {
+            "skin_name": "broken",
+            "masks_used": ["mudguards", "center_spine"],
+            "mask_evidence": {
+                "mudguards": {
+                    "evidence_status": "experimental_until_tmuf_smoke",
+                    "pixel_count": 425340,
+                    "source_files": ["resources/authoritative/gbuffer/position_2048.npy"],
+                }
+            },
+        }
+
+        errors = validate_mask_evidence(broken_report, premium=True)
+
+        self.assertIn("missing mask evidence: center_spine", errors)
+        self.assertIn("mudguards must use proven local PSD label evidence", errors)
 
     def test_cli_outputs_json_summary(self):
         from recipes.validate_stock_outputs import main
