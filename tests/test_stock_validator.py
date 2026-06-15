@@ -25,6 +25,7 @@ class StockValidatorTests(unittest.TestCase):
             self.assertTrue(checks["report_route_stock_diffuse_only"])
             self.assertTrue(checks["report_declares_no_donor_or_details_route"])
             self.assertTrue(checks["report_input_evidence_matches_manifest"])
+            self.assertTrue(checks["report_output_artifacts_match_files"])
             self.assertTrue(checks["atlas_preview_exists"])
             self.assertTrue(checks["projection_preview_exists"])
             self.assertTrue(checks["preview_visual_quality_passed"])

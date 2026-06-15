@@ -6,6 +6,7 @@ import zipfile
 from pathlib import Path
 from typing import Any
 
+from src.evidence.artifact_trace import sha256
 from src.evidence.input_trace import MANIFEST, STOCK_DIFFUSE_INPUTS
 from src.evidence.visual_quality import validate_visual_quality
 from src.stock_diffuse.package import ZIP_TIMESTAMP
@@ -68,6 +69,31 @@ def validate_input_evidence(report: dict[str, Any], manifest: dict[str, Any]) ->
     return errors
 
 
+def validate_output_artifacts(report: dict[str, Any], root: Path = ROOT) -> list[str]:
+    errors: list[str] = []
+    expected = {
+        "skin_zip": f"out/skins/{report.get('skin_name')}.zip",
+        "atlas_preview": f"out/previews/{report.get('skin_name')}_atlas.png",
+        "projected_preview": f"out/previews/{report.get('skin_name')}_projected_side_top_rear.png",
+    }
+    output_artifacts = report.get("output_artifacts", {})
+    for key, rel in expected.items():
+        if key not in output_artifacts:
+            errors.append(f"missing output artifact evidence: {key}")
+            continue
+        path = root / rel
+        actual = output_artifacts[key]
+        if actual.get("path") != rel:
+            errors.append(f"output artifact path mismatch: {key}")
+        elif not path.exists():
+            errors.append(f"output artifact file missing: {rel}")
+        elif actual.get("sha256") != sha256(path):
+            errors.append(f"output artifact sha256 mismatch: {rel}")
+        elif actual.get("size_bytes") != path.stat().st_size:
+            errors.append(f"output artifact size mismatch: {rel}")
+    return errors
+
+
 def _zip_checks(zip_path: Path) -> tuple[dict[str, bool], list[str]]:
     checks = {
         "zip_exists": zip_path.exists(),
@@ -118,6 +144,7 @@ def _report_checks(report_path: Path, manifest: dict[str, Any]) -> tuple[dict[st
         "report_route_stock_diffuse_only": False,
         "report_declares_no_donor_or_details_route": False,
         "report_input_evidence_matches_manifest": False,
+        "report_output_artifacts_match_files": False,
         "tmuf_smoke_passed": False,
     }
     errors: list[str] = []
@@ -135,7 +162,9 @@ def _report_checks(report_path: Path, manifest: dict[str, Any]) -> tuple[dict[st
         and report.get("evidence_status", {}).get("donor_gbx", "not_used") == "not_used"
     )
     input_errors = validate_input_evidence(report, manifest)
+    output_errors = validate_output_artifacts(report)
     checks["report_input_evidence_matches_manifest"] = not input_errors
+    checks["report_output_artifacts_match_files"] = not output_errors
     checks["tmuf_smoke_passed"] = (
         report.get("tmuf_smoke_test") == "passed"
         and report.get("evidence_status", {}).get("gbuffer_mapping") == "proven_by_tmuf_smoke"
@@ -146,6 +175,7 @@ def _report_checks(report_path: Path, manifest: dict[str, Any]) -> tuple[dict[st
     if not checks["report_declares_no_donor_or_details_route"]:
         errors.append(f"report does not declare a clean stock route: {report_path}")
     errors.extend(f"{report_path}: {error}" for error in input_errors)
+    errors.extend(f"{report_path}: {error}" for error in output_errors)
     return checks, report, errors
 
 

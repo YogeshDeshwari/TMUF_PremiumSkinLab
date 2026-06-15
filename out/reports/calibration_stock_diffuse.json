@@ -50,6 +50,23 @@
     "GBuffer direction and nearest-neighbour footprint fill require TMUF visual confirmation.",
     "Diffuse alpha is kept conservative; gloss behavior is not considered proven by this artifact."
   ],
+  "output_artifacts": {
+    "atlas_preview": {
+      "path": "out/previews/calibration_stock_diffuse_atlas.png",
+      "sha256": "45cf2b38dcf54296bd33cb8825f10fcdb168ca2b978f4eee71d20fa79059e72c",
+      "size_bytes": 623205
+    },
+    "projected_preview": {
+      "path": "out/previews/calibration_stock_diffuse_projected_side_top_rear.png",
+      "sha256": "47708bad004104b6341dbff173bd186b48a3e95715d1bd4d744682b088999b2f",
+      "size_bytes": 258535
+    },
+    "skin_zip": {
+      "path": "out/skins/calibration_stock_diffuse.zip",
+      "sha256": "9e51e0bc7b11aedc0cefa3a1ae58334b93a7858392c07f0e8552bec46da7c70e",
+      "size_bytes": 488418
+    }
+  },
   "package_files": [
     "Diffuse.dds",
     "Icon.dds"

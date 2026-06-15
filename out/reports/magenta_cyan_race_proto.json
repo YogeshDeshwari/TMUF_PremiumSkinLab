@@ -66,6 +66,23 @@
     "tail_bar",
     "mudguard_edge"
   ],
+  "output_artifacts": {
+    "atlas_preview": {
+      "path": "out/previews/magenta_cyan_race_proto_atlas.png",
+      "sha256": "53c753e1e3c221a05ee5acd09f92c0c9ac8aa58cc9671ab51e7da601f36bdb48",
+      "size_bytes": 876804
+    },
+    "projected_preview": {
+      "path": "out/previews/magenta_cyan_race_proto_projected_side_top_rear.png",
+      "sha256": "10448b4f2053d4f922d346e5045d91b1883d0cf90814501ab88df4129167d574",
+      "size_bytes": 281666
+    },
+    "skin_zip": {
+      "path": "out/skins/magenta_cyan_race_proto.zip",
+      "sha256": "47892dd64c55914aca3261d6942bc4033e2e76d77eee67dec07134e1e6639b72",
+      "size_bytes": 511238
+    }
+  },
   "package_files": [
     "Diffuse.dds",
     "Icon.dds"

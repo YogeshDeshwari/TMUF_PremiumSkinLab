@@ -66,6 +66,23 @@
     "tail_bar",
     "mudguard_edge"
   ],
+  "output_artifacts": {
+    "atlas_preview": {
+      "path": "out/previews/violet_cyber_flow_atlas.png",
+      "sha256": "57dd9fb5549aab5b5b140b6d3dcd03082b2da379e7fcf4edf99d71d4acbc742c",
+      "size_bytes": 841929
+    },
+    "projected_preview": {
+      "path": "out/previews/violet_cyber_flow_projected_side_top_rear.png",
+      "sha256": "5eb449d445414254287087b021725d3df0ecbaf11cd09d960e0cc9340eabb308",
+      "size_bytes": 268919
+    },
+    "skin_zip": {
+      "path": "out/skins/violet_cyber_flow.zip",
+      "sha256": "c488482f2266c6fd8babf07aac4207475d4e40bb99a89c2f8b4015be9722bbe0",
+      "size_bytes": 519144
+    }
+  },
   "package_files": [
     "Diffuse.dds",
     "Icon.dds"

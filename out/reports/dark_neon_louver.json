@@ -66,6 +66,23 @@
     "tail_bar",
     "mudguard_edge"
   ],
+  "output_artifacts": {
+    "atlas_preview": {
+      "path": "out/previews/dark_neon_louver_atlas.png",
+      "sha256": "a1481152dc71e2801fca2a657f85a7d7cb94d86d2a1ae317fb74c491005e7edc",
+      "size_bytes": 833290
+    },
+    "projected_preview": {
+      "path": "out/previews/dark_neon_louver_projected_side_top_rear.png",
+      "sha256": "d8457b8ee1c77cd7e686a09be34a0375390ec846377051b846a68f0ccabda0e9",
+      "size_bytes": 285405
+    },
+    "skin_zip": {
+      "path": "out/skins/dark_neon_louver.zip",
+      "sha256": "0e49bb2cd34c8fe639d44687b4ce5c3edf974eb6d98ee90584e00c325d60007a",
+      "size_bytes": 490578
+    }
+  },
   "package_files": [
     "Diffuse.dds",
     "Icon.dds"

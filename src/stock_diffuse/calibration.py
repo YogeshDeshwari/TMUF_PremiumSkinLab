@@ -14,6 +14,7 @@ from scipy.ndimage import binary_dilation, distance_transform_edt
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src" / "dds"))
 from tmnf_dds import build_dds_dxt5_bytes  # noqa: E402
+from src.evidence.artifact_trace import stock_output_artifacts  # noqa: E402
 from src.evidence.input_trace import input_evidence  # noqa: E402
 from src.stock_diffuse.package import write_stable_zip_entry  # noqa: E402
 
@@ -176,6 +177,7 @@ def save_outputs() -> Path:
             "dds_package": "generated_and_header_checked_by_tests",
         },
         "input_evidence": input_evidence(),
+        "output_artifacts": stock_output_artifacts(out_skin, out_atlas, out_preview),
         "calibration_colors": {
             "nose": "red",
             "tail": "blue",

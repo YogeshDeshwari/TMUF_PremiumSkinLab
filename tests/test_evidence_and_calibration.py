@@ -1,4 +1,5 @@
 import json
+import hashlib
 import struct
 import zipfile
 from pathlib import Path
@@ -17,6 +18,19 @@ EXPECTED_STOCK_INPUTS = {
     "authoritative/parts/psd_parts.json": "proven",
     "authoritative/reference/official_prelight_AO.png": "proven",
 }
+EXPECTED_OUTPUT_ARTIFACTS = {
+    "skin_zip": "out/skins/{name}.zip",
+    "atlas_preview": "out/previews/{name}_atlas.png",
+    "projected_preview": "out/previews/{name}_projected_side_top_rear.png",
+}
+
+
+def sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
 
 
 def dds_info(data: bytes):
@@ -94,6 +108,7 @@ class CalibrationArtifactTests(unittest.TestCase):
         self.assertEqual(report["tmuf_smoke_test"], "not_run")
         self.assertEqual(report["evidence_status"]["gbuffer_mapping"], "experimental_until_tmuf_smoke")
         self.assert_report_records_stock_input_evidence(report)
+        self.assert_report_records_output_artifacts(report)
 
     def assert_report_records_stock_input_evidence(self, report):
         manifest = json.loads((ROOT / "resources" / "evidence_manifest.json").read_text())
@@ -105,6 +120,15 @@ class CalibrationArtifactTests(unittest.TestCase):
             self.assertEqual(input_evidence[path]["evidence_label"], expected_label)
             self.assertEqual(input_evidence[path]["sha256"], manifest_by_path[path]["sha256"])
             self.assertEqual(input_evidence[path]["size_bytes"], manifest_by_path[path]["size_bytes"])
+
+    def assert_report_records_output_artifacts(self, report):
+        output_artifacts = report["output_artifacts"]
+        for key, pattern in EXPECTED_OUTPUT_ARTIFACTS.items():
+            rel = pattern.format(name=report["skin_name"])
+            path = ROOT / rel
+            self.assertEqual(output_artifacts[key]["path"], rel)
+            self.assertEqual(output_artifacts[key]["sha256"], sha256(path))
+            self.assertEqual(output_artifacts[key]["size_bytes"], path.stat().st_size)
 
 
 class PremiumStockBatchTests(unittest.TestCase):
@@ -154,6 +178,7 @@ class PremiumStockBatchTests(unittest.TestCase):
             self.assertIn("no_vignette", report["design_rules"])
             self.assertIn("no_random_scatter", report["design_rules"])
             CalibrationArtifactTests.assert_report_records_stock_input_evidence(self, report)
+            CalibrationArtifactTests.assert_report_records_output_artifacts(self, report)
 
 
 if __name__ == "__main__":

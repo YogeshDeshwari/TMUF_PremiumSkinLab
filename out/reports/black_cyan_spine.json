@@ -66,6 +66,23 @@
     "tail_bar",
     "mudguard_edge"
   ],
+  "output_artifacts": {
+    "atlas_preview": {
+      "path": "out/previews/black_cyan_spine_atlas.png",
+      "sha256": "732e21ee3c6d38f5b96c8c4e097c90997d7a70792bbce1a92df8f148d7c2e62b",
+      "size_bytes": 910114
+    },
+    "projected_preview": {
+      "path": "out/previews/black_cyan_spine_projected_side_top_rear.png",
+      "sha256": "9b1443b97d8228f417b29b598f0ef922cceeebd1a370f7779b2e72f0e3f12c4c",
+      "size_bytes": 290963
+    },
+    "skin_zip": {
+      "path": "out/skins/black_cyan_spine.zip",
+      "sha256": "2ca2fd60f9399ae1cc9b49e33aed52a193c2b7cd9577d4dc00953ee47e67d0b9",
+      "size_bytes": 547048
+    }
+  },
   "package_files": [
     "Diffuse.dds",
     "Icon.dds"
