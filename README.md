@@ -91,6 +91,11 @@ python3 recipes/lab_status.py --write
 python3 -m unittest discover -s tests
 ```
 
+Panel targeting evidence lives in
+`out/reports/stock_part_inventory.json` under `paintable_panel_catalog`.
+Those entries are atlas evidence only; each still carries
+`tmuf_runtime_status=not_proven_until_smoke` until calibration passes in TMUF.
+
 The smoke kit includes `previews/tmuf_smoke_contact_sheet.png` as a visual
 review aid only. It is not smoke evidence.
 

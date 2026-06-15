@@ -52,6 +52,41 @@ class StockPartInventoryTests(unittest.TestCase):
         self.assertIn("front_nose_len_positive", inventory["targetable_regions"])
         self.assertIn("rear_deck_candidate_len_negative_high_hgt", inventory["targetable_regions"])
 
+    def test_inventory_exposes_paintable_panel_catalog_with_evidence_boundaries(self):
+        from src.evidence.part_inventory import build_part_inventory
+
+        inventory = build_part_inventory()
+        catalog = inventory["paintable_panel_catalog"]
+
+        self.assertEqual(catalog["schema"], "tmuf_premium_skin_lab.paintable_panel_catalog.v1")
+        self.assertEqual(catalog["tmuf_runtime_status"], "not_proven_until_smoke")
+        self.assertIn("no panel entry proves TMUF runtime visibility before calibration smoke", catalog["boundary"])
+
+        panels = catalog["panels"]
+        self.assertGreaterEqual(len(panels), 12)
+
+        tailwing = panels["tailwing_bands"]
+        self.assertEqual(tailwing["source_status"], "proven_local_label_map")
+        self.assertEqual(tailwing["tmuf_runtime_status"], "not_proven_until_smoke")
+        self.assertIn("TailWingUnderBorderColor", tailwing["source_zones"])
+        self.assertIn("resources/authoritative/parts/psd_parts.json", tailwing["source_files"])
+
+        rear_deck = panels["engine_rear_deck"]
+        self.assertEqual(rear_deck["source_status"], "mixed_generated_labels_and_experimental_gbuffer")
+        self.assertIn("rear_deck_C_63", rear_deck["source_zones"])
+        self.assertIn("resources/authoritative/parts/panels_high.json", rear_deck["source_files"])
+        self.assertIn("resources/authoritative/gbuffer/position_2048.npy", rear_deck["source_files"])
+
+        front_guards = panels["front_mudguard_caps"]
+        self.assertEqual(front_guards["source_status"], "mixed_local_label_and_experimental_gbuffer")
+        self.assertIn("FrontMudGuards", front_guards["source_zones"])
+        self.assertIn("LEN/Z front split remains experimental until TMUF smoke", front_guards["proof_notes"])
+
+        center_spine = panels["center_spine"]
+        self.assertEqual(center_spine["source_status"], "experimental_until_tmuf_smoke")
+        self.assertIn("LAT/X symmetry", center_spine["geometry_constraints"])
+        self.assertEqual(center_spine["safe_design_scale"], "medium_to_broad_accent")
+
     def test_cli_writes_inventory_report(self):
         with tempfile.TemporaryDirectory() as tmp:
             output = Path(tmp) / "stock_part_inventory.json"

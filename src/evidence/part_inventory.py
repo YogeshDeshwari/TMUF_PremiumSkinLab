@@ -231,6 +231,241 @@ def _mesh_summary(*, base_dir: Path) -> dict[str, Any]:
     }
 
 
+def _source_files_for_panel(source_maps: list[str], *, include_gbuffer: bool) -> list[str]:
+    files: list[str] = []
+    for source_map in source_maps:
+        files.append(f"resources/authoritative/parts/{source_map}.json")
+        files.append(f"resources/authoritative/parts/{source_map}_labels.npy")
+    if include_gbuffer:
+        files.extend(
+            [
+                "resources/authoritative/gbuffer/position_2048.npy",
+                "resources/authoritative/gbuffer/coverage_2048.npy",
+                "resources/authoritative/gbuffer/extents_2048.json",
+            ]
+        )
+    return files
+
+
+def _catalog_panel(
+    *,
+    name: str,
+    source_status: str,
+    source_maps: list[str],
+    source_zones: list[str],
+    design_role: str,
+    safe_design_scale: str,
+    geometry_constraints: list[str],
+    proof_notes: list[str],
+    label_maps: dict[str, dict[str, Any]],
+    include_gbuffer: bool = False,
+) -> dict[str, Any]:
+    zone_indexes = {
+        source_map: {zone["name"]: zone for zone in label_maps[source_map]["zones"]}
+        for source_map in source_maps
+    }
+    matched: list[dict[str, Any]] = []
+    missing: list[str] = []
+    for zone_name in source_zones:
+        for source_map, zone_index in zone_indexes.items():
+            if zone_name in zone_index:
+                zone = zone_index[zone_name]
+                matched.append(
+                    {
+                        "map": source_map,
+                        "name": zone["name"],
+                        "area": zone["area"],
+                        "bbox": zone["bbox"],
+                        "risk_class": zone["risk_class"],
+                    }
+                )
+                break
+        else:
+            missing.append(zone_name)
+
+    if missing:
+        raise KeyError(f"{name} references missing panel zones: {', '.join(missing)}")
+
+    return {
+        "source_status": source_status,
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "source_files": _source_files_for_panel(source_maps, include_gbuffer=include_gbuffer),
+        "source_maps": source_maps,
+        "source_zones": source_zones,
+        "zone_evidence": matched,
+        "total_label_area": int(sum(zone["area"] for zone in matched)),
+        "risk_classes": sorted({zone["risk_class"] for zone in matched}),
+        "design_role": design_role,
+        "safe_design_scale": safe_design_scale,
+        "geometry_constraints": geometry_constraints,
+        "proof_notes": proof_notes,
+    }
+
+
+def _paintable_panel_catalog(label_maps: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    panels = {
+        "main_body_top_quadrants": _catalog_panel(
+            name="main_body_top_quadrants",
+            source_status="proven_local_label_map",
+            source_maps=["psd_parts"],
+            source_zones=["MainBodyTOP_TL", "MainBodyTOP_TR", "MainBodyTOP_BL", "MainBodyTOP_BR"],
+            design_role="large base fields, hard-edge blocks, long stripe clipping, and broad abstract panels",
+            safe_design_scale="broad_identity_surface",
+            geometry_constraints=["named PSD quadrants only"],
+            proof_notes=["local atlas labels are proven; TMUF runtime visibility still requires calibration smoke"],
+            label_maps=label_maps,
+        ),
+        "nose_identity_panel": _catalog_panel(
+            name="nose_identity_panel",
+            source_status="proven_local_label_map",
+            source_maps=["psd_parts"],
+            source_zones=["NosePart"],
+            design_role="front identity wedge, spear tip, and number-free badge field",
+            safe_design_scale="broad_identity_surface",
+            geometry_constraints=["named PSD nose zone only"],
+            proof_notes=["local NosePart label is proven; front direction confirmation still belongs to smoke calibration"],
+            label_maps=label_maps,
+        ),
+        "center_spine": _catalog_panel(
+            name="center_spine",
+            source_status="experimental_until_tmuf_smoke",
+            source_maps=["psd_parts"],
+            source_zones=["MainBodyTOP_TL", "MainBodyTOP_TR", "MainBodyTOP_BL", "MainBodyTOP_BR"],
+            design_role="long center stripe, symmetry probe, and top-flow alignment",
+            safe_design_scale="medium_to_broad_accent",
+            geometry_constraints=["LAT/X symmetry", "LEN/Z flow", "HGT/Y upper surfaces"],
+            proof_notes=["GBuffer centerline placement remains experimental until TMUF smoke"],
+            label_maps=label_maps,
+            include_gbuffer=True,
+        ),
+        "sidepod_blades": _catalog_panel(
+            name="sidepod_blades",
+            source_status="mixed_local_label_and_experimental_gbuffer",
+            source_maps=["psd_parts"],
+            source_zones=["SideUnderColor_L", "SideUnderColor_R"],
+            design_role="lower side sweeps, sponsor-like blank blocks, and side color returns",
+            safe_design_scale="broad_identity_surface",
+            geometry_constraints=["LAT/X side split", "HGT/Y lower side band", "LEN/Z flow"],
+            proof_notes=["SideUnderColor labels are proven; 3D blade placement remains experimental until TMUF smoke"],
+            label_maps=label_maps,
+            include_gbuffer=True,
+        ),
+        "engine_rear_deck": _catalog_panel(
+            name="engine_rear_deck",
+            source_status="mixed_generated_labels_and_experimental_gbuffer",
+            source_maps=["panels_high", "panels_fine"],
+            source_zones=["rear_deck_C_63", "rear_deck_C_08", "rear_deck_C_21", "rear_deck_C_140"],
+            design_role="rear deck louvers, glow blocks, technical vent rhythm, and symmetric rear highlights",
+            safe_design_scale="medium_to_broad_accent",
+            geometry_constraints=["low LEN/Z", "high HGT/Y", "LAT/X mirrored offset bands"],
+            proof_notes=[
+                "generated panel names support only deck/rear token evidence",
+                "exact TMUF visual interpretation and louver placement remain experimental until smoke",
+            ],
+            label_maps=label_maps,
+            include_gbuffer=True,
+        ),
+        "tailwing_bands": _catalog_panel(
+            name="tailwing_bands",
+            source_status="proven_local_label_map",
+            source_maps=["psd_parts"],
+            source_zones=["Tailwing_L", "Tailwing_R", "TailWingUnderBorderColor"],
+            design_role="rear wing bands, edge trim, and high-contrast rear identity",
+            safe_design_scale="medium_to_broad_accent",
+            geometry_constraints=["named PSD tailwing zones only"],
+            proof_notes=["tailwing labels are proven local atlas evidence; runtime visibility still requires smoke"],
+            label_maps=label_maps,
+        ),
+        "front_mudguard_caps": _catalog_panel(
+            name="front_mudguard_caps",
+            source_status="mixed_local_label_and_experimental_gbuffer",
+            source_maps=["psd_parts"],
+            source_zones=["FrontMudGuards", "FrontMudguards.Inside", "FrontMudguardUnderColor", "FrontMudguardEdgeColor"],
+            design_role="front guard caps, edge highlights, and calibration-visible color checks",
+            safe_design_scale="medium_to_broad_accent",
+            geometry_constraints=["named PSD mudguard labels", "LEN/Z front split"],
+            proof_notes=["LEN/Z front split remains experimental until TMUF smoke"],
+            label_maps=label_maps,
+            include_gbuffer=True,
+        ),
+        "rear_mudguard_caps": _catalog_panel(
+            name="rear_mudguard_caps",
+            source_status="mixed_local_label_and_experimental_gbuffer",
+            source_maps=["psd_parts"],
+            source_zones=["RearMudGuards", "RearMudGuardsInside", "RearMudguardUnderColor", "RearMudguardsTip", "RearMudguardsedgeColor"],
+            design_role="rear guard caps, rear color echo, and wheel-arch rhythm",
+            safe_design_scale="medium_to_broad_accent",
+            geometry_constraints=["named PSD mudguard labels", "LEN/Z rear split"],
+            proof_notes=["LEN/Z rear split remains experimental until TMUF smoke"],
+            label_maps=label_maps,
+            include_gbuffer=True,
+        ),
+        "side_wings": _catalog_panel(
+            name="side_wings",
+            source_status="proven_local_label_map",
+            source_maps=["psd_parts"],
+            source_zones=["SIdeWings", "SideWingsUNDER"],
+            design_role="small aero flicks and secondary color hits",
+            safe_design_scale="medium_accent_surface",
+            geometry_constraints=["named PSD side wing zones only"],
+            proof_notes=["local labels are proven; visibility and seam quality still require TMUF review"],
+            label_maps=label_maps,
+        ),
+        "mirrors_and_holders": _catalog_panel(
+            name="mirrors_and_holders",
+            source_status="proven_local_label_map",
+            source_maps=["psd_parts"],
+            source_zones=["SideMirrors", "MirrorHolders"],
+            design_role="small contrast checks and polished micro-detail",
+            safe_design_scale="small_detail_surface",
+            geometry_constraints=["named PSD mirror zones only"],
+            proof_notes=["small details can disappear in game; use for probe and restraint until visual acceptance"],
+            label_maps=label_maps,
+        ),
+        "helmet_and_visor": _catalog_panel(
+            name="helmet_and_visor",
+            source_status="proven_local_label_map",
+            source_maps=["psd_parts"],
+            source_zones=["Helmet_TL", "Helmet_TR", "Helmet_BL", "Helmet_BR", "HelmetGlass_L", "HelmetGlass_R"],
+            design_role="driver color harmony and restrained glass/visor shading",
+            safe_design_scale="medium_accent_surface",
+            geometry_constraints=["named PSD helmet and glass zones only"],
+            proof_notes=["helmet is visible local atlas evidence but should not drive main car identity"],
+            label_maps=label_maps,
+        ),
+        "underbody_dark": _catalog_panel(
+            name="underbody_dark",
+            source_status="proven_local_label_map",
+            source_maps=["psd_parts"],
+            source_zones=[
+                "MainBodyUNDER_TL",
+                "MainBodyUNDER_TR",
+                "MainBodyUNDER_BL",
+                "MainBodyUNDER_BR",
+                "UnderPlate_L",
+                "UnderPlate_R",
+                "UnderPlate.insidecolor :)",
+            ],
+            design_role="dark material continuity, low reflections, and non-hero shadow fields",
+            safe_design_scale="broad_support_surface",
+            geometry_constraints=["named PSD underside and underplate zones only"],
+            proof_notes=["use as support material; not a proof of wheel, tyre, Details.dds, or ProjShad behavior"],
+            label_maps=label_maps,
+        ),
+    }
+    return {
+        "schema": "tmuf_premium_skin_lab.paintable_panel_catalog.v1",
+        "tmuf_runtime_status": "not_proven_until_smoke",
+        "boundary": [
+            "no panel entry proves TMUF runtime visibility before calibration smoke",
+            "local label maps prove atlas regions, not in-game seam quality",
+            "GBuffer-derived constraints remain experimental_until_tmuf_smoke",
+            "generated panel names provide token evidence only, not stock semantic truth beyond their local labels",
+        ],
+        "panels": panels,
+    }
+
+
 def build_part_inventory(base_dir: Path = ROOT) -> dict[str, Any]:
     base_dir = base_dir.resolve()
     label_maps = {
@@ -251,6 +486,7 @@ def build_part_inventory(base_dir: Path = ROOT) -> dict[str, Any]:
         "label_maps": label_maps,
         "gbuffer": _gbuffer_summary(base_dir=base_dir),
         "mesh": _mesh_summary(base_dir=base_dir),
+        "paintable_panel_catalog": _paintable_panel_catalog(label_maps),
         "targetable_regions": {
             "front_nose_len_positive": {
                 "evidence": "LEN/Z positive end is front; front guards span Z about 1.548..2.045 and body/fixed reaches about 2.135.",

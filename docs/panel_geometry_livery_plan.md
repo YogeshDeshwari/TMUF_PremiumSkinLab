@@ -76,6 +76,13 @@ Risk classes used by `out/reports/stock_part_inventory.json`:
 - `probe_only_tiny_fragment`: area `< 5000`; do not use for premium hero
   design until a probe confirms visibility.
 
+`out/reports/stock_part_inventory.json` also includes
+`paintable_panel_catalog`, the machine-readable panel targeting catalogue for
+the stock Diffuse lane. It separates local label-map panels from mixed
+local-plus-GBuffer panels and GBuffer-only geometry panels. Every catalog entry
+keeps `tmuf_runtime_status=not_proven_until_smoke`; it is evidence for atlas
+targeting, not proof of in-game visibility.
+
 ## Named PSD Surface Families
 
 `psd_parts` is the primary named map.
@@ -450,4 +457,3 @@ After calibration smoke:
 - Reject candidates that rely on tiny fragments, noisy scatter, hardcoded old
   UV coordinates, or unverified full-car features.
 - Use preview and TMUF screenshots as visual acceptance evidence.
-
