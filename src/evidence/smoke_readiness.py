@@ -109,6 +109,20 @@ def _base_commands(root: Path) -> dict[str, str]:
             "python3 recipes/install_premium_review_skins.py "
             "--install-skins-dir /absolute/path/to/StadiumCar --json"
         ),
+        "record_premium_visual_review": (
+            "python3 recipes/record_premium_visual_review.py "
+            "--skin-name black_magenta_cyan_blade "
+            "--verdict needs_iteration "
+            "--tester \"manual tester\" "
+            "--tmuf-build \"TMUF local install\" "
+            "--test-date-local YYYY-MM-DD "
+            "--screenshot-role front=/absolute/path/to/premium_front.png "
+            "--screenshot-role side=/absolute/path/to/premium_side.png "
+            "--screenshot-role rear=/absolute/path/to/premium_rear.png "
+            "--screenshot-role top=/absolute/path/to/premium_top.png "
+            "--notes \"manual visual feedback\" "
+            "--json"
+        ),
         "prepare_smoke_session": "python3 recipes/prepare_tmuf_smoke_session.py --json",
         "record_smoke": (
             "python3 recipes/record_tmuf_smoke.py "
@@ -367,6 +381,7 @@ def format_smoke_command_packet(readiness: dict[str, Any]) -> str:
         "install_discovered",
         "install_premium_review_explicit",
         "install_premium_review_discovered",
+        "record_premium_visual_review",
         "prepare_smoke_session",
         "record_smoke",
         "evaluate",

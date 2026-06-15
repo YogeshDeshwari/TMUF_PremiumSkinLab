@@ -62,6 +62,8 @@ Use this before calling any skin complete.
 - [ ] Atlas preview exists.
 - [ ] Projected side/top/rear preview exists.
 - [ ] Premium candidate review board exists for side-by-side local comparison.
+- [ ] In-game premium feedback, when available, is recorded with
+      `python3 recipes/record_premium_visual_review.py ... --screenshot-role front=... --screenshot-role side=... --screenshot-role rear=... --screenshot-role top=...`.
 - [ ] Broad graphics are readable.
 - [ ] Accent colors are not random scatter.
 - [ ] Mudguard and wheel treatment matches the route being tested.

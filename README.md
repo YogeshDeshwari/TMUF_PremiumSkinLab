@@ -184,3 +184,14 @@ and explicit observation confirmation with:
 python3 recipes/record_tmuf_smoke.py --tester "manual tester" --tmuf-build "TMUF local install" --test-date-local 2026-06-15 --install-receipt out/proof/tmuf_calibration_smoke_kit/proof/calibration_install_receipt.json --screenshot-role front=/path/to/tmuf_front.png --screenshot-role side=/path/to/tmuf_side.png --screenshot-role rear=/path/to/tmuf_rear.png --screenshot-role top=/path/to/tmuf_top.png --confirm-observation nose_is_red --confirm-observation tail_is_blue --confirm-observation left_side_is_green --confirm-observation right_side_is_yellow --confirm-observation roof_high_surfaces_are_white --confirm-observation lower_floor_surfaces_are_dark --confirm-observation mudguards_are_magenta --confirm-observation centerline_is_cyan --confirm-observation package_loads_without_custom_gbx
 python3 recipes/tmuf_smoke_gate.py --evaluate out/proof/calibration_tmuf_smoke.json
 ```
+
+Premium candidate feedback is recorded separately from the calibration gate.
+After inspecting one candidate in TMUF/TMNF, record its role-labeled screenshots
+and verdict with:
+
+```bash
+python3 recipes/record_premium_visual_review.py --skin-name black_magenta_cyan_blade --verdict needs_iteration --tester "manual tester" --tmuf-build "TMUF local install" --test-date-local 2026-06-15 --screenshot-role front=/path/to/premium_front.png --screenshot-role side=/path/to/premium_side.png --screenshot-role rear=/path/to/premium_rear.png --screenshot-role top=/path/to/premium_top.png --notes "tail stripe too weak" --json
+```
+
+This records visual feedback only. It does not prove TMUF calibration smoke,
+GBuffer mapping, or stock route correctness.

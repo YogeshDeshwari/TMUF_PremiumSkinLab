@@ -196,6 +196,10 @@ class SmokeReadinessTests(unittest.TestCase):
             self.assertIn("python3 recipes/prepare_tmuf_smoke_session.py --json", text)
             self.assertIn("install_premium_review_explicit:", text)
             self.assertIn("python3 recipes/install_premium_review_skins.py --install-skins-dir", text)
+            self.assertIn("record_premium_visual_review:", text)
+            self.assertIn("python3 recipes/record_premium_visual_review.py", text)
+            self.assertIn("--skin-name black_magenta_cyan_blade", text)
+            self.assertIn("--verdict needs_iteration", text)
             self.assertIn("python3 recipes/record_tmuf_smoke.py", text)
             self.assertIn("Do not run apply until evaluate passes", text)
 

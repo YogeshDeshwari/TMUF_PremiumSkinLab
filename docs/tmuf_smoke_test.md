@@ -219,6 +219,30 @@ The receipt records file hashes for the premium ZIP copies only. It does not
 prove TMUF/TMNF loaded them, does not prove GBuffer mapping, and does not
 promote any premium candidate past the calibration smoke gate.
 
+After a premium candidate is inspected in TMUF/TMNF, record visual feedback for
+that one candidate with real role-labeled screenshots:
+
+```bash
+python3 recipes/record_premium_visual_review.py \
+  --skin-name black_magenta_cyan_blade \
+  --verdict needs_iteration \
+  --tester "manual tester" \
+  --tmuf-build "TMUF local install" \
+  --test-date-local 2026-06-15 \
+  --screenshot-role front=/path/to/premium_front.png \
+  --screenshot-role side=/path/to/premium_side.png \
+  --screenshot-role rear=/path/to/premium_rear.png \
+  --screenshot-role top=/path/to/premium_top.png \
+  --notes "tail stripe too weak" \
+  --json
+```
+
+Allowed verdicts are `accepted`, `needs_iteration`, and `rejected`. The review
+record copies screenshots under `out/proof/premium_visual_review/` and stores
+fingerprints so changed screenshots are detectable. This is visual feedback
+evidence only. It still does not prove the calibration smoke gate or GBuffer
+mapping.
+
 Create the template if you want a manual form:
 
 ```bash
