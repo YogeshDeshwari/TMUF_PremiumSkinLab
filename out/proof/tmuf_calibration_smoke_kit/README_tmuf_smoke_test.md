@@ -100,6 +100,20 @@ python3 recipes/find_tmuf_skin_dirs.py \
   --json
 ```
 
+If that scan finds no existing `StadiumCar` folder, generate manual creation
+targets under the same confirmed root:
+
+```bash
+python3 recipes/find_tmuf_skin_dirs.py \
+  --root /absolute/path/to/TrackMania-or-Wine-prefix \
+  --include-creation-targets \
+  --json
+```
+
+These target paths are not created automatically and are not TMUF smoke proof.
+Use them only after confirming the root is the intended TMUF/TMNF user-data or
+install-data folder.
+
 Recognized install targets must end in one of these suffixes:
 
 ```text

@@ -32,6 +32,28 @@ class SkinDirLocatorTests(unittest.TestCase):
             self.assertEqual(find_stadiumcar_skin_dirs([missing]), [])
             self.assertFalse(missing.exists())
 
+    def test_report_can_include_manual_creation_targets_without_creating_paths(self):
+        from src.evidence.skin_dirs import KNOWN_SUFFIXES, build_skin_dir_report
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "TMUF UserData"
+            root.mkdir()
+
+            report = build_skin_dir_report([root], include_creation_targets=True)
+
+            self.assertEqual(report["candidate_count"], 0)
+            targets = report["manual_creation_targets"]
+            self.assertEqual(len(targets), len(KNOWN_SUFFIXES))
+            self.assertTrue(report["does_not_prove_tmuf_smoke"])
+            for target in targets:
+                path = Path(target["path"])
+                self.assertFalse(path.exists())
+                self.assertTrue(target["requires_manual_creation"])
+                self.assertTrue(target["does_not_prove_tmuf_smoke"])
+                self.assertEqual(target["status"], "manual_target_hint_not_tmuf_proof")
+                self.assertEqual(target["target_root"], root.as_posix())
+                self.assertIn(target["route"], set(KNOWN_SUFFIXES.values()))
+
     def test_cli_can_write_candidate_report(self):
         from recipes.find_tmuf_skin_dirs import main
 
@@ -48,6 +70,22 @@ class SkinDirLocatorTests(unittest.TestCase):
             self.assertEqual(data["candidates"][0]["path"], direct.as_posix())
             self.assertTrue(out.exists())
             self.assertEqual(json.loads(out.read_text())["candidate_count"], 1)
+
+    def test_cli_can_emit_manual_creation_targets_for_explicit_root(self):
+        from recipes.find_tmuf_skin_dirs import main
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "TMUF Prefix"
+            root.mkdir()
+
+            output = main(["--root", str(root), "--include-creation-targets", "--json"])
+            data = json.loads(output)
+
+            self.assertEqual(data["candidate_count"], 0)
+            self.assertGreaterEqual(len(data["manual_creation_targets"]), 3)
+            self.assertTrue(all(item["path"].startswith(root.as_posix()) for item in data["manual_creation_targets"]))
+            self.assertTrue(all(item["requires_manual_creation"] for item in data["manual_creation_targets"]))
+            self.assertFalse(any(Path(item["path"]).exists() for item in data["manual_creation_targets"]))
 
 
 if __name__ == "__main__":

@@ -31,6 +31,8 @@ scan_skin_dirs:
   python3 recipes/find_tmuf_skin_dirs.py --write
 scan_custom_root:
   python3 recipes/find_tmuf_skin_dirs.py --root /absolute/path/to/TrackMania-or-Wine-prefix --write --json
+plan_creation_targets:
+  python3 recipes/find_tmuf_skin_dirs.py --root /absolute/path/to/TrackMania-or-Wine-prefix --include-creation-targets --json
 preflight_explicit:
   python3 recipes/smoke_readiness.py --install-target /absolute/path/to/StadiumCar --write --write-command-packet
 install_explicit:

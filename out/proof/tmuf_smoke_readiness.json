@@ -27,6 +27,7 @@
     "evaluate": "python3 recipes/tmuf_smoke_gate.py --evaluate out/proof/calibration_tmuf_smoke.json",
     "install_discovered": "python3 recipes/prepare_tmuf_smoke_kit.py --install-discovered",
     "install_explicit": "python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /absolute/path/to/StadiumCar",
+    "plan_creation_targets": "python3 recipes/find_tmuf_skin_dirs.py --root /absolute/path/to/TrackMania-or-Wine-prefix --include-creation-targets --json",
     "preflight_explicit": "python3 recipes/smoke_readiness.py --install-target /absolute/path/to/StadiumCar --write --write-command-packet",
     "record_smoke": "python3 recipes/record_tmuf_smoke.py --tester \"manual tester\" --tmuf-build \"TMUF local install\" --test-date-local YYYY-MM-DD --install-receipt /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit/proof/calibration_install_receipt.json --screenshot-role front=/absolute/path/to/tmuf_front.png --screenshot-role side=/absolute/path/to/tmuf_side.png --screenshot-role rear=/absolute/path/to/tmuf_rear.png --screenshot-role top=/absolute/path/to/tmuf_top.png --all-required-observations-passed",
     "scan_custom_root": "python3 recipes/find_tmuf_skin_dirs.py --root /absolute/path/to/TrackMania-or-Wine-prefix --write --json",

@@ -2,7 +2,8 @@
   "candidate_count": 0,
   "candidates": [],
   "does_not_prove_tmuf_smoke": true,
-  "safe_use": "Use a listed path only as an explicit install target; finding a directory does not prove TMUF load.",
+  "manual_creation_targets": [],
+  "safe_use": "Use a listed path only as an explicit install target; finding or planning a directory does not prove TMUF load.",
   "schema_version": 1,
   "status": "no_candidates_found"
 }

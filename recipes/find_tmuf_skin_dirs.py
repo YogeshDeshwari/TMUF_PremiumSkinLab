@@ -15,14 +15,19 @@ from src.evidence.skin_dirs import DEFAULT_REPORT, build_skin_dir_report, write_
 def main(argv: list[str] | None = None) -> str:
     parser = argparse.ArgumentParser(description="Find existing TMUF/TMNF StadiumCar skin directories.")
     parser.add_argument("--root", action="append", type=Path, help="search root; may be passed more than once")
+    parser.add_argument(
+        "--include-creation-targets",
+        action="store_true",
+        help="include recognized StadiumCar target paths that would need manual creation",
+    )
     parser.add_argument("--write", type=Path, nargs="?", const=DEFAULT_REPORT, help="write JSON report")
     parser.add_argument("--json", action="store_true", help="emit machine-readable JSON")
     args = parser.parse_args(argv)
 
     roots = args.root if args.root else None
-    report = build_skin_dir_report(roots)
+    report = build_skin_dir_report(roots, include_creation_targets=args.include_creation_targets)
     if args.write is not None:
-        write_skin_dir_report(args.write, roots)
+        write_skin_dir_report(args.write, roots, include_creation_targets=args.include_creation_targets)
 
     if args.json:
         output = json.dumps(report, indent=2, sort_keys=True)
@@ -32,6 +37,7 @@ def main(argv: list[str] | None = None) -> str:
             f"candidate_count={report['candidate_count']}",
         ]
         lines.extend(f"candidate={candidate['path']}" for candidate in report["candidates"])
+        lines.extend(f"manual_creation_target={target['path']}" for target in report["manual_creation_targets"])
         output = "\n".join(lines)
 
     if argv is None:
