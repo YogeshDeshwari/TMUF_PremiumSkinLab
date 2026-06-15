@@ -5,6 +5,8 @@ from pathlib import Path
 from typing import Any
 
 from src.evidence.part_inventory import ROOT, build_part_inventory
+from src.stock_diffuse.calibration import load_fields
+from src.stock_diffuse.panel_masks import build_stock_panel_masks
 
 
 DEFAULT_JSON_OUTPUT = ROOT / "out" / "reports" / "stock_panel_deep_dive.json"
@@ -103,12 +105,27 @@ PANEL_ALIASES = {
     "large_side_flank_panel": "mid_side_generated_panel",
 }
 
+GENERATOR_MASKS_NOT_CATALOG_PANELS = [
+    "body",
+    "upper",
+    "lower",
+    "nose_spear",
+    "side_blade",
+    "secondary_blade",
+    "rear_louvers",
+    "rear_center_glow",
+    "shoulder_line",
+    "tail_bar",
+    "mudguard_edge",
+]
+
 
 def build_panel_deep_dive(base_dir: Path = ROOT) -> dict[str, Any]:
     base_dir = base_dir.resolve()
     inventory = build_part_inventory(base_dir)
     catalog = inventory["paintable_panel_catalog"]["panels"]
     candidate_usage = _candidate_usage(base_dir / "out" / "reports")
+    generator_masks = _generator_masks_not_catalog_panels(base_dir)
 
     surface_families = {
         family_name: _family_entry(family_name, family, catalog, candidate_usage)
@@ -140,6 +157,12 @@ def build_panel_deep_dive(base_dir: Path = ROOT) -> dict[str, Any]:
         "source_inventory": "out/reports/stock_part_inventory.json",
         "source_inventory_schema": inventory["schema"],
         "catalog_target_count": len(catalog),
+        "source_status_counts": _status_counts(
+            panel["source_status"] for panel in catalog.values()
+        ),
+        "runtime_status_counts": _status_counts(
+            panel["tmuf_runtime_status"] for panel in catalog.values()
+        ),
         "label_map_counts": {
             name: label_map["zone_count"]
             for name, label_map in inventory["label_maps"].items()
@@ -158,6 +181,7 @@ def build_panel_deep_dive(base_dir: Path = ROOT) -> dict[str, Any]:
             ],
         },
         "surface_families": surface_families,
+        "generator_masks_not_catalog_panels": generator_masks,
         "panel_aliases": PANEL_ALIASES,
         "candidate_usage_by_target": candidate_usage,
         "more_panel_opportunities": opportunities,
@@ -190,6 +214,8 @@ def render_panel_deep_dive_markdown(report: dict[str, Any]) -> str:
         f"- Stock route: `{report['evidence_boundary']['stock_package_route']}`.",
         f"- TMUF runtime status: `{report['evidence_boundary']['tmuf_runtime_status']}`.",
         f"- Catalog targets: `{report['catalog_target_count']}`.",
+        f"- Source status counts: `{_format_counts(report['source_status_counts'])}`.",
+        f"- Runtime status counts: `{_format_counts(report['runtime_status_counts'])}`.",
         f"- Label maps: `psd_parts={report['label_map_counts']['psd_parts']}`, `panels_high={report['label_map_counts']['panels_high']}`, `panels_fine={report['label_map_counts']['panels_fine']}`.",
         "",
         "Known limits:",
@@ -204,8 +230,10 @@ def render_panel_deep_dive_markdown(report: dict[str, Any]) -> str:
                 "",
                 family["description"],
                 "",
-                "| Target | Status | Area | Use |",
-                "| --- | --- | ---: | --- |",
+                f"Source status counts: `{_format_counts(family['source_status_counts'])}`. Runtime status counts: `{_format_counts(family['runtime_status_counts'])}`.",
+                "",
+                "| Target | Source status | Runtime status | Area | Use |",
+                "| --- | --- | --- | ---: | --- |",
             ]
         )
         for entry in family["target_entries"]:
@@ -215,6 +243,7 @@ def render_panel_deep_dive_markdown(report: dict[str, Any]) -> str:
                     [
                         f"`{entry['target']}`",
                         f"`{entry['source_status']}`",
+                        f"`{entry['tmuf_runtime_status']}`",
                         str(entry["total_label_area"]),
                         entry["design_role"],
                     ]
@@ -227,14 +256,30 @@ def render_panel_deep_dive_markdown(report: dict[str, Any]) -> str:
         [
             "## More Panel Opportunities",
             "",
-            "| Target | Current candidates | Why it matters |",
-            "| --- | --- | --- |",
+            "| Target | Source status | Runtime status | Current candidates | Why it matters |",
+            "| --- | --- | --- | --- | --- |",
         ]
     )
     for opportunity in report["more_panel_opportunities"]:
         usage = ", ".join(opportunity["candidate_usage"]) or "none yet"
         lines.append(
-            f"| `{opportunity['target']}` | {usage} | {opportunity['why_it_matters']} |"
+            f"| `{opportunity['target']}` | `{opportunity['source_status']}` | `{opportunity['tmuf_runtime_status']}` | {usage} | {opportunity['why_it_matters']} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Generator Masks, Not Catalog Panels",
+            "",
+            "These masks are useful for painting composition, but they are not named stock panel catalog targets. They stay experimental until TMUF smoke evidence validates the GBuffer-driven placement.",
+            "",
+            "| Mask | Evidence status | Pixel count | Use |",
+            "| --- | --- | ---: | --- |",
+        ]
+    )
+    for name, entry in report["generator_masks_not_catalog_panels"].items():
+        lines.append(
+            f"| `{name}` | `{entry['evidence_status']}` | {entry['pixel_count']} | {entry['design_use']} |"
         )
 
     lines.extend(["", "## Aliases", ""])
@@ -258,6 +303,35 @@ def render_panel_deep_dive_markdown(report: dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _status_counts(values: Any) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for value in values:
+        key = str(value)
+        counts[key] = counts.get(key, 0) + 1
+    return dict(sorted(counts.items()))
+
+
+def _format_counts(counts: dict[str, int]) -> str:
+    return ", ".join(f"{name}={count}" for name, count in sorted(counts.items()))
+
+
+def _generator_masks_not_catalog_panels(_base_dir: Path) -> dict[str, dict[str, Any]]:
+    masks = build_stock_panel_masks(load_fields())
+    report: dict[str, dict[str, Any]] = {}
+    for name in GENERATOR_MASKS_NOT_CATALOG_PANELS:
+        entry = masks[name].report_entry()
+        report[name] = {
+            "catalog_status": "not_catalog_panel",
+            "evidence_status": entry["evidence_status"],
+            "pixel_count": entry["pixel_count"],
+            "risk_class": entry["risk_class"],
+            "source_files": entry["source_files"],
+            "source_zones": entry["source_zones"],
+            "design_use": entry["design_use"],
+        }
+    return report
+
+
 def _family_entry(
     family_name: str,
     family: dict[str, Any],
@@ -277,6 +351,8 @@ def _family_entry(
         "targets": list(family["targets"]),
         "target_count": len(family["targets"]),
         "total_label_area": int(sum(entry["total_label_area"] for entry in target_entries)),
+        "source_status_counts": _status_counts(entry["source_status"] for entry in target_entries),
+        "runtime_status_counts": _status_counts(entry["tmuf_runtime_status"] for entry in target_entries),
         "source_statuses": sorted({entry["source_status"] for entry in target_entries}),
         "target_entries": target_entries,
     }

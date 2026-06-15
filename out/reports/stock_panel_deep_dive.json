@@ -110,6 +110,183 @@
     "stock_package_route": "stock_diffuse_only",
     "tmuf_runtime_status": "not_proven_until_smoke"
   },
+  "generator_masks_not_catalog_panels": {
+    "body": {
+      "catalog_status": "not_catalog_panel",
+      "design_use": "Whole stock atlas footprint used by the current stock generator.",
+      "evidence_status": "experimental_until_tmuf_smoke",
+      "pixel_count": 4103418,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": []
+    },
+    "lower": {
+      "catalog_status": "not_catalog_panel",
+      "design_use": "Low body surfaces selected by HGT/Y after GBuffer projection.",
+      "evidence_status": "experimental_until_tmuf_smoke",
+      "pixel_count": 1957971,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": []
+    },
+    "mudguard_edge": {
+      "catalog_status": "not_catalog_panel",
+      "design_use": "Mudguard edge accent combining PSD mudguards and GBuffer position.",
+      "evidence_status": "experimental_until_tmuf_smoke",
+      "pixel_count": 414363,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": [
+        "RearMudGuards",
+        "RearMudGuardsInside",
+        "FrontMudGuards",
+        "FrontMudguards.Inside",
+        "RearMudguardUnderColor",
+        "FrontMudguardUnderColor",
+        "RearMudguardsTip",
+        "FrontMudguardEdgeColor",
+        "RearMudguardsedgeColor"
+      ]
+    },
+    "nose_spear": {
+      "catalog_status": "not_catalog_panel",
+      "design_use": "Front spear selected by positive LEN and center symmetry.",
+      "evidence_status": "experimental_until_tmuf_smoke",
+      "pixel_count": 205498,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": []
+    },
+    "rear_center_glow": {
+      "catalog_status": "not_catalog_panel",
+      "design_use": "Centered rear deck focal accent.",
+      "evidence_status": "experimental_until_tmuf_smoke",
+      "pixel_count": 159717,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": []
+    },
+    "rear_louvers": {
+      "catalog_status": "not_catalog_panel",
+      "design_use": "Rear deck louver rhythm selected by LEN/HGT/symmetry.",
+      "evidence_status": "experimental_until_tmuf_smoke",
+      "pixel_count": 122550,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": []
+    },
+    "secondary_blade": {
+      "catalog_status": "not_catalog_panel",
+      "design_use": "Secondary lower side blade offset from the primary blade.",
+      "evidence_status": "experimental_until_tmuf_smoke",
+      "pixel_count": 34918,
+      "risk_class": "medium_accent_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": []
+    },
+    "shoulder_line": {
+      "catalog_status": "not_catalog_panel",
+      "design_use": "Upper shoulder pinline selected by HGT/LEN/symmetry.",
+      "evidence_status": "experimental_until_tmuf_smoke",
+      "pixel_count": 44664,
+      "risk_class": "medium_accent_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": []
+    },
+    "side_blade": {
+      "catalog_status": "not_catalog_panel",
+      "design_use": "Lower side blade selected by side-band height and lateral symmetry.",
+      "evidence_status": "experimental_until_tmuf_smoke",
+      "pixel_count": 59701,
+      "risk_class": "medium_accent_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": []
+    },
+    "tail_bar": {
+      "catalog_status": "not_catalog_panel",
+      "design_use": "Rear transverse accent selected by low LEN and HGT.",
+      "evidence_status": "experimental_until_tmuf_smoke",
+      "pixel_count": 194475,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": []
+    },
+    "upper": {
+      "catalog_status": "not_catalog_panel",
+      "design_use": "High body surfaces selected by HGT/Y after GBuffer projection.",
+      "evidence_status": "experimental_until_tmuf_smoke",
+      "pixel_count": 2145447,
+      "risk_class": "broad_design_surface",
+      "source_files": [
+        "resources/authoritative/parts/psd_parts.json",
+        "resources/authoritative/parts/psd_parts_labels.npy",
+        "resources/authoritative/gbuffer/position_2048.npy",
+        "resources/authoritative/gbuffer/coverage_2048.npy",
+        "resources/authoritative/gbuffer/extents_2048.json"
+      ],
+      "source_zones": []
+    }
+  },
   "label_map_counts": {
     "panels_fine": 107,
     "panels_high": 60,
@@ -282,12 +459,28 @@
     "nose_top_deck_panels": "nose_deck_generated_panels",
     "upper_center_roof_spine": "center_spine + main_body_top_quadrants"
   },
+  "runtime_status_counts": {
+    "not_proven_until_smoke": 26
+  },
   "schema": "tmuf_premium_skin_lab.stock_panel_deep_dive.v1",
   "source_inventory": "out/reports/stock_part_inventory.json",
   "source_inventory_schema": "tmuf_premium_skin_lab.stock_part_inventory.v1",
+  "source_status_counts": {
+    "experimental_until_tmuf_smoke": 1,
+    "mixed_generated_labels_and_experimental_gbuffer": 10,
+    "mixed_local_label_and_experimental_gbuffer": 3,
+    "proven_local_label_map": 12
+  },
   "surface_families": {
     "cockpit_mid_deck": {
       "description": "Top body quadrants, cockpit-adjacent deck fields, large flank panels, and pilot harmony.",
+      "runtime_status_counts": {
+        "not_proven_until_smoke": 6
+      },
+      "source_status_counts": {
+        "mixed_generated_labels_and_experimental_gbuffer": 3,
+        "proven_local_label_map": 3
+      },
       "source_statuses": [
         "mixed_generated_labels_and_experimental_gbuffer",
         "proven_local_label_map"
@@ -483,6 +676,15 @@
     },
     "front_nose_centerline": {
       "description": "Front identity, nose flow, splitter-like support panels, and centerline probes.",
+      "runtime_status_counts": {
+        "not_proven_until_smoke": 8
+      },
+      "source_status_counts": {
+        "experimental_until_tmuf_smoke": 1,
+        "mixed_generated_labels_and_experimental_gbuffer": 3,
+        "mixed_local_label_and_experimental_gbuffer": 1,
+        "proven_local_label_map": 3
+      },
       "source_statuses": [
         "experimental_until_tmuf_smoke",
         "mixed_generated_labels_and_experimental_gbuffer",
@@ -759,6 +961,14 @@
     },
     "rear_engine_tail": {
       "description": "Rear deck, louver rows, tailwing bands, rear guard rhythm, and lower rear support panels.",
+      "runtime_status_counts": {
+        "not_proven_until_smoke": 7
+      },
+      "source_status_counts": {
+        "mixed_generated_labels_and_experimental_gbuffer": 4,
+        "mixed_local_label_and_experimental_gbuffer": 1,
+        "proven_local_label_map": 2
+      },
       "source_statuses": [
         "mixed_generated_labels_and_experimental_gbuffer",
         "mixed_local_label_and_experimental_gbuffer",
@@ -1016,6 +1226,14 @@
     },
     "side_flanks_aero": {
       "description": "Sidepod blades, side winglets, mirrors, vents, and side-to-tail color rhythm.",
+      "runtime_status_counts": {
+        "not_proven_until_smoke": 7
+      },
+      "source_status_counts": {
+        "mixed_generated_labels_and_experimental_gbuffer": 2,
+        "mixed_local_label_and_experimental_gbuffer": 1,
+        "proven_local_label_map": 4
+      },
       "source_statuses": [
         "mixed_generated_labels_and_experimental_gbuffer",
         "mixed_local_label_and_experimental_gbuffer",
@@ -1254,6 +1472,12 @@
     },
     "support_auxiliary": {
       "description": "Non-hero support surfaces that can polish a skin without proving custom materials.",
+      "runtime_status_counts": {
+        "not_proven_until_smoke": 5
+      },
+      "source_status_counts": {
+        "proven_local_label_map": 5
+      },
       "source_statuses": [
         "proven_local_label_map"
       ],

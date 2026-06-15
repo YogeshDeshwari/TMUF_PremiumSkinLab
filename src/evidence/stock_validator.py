@@ -8,6 +8,7 @@ from typing import Any
 
 from src.evidence.artifact_trace import sha256
 from src.evidence.input_trace import MANIFEST, STOCK_DIFFUSE_INPUTS
+from src.evidence.smoke_gate import evaluate_smoke_report
 from src.evidence.visual_quality import validate_visual_quality
 from src.stock_diffuse.package import ZIP_TIMESTAMP
 from src.stock_diffuse.premium import CANDIDATE_NAMES
@@ -102,6 +103,32 @@ def validate_output_artifacts(report: dict[str, Any], root: Path = ROOT) -> list
         elif actual.get("size_bytes") != path.stat().st_size:
             errors.append(f"output artifact size mismatch: {rel}")
     return errors
+
+
+def validate_tmuf_smoke_evidence(report: dict[str, Any], root: Path = ROOT) -> list[str]:
+    if not (
+        report.get("tmuf_smoke_test") == "passed"
+        and report.get("evidence_status", {}).get("gbuffer_mapping") == GBUFFER_PROVEN_STATUS
+    ):
+        return []
+
+    evidence = report.get("tmuf_smoke_evidence")
+    if not isinstance(evidence, dict):
+        return ["passed report missing tmuf_smoke_evidence"]
+    report_value = evidence.get("report")
+    if not isinstance(report_value, str) or not report_value.strip():
+        return ["passed report missing tmuf_smoke_evidence.report"]
+
+    smoke_report_path = Path(report_value)
+    if not smoke_report_path.is_absolute():
+        smoke_report_path = Path(root) / smoke_report_path
+    if not smoke_report_path.exists():
+        return [f"smoke evidence report missing: {smoke_report_path}"]
+
+    result = evaluate_smoke_report(smoke_report_path, base_dir=root)
+    if not result["passed"]:
+        return [f"smoke evidence report did not pass: {smoke_report_path}"]
+    return []
 
 
 def validate_mask_evidence(report: dict[str, Any], premium: bool) -> list[str]:
@@ -434,7 +461,11 @@ def _zip_checks(zip_path: Path) -> tuple[dict[str, bool], list[str]]:
     return checks, errors
 
 
-def _report_checks(report_path: Path, manifest: dict[str, Any]) -> tuple[dict[str, bool], dict[str, Any], list[str]]:
+def _report_checks(
+    report_path: Path,
+    manifest: dict[str, Any],
+    root: Path = ROOT,
+) -> tuple[dict[str, bool], dict[str, Any], list[str]]:
     checks = {
         "report_exists": report_path.exists(),
         "report_route_stock_diffuse_only": False,
@@ -463,12 +494,14 @@ def _report_checks(report_path: Path, manifest: dict[str, Any]) -> tuple[dict[st
         and report.get("evidence_status", {}).get("donor_gbx", "not_used") == "not_used"
     )
     input_errors = validate_input_evidence(report, manifest)
-    output_errors = validate_output_artifacts(report)
+    output_errors = validate_output_artifacts(report, root=root)
+    smoke_evidence_errors = validate_tmuf_smoke_evidence(report, root=root)
     checks["report_input_evidence_matches_manifest"] = not input_errors
     checks["report_output_artifacts_match_files"] = not output_errors
     checks["tmuf_smoke_passed"] = (
         report.get("tmuf_smoke_test") == "passed"
         and report.get("evidence_status", {}).get("gbuffer_mapping") == "proven_by_tmuf_smoke"
+        and not smoke_evidence_errors
     )
 
     if not checks["report_route_stock_diffuse_only"]:
@@ -477,6 +510,7 @@ def _report_checks(report_path: Path, manifest: dict[str, Any]) -> tuple[dict[st
         errors.append(f"report does not declare a clean stock route: {report_path}")
     errors.extend(f"{report_path}: {error}" for error in input_errors)
     errors.extend(f"{report_path}: {error}" for error in output_errors)
+    errors.extend(f"{report_path}: {error}" for error in smoke_evidence_errors)
     return checks, report, errors
 
 
@@ -508,6 +542,7 @@ def validate_stock_outputs(root: Path = ROOT) -> dict[str, Any]:
         report_checks, report, report_errors = _report_checks(
             root / "out" / "reports" / f"{skin_name}.json",
             manifest,
+            root=root,
         )
         mask_errors = validate_mask_evidence(report, premium=premium)
         alpha_errors = validate_alpha_policy(report, premium=premium)

@@ -20,6 +20,18 @@ class StockPanelDeepDiveTests(unittest.TestCase):
         self.assertEqual(report["evidence_boundary"]["tmuf_runtime_status"], "not_proven_until_smoke")
         self.assertIn("no roof named PSD zone", report["evidence_boundary"]["known_limits"])
         self.assertEqual(report["catalog_target_count"], 26)
+        self.assertEqual(sum(report["source_status_counts"].values()), report["catalog_target_count"])
+        self.assertEqual(report["runtime_status_counts"], {"not_proven_until_smoke": 26})
+        generator_masks = report["generator_masks_not_catalog_panels"]
+        self.assertIn("nose_spear", generator_masks)
+        self.assertIn("side_blade", generator_masks)
+        self.assertIn("rear_louvers", generator_masks)
+        self.assertIn("rear_center_glow", generator_masks)
+        self.assertIn("tail_bar", generator_masks)
+        self.assertEqual(generator_masks["rear_louvers"]["catalog_status"], "not_catalog_panel")
+        self.assertEqual(generator_masks["rear_louvers"]["evidence_status"], "experimental_until_tmuf_smoke")
+        self.assertGreater(generator_masks["rear_louvers"]["pixel_count"], 0)
+        self.assertIn("resources/authoritative/gbuffer/position_2048.npy", generator_masks["rear_louvers"]["source_files"])
 
         families = report["surface_families"]
         self.assertIn("nose_identity_panel", families["front_nose_centerline"]["targets"])
@@ -30,6 +42,8 @@ class StockPanelDeepDiveTests(unittest.TestCase):
         self.assertIn("rear_wheel_diffuse_blocks", families["support_auxiliary"]["targets"])
 
         for family in families.values():
+            self.assertEqual(sum(family["source_status_counts"].values()), family["target_count"])
+            self.assertEqual(family["runtime_status_counts"], {"not_proven_until_smoke": family["target_count"]})
             for entry in family["target_entries"]:
                 self.assertIn("source_zones", entry)
                 self.assertEqual(entry["tmuf_runtime_status"], "not_proven_until_smoke")
@@ -94,6 +108,10 @@ class StockPanelDeepDiveTests(unittest.TestCase):
             markdown = markdown_output.read_text()
             self.assertIn("# Stock Panel Deep Dive", markdown)
             self.assertIn("front_nose_centerline", markdown)
+            self.assertIn("| Target | Source status | Runtime status | Area | Use |", markdown)
+            self.assertIn("| Target | Source status | Runtime status | Current candidates | Why it matters |", markdown)
+            self.assertIn("## Generator Masks, Not Catalog Panels", markdown)
+            self.assertIn("`rear_center_glow`", markdown)
             self.assertIn("Details.dds", markdown)
 
 

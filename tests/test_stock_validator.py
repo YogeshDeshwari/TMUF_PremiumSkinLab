@@ -1,5 +1,10 @@
 import json
+import shutil
+from pathlib import Path
+import tempfile
 import unittest
+
+from PIL import Image, ImageDraw
 
 
 class StockValidatorTests(unittest.TestCase):
@@ -45,6 +50,93 @@ class StockValidatorTests(unittest.TestCase):
         self.assertTrue(result["premium_batch_index"]["valid"])
         self.assertEqual(result["premium_batch_index"]["candidate_count"], 5)
         self.assertTrue(result["premium_batch_index"]["does_not_prove_tmuf_smoke"])
+
+    def test_stock_validation_uses_passed_root_for_report_artifact_hashes(self):
+        from src.evidence.stock_validator import validate_stock_outputs
+
+        root = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as tmp:
+            temp_root = Path(tmp) / "copied_lab"
+            for rel in ["resources/evidence_manifest.json", "out/reports", "out/skins", "out/previews"]:
+                source = root / rel
+                destination = temp_root / rel
+                if source.is_dir():
+                    shutil.copytree(source, destination)
+                else:
+                    destination.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(source, destination)
+
+            atlas = temp_root / "out" / "previews" / "black_cyan_spine_atlas.png"
+            image = Image.new("RGBA", (2048, 2048), (12, 12, 14, 255))
+            draw = ImageDraw.Draw(image)
+            draw.rectangle((128, 128, 1920, 1920), fill=(220, 20, 180, 255))
+            image.save(atlas)
+
+            result = validate_stock_outputs(temp_root)
+
+        self.assertIn(
+            "out/previews/black_cyan_spine_atlas.png",
+            "\n".join(result["errors"]),
+        )
+        self.assertTrue(
+            any(
+                "output artifact sha256 mismatch: out/previews/black_cyan_spine_atlas.png" in error
+                for error in result["errors"]
+            )
+        )
+
+    def test_stock_validation_rejects_passed_fields_without_valid_smoke_report(self):
+        from src.evidence.stock_validator import validate_stock_outputs
+
+        root = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as tmp:
+            temp_root = Path(tmp) / "copied_lab"
+            for rel in ["resources/evidence_manifest.json", "out/reports", "out/skins", "out/previews"]:
+                source = root / rel
+                destination = temp_root / rel
+                if source.is_dir():
+                    shutil.copytree(source, destination)
+                else:
+                    destination.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(source, destination)
+
+            for report_path in (temp_root / "out" / "reports").glob("*.json"):
+                data = json.loads(report_path.read_text())
+                if data.get("route") == "stock_diffuse_only" and data.get("package_files") == ["Diffuse.dds", "Icon.dds"]:
+                    data["tmuf_smoke_test"] = "passed"
+                    data.setdefault("evidence_status", {})["gbuffer_mapping"] = "proven_by_tmuf_smoke"
+                    data["tmuf_smoke_evidence"] = {
+                        "report": "out/proof/missing_calibration_tmuf_smoke.json",
+                    }
+                    for entry in data.get("mask_evidence", {}).values():
+                        if entry.get("evidence_status") in {
+                            "experimental_until_tmuf_smoke",
+                            "mixed_generated_labels_and_experimental_gbuffer",
+                            "mixed_local_label_and_experimental_gbuffer",
+                        }:
+                            entry["evidence_status"] = "proven_by_tmuf_smoke"
+                elif data.get("schema") == "tmuf_premium_skin_lab.premium_batch_index.v1":
+                    data["does_not_prove_tmuf_smoke"] = False
+                    data["tmuf_smoke_status"] = "passed"
+                    data["gbuffer_mapping"] = "proven_by_tmuf_smoke"
+                    data["completion_status"] = "stock_calibration_smoke_passed"
+                    data["tmuf_smoke_evidence"] = {
+                        "report": "out/proof/missing_calibration_tmuf_smoke.json",
+                    }
+                    for candidate in data.get("candidates", []):
+                        candidate["tmuf_smoke_test"] = "passed"
+                        candidate["gbuffer_mapping"] = "proven_by_tmuf_smoke"
+                report_path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
+
+            result = validate_stock_outputs(temp_root)
+
+        self.assertFalse(result["local_checks_passed"])
+        self.assertEqual(result["tmuf_smoke_status"], "pending")
+        self.assertEqual(result["completion_status"], "not_complete_tmuf_smoke_pending")
+        self.assertTrue(
+            any("smoke evidence report missing" in error for error in result["errors"]),
+            result["errors"],
+        )
 
     def test_report_input_evidence_must_match_manifest(self):
         from src.evidence.input_trace import STOCK_DIFFUSE_INPUTS

@@ -155,6 +155,25 @@ python3 recipes/tmuf_smoke_gate.py --apply out/proof/calibration_tmuf_smoke.json
 The dry run prints JSON with `would_update` and `would_skip` lists. It does
 not write any report files.
 
+To test the post-smoke promotion and validation pipeline without writing fake
+proof into the real project, run a synthetic self-test in a scratch workspace:
+
+```bash
+python3 recipes/synthetic_post_smoke_selftest.py \
+  --workspace /tmp/tmuf_premium_synthetic_post_smoke \
+  --json
+```
+
+This copies the current reports, skins, previews, and evidence manifest into
+the scratch workspace, generates synthetic nonblank screenshots there, applies
+the smoke promotion only inside that copy, and then runs stock/profile
+validators against the copy. It must report `synthetic_smoke=true` and
+`claims_real_tmuf_proof=false`. This command proves the promotion code path
+works; it does not prove that TMUF/TMNF loaded the calibration skin.
+If the workspace path already exists, the command removes it only when it
+contains the synthetic self-test marker file. It refuses unmarked existing
+paths so an arbitrary directory is not deleted by accident.
+
 Only after it evaluates as passed, promote generated reports:
 
 ```bash
@@ -180,6 +199,9 @@ The apply step promotes only stock skin reports and
 `premium_batch_index.json`. It skips inventory, deep-dive, lab-status, and
 other non-skin evidence JSON files. The premium batch index is updated to carry
 the same smoke evidence and `tmuf_smoke_status=passed`.
+Stock validation does not trust those promoted fields by themselves: it
+re-evaluates the referenced smoke report and its screenshot fingerprints before
+counting any skin as smoke-passed.
 
 Do not apply this gate from projected previews alone.
 
