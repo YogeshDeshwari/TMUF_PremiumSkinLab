@@ -157,6 +157,8 @@ entries from:
 
 ```text
 experimental_until_tmuf_smoke
+mixed_generated_labels_and_experimental_gbuffer
+mixed_local_label_and_experimental_gbuffer
 ```
 
 to:
@@ -164,6 +166,11 @@ to:
 ```text
 proven_by_tmuf_smoke
 ```
+
+The apply step promotes only stock skin reports and
+`premium_batch_index.json`. It skips inventory, deep-dive, lab-status, and
+other non-skin evidence JSON files. The premium batch index is updated to carry
+the same smoke evidence and `tmuf_smoke_status=passed`.
 
 Do not apply this gate from projected previews alone.
 

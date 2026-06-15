@@ -218,24 +218,62 @@ def apply_smoke_result(
     updated: list[Path] = []
     for path in paths:
         data = json.loads(path.read_text())
-        evidence = data.setdefault("evidence_status", {})
-        evidence["gbuffer_mapping"] = result["gbuffer_mapping_status"]
-        _promote_gbuffer_mask_evidence(data, result["gbuffer_mapping_status"])
-        data["tmuf_smoke_test"] = "passed"
-        if isinstance(data.get("proof_gate"), dict):
-            data["proof_gate"]["calibration_stock_diffuse"] = "passed"
-        data["tmuf_smoke_evidence"] = {
-            "report": smoke_report_path.as_posix(),
-            "screenshots": result["screenshots"],
-            "screenshot_roles": result["screenshot_roles"],
-            "screenshot_evidence": result["screenshot_evidence"],
-            "tester": result["tester"],
-            "tmuf_build": result["tmuf_build"],
-            "test_date_local": result["test_date_local"],
-        }
+        if _is_stock_skin_report(data):
+            _promote_stock_skin_report(data, result, smoke_report_path)
+        elif _is_premium_batch_index(data):
+            _promote_premium_batch_index(data, result, smoke_report_path)
+        else:
+            continue
         path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
         updated.append(path)
     return updated
+
+
+def _is_stock_skin_report(data: dict[str, Any]) -> bool:
+    return (
+        isinstance(data.get("skin_name"), str)
+        and data.get("route") == "stock_diffuse_only"
+        and data.get("package_files") == ["Diffuse.dds", "Icon.dds"]
+    )
+
+
+def _is_premium_batch_index(data: dict[str, Any]) -> bool:
+    return data.get("schema") == "tmuf_premium_skin_lab.premium_batch_index.v1"
+
+
+def _smoke_evidence_payload(result: dict[str, Any], smoke_report_path: Path) -> dict[str, Any]:
+    return {
+        "report": smoke_report_path.as_posix(),
+        "screenshots": result["screenshots"],
+        "screenshot_roles": result["screenshot_roles"],
+        "screenshot_evidence": result["screenshot_evidence"],
+        "tester": result["tester"],
+        "tmuf_build": result["tmuf_build"],
+        "test_date_local": result["test_date_local"],
+    }
+
+
+def _promote_stock_skin_report(data: dict[str, Any], result: dict[str, Any], smoke_report_path: Path) -> None:
+    evidence = data.setdefault("evidence_status", {})
+    evidence["gbuffer_mapping"] = result["gbuffer_mapping_status"]
+    _promote_gbuffer_mask_evidence(data, result["gbuffer_mapping_status"])
+    data["tmuf_smoke_test"] = "passed"
+    if isinstance(data.get("proof_gate"), dict):
+        data["proof_gate"]["calibration_stock_diffuse"] = "passed"
+    data["tmuf_smoke_evidence"] = _smoke_evidence_payload(result, smoke_report_path)
+
+
+def _promote_premium_batch_index(data: dict[str, Any], result: dict[str, Any], smoke_report_path: Path) -> None:
+    data["does_not_prove_tmuf_smoke"] = False
+    data["tmuf_smoke_status"] = "passed"
+    data["gbuffer_mapping"] = result["gbuffer_mapping_status"]
+    data["completion_status"] = "stock_calibration_smoke_passed"
+    data["required_before_promotion"] = []
+    data["tmuf_smoke_evidence"] = _smoke_evidence_payload(result, smoke_report_path)
+    for candidate in data.get("candidates", []):
+        if isinstance(candidate, dict):
+            candidate["tmuf_smoke_test"] = "passed"
+            candidate["gbuffer_mapping"] = result["gbuffer_mapping_status"]
 
 
 def _promote_gbuffer_mask_evidence(data: dict[str, Any], gbuffer_mapping_status: str) -> None:

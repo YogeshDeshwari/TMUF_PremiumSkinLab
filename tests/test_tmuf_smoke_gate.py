@@ -88,6 +88,8 @@ class TmufSmokeGateTests(unittest.TestCase):
                 json.dumps(
                     {
                         "skin_name": "black_magenta_cyan_blade",
+                        "route": "stock_diffuse_only",
+                        "package_files": ["Diffuse.dds", "Icon.dds"],
                         "tmuf_smoke_test": "not_run",
                         "proof_gate": {"calibration_stock_diffuse": "required_before_proven_use"},
                         "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
@@ -143,6 +145,107 @@ class TmufSmokeGateTests(unittest.TestCase):
             self.assertEqual(promoted["tmuf_smoke_evidence"]["screenshots"], screenshots)
             self.assertEqual(promoted["tmuf_smoke_evidence"]["screenshot_roles"], screenshot_roles)
             self.assertIn(screenshot_roles["front"], promoted["tmuf_smoke_evidence"]["screenshot_evidence"])
+
+    def test_apply_skips_non_skin_reports_and_updates_batch_index(self):
+        from src.evidence.smoke_gate import (
+            REQUIRED_OBSERVATIONS,
+            apply_smoke_result,
+            fingerprint_screenshot_file,
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            role_paths = _write_role_screenshots(base)
+            screenshot_roles = {role: path.name for role, path in role_paths.items()}
+            screenshots = [screenshot_roles[role] for role in REQUIRED_SCREENSHOT_ROLES]
+            smoke_report = base / "calibration_tmuf_smoke.json"
+            smoke_report.write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "artifact": "out/skins/calibration_stock_diffuse.zip",
+                        "status": "passed",
+                        "tester": "manual tester",
+                        "tmuf_build": "TMUF local install",
+                        "test_date_local": "2026-06-15",
+                        "screenshots": screenshots,
+                        "screenshot_roles": screenshot_roles,
+                        "screenshot_evidence": {
+                            path.name: fingerprint_screenshot_file(path) for path in role_paths.values()
+                        },
+                        "observations": {name: True for name in REQUIRED_OBSERVATIONS},
+                    }
+                )
+            )
+            skin_report = base / "black_magenta_cyan_blade.json"
+            skin_report.write_text(
+                json.dumps(
+                    {
+                        "skin_name": "black_magenta_cyan_blade",
+                        "route": "stock_diffuse_only",
+                        "package_files": ["Diffuse.dds", "Icon.dds"],
+                        "tmuf_smoke_test": "not_run",
+                        "proof_gate": {"calibration_stock_diffuse": "required_before_proven_use"},
+                        "evidence_status": {"gbuffer_mapping": "experimental_until_tmuf_smoke"},
+                        "mask_evidence": {
+                            "center_spine": {
+                                "evidence_status": "experimental_until_tmuf_smoke",
+                                "pixel_count": 531368,
+                            }
+                        },
+                    }
+                )
+            )
+            batch_index = base / "premium_batch_index.json"
+            batch_index.write_text(
+                json.dumps(
+                    {
+                        "schema": "tmuf_premium_skin_lab.premium_batch_index.v1",
+                        "route": "stock_diffuse_only",
+                        "candidate_count": 1,
+                        "does_not_prove_tmuf_smoke": True,
+                        "tmuf_smoke_status": "pending",
+                        "gbuffer_mapping": "experimental_until_tmuf_smoke",
+                        "completion_status": "not_complete_tmuf_smoke_pending",
+                        "candidates": [
+                            {
+                                "skin_name": "black_magenta_cyan_blade",
+                                "tmuf_smoke_test": "not_run",
+                                "gbuffer_mapping": "experimental_until_tmuf_smoke",
+                                "package_files": ["Diffuse.dds", "Icon.dds"],
+                            }
+                        ],
+                    }
+                )
+            )
+            inventory = base / "stock_part_inventory.json"
+            inventory_data = {
+                "schema": "tmuf_premium_skin_lab.stock_part_inventory.v1",
+                "evidence_status": {"tmuf_runtime_visibility": "not_proven_until_smoke"},
+            }
+            inventory.write_text(json.dumps(inventory_data))
+
+            updated = apply_smoke_result(
+                smoke_report,
+                report_paths=[skin_report, batch_index, inventory],
+                base_dir=base,
+            )
+
+            self.assertEqual(updated, [skin_report, batch_index])
+            self.assertEqual(json.loads(inventory.read_text()), inventory_data)
+
+            promoted_skin = json.loads(skin_report.read_text())
+            self.assertEqual(promoted_skin["tmuf_smoke_test"], "passed")
+            self.assertEqual(promoted_skin["evidence_status"]["gbuffer_mapping"], "proven_by_tmuf_smoke")
+
+            promoted_index = json.loads(batch_index.read_text())
+            self.assertFalse(promoted_index["does_not_prove_tmuf_smoke"])
+            self.assertEqual(promoted_index["tmuf_smoke_status"], "passed")
+            self.assertEqual(promoted_index["gbuffer_mapping"], "proven_by_tmuf_smoke")
+            self.assertEqual(promoted_index["completion_status"], "stock_calibration_smoke_passed")
+            self.assertEqual(promoted_index["candidates"][0]["tmuf_smoke_test"], "passed")
+            self.assertEqual(promoted_index["candidates"][0]["gbuffer_mapping"], "proven_by_tmuf_smoke")
+            self.assertIn("tmuf_smoke_evidence", promoted_index)
 
     def test_missing_or_changed_screenshot_fingerprint_prevents_promotion(self):
         from src.evidence.smoke_gate import (

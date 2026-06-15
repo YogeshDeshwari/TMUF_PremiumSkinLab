@@ -339,7 +339,16 @@ def validate_premium_batch_index(index: dict[str, Any], premium_reports: list[di
         errors.append("premium batch index schema mismatch")
     if index.get("route") != "stock_diffuse_only":
         errors.append("premium batch index route must be stock_diffuse_only")
-    if index.get("does_not_prove_tmuf_smoke") is not True:
+    index_smoke_passed = (
+        index.get("tmuf_smoke_status") == "passed"
+        and index.get("gbuffer_mapping") == "proven_by_tmuf_smoke"
+    )
+    if index_smoke_passed:
+        if index.get("does_not_prove_tmuf_smoke") is not False:
+            errors.append("passed premium batch index must carry TMUF smoke proof")
+        if not isinstance(index.get("tmuf_smoke_evidence"), dict):
+            errors.append("passed premium batch index must include tmuf_smoke_evidence")
+    elif index.get("does_not_prove_tmuf_smoke") is not True:
         errors.append("premium batch index must not prove TMUF smoke")
 
     candidates = index.get("candidates")

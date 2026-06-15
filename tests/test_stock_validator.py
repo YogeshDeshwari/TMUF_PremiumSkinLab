@@ -475,6 +475,32 @@ class StockValidatorTests(unittest.TestCase):
 
         self.assertEqual(validate_premium_batch_index(valid_index, reports), [])
 
+        passed_reports = [
+            {
+                **report,
+                "tmuf_smoke_test": "passed",
+                "evidence_status": {"gbuffer_mapping": "proven_by_tmuf_smoke"},
+            }
+            for report in reports
+        ]
+        passed_index = {
+            **valid_index,
+            "does_not_prove_tmuf_smoke": False,
+            "tmuf_smoke_status": "passed",
+            "gbuffer_mapping": "proven_by_tmuf_smoke",
+            "completion_status": "stock_calibration_smoke_passed",
+            "tmuf_smoke_evidence": {"report": "out/proof/calibration_tmuf_smoke.json"},
+            "candidates": [
+                {
+                    **candidate,
+                    "tmuf_smoke_test": "passed",
+                    "gbuffer_mapping": "proven_by_tmuf_smoke",
+                }
+                for candidate in valid_index["candidates"]
+            ],
+        }
+        self.assertEqual(validate_premium_batch_index(passed_index, passed_reports), [])
+
         duplicate = {
             **valid_index,
             "candidates": [
