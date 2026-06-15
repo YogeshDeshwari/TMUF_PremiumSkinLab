@@ -7,6 +7,23 @@ Next actions:
 - choose_or_create_tmuf_stadiumcar_skin_dir
 - install_with_explicit_target
 
+Calibration observations to verify:
+- nose_is_red
+- tail_is_blue
+- left_side_is_green
+- right_side_is_yellow
+- roof_high_surfaces_are_white
+- lower_floor_surfaces_are_dark
+- mudguards_are_magenta
+- centerline_is_cyan
+- package_loads_without_custom_gbx
+
+Required screenshot roles:
+- front
+- side
+- rear
+- top
+
 Commands:
 build_smoke_kit:
   python3 recipes/prepare_tmuf_smoke_kit.py

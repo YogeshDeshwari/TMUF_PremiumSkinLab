@@ -148,7 +148,9 @@ class SmokeReadinessTests(unittest.TestCase):
 
     def test_command_packet_is_human_readable_and_keeps_proof_boundary(self):
         from src.evidence.skin_dirs import write_skin_dir_report
+        from src.evidence.smoke_gate import REQUIRED_OBSERVATIONS, REQUIRED_SCREENSHOT_ROLES
         from src.evidence.smoke_kit import build_smoke_kit
+        from src.evidence.smoke_readiness import build_smoke_readiness
         from src.evidence.smoke_readiness import write_smoke_command_packet
 
         with tempfile.TemporaryDirectory() as tmp:
@@ -158,11 +160,21 @@ class SmokeReadinessTests(unittest.TestCase):
             write_skin_dir_report(root / "out" / "proof" / "tmuf_skin_dirs.json", roots=[root / "missing"])
 
             written = write_smoke_command_packet(packet_path, root)
+            readiness = build_smoke_readiness(root)
 
             self.assertEqual(written, packet_path)
+            self.assertEqual(readiness["calibration_smoke_requirements"]["required_observations"], REQUIRED_OBSERVATIONS)
+            self.assertEqual(readiness["calibration_smoke_requirements"]["required_screenshot_roles"], REQUIRED_SCREENSHOT_ROLES)
+            self.assertTrue(readiness["calibration_smoke_requirements"]["does_not_prove_tmuf_smoke"])
             text = packet_path.read_text()
             self.assertIn("status=needs_explicit_stadiumcar_dir", text)
             self.assertIn("does_not_prove_tmuf_smoke=true", text)
+            self.assertIn("Calibration observations to verify:", text)
+            for observation in REQUIRED_OBSERVATIONS:
+                self.assertIn(f"- {observation}", text)
+            self.assertIn("Required screenshot roles:", text)
+            for role in REQUIRED_SCREENSHOT_ROLES:
+                self.assertIn(f"- {role}", text)
             self.assertIn("choose_or_create_tmuf_stadiumcar_skin_dir", text)
             self.assertIn("python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir", text)
             self.assertIn("preflight_explicit:", text)

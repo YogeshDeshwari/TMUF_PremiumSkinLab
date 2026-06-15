@@ -11,7 +11,7 @@ from src.evidence.skin_dirs import (
     KNOWN_SUFFIXES,
     route_for_stadiumcar_skin_dir,
 )
-from src.evidence.smoke_gate import validate_install_receipt_file
+from src.evidence.smoke_gate import REQUIRED_OBSERVATIONS, REQUIRED_SCREENSHOT_ROLES, validate_install_receipt_file
 from src.evidence.smoke_kit import CALIBRATION_SKIN, DEFAULT_KIT_DIR, validate_smoke_kit
 
 
@@ -227,6 +227,13 @@ def build_smoke_readiness(root: Path = ROOT, *, install_target: Path | None = No
             {"suffix": "/".join(suffix), "route": route}
             for suffix, route in sorted(KNOWN_SUFFIXES.items(), key=lambda item: item[1])
         ],
+        "calibration_smoke_requirements": {
+            "required_observations": REQUIRED_OBSERVATIONS,
+            "required_screenshot_roles": REQUIRED_SCREENSHOT_ROLES,
+            "recording_gate": "recipes/record_tmuf_smoke.py",
+            "evaluation_gate": "recipes/tmuf_smoke_gate.py --evaluate out/proof/calibration_tmuf_smoke.json",
+            "does_not_prove_tmuf_smoke": True,
+        },
         "next_actions": next_actions,
         "commands": commands,
         "proof_boundary": "This readiness report guides manual smoke setup only; it does not prove TMUF/TMNF load or GBuffer mapping.",
@@ -270,6 +277,13 @@ def format_smoke_command_packet(readiness: dict[str, Any]) -> str:
                 "does_not_prove_tmuf_smoke=true",
             ]
         )
+    requirements = readiness.get("calibration_smoke_requirements", {})
+    required_observations = requirements.get("required_observations", [])
+    required_screenshot_roles = requirements.get("required_screenshot_roles", [])
+    lines.extend(["", "Calibration observations to verify:"])
+    lines.extend(f"- {observation}" for observation in required_observations)
+    lines.extend(["", "Required screenshot roles:"])
+    lines.extend(f"- {role}" for role in required_screenshot_roles)
     lines.extend(["", "Commands:"])
     for name in [
         "build_smoke_kit",
