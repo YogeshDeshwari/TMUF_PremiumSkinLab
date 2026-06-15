@@ -105,6 +105,7 @@ def _base_commands(root: Path) -> dict[str, str]:
             "--install-target /absolute/path/to/StadiumCar --write --write-command-packet"
         ),
         "install_explicit": "python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /absolute/path/to/StadiumCar",
+        "prepare_smoke_session": "python3 recipes/prepare_tmuf_smoke_session.py --json",
         "record_smoke": (
             "python3 recipes/record_tmuf_smoke.py "
             "--tester \"manual tester\" "
@@ -349,6 +350,7 @@ def format_smoke_command_packet(readiness: dict[str, Any]) -> str:
         "preflight_explicit",
         "install_explicit",
         "install_discovered",
+        "prepare_smoke_session",
         "record_smoke",
         "evaluate",
         "apply_after_pass_only",

@@ -192,6 +192,8 @@ class SmokeReadinessTests(unittest.TestCase):
             self.assertIn("Skins/Vehicles/StadiumCar", text)
             self.assertIn("GameData/Skins/Vehicles/StadiumCar", text)
             self.assertIn("Skins/Models/StadiumCar", text)
+            self.assertIn("prepare_smoke_session:", text)
+            self.assertIn("python3 recipes/prepare_tmuf_smoke_session.py --json", text)
             self.assertIn("python3 recipes/record_tmuf_smoke.py", text)
             self.assertIn("Do not run apply until evaluate passes", text)
 

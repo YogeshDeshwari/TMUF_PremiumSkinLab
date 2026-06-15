@@ -67,6 +67,8 @@ install_explicit:
   python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar
 install_discovered:
   python3 recipes/prepare_tmuf_smoke_kit.py --install-discovered --search-root /Users/ydeshwari/Documents/TrackMania
+prepare_smoke_session:
+  python3 recipes/prepare_tmuf_smoke_session.py --json
 record_smoke:
   python3 recipes/record_tmuf_smoke.py --tester "manual tester" --tmuf-build "TMUF local install" --test-date-local YYYY-MM-DD --install-receipt /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit/proof/calibration_install_receipt.json --screenshot-role front=/absolute/path/to/tmuf_front.png --screenshot-role side=/absolute/path/to/tmuf_side.png --screenshot-role rear=/absolute/path/to/tmuf_rear.png --screenshot-role top=/absolute/path/to/tmuf_top.png --all-required-observations-passed
 evaluate:

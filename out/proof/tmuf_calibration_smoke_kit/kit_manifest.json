@@ -2,7 +2,7 @@
   "calibration_skin": "skins/calibration_stock_diffuse.zip",
   "does_not_prove_tmuf_smoke": true,
   "file_sha256": {
-    "README_tmuf_smoke_test.md": "4f09630321070517204d93e2b56b28202d92bc8c53d89c406d223fa0056b93c2",
+    "README_tmuf_smoke_test.md": "b2dcf3c29ea47e2ea0c53c75cb1e141ace635591d104fab5976cb6d56784c908",
     "previews/calibration_panel_family_probe_atlas.png": "7797f13f8b824c7c090541fe17be8dc7a8896a32921bba46027a9f22cc381cd9",
     "previews/calibration_panel_family_probe_projected_side_top_rear.png": "118ef4b73a1b049d419c439355222bf3936855b50872e670f6120ce533a0c2e2",
     "previews/calibration_stock_diffuse_atlas.png": "45cf2b38dcf54296bd33cb8825f10fcdb168ca2b978f4eee71d20fa79059e72c",

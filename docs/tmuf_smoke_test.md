@@ -221,6 +221,24 @@ out/proof/calibration_tmuf_smoke.json
 Preferred path: record the real smoke evidence with the helper after the skin
 has been loaded in TMUF/TMNF and the required observations have been checked:
 
+Prepare exact screenshot paths and a ready-to-edit command:
+
+```bash
+python3 recipes/prepare_tmuf_smoke_session.py --json
+```
+
+This writes:
+
+```text
+out/proof/tmuf_smoke_session/session_manifest.json
+out/proof/tmuf_smoke_session/record_tmuf_smoke_command.txt
+out/proof/tmuf_smoke_session/README_tmuf_smoke_session.md
+```
+
+Save the real TMUF/TMNF screenshots into the paths listed in the session
+manifest. The session files do not create fake screenshots and do not prove
+TMUF smoke status.
+
 ```bash
 python3 recipes/record_tmuf_smoke.py \
   --tester "manual tester" \

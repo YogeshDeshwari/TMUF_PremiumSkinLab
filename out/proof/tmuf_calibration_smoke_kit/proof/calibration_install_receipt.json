@@ -1,16 +1,5 @@
 {
   "does_not_prove_tmuf_smoke": true,
-  "install_target_setup": {
-    "created": true,
-    "does_not_prove_tmuf_smoke": true,
-    "next_install_command": "python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar",
-    "next_preflight_command": "python3 recipes/smoke_readiness.py --install-target /Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar --write --write-command-packet",
-    "path": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar",
-    "route": "skins_vehicles_stadiumcar",
-    "safe_use": "This only prepares a recognized StadiumCar skin folder; it does not prove TMUF/TMNF loads skins from this path.",
-    "schema": "tmuf_premium_skin_lab.stadiumcar_skin_dir_create.v1",
-    "status": "directory_ready_not_tested"
-  },
   "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/calibration_stock_diffuse.zip",
   "installed_supplemental_skins": [
     {
@@ -33,7 +22,7 @@
   ],
   "route": "skins_vehicles_stadiumcar",
   "schema": "tmuf_premium_skin_lab.calibration_install_receipt.v1",
-  "selection_mode": "explicit_install_target_created",
+  "selection_mode": "explicit_install_target",
   "sha256": "9e51e0bc7b11aedc0cefa3a1ae58334b93a7858392c07f0e8552bec46da7c70e",
   "size_bytes": 488418,
   "source_sha256": "9e51e0bc7b11aedc0cefa3a1ae58334b93a7858392c07f0e8552bec46da7c70e",

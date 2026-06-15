@@ -1,0 +1,53 @@
+{
+  "base_dir": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab",
+  "does_not_prove_tmuf_smoke": true,
+  "install_receipt": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit/proof/calibration_install_receipt.json",
+  "install_receipt_errors": [],
+  "install_receipt_valid": true,
+  "output_report": "out/proof/calibration_tmuf_smoke.json",
+  "proof_boundary": "This session scaffold only prepares screenshot paths and a record command; it is not TMUF smoke evidence.",
+  "readme": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_smoke_session/README_tmuf_smoke_session.md",
+  "record_command": "python3 recipes/record_tmuf_smoke.py --tester 'manual tester' --tmuf-build 'TMUF local install' --test-date-local YYYY-MM-DD --install-receipt /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit/proof/calibration_install_receipt.json --screenshot-role front=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_smoke_session/screenshots/tmuf_calibration_front.png --screenshot-role side=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_smoke_session/screenshots/tmuf_calibration_side.png --screenshot-role rear=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_smoke_session/screenshots/tmuf_calibration_rear.png --screenshot-role top=/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_smoke_session/screenshots/tmuf_calibration_top.png --all-required-observations-passed --output /Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/calibration_tmuf_smoke.json",
+  "record_command_file": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_smoke_session/record_tmuf_smoke_command.txt",
+  "required_observations": [
+    "nose_is_red",
+    "tail_is_blue",
+    "left_side_is_green",
+    "right_side_is_yellow",
+    "roof_high_surfaces_are_white",
+    "lower_floor_surfaces_are_dark",
+    "mudguards_are_magenta",
+    "centerline_is_cyan",
+    "package_loads_without_custom_gbx"
+  ],
+  "schema": "tmuf_premium_skin_lab.smoke_session.v1",
+  "screenshot_slots": [
+    {
+      "exists": false,
+      "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_smoke_session/screenshots/tmuf_calibration_front.png",
+      "required": true,
+      "role": "front"
+    },
+    {
+      "exists": false,
+      "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_smoke_session/screenshots/tmuf_calibration_side.png",
+      "required": true,
+      "role": "side"
+    },
+    {
+      "exists": false,
+      "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_smoke_session/screenshots/tmuf_calibration_rear.png",
+      "required": true,
+      "role": "rear"
+    },
+    {
+      "exists": false,
+      "path": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_smoke_session/screenshots/tmuf_calibration_top.png",
+      "required": true,
+      "role": "top"
+    }
+  ],
+  "screenshots_dir": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_smoke_session/screenshots",
+  "session_dir": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_smoke_session",
+  "status": "awaiting_tmuf_screenshots"
+}
