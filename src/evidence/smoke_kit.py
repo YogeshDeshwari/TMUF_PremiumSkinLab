@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import shutil
 import zipfile
+from hashlib import sha256
 from pathlib import Path
 from typing import Any
 
@@ -44,9 +45,63 @@ def _kit_manifest(files: list[str]) -> dict[str, Any]:
         "next_steps": [
             "Copy skins/calibration_stock_diffuse.zip into the TMUF/TMNF StadiumCar skin folder.",
             "Load the skin in TMUF/TMNF.",
-            "Record required observations and screenshot paths in a filled smoke report.",
+            "Record required observations and screenshot paths with recipes/record_tmuf_smoke.py.",
             "Run recipes/tmuf_smoke_gate.py --evaluate before applying any promotion.",
         ],
+    }
+
+
+def _digest(path: Path) -> str:
+    return sha256(path.read_bytes()).hexdigest()
+
+
+def validate_smoke_kit(out_dir: Path = DEFAULT_KIT_DIR) -> dict[str, Any]:
+    out_dir = Path(out_dir)
+    manifest_path = out_dir / "kit_manifest.json"
+    zip_path = out_dir.with_suffix(".zip")
+
+    missing_files = [rel for rel in sorted(KIT_FILES) if not (out_dir / rel).exists()]
+    stale_files = [
+        rel
+        for rel, source in KIT_FILES.items()
+        if (out_dir / rel).exists() and source.exists() and _digest(out_dir / rel) != _digest(source)
+    ]
+
+    zip_missing_or_stale: list[str] = []
+    if not zip_path.exists():
+        zip_missing_or_stale = sorted(KIT_FILES) + ["kit_manifest.json"]
+    else:
+        with zipfile.ZipFile(zip_path) as zf:
+            names = set(zf.namelist())
+            expected_names = set(KIT_FILES) | {"kit_manifest.json"}
+            zip_missing_or_stale.extend(sorted(expected_names - names))
+            for rel, source in KIT_FILES.items():
+                if rel in names and source.exists() and sha256(zf.read(rel)).hexdigest() != _digest(source):
+                    zip_missing_or_stale.append(rel)
+            if "kit_manifest.json" in names and manifest_path.exists():
+                if sha256(zf.read("kit_manifest.json")).hexdigest() != _digest(manifest_path):
+                    zip_missing_or_stale.append("kit_manifest.json")
+
+    exists = manifest_path.exists() and zip_path.exists() and not missing_files
+    fresh = exists and not stale_files and not zip_missing_or_stale
+    status = "fresh_not_run" if fresh else "stale_or_missing"
+    if manifest_path.exists():
+        manifest = json.loads(manifest_path.read_text())
+        manifest_status = manifest.get("status", "unknown")
+    else:
+        manifest_status = "missing"
+
+    return {
+        "exists": exists,
+        "fresh": fresh,
+        "status": status,
+        "manifest_status": manifest_status,
+        "manifest": str(manifest_path),
+        "zip": str(zip_path),
+        "missing_files": missing_files,
+        "stale_files": sorted(stale_files),
+        "zip_missing_or_stale": sorted(set(zip_missing_or_stale)),
+        "does_not_prove_tmuf_smoke": True,
     }
 
 

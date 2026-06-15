@@ -19,9 +19,14 @@
   "smoke_kit": {
     "does_not_prove_tmuf_smoke": true,
     "exists": true,
+    "fresh": true,
+    "freshness_status": "fresh_not_run",
     "manifest": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit/kit_manifest.json",
+    "missing_files": [],
+    "stale_files": [],
     "status": "not_run",
-    "zip": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit.zip"
+    "zip": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/proof/tmuf_calibration_smoke_kit.zip",
+    "zip_missing_or_stale": []
   },
   "stock": {
     "candidate_count": 5,

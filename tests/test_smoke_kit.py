@@ -23,11 +23,30 @@ class SmokeKitTests(unittest.TestCase):
             self.assertEqual(manifest["calibration_skin"], "skins/calibration_stock_diffuse.zip")
             self.assertIn("proof/calibration_tmuf_smoke_template.json", manifest["files"])
             self.assertIn("previews/calibration_stock_diffuse_projected_side_top_rear.png", manifest["files"])
+            self.assertTrue(any("recipes/record_tmuf_smoke.py" in step for step in manifest["next_steps"]))
 
             with zipfile.ZipFile(zip_path) as zf:
                 names = set(zf.namelist())
                 self.assertEqual(names, set(manifest["files"]) | {"kit_manifest.json"})
                 self.assertTrue(all(info.date_time == (2000, 1, 1, 0, 0, 0) for info in zf.infolist()))
+
+    def test_validate_smoke_kit_detects_stale_copied_files(self):
+        from src.evidence.smoke_kit import build_smoke_kit, validate_smoke_kit
+
+        with tempfile.TemporaryDirectory() as tmp:
+            kit_dir = Path(tmp) / "kit"
+            build_smoke_kit(kit_dir)
+
+            fresh = validate_smoke_kit(kit_dir)
+            self.assertTrue(fresh["exists"])
+            self.assertTrue(fresh["fresh"])
+            self.assertEqual(fresh["stale_files"], [])
+
+            (kit_dir / "README_tmuf_smoke_test.md").write_text("stale instructions\n")
+
+            stale = validate_smoke_kit(kit_dir)
+            self.assertFalse(stale["fresh"])
+            self.assertIn("README_tmuf_smoke_test.md", stale["stale_files"])
 
     def test_install_calibration_skin_requires_explicit_target_and_only_copies_skin(self):
         from src.evidence.smoke_kit import install_calibration_skin

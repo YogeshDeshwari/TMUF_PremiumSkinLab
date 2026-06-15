@@ -12,7 +12,7 @@
   "next_steps": [
     "Copy skins/calibration_stock_diffuse.zip into the TMUF/TMNF StadiumCar skin folder.",
     "Load the skin in TMUF/TMNF.",
-    "Record required observations and screenshot paths in a filled smoke report.",
+    "Record required observations and screenshot paths with recipes/record_tmuf_smoke.py.",
     "Run recipes/tmuf_smoke_gate.py --evaluate before applying any promotion."
   ],
   "schema_version": 1,

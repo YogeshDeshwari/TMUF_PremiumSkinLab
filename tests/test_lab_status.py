@@ -17,6 +17,8 @@ class LabStatusTests(unittest.TestCase):
         self.assertEqual(status["stock"]["candidate_count"], 5)
         self.assertEqual(status["profiles"]["overall_status"], "custom_profiles_locked")
         self.assertEqual(status["smoke_kit"]["status"], "not_run")
+        self.assertIn("fresh", status["smoke_kit"])
+        self.assertTrue(status["smoke_kit"]["fresh"])
         self.assertTrue(status["smoke_kit"]["exists"])
         self.assertIn("run_tmuf_calibration_smoke_test", status["next_required_evidence"])
         self.assertIn("record_tmuf_smoke_evidence", status["next_required_evidence"])
@@ -33,6 +35,14 @@ class LabStatusTests(unittest.TestCase):
             self.assertTrue(out_path.exists())
             written = json.loads(out_path.read_text())
             self.assertEqual(written["objective_status"], data["objective_status"])
+
+    def test_cli_summary_includes_smoke_kit_freshness(self):
+        from recipes.lab_status import main
+
+        output = main([])
+
+        self.assertIn("smoke_kit=not_run", output)
+        self.assertIn("smoke_kit_fresh=True", output)
 
 
 if __name__ == "__main__":

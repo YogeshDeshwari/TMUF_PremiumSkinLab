@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from src.evidence.smoke_kit import DEFAULT_KIT_DIR
+from src.evidence.smoke_kit import DEFAULT_KIT_DIR, validate_smoke_kit
 from src.evidence.stock_validator import validate_stock_outputs
 from src.profiles.gates import evaluate_profile_gates
 from src.stock_diffuse.premium import CANDIDATE_NAMES
@@ -16,20 +16,18 @@ DEFAULT_STATUS_PATH = ROOT / "out" / "reports" / "lab_status.json"
 
 def _smoke_kit_status(root: Path) -> dict[str, Any]:
     kit_dir = root / DEFAULT_KIT_DIR.relative_to(ROOT)
-    manifest_path = kit_dir / "kit_manifest.json"
-    zip_path = kit_dir.with_suffix(".zip")
-    if manifest_path.exists():
-        manifest = json.loads(manifest_path.read_text())
-        status = manifest.get("status", "unknown")
-    else:
-        manifest = {}
-        status = "missing"
+    validation = validate_smoke_kit(kit_dir)
     return {
-        "exists": manifest_path.exists() and zip_path.exists(),
-        "status": status,
-        "manifest": str(manifest_path),
-        "zip": str(zip_path),
-        "does_not_prove_tmuf_smoke": manifest.get("does_not_prove_tmuf_smoke", True),
+        "exists": validation["exists"],
+        "fresh": validation["fresh"],
+        "status": validation["manifest_status"],
+        "freshness_status": validation["status"],
+        "manifest": validation["manifest"],
+        "zip": validation["zip"],
+        "missing_files": validation["missing_files"],
+        "stale_files": validation["stale_files"],
+        "zip_missing_or_stale": validation["zip_missing_or_stale"],
+        "does_not_prove_tmuf_smoke": validation["does_not_prove_tmuf_smoke"],
     }
 
 
