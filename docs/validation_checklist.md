@@ -19,6 +19,8 @@ Use this before calling any skin complete.
 - [ ] No `reference_only` input is treated as stock truth.
 - [ ] No `experimental` feature is enabled without a proof report.
 - [ ] Any TMUF/game behavior claim has a smoke-test note.
+- [ ] Run `python3 recipes/validate_profile_gates.py` before touching CH_2026
+      full-car or no-mudguard lanes.
 
 ## Visual Checks
 
@@ -39,3 +41,10 @@ Use this before calling any skin complete.
 - [ ] Capture at least front, side, rear, and top-ish views.
 - [ ] Update the report JSON from `tmuf_smoke_test: not_run` to the actual result.
 - [ ] Promote or keep evidence status based on the result.
+
+## Custom Profile Gates
+
+- [ ] `ch2026_fullcar` remains locked until stock calibration smoke passes.
+- [ ] `ch2026_nomud` remains locked until CH_2026 full-car smoke passes.
+- [ ] CH_2026 donor zip is treated as `experimental`, not stock truth.
+- [ ] `remove_guards` evidence remains CH_2026-specific and experimental.
