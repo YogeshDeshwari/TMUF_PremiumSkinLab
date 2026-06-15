@@ -177,6 +177,18 @@ class PremiumStockBatchTests(unittest.TestCase):
             self.assertGreater(report["style_metrics"]["cyan_accent_ratio"], 0.005)
             self.assertIn("no_vignette", report["design_rules"])
             self.assertIn("no_random_scatter", report["design_rules"])
+            self.assertEqual(
+                report["mask_evidence"]["mudguards"]["evidence_status"],
+                "proven_local_psd_parts_label_map",
+            )
+            self.assertEqual(
+                report["mask_evidence"]["center_spine"]["evidence_status"],
+                "experimental_until_tmuf_smoke",
+            )
+            self.assertIn(
+                "resources/authoritative/parts/psd_parts_labels.npy",
+                report["mask_evidence"]["mudguards"]["source_files"],
+            )
             CalibrationArtifactTests.assert_report_records_stock_input_evidence(self, report)
             CalibrationArtifactTests.assert_report_records_output_artifacts(self, report)
 

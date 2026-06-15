@@ -13,8 +13,9 @@ from scipy.ndimage import binary_dilation, gaussian_filter
 from src.dds.tmnf_dds import build_dds_dxt5_bytes
 from src.evidence.artifact_trace import stock_output_artifacts
 from src.evidence.input_trace import input_evidence
-from src.stock_diffuse.calibration import SIZE, hx, load_fields, mudguard_ids, project_view
+from src.stock_diffuse.calibration import SIZE, hx, load_fields, project_view
 from src.stock_diffuse.package import write_stable_zip_entry
+from src.stock_diffuse.panel_masks import PremiumMaskParams, build_stock_panel_masks, mask_report_entries
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -25,6 +26,18 @@ CANDIDATE_NAMES = [
     "violet_cyber_flow",
     "dark_neon_louver",
     "magenta_cyan_race_proto",
+]
+PREMIUM_MASK_NAMES = [
+    "center_spine",
+    "nose_spear",
+    "side_blade",
+    "secondary_blade",
+    "rear_louvers",
+    "rear_center_glow",
+    "shoulder_line",
+    "tail_bar",
+    "mudguards",
+    "mudguard_edge",
 ]
 
 
@@ -133,61 +146,18 @@ def _blend(rgb: np.ndarray, mask: np.ndarray, color: str, strength: float = 1.0)
     rgb[:] = rgb * (1.0 - amount[..., None]) + hx(color) * amount[..., None]
 
 
-def _thin_line(field: np.ndarray, center: np.ndarray | float, width: float) -> np.ndarray:
-    return np.abs(field - center) < width
+def _mask_params(candidate: Candidate) -> PremiumMaskParams:
+    return PremiumMaskParams(
+        spine_width=candidate.spine_width,
+        blade_slope=candidate.blade_slope,
+        blade_offset=candidate.blade_offset,
+        rear_louver_count=candidate.rear_louver_count,
+    )
 
 
 def _build_masks(fields: dict[str, Any], candidate: Candidate) -> dict[str, np.ndarray]:
-    coverage = fields["coverage"]
-    labels = fields["labels"]
-    length, lateral, height, symmetry = _axis_fields(fields)
-
-    body = coverage & (labels > 0)
-    upper = body & (height > 0.48)
-    lower = body & (height <= 0.48)
-    nose = body & (length > 0.72)
-    rear = body & (length < 0.36)
-    deck = upper & (height > 0.58)
-    engine_deck = rear & deck
-    side_band = lower & (height > 0.22) & (symmetry > 0.18) & (symmetry < 0.43)
-    mudguards = np.isin(labels, mudguard_ids(fields["zones"]))
-
-    spine_width = candidate.spine_width + 0.018 * np.clip(length - 0.68, 0, 1)
-    center_spine = upper & _thin_line(symmetry, 0.0, spine_width)
-    nose_spear = nose & _thin_line(symmetry, 0.0, candidate.spine_width * (1.35 - 0.45 * (length - 0.72)))
-
-    blade_center = candidate.blade_offset + candidate.blade_slope * np.clip(length - 0.28, -0.12, 0.52)
-    side_blade = side_band & _thin_line(symmetry, blade_center, 0.032)
-    secondary_blade = side_band & _thin_line(symmetry, np.clip(blade_center + 0.075, 0.18, 0.46), 0.020)
-
-    rear_louver_phase = ((1.0 - length) * candidate.rear_louver_count + symmetry * 2.6) % 1.0
-    rear_louvers = engine_deck & (symmetry > 0.08) & (symmetry < 0.35) & (rear_louver_phase < 0.30)
-    rear_center_glow = engine_deck & _thin_line(symmetry, 0.0, max(candidate.spine_width * 0.72, 0.030))
-
-    shoulder_line = upper & (symmetry > 0.20) & (symmetry < 0.33) & _thin_line(
-        height, 0.62 + 0.18 * (length - 0.45), 0.026
-    )
-    tail_bar = rear & _thin_line(length, 0.12, 0.022) & (height > 0.30)
-    mudguard_edge = mudguards & (
-        (symmetry > 0.31)
-        | (height > 0.62)
-        | (length > 0.76)
-        | (length < 0.20)
-    )
-
-    return {
-        "body": body,
-        "mudguards": mudguards,
-        "center_spine": center_spine,
-        "nose_spear": nose_spear,
-        "side_blade": side_blade,
-        "secondary_blade": secondary_blade,
-        "rear_louvers": rear_louvers,
-        "rear_center_glow": rear_center_glow,
-        "shoulder_line": shoulder_line,
-        "tail_bar": tail_bar,
-        "mudguard_edge": mudguard_edge,
-    }
+    panel_masks = build_stock_panel_masks(fields, _mask_params(candidate))
+    return {name: panel.mask for name, panel in panel_masks.items()}
 
 
 def build_premium_rgba(candidate: Candidate) -> tuple[Image.Image, dict[str, float]]:
@@ -332,17 +302,11 @@ def _write_candidate(candidate: Candidate) -> dict[str, str]:
             "no_stadiumcar_v2_uvs",
             "no_ch2026_donor_assumptions",
         ],
-        "masks_used": [
-            "center_spine",
-            "nose_spear",
-            "side_blade",
-            "secondary_blade",
-            "rear_louvers",
-            "rear_center_glow",
-            "shoulder_line",
-            "tail_bar",
-            "mudguard_edge",
-        ],
+        "masks_used": PREMIUM_MASK_NAMES,
+        "mask_evidence": mask_report_entries(
+            build_stock_panel_masks(load_fields(), _mask_params(candidate)),
+            PREMIUM_MASK_NAMES,
+        ),
         "style_metrics": metrics,
         "known_risks": [
             "GBuffer placement remains experimental until the calibration skin is smoke-tested in TMUF.",
