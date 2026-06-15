@@ -1,0 +1,239 @@
+{
+  "calibration_gate_status": "pending_tmuf_smoke",
+  "candidate_count": 20,
+  "does_not_prove_tmuf_smoke": true,
+  "install_target": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar",
+  "installed_skins": [
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/black_magenta_cyan_blade.zip",
+      "name": "black_magenta_cyan_blade",
+      "package_route": "stock_diffuse_only",
+      "sha256": "5a638a243b5ce9c625d910e39487b163c434bab7776d170a8454850a8efdfa0e",
+      "size_bytes": 619288,
+      "source_sha256": "5a638a243b5ce9c625d910e39487b163c434bab7776d170a8454850a8efdfa0e",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/black_magenta_cyan_blade.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/black_cyan_spine.zip",
+      "name": "black_cyan_spine",
+      "package_route": "stock_diffuse_only",
+      "sha256": "7ade4812c29c848dfe822ae7dd14b2e29f2f49dfad1da2c86d9e8d2ec20331ef",
+      "size_bytes": 512217,
+      "source_sha256": "7ade4812c29c848dfe822ae7dd14b2e29f2f49dfad1da2c86d9e8d2ec20331ef",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/black_cyan_spine.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/violet_cyber_flow.zip",
+      "name": "violet_cyber_flow",
+      "package_route": "stock_diffuse_only",
+      "sha256": "a922161c9f839706f7cef3063416f7c7f80a6d0c887ce06be9392aa86b4710d1",
+      "size_bytes": 606021,
+      "source_sha256": "a922161c9f839706f7cef3063416f7c7f80a6d0c887ce06be9392aa86b4710d1",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/violet_cyber_flow.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/dark_neon_louver.zip",
+      "name": "dark_neon_louver",
+      "package_route": "stock_diffuse_only",
+      "sha256": "dfb6098d9b9e72c8dfb44b5239904ab3d11cbbf8da7b1c907e7d64b45d9b1f1d",
+      "size_bytes": 512766,
+      "source_sha256": "dfb6098d9b9e72c8dfb44b5239904ab3d11cbbf8da7b1c907e7d64b45d9b1f1d",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/dark_neon_louver.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/magenta_cyan_race_proto.zip",
+      "name": "magenta_cyan_race_proto",
+      "package_route": "stock_diffuse_only",
+      "sha256": "273c6884e1116d455bbe535493c033e2e4c471fbeb4f75eaed14e5a53e7e1c8e",
+      "size_bytes": 595921,
+      "source_sha256": "273c6884e1116d455bbe535493c033e2e4c471fbeb4f75eaed14e5a53e7e1c8e",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/magenta_cyan_race_proto.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/black_red_cyber_minimal.zip",
+      "name": "black_red_cyber_minimal",
+      "package_route": "stock_diffuse_only",
+      "sha256": "e462875036bc8e7661340cfd920c50957e14d33c6f4004c1bf06145405e3550f",
+      "size_bytes": 513716,
+      "source_sha256": "e462875036bc8e7661340cfd920c50957e14d33c6f4004c1bf06145405e3550f",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/black_red_cyber_minimal.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/carbon_gold_circuit.zip",
+      "name": "carbon_gold_circuit",
+      "package_route": "stock_diffuse_only",
+      "sha256": "e57d3af51471e5b4b3bd4cfefef25afc92b4706ec38faf9d89d1a643e5d59622",
+      "size_bytes": 576584,
+      "source_sha256": "e57d3af51471e5b4b3bd4cfefef25afc92b4706ec38faf9d89d1a643e5d59622",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/carbon_gold_circuit.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/teal_magenta_vector.zip",
+      "name": "teal_magenta_vector",
+      "package_route": "stock_diffuse_only",
+      "sha256": "81d90a7d7a8351b6bb36229c7e054d91f087cd20cc298918e6429763ee1234e1",
+      "size_bytes": 616771,
+      "source_sha256": "81d90a7d7a8351b6bb36229c7e054d91f087cd20cc298918e6429763ee1234e1",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/teal_magenta_vector.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/shadow_magenta_split.zip",
+      "name": "shadow_magenta_split",
+      "package_route": "stock_diffuse_only",
+      "sha256": "3cc0acd4ee4d434f300fc29788369624c15a1b1aed1a199aaffbf6af055a83e3",
+      "size_bytes": 508780,
+      "source_sha256": "3cc0acd4ee4d434f300fc29788369624c15a1b1aed1a199aaffbf6af055a83e3",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/shadow_magenta_split.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/white_cyan_nightcore.zip",
+      "name": "white_cyan_nightcore",
+      "package_route": "stock_diffuse_only",
+      "sha256": "6ccff1e6d6c2f4318eb0d7608a7a0089b70e5067dbcaaa36523fa2a7bdce3e67",
+      "size_bytes": 621976,
+      "source_sha256": "6ccff1e6d6c2f4318eb0d7608a7a0089b70e5067dbcaaa36523fa2a7bdce3e67",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/white_cyan_nightcore.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/monochrome_magenta_pinstripe.zip",
+      "name": "monochrome_magenta_pinstripe",
+      "package_route": "stock_diffuse_only",
+      "sha256": "6dad9fcd3f30c7b193eb1ea8a8e79a8239f5cbd2f6f7d42beaa577298b501602",
+      "size_bytes": 469428,
+      "source_sha256": "6dad9fcd3f30c7b193eb1ea8a8e79a8239f5cbd2f6f7d42beaa577298b501602",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/monochrome_magenta_pinstripe.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/cyan_white_gt_block.zip",
+      "name": "cyan_white_gt_block",
+      "package_route": "stock_diffuse_only",
+      "sha256": "5162863a435ce062881df2ae5f0990d9852c1df02a4d7d7ae6c62817a342b610",
+      "size_bytes": 552912,
+      "source_sha256": "5162863a435ce062881df2ae5f0990d9852c1df02a4d7d7ae6c62817a342b610",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/cyan_white_gt_block.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/neon_checker_tail.zip",
+      "name": "neon_checker_tail",
+      "package_route": "stock_diffuse_only",
+      "sha256": "26a182fcdcbbeb43381ddf83704b86b6155c54dc9145b8fe1a33826ff1516a2a",
+      "size_bytes": 571795,
+      "source_sha256": "26a182fcdcbbeb43381ddf83704b86b6155c54dc9145b8fe1a33826ff1516a2a",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/neon_checker_tail.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/asym_diagonal_sash.zip",
+      "name": "asym_diagonal_sash",
+      "package_route": "stock_diffuse_only",
+      "sha256": "b57714786925e7baedd0326d716e4fa41ce0c095ecc667f50505df1fab0e81ab",
+      "size_bytes": 639105,
+      "source_sha256": "b57714786925e7baedd0326d716e4fa41ce0c095ecc667f50505df1fab0e81ab",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/asym_diagonal_sash.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/guard_halo_cyan.zip",
+      "name": "guard_halo_cyan",
+      "package_route": "stock_diffuse_only",
+      "sha256": "a92d4d7b0809c15d614477f861e0df71696612b3c2281f86492a260ff508b640",
+      "size_bytes": 442910,
+      "source_sha256": "a92d4d7b0809c15d614477f861e0df71696612b3c2281f86492a260ff508b640",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/guard_halo_cyan.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/full_panel_cyber_flood.zip",
+      "name": "full_panel_cyber_flood",
+      "package_route": "stock_diffuse_only",
+      "sha256": "b8c11cd6ce803b5580d85add8b5471243c5c04016259f9e5cde02c6ca2eefc22",
+      "size_bytes": 711622,
+      "source_sha256": "b8c11cd6ce803b5580d85add8b5471243c5c04016259f9e5cde02c6ca2eefc22",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/full_panel_cyber_flood.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/mint_purple_split.zip",
+      "name": "mint_purple_split",
+      "package_route": "stock_diffuse_only",
+      "sha256": "e49b3cad5707e13dc33ca1b040d49d83a56f932d8ae834119fcf798f35e29398",
+      "size_bytes": 628868,
+      "source_sha256": "e49b3cad5707e13dc33ca1b040d49d83a56f932d8ae834119fcf798f35e29398",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/mint_purple_split.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/orange_teal_circuit.zip",
+      "name": "orange_teal_circuit",
+      "package_route": "stock_diffuse_only",
+      "sha256": "1bb5d31f61f206029712dc3613fd1f17e8c0f01c408cfcceb2d107d599f6fc1e",
+      "size_bytes": 563965,
+      "source_sha256": "1bb5d31f61f206029712dc3613fd1f17e8c0f01c408cfcceb2d107d599f6fc1e",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/orange_teal_circuit.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/white_magenta_rally_blocks.zip",
+      "name": "white_magenta_rally_blocks",
+      "package_route": "stock_diffuse_only",
+      "sha256": "d05642fb56500e9df57978e8c2bc7ebe1d6d83d9cdfef0a0de41d73d1629a291",
+      "size_bytes": 634894,
+      "source_sha256": "d05642fb56500e9df57978e8c2bc7ebe1d6d83d9cdfef0a0de41d73d1629a291",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/white_magenta_rally_blocks.zip",
+      "tmuf_smoke_test": "not_run"
+    },
+    {
+      "does_not_prove_tmuf_smoke": true,
+      "installed_skin": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar/crimson_cyan_arrow.zip",
+      "name": "crimson_cyan_arrow",
+      "package_route": "stock_diffuse_only",
+      "sha256": "fb175bc365ed6a7618bbfb7017447e5614dfb303c4388c00b31a26638029fb06",
+      "size_bytes": 607876,
+      "source_sha256": "fb175bc365ed6a7618bbfb7017447e5614dfb303c4388c00b31a26638029fb06",
+      "source_skin": "/Users/ydeshwari/Documents/TMUF_PremiumSkinLab/out/skins/crimson_cyan_arrow.zip",
+      "tmuf_smoke_test": "not_run"
+    }
+  ],
+  "next_required_evidence": [
+    "run_tmuf_calibration_smoke_test",
+    "record_tmuf_smoke_evidence",
+    "evaluate_then_apply_tmuf_smoke_gate",
+    "manual_visual_feedback_on_premium_candidates"
+  ],
+  "proof_boundary": "This receipt proves file copy/hash only. It does not prove TMUF/TMNF load, stock GBuffer mapping, or visual acceptance.",
+  "route": "skins_vehicles_stadiumcar",
+  "schema": "tmuf_premium_skin_lab.premium_review_install_receipt.v1",
+  "selection_mode": "explicit_install_target",
+  "status": "installed_for_visual_review_not_tested"
+}

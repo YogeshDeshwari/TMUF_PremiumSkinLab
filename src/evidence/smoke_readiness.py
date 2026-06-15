@@ -105,6 +105,10 @@ def _base_commands(root: Path) -> dict[str, str]:
             "--install-target /absolute/path/to/StadiumCar --write --write-command-packet"
         ),
         "install_explicit": "python3 recipes/prepare_tmuf_smoke_kit.py --install-skins-dir /absolute/path/to/StadiumCar",
+        "install_premium_review_explicit": (
+            "python3 recipes/install_premium_review_skins.py "
+            "--install-skins-dir /absolute/path/to/StadiumCar --json"
+        ),
         "prepare_smoke_session": "python3 recipes/prepare_tmuf_smoke_session.py --json",
         "record_smoke": (
             "python3 recipes/record_tmuf_smoke.py "
@@ -193,12 +197,23 @@ def build_smoke_readiness(root: Path = ROOT, *, install_target: Path | None = No
             "python3 recipes/prepare_tmuf_smoke_kit.py "
             f"--install-skins-dir {shlex.quote(target_preflight['path'])}"
         )
+        commands["install_premium_review_explicit"] = (
+            "python3 recipes/install_premium_review_skins.py "
+            f"--install-skins-dir {shlex.quote(target_preflight['path'])} --json"
+        )
         commands["preflight_explicit"] = (
             "python3 recipes/smoke_readiness.py "
             f"--install-target {shlex.quote(target_preflight['path'])} "
             "--write --write-command-packet"
         )
     commands["install_discovered"] = _install_discovered_command(selected_candidate)
+    commands["install_premium_review_discovered"] = (
+        commands["install_discovered"].replace(
+            "recipes/prepare_tmuf_smoke_kit.py",
+            "recipes/install_premium_review_skins.py",
+        )
+        + " --json"
+    )
     recommended_target = skin_dirs.get("recommended_creation_target")
     if isinstance(recommended_target, dict) and recommended_target.get("path"):
         recommended_path = shlex.quote(str(recommended_target["path"]))
@@ -350,6 +365,8 @@ def format_smoke_command_packet(readiness: dict[str, Any]) -> str:
         "preflight_explicit",
         "install_explicit",
         "install_discovered",
+        "install_premium_review_explicit",
+        "install_premium_review_discovered",
         "prepare_smoke_session",
         "record_smoke",
         "evaluate",

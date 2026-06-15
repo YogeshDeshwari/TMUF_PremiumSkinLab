@@ -200,6 +200,25 @@ explicit install target is recognized and writable, whether an install receipt
 exists, and which command should be run next. The command packet is the same
 setup guidance in copy-friendly text form.
 
+To copy the current premium stock-safe candidate ZIPs into a chosen
+`StadiumCar` folder for visual feedback:
+
+```bash
+python3 recipes/install_premium_review_skins.py \
+  --install-skins-dir /absolute/path/to/StadiumCar \
+  --json
+```
+
+This writes:
+
+```text
+out/proof/premium_review_install_receipt.json
+```
+
+The receipt records file hashes for the premium ZIP copies only. It does not
+prove TMUF/TMNF loaded them, does not prove GBuffer mapping, and does not
+promote any premium candidate past the calibration smoke gate.
+
 Create the template if you want a manual form:
 
 ```bash

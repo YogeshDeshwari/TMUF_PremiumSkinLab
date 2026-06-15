@@ -4,7 +4,7 @@
     {
       "confidence": "high",
       "does_not_prove_tmuf_smoke": true,
-      "existing_zip_count": 2,
+      "existing_zip_count": 22,
       "path": "/Users/ydeshwari/Documents/TrackMania/Skins/Vehicles/StadiumCar",
       "route": "skins_vehicles_stadiumcar",
       "search_root": "/Users/ydeshwari/Documents/TrackMania"
@@ -224,9 +224,9 @@
   "recommended_creation_target": null,
   "safe_use": "Use a listed path only as an explicit install target; finding or planning a directory does not prove TMUF load.",
   "scan_boundary": {
-    "bounded_by_max_depth": true,
+    "bounded_by_max_depth": false,
     "does_not_prove_tmuf_smoke": true,
-    "max_depth": 8
+    "max_depth": null
   },
   "schema_version": 1,
   "status": "candidates_found"

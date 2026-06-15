@@ -194,6 +194,8 @@ class SmokeReadinessTests(unittest.TestCase):
             self.assertIn("Skins/Models/StadiumCar", text)
             self.assertIn("prepare_smoke_session:", text)
             self.assertIn("python3 recipes/prepare_tmuf_smoke_session.py --json", text)
+            self.assertIn("install_premium_review_explicit:", text)
+            self.assertIn("python3 recipes/install_premium_review_skins.py --install-skins-dir", text)
             self.assertIn("python3 recipes/record_tmuf_smoke.py", text)
             self.assertIn("Do not run apply until evaluate passes", text)
 
@@ -218,6 +220,10 @@ class SmokeReadinessTests(unittest.TestCase):
             self.assertIn("route=skins_vehicles_stadiumcar", text)
             self.assertIn("valid=true", text)
             self.assertIn("does_not_prove_tmuf_smoke=true", text)
+            self.assertIn(
+                f"python3 recipes/install_premium_review_skins.py --install-skins-dir {install_dir} --json",
+                text,
+            )
 
     def test_command_packet_includes_recommended_documents_trackmania_target(self):
         from src.evidence.skin_dirs import write_skin_dir_report
